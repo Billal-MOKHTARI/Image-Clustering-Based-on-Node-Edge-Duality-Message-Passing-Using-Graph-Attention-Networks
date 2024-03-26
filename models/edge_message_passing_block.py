@@ -1,2 +1,0 @@
-class EdgeMPBlock:
-    pass
