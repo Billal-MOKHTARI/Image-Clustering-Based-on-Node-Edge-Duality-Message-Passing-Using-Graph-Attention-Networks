@@ -3,10 +3,10 @@ import torchvision.models as models
 import torch.nn as nn
 import torch.nn.functional as F
 from torchsummary import summary  # Used for model summary
-
+import os
 import sys
-sys.path.append("../../")  # Add parent directory to system path
-sys.path.append("../")  # Add current directory to system path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 import constants  # Import custom constants module
 from src import utils  # Import custom utility functions module
 
@@ -87,6 +87,15 @@ class NodeTransformer(nn.Module):
 
 
 # Test the model
-input_shape = (200, 224, 224)
-model = NodeTransformer(input_shape, model='vgg16')
-summary(model, input_shape, -1)  # Display model summary
+# input_shape = (200, 224, 224)
+# model = NodeTransformer(input_shape, model='vgg16')
+# # summary(model, input_shape, -1) 
+vgg = models.vgg16(pretrained=True)
+print(list(vgg.named_children())[0])
+
+# del vgg.classifier[-1]
+# del vgg.classifier[-1]
+# print(vgg.classifier)
+# for l in classifier:
+#     print(l)
+# summary(vgg, (3, 224, 224), -1)
