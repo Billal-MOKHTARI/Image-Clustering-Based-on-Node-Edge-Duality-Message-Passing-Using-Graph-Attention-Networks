@@ -8,7 +8,6 @@ import models.constants
 
 
 
-
 class TestNodeEncoder(unittest.TestCase):
     def setUp(self):
         self.input_shape = (0, 224, 224)

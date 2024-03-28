@@ -1,6 +1,8 @@
 import unittest
 import sys
-sys.path.append("../")
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+
 from src import utils
 
 class TestRequiredKernel(unittest.TestCase):

@@ -1,7 +1,10 @@
 import torchvision.models as models
 from torch import nn
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-class ModelUtils:
+class PyModelManager:
     
     def __init__(self, model):
         self.model = model
@@ -10,11 +13,7 @@ class ModelUtils:
     
     def get_named_layers(self):
 
-        # Get the layers of the pre-trained model
-        layers = list(self.model.named_children())
-        layer_keys = [layer[0] for layer in layers]
-        layer_values = [layer[1] for layer in layers]
-        self.dict_layers = dict(zip(layer_keys, layer_values))
+        self.dict_layers = dict(self.model.named_children())
         return self.dict_layers
 
     def get_list_layers(self):
@@ -49,8 +48,9 @@ class ModelUtils:
         assert hasattr(layer, 'in_features'), f'{layer} does not have the attribute in_features'
         return layer.in_features
     
-vgg = models.vgg16(pretrained=True)
-# model = ModelUtils(vgg)
-# model.delete_layer_by_name('classifier', -1)
+# vgg = models.vgg16(pretrained=True)
+
+# model = PyModelManager(vgg)
+# # model.delete_layer_by_name('classifier', -1)
 # print(model.get_named_layers())
-print(vgg.classifier[0])
+# print(vgg.classifier[0])
