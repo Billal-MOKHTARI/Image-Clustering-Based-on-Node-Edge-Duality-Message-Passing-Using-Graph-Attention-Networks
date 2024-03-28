@@ -1,4 +1,5 @@
 import torchvision.models as models
+from torch import nn
 
 class ModelUtils:
     
@@ -6,7 +7,7 @@ class ModelUtils:
         self.model = model
         self.named_layers = dict()
         self.list_layers = list()
-        
+    
     def get_named_layers(self):
 
         # Get the layers of the pre-trained model
@@ -40,9 +41,16 @@ class ModelUtils:
         else:
             layers = self.get_named_layers()[layer_name]
             del layers[layer_index]
-          
+    def get_output_size(self, layer):
+        assert hasattr(layer, 'out_features'), f'{layer} does not have the attribute out_features'
+        return layer.out_features
+    
+    def get_input_size(self, layer):
+        assert hasattr(layer, 'in_features'), f'{layer} does not have the attribute in_features'
+        return layer.in_features
+    
 vgg = models.vgg16(pretrained=True)
-model = ModelUtils(vgg)
-model.delete_layer_by_name('classifier')
-print(vgg.classifier)
-
+# model = ModelUtils(vgg)
+# model.delete_layer_by_name('classifier', -1)
+# print(model.get_named_layers())
+print(vgg.classifier[0])

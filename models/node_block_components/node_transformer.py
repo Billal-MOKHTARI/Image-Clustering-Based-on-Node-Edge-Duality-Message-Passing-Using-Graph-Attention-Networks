@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 import constants  # Import custom constants module
 from src import utils  # Import custom utility functions module
 
-class NodeTransformer(nn.Module):
+class NodeEncoder(nn.Module):
     """
     A custom neural network module for transforming node data using extended convolutional layers 
     followed by a pre-trained model.
@@ -29,7 +29,7 @@ class NodeTransformer(nn.Module):
     """
 
     def __init__(self, input_shape, model, margin_expansion_factor=6, **kwargs):
-        super(NodeTransformer, self).__init__()
+        super(NodeEncoder, self).__init__()
 
         # Ensure that the chosen model is supported
         assert model in constants.MODELS, f"The model you chose is not in {constants.MODELS}"
@@ -73,7 +73,7 @@ class NodeTransformer(nn.Module):
 
     def forward(self, x):
         """
-        Forward pass method of the NodeTransformer module.
+        Forward pass method of the NodeEncoder module.
 
         Args:
             x (torch.Tensor): Input tensor of shape (batch_size, channels, height, width).
@@ -88,7 +88,7 @@ class NodeTransformer(nn.Module):
 
 # Test the model
 # input_shape = (200, 224, 224)
-# model = NodeTransformer(input_shape, model='vgg16')
+# model = NodeEncoder(input_shape, model='vgg16')
 # # summary(model, input_shape, -1) 
 vgg = models.vgg16(pretrained=True)
 print(list(vgg.named_children())[0])
