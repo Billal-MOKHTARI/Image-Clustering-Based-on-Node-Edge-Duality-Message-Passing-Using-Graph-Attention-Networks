@@ -31,8 +31,10 @@ class PyModelManager:
             return self.get_named_layers()[layer_name][layer_index]
 
     def get_layer_by_index(self, block_index, layer_index=None):
-
-        return self.get_list_layers()[block_index][layer_index]
+        if layer_index is None:
+            return self.get_list_layers()[block_index]
+        else:
+            return self.get_list_layers()[block_index][layer_index]
     
     def delete_layer_by_name(self, layer_name, layer_index=None):
         if layer_index is None:
@@ -40,6 +42,13 @@ class PyModelManager:
         else:
             layers = self.get_named_layers()[layer_name]
             del layers[layer_index]
+    
+    def delete_layer_by_index(self, block_index, layer_index=None):
+        if layer_index is None:
+            del self.list_layers[block_index]
+        else:
+            del self.list_layers[block_index][layer_index]        
+    
     def get_output_size(self, layer):
         assert hasattr(layer, 'out_features'), f'{layer} does not have the attribute out_features'
         return layer.out_features
