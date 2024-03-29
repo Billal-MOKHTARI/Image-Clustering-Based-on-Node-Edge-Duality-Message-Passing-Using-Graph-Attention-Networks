@@ -9,6 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 import constants  # Import custom constants module
 from src import utils  # Import custom utility functions module
+from src import py_model_manager  # Import custom PyModelManager module
 
 class NodeEncoder(nn.Module):
     """
@@ -42,6 +43,10 @@ class NodeEncoder(nn.Module):
         # Store input shape and pre-trained model
         self.input_shape = input_shape
         self.model = eval("models." + model)(pretrained=pretrained)  # Instantiate the pre-trained model
+        
+        self.py_model_manager = py_model_manager.PyModelManager(self.model)
+        # self.py_model_manager.delete_layer_by_name('classifier', -1)
+        
         self.margin_expansion_factor = margin_expansion_factor  # Margin expansion factor
         self.extended_conv_layers = list()  # List to store extended convolutional layers
 
@@ -86,16 +91,14 @@ class NodeEncoder(nn.Module):
         return x
 
 
-# Test the model
-# input_shape = (200, 224, 224)
-# model = NodeEncoder(input_shape, model='vgg16')
-# # summary(model, input_shape, -1) 
-vgg = models.vgg16(pretrained=True)
-print(list(vgg.named_children())[0])
 
-# del vgg.classifier[-1]
-# del vgg.classifier[-1]
-# print(vgg.classifier)
-# for l in classifier:
-#     print(l)
-# summary(vgg, (3, 224, 224), -1)
+# # model.delete_layer_by_name('classifier', -1)
+# print(model.get_named_layers())
+# print(vgg.classifier[0])
+
+input_shape = (200, 256, 256)
+model = NodeEncoder(input_shape, model='efficientnet_b2')
+pmm = py_model_manager.PyModelManager(model)
+print(pmm.get_named_layers())
+summary(model, input_shape, -1) 
+
