@@ -12,23 +12,33 @@ class PyModelManager:
         self.list_layers = list()
     
     def get_named_layers(self):
-
-        self.dict_layers = dict(self.model.named_children())
-        return self.dict_layers
+        def get_layers_recursive(model_children: dict):
+            for name, layer in model_children.items():
+                if dict(layer.named_children()) != {}:
+                    model_children[name] = get_layers_recursive(dict(layer.named_children()))
+                else:
+                    model_children[name] = layer
+            self.named_layers = model_children
+            return self.named_layers
+        return get_layers_recursive(dict(self.model.named_children()))
+    
 
     def get_list_layers(self):
 
-        # Get the layers of the pre-trained model
         self.list_layers = list(self.model.children())
         return self.list_layers
 
-    def get_layer_by_name(self, layer_name, layer_index=None):
+    def get_layer_by_name(self, index):
+        layers = self.get_named_layers()
+
+        try:
+            for ind in index:
+                layer = layers[ind]
+                layers = layer
+            return layer
+        except TypeError:
+            print(f'The index {index} is out of range.')    
         
-        
-        if layer_index is None:
-            return self.get_named_layers()[layer_name]
-        else:
-            return self.get_named_layers()[layer_name][layer_index]
 
     def get_layer_by_index(self, block_index, layer_index=None):
         if layer_index is None:
@@ -36,12 +46,11 @@ class PyModelManager:
         else:
             return self.get_list_layers()[block_index][layer_index]
     
-    def delete_layer_by_name(self, layer_name, layer_index=None):
-        if layer_index is None:
-            delattr(self.model, layer_name)
-        else:
-            layers = self.get_named_layers()[layer_name]
-            del layers[layer_index]
+   
+    def delete_layer_by_name(self, index):
+        layer = self.get_layer_by_name(index)
+        del layer
+        
     
     def delete_layer_by_index(self, block_index, layer_index=None):
         if layer_index is None:
@@ -57,9 +66,23 @@ class PyModelManager:
         assert hasattr(layer, 'in_features'), f'{layer} does not have the attribute in_features'
         return layer.in_features
     
-# vgg = models.vgg16(pretrained=True)
+    
+    
+vgg16 = models.vgg16(pretrained=True)
 
-# model = PyModelManager(vgg)
-# # model.delete_layer_by_name('classifier', -1)
-# print(model.get_named_layers())
-# print(vgg.classifier[0])
+def model_to_dict(model_children: dict):
+    for name, layer in model_children.items():
+        if dict(layer.named_children()) != {}:
+            model_children[name] = model_to_dict(dict(layer.named_children()))
+        else:
+            model_children[name] = layer
+    return model_children
+        
+
+
+
+# print(dict_layers)
+model = PyModelManager(vgg16)
+# model.delete_layer_by_name('classifier', -1)
+model.delete_layer_by_name(['classifier'])
+print(model.get_named_layers())

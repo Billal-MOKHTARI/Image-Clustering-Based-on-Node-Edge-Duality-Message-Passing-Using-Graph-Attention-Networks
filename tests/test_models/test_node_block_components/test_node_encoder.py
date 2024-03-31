@@ -16,6 +16,8 @@ class TestNodeEncoder(unittest.TestCase):
         self.kwargs = {"pretrained": True, "stride": (1, 1), "padding": (0, 0)}
         self.node_encoder = node_encoder.NodeEncoder(self.input_shape, self.model, self.margin_expansion_factor, **self.kwargs)
         print(self.node_encoder)
+    
+    
         
 if __name__ == '__main__':
     unittest.main()

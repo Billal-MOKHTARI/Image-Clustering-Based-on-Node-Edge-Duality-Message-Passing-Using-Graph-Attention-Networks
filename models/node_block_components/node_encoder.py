@@ -29,23 +29,26 @@ class NodeEncoder(nn.Module):
         extended_conv_layers (torch.nn.Sequential): Sequential container for extended convolutional layers.
     """
 
-    def __init__(self, input_shape, model, margin_expansion_factor=6, **kwargs):
+    def __init__(self, input_shape, model_name, margin_expansion_factor=6, **kwargs):
         super(NodeEncoder, self).__init__()
-
+  
         # Ensure that the chosen model is supported
-        assert model in constants.MODELS, f"The model you chose is not in {constants.MODELS}"
+        assert model_name in constants.MODELS, f"The model you chose is not in {constants.MODELS}"
 
         # Extract additional keyword arguments
+        self.model_name = model_name  # Pre-trained model architecture name
         pretrained = kwargs.get("pretrained", True)  # Whether to use pre-trained weights
         stride = kwargs.get("stride", (1, 1))  # Stride for convolutional layers
         padding = kwargs.get("padding", (0, 0))  # Padding for convolutional layers
 
         # Store input shape and pre-trained model
         self.input_shape = input_shape
-        self.model = eval("models." + model)(pretrained=pretrained)  # Instantiate the pre-trained model
+        self.model = eval("models." + self.model_name)(pretrained=pretrained)  # Instantiate the pre-trained model
         
         self.py_model_manager = py_model_manager.PyModelManager(self.model)
-        # self.py_model_manager.delete_layer_by_name('classifier', -1)
+
+        # if self.model_name.startswith('vgg') :
+        #     self.py_model_manager.delete_layer_by_name('classifier', -1)
         
         self.margin_expansion_factor = margin_expansion_factor  # Margin expansion factor
         self.extended_conv_layers = list()  # List to store extended convolutional layers
@@ -97,8 +100,8 @@ class NodeEncoder(nn.Module):
 # print(vgg.classifier[0])
 
 input_shape = (200, 256, 256)
-model = NodeEncoder(input_shape, model='efficientnet_b2')
-pmm = py_model_manager.PyModelManager(model)
-print(pmm.get_named_layers())
-summary(model, input_shape, -1) 
+model = NodeEncoder(input_shape, model_name='efficientnet_b0')
 
+pmm = py_model_manager.PyModelManager(model)
+print(model.model.named_children())
+# summary(model, input_shape, -1)
