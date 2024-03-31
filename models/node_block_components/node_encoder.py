@@ -97,10 +97,10 @@ class NodeEncoder(nn.Module):
 # print(vgg.classifier[0])
 
 input_shape = (200, 256, 256)
-model = NodeEncoder(input_shape, model='efficientnet_b2')
+model = NodeEncoder(input_shape, model='vgg16')
 pmm = py_model_manager.PyModelManager(model)
-pmm.delete_layer_recursive(['model', 'classifier', -1])
-print(pmm.get_named_layers())
+# pmm.delete_layer_recursive(['model', 'classifier', -1])
+print(pmm.search_layer('inplace', True))
 
 
 # summary(model, input_shape, -1) 

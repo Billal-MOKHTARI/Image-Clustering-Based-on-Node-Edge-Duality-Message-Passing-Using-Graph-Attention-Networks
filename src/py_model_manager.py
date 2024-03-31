@@ -2,6 +2,7 @@ import torchvision.models as models
 from torch import nn
 import os
 import sys
+import numpy as np
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
 class PyModelManager:
@@ -79,30 +80,41 @@ class PyModelManager:
     
     # Search for a layer in the model by property
     def search_layer(self, property, value):
-        def dfs(self, model, property, value, layers, indexes, tmp=[]):
+        def dfs(self, model, property, value, layers, indexes, tmp=np.array([]), depth=0):
+            
             for name, layer in model.named_children():
-                print(dict(layer.named_children()))
+                tmp = np.append(tmp, name)
 
+                if(len(tmp)>depth+1):
+                    tmp = tmp[:depth+1]
+                dfs(self, layer, property, value, layers, indexes, tmp, depth+1)
+                
                 if hasattr(layer, property) and self.get_attribute(layer, property) == value:
+
                     layers.append(layer)
-                    indexes.append(tmp)
-                    tmp = []
-                else:
-                    tmp.append(name)
-                    dfs(self, layer, property, value, layers, indexes, tmp)
+                    indexes.append(tmp.copy())
+
+                    tmp = tmp[:-1]
+
+                elif dict(layer.named_children()) == {}:
+                    tmp = tmp[:-1]
+            
+
+            
 
         layers = []
         indexes = []
 
         dfs(self, self.model, property, value, layers, indexes)
-        return layers, indexes
+        return layers, [ind.tolist() for ind in indexes]
     
     def delete_by_attribute(self, property, value):
         pass
     
-vgg = models.vgg16(pretrained=True)
+# vgg = models.vgg16(pretrained=True)
 
-model = PyModelManager(vgg)
+# model = PyModelManager(vgg)
 # model.delete_layer_recursive(['classifier', -1])
-print(model.search_layer('out_features', 4096))
+# print(model.search_layer('inplace', True))
+# print(dict(vgg.named_children()))
 # print(vgg.classifier[0])
