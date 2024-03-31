@@ -80,33 +80,27 @@ class PyModelManager:
     
     # Search for a layer in the model by property
     def search_layer(self, property, value):
-        def dfs(self, model, property, value, layers, indexes, tmp=np.array([]), depth=0):
-            
+        def dfs(self, model, property, value, layers, indexes, tmp=None, depth=0):
+            if tmp is None:
+                tmp = []
+
             for name, layer in model.named_children():
-                tmp = np.append(tmp, name)
-
-                if(len(tmp)>depth+1):
-                    tmp = tmp[:depth+1]
-                dfs(self, layer, property, value, layers, indexes, tmp, depth+1)
-                
+                tmp.append(name)
                 if hasattr(layer, property) and self.get_attribute(layer, property) == value:
-
                     layers.append(layer)
                     indexes.append(tmp.copy())
 
-                    tmp = tmp[:-1]
+                # Recursive call
+                dfs(self, layer, property, value, layers, indexes, tmp, depth+1)
 
-                elif dict(layer.named_children()) == {}:
-                    tmp = tmp[:-1]
-            
-
-            
+                # Pop the last element to backtrack
+                tmp.pop()
 
         layers = []
         indexes = []
 
         dfs(self, self.model, property, value, layers, indexes)
-        return layers, [ind.tolist() for ind in indexes]
+        return layers, indexes
     
     def delete_by_attribute(self, property, value):
         pass
