@@ -43,6 +43,22 @@ class PyModelManager:
             layers = self.get_named_layers()[layer_name]
             del layers[layer_index]
     
+    def delete_layer_recursive(self, indexes):
+        trace = ['self.model']
+        for index in indexes[:-1]:
+            
+            if isinstance(index, int):
+                trace.append(f'[{index}]')
+            else:
+                trace.append(f'.{index}')
+        
+        if isinstance(indexes[-1], int):
+            layers = eval(''.join(trace))
+            del layers[indexes[-1]]
+        else:
+            delattr(eval(''.join(trace)), indexes[-1])
+            
+    
     def delete_layer_by_index(self, block_index, layer_index=None):
         if layer_index is None:
             del self.list_layers[block_index]
@@ -57,9 +73,9 @@ class PyModelManager:
         assert hasattr(layer, 'in_features'), f'{layer} does not have the attribute in_features'
         return layer.in_features
     
-# vgg = models.vgg16(pretrained=True)
+vgg = models.vgg16(pretrained=True)
 
-# model = PyModelManager(vgg)
-# # model.delete_layer_by_name('classifier', -1)
-# print(model.get_named_layers())
+model = PyModelManager(vgg)
+model.delete_layer_recursive(['classifier', -1])
+print(model.get_named_layers())
 # print(vgg.classifier[0])
