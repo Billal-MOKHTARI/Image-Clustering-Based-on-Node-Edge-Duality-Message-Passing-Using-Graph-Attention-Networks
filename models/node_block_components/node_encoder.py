@@ -98,10 +98,10 @@ class NodeEncoder(nn.Module):
 
 input_shape = (200, 256, 256)
 model = NodeEncoder(input_shape, model='efficientnet_b2')
-pmm = py_model_manager.PyModelManager
+pmm = py_model_manager.PyModelManager(model)
+pmm.delete_layer_recursive(['model', 'classifier', -1])
+print(pmm.get_named_layers())
 
-# print(pmm(pmm(model).get_layer_by_name('model')).delete_layer_by_name('classifier'))
-delattr(eval("model.model"))
 
-summary(model, input_shape, -1) 
+# summary(model, input_shape, -1) 
 
