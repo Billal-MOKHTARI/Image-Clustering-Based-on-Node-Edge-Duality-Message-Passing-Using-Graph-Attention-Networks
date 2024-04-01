@@ -37,3 +37,35 @@ def bi_operator(op, a, b):
         return a <= b
     elif callable(op):
         op(a, b)
+
+# Multiple conditions test
+def evaluate_conditions(conditions):
+    for operator, operands in conditions.items():
+        if operator == 'and':
+            result = True
+            for condition in operands:
+                key = list(condition.keys())[0]
+                value = list(condition.values())[0]
+                result = result and bi_operator(key, value[0], value[1])
+            if not result:
+                return False
+        elif operator == 'or':
+            result = False
+            for condition in operands:
+                key = list(condition.keys())[0]
+                value = list(condition.values())[0]
+                result = result or bi_operator(key, value[0], value[1])
+            if result:
+                return True
+             
+       
+    return False
+    
+conditions = {
+    'and': [{'==': (1, 1)}, {'>': (3, 2)}, {'<': (5, 6)}],
+    'or': [{'<': (2, 1)}, {'!=': (4, 4)}],
+
+}
+
+result = evaluate_conditions(conditions)
+print(result)
