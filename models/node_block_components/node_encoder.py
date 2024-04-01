@@ -100,8 +100,8 @@ input_shape = (200, 256, 256)
 model = NodeEncoder(input_shape, model='efficientnet_b0')
 pmm = py_model_manager.PyModelManager(model)
 # pmm.delete_layer_recursive(['model', 'classifier', -1])
-layers, indexes = pmm.search_layer('inplace', True)
-
-print(model.model.features[1][0].block[0][2])
+result = pmm.search_layer_by_instance(nn.Conv2d)
+pmm.delete_layer_by_instance(nnCo)
+print(pmm.get_layer_by_index(list(result.keys())[1]))
 # summary(model, input_shape, -1) 
 
