@@ -43,6 +43,20 @@ class PyModelManager:
         
         return get_layers_recursive(dict(self.model.named_children()))
 
+    def get_attribute(self, layer, attribute):
+        """
+        Get a specific attribute of a layer.
+
+        Args:
+            layer (torch.nn.Module): The layer.
+            attribute (str): The attribute name.
+
+        Returns:
+            Any: The value of the attribute.
+        """
+        assert hasattr(layer, attribute), f'{layer} does not have the attribute {attribute}'
+        return getattr(layer, attribute)
+    
     def get_layer_by_index(self, index):
         """
         Get a layer from the model using its index.
@@ -69,45 +83,8 @@ class PyModelManager:
                 return getattr(eval(''.join(trace)), index[-1])
         except:
             print(f'Layer with index {index} not found')
-            
 
-    def delete_layer_by_index(self, indexes):
-        """
-        Delete a layer from the model using its index.
-
-        Args:
-            indexes (list): The index path of the layer in the model.
-        """
-        trace = ['self.model']
-        for index in indexes[:-1]:
-            
-            if isinstance(index, int):
-                trace.append(f'[{index}]')
-            else:
-                trace.append(f'.{index}')
-        
-        if isinstance(indexes[-1], int):
-            layers = eval(''.join(trace))
-            del layers[indexes[-1]]
-        else:
-            delattr(eval(''.join(trace)), indexes[-1])
-    
-
-    def get_attribute(self, layer, attribute):
-        """
-        Get a specific attribute of a layer.
-
-        Args:
-            layer (torch.nn.Module): The layer.
-            attribute (str): The attribute name.
-
-        Returns:
-            Any: The value of the attribute.
-        """
-        assert hasattr(layer, attribute), f'{layer} does not have the attribute {attribute}'
-        return getattr(layer, attribute)
-    
-    def search_layer_by_attribute(self, property, value):
+    def get_layer_by_attribute(self, property, value, operator):
         """
         Search for layers in the model with a specific attribute value.
 
@@ -124,7 +101,7 @@ class PyModelManager:
 
             for name, layer in model.named_children():
                 tmp.append(name)
-                if hasattr(layer, property) and self.get_attribute(layer, property) == value:
+                if hasattr(layer, property) and utils.bi_operator(operator, self.get_attribute(layer, property), value):
                     layers.append(layer)
                     indexes.append(tmp.copy())
 
@@ -141,7 +118,7 @@ class PyModelManager:
         
         return utils.create_dictionary(utils.convert_to_int(indexes), layers)
     
-    def search_layer_by_instance(self, instance_type):
+    def get_layer_by_instance(self, instance_type):
         """
         Search for layers in the model by their instance type.
 
@@ -174,7 +151,28 @@ class PyModelManager:
 
         return utils.create_dictionary(utils.convert_to_int(indexes), layers)    
 
-    def delete_layer_by_attribute(self, property, value):
+    def delete_layer_by_index(self, indexes):
+        """
+        Delete a layer from the model using its index.
+
+        Args:
+            indexes (list): The index path of the layer in the model.
+        """
+        trace = ['self.model']
+        for index in indexes[:-1]:
+            
+            if isinstance(index, int):
+                trace.append(f'[{index}]')
+            else:
+                trace.append(f'.{index}')
+        
+        if isinstance(indexes[-1], int):
+            layers = eval(''.join(trace))
+            del layers[indexes[-1]]
+        else:
+            delattr(eval(''.join(trace)), indexes[-1])
+
+    def delete_layer_by_attribute(self, property, value, operator):
         """
         Delete layers from the model with a specific attribute value.
 
@@ -182,9 +180,11 @@ class PyModelManager:
             property (str): The attribute to search for.
             value: The value of the attribute to match.
         """
-        search_res = self.search_layer_by_attribute(property, value)
-        for key in search_res.keys():
-            self.delete_layer_by_index(key)
+        search_res = self.get_layer_by_attribute(property, value, operator)
+ 
+        while list(search_res.keys()) != []:
+            self.delete_layer_by_index(list(search_res.keys())[0])
+            search_res = self.get_layer_by_attribute(property, value, operator)
 
     def delete_layer_by_instance(self, instance_type):
         """
@@ -193,6 +193,9 @@ class PyModelManager:
         Args:
             instance_type (type): The instance type of the layers to delete.
         """
-        search_res = self.search_layer_by_instance(instance_type)
-        for key in search_res.keys():
-            self.delete_layer_by_index(key)
+        search_res = self.get_layer_by_instance(instance_type)
+ 
+        while list(search_res.keys()) != []:
+            self.delete_layer_by_index(list(search_res.keys())[0])
+            search_res = self.get_layer_by_instance(instance_type)
+

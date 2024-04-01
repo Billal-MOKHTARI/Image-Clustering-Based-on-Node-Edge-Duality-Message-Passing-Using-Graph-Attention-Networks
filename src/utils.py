@@ -20,3 +20,20 @@ def convert_to_int(input_list):
 
 def create_dictionary(keys, values):
     return dict(zip(map(tuple, keys), values))
+
+def bi_operator(op, a, b):
+    if op == '==':
+        
+        return a == b
+    elif op == '!=':
+        return a != b
+    elif op == '>':
+        return a > b
+    elif op == '>=':
+        return a >= b
+    elif op == '<':
+        return a < b
+    elif op == '<=':
+        return a <= b
+    elif callable(op):
+        op(a, b)
