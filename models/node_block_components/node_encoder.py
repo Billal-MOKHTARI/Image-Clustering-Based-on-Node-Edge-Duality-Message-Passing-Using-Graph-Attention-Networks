@@ -100,8 +100,16 @@ input_shape = (200, 256, 256)
 model = NodeEncoder(input_shape, model='efficientnet_b0')
 pmm = py_model_manager.PyModelManager(model)
 
-pmm.delete_layer_by_attribute('inplace', True, '==')
+conditions = {
+    'and': [{'==': ('kernel_size', (1, 1))}, {'==': ('stride', (1, 1))}],
+    'or': [{'==': ('kernel_size', (3, 3))}]
+    
+}
+print(pmm.delete_layer_by_attributes(conditions))
+print(pmm.get_named_layers())
 
-print(dict(pmm.model.named_children()))
+# pmm.delete_layer_by_attribute('inplace', True, '==')
+
+# print(dict(pmm.model.named_children()))
 # summary(model, input_shape, -1) 
 

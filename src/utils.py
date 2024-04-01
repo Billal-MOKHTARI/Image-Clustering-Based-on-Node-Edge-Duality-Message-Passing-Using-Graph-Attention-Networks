@@ -46,26 +46,27 @@ def evaluate_conditions(conditions):
             for condition in operands:
                 key = list(condition.keys())[0]
                 value = list(condition.values())[0]
+                
                 result = result and bi_operator(key, value[0], value[1])
-            if not result:
-                return False
+                
+            return result
         elif operator == 'or':
             result = False
             for condition in operands:
                 key = list(condition.keys())[0]
                 value = list(condition.values())[0]
                 result = result or bi_operator(key, value[0], value[1])
-            if result:
-                return True
+            return result
              
        
     return False
     
-conditions = {
-    'and': [{'==': (1, 1)}, {'>': (3, 2)}, {'<': (5, 6)}],
-    'or': [{'<': (2, 1)}, {'!=': (4, 4)}],
+def intersect_dicts(dict1, dict2):
+    intersection_dict = {}
+    for key in dict1.keys() & dict2.keys():  # Using set intersection for keys
+        if dict1[key] == dict2[key]:  # Ensure values are the same for the common key
+            intersection_dict[key] = dict1[key]
+    return intersection_dict
 
-}
-
-result = evaluate_conditions(conditions)
-print(result)
+def union_dicts(dict1, dict2):
+    return {**dict1, **dict2}
