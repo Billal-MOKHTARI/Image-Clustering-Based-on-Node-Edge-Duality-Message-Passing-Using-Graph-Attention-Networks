@@ -3,7 +3,7 @@ import sys
 import os
 # Add the parent directory of the current file to the system path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
-from models.node_block_components import node_encoder
+from models.node_block_components import image_encoder
 import models.constants
 
 
@@ -14,8 +14,8 @@ class TestNodeEncoder(unittest.TestCase):
         self.model = "resnet18"
         self.margin_expansion_factor = 6
         self.kwargs = {"pretrained": True, "stride": (1, 1), "padding": (0, 0)}
-        self.node_encoder = node_encoder.NodeEncoder(self.input_shape, self.model, self.margin_expansion_factor, **self.kwargs)
-        print(self.node_encoder)
+        self.image_encoder = image_encoder.NodeEncoder(self.input_shape, self.model, self.margin_expansion_factor, **self.kwargs)
+        print(self.image_encoder)
         
 if __name__ == '__main__':
     unittest.main()
