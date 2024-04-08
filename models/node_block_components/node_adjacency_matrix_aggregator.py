@@ -2,11 +2,15 @@ from torch import nn
 from torchsummaryX import summary
 import torch
 class NodeAdjacencyMatrixAgregator(nn.Module):
-    def __init__(self, num_embeddings, embedding_dim, matrix_dim, **kwargs):
+    def __init__(self, num_embeddings, embedding_dim, matrix_dim, layer_index):
         super(NodeAdjacencyMatrixAgregator, self).__init__()
+        
+        self.layer_index = layer_index
+        if layer_index == 0:
+            self.embedding_layer = nn.Embedding(num_embeddings, embedding_dim)
+            self.matrix_dim = matrix_dim
+ 
 
-        self.embedding_layer = nn.Embedding(num_embeddings, embedding_dim)
-        self.matrix_dim = matrix_dim
 
     def forward(self, x, measure_matrix):
         # The measure matrix might me degree matrix, closeness matrix or any other matrix
@@ -23,9 +27,4 @@ class NodeAdjacencyMatrixAgregator(nn.Module):
 
         return x
 
-mat = torch.tensor([[[0, 2, 1, 5], [2, 2, 1, 3], [0, 1, 2, 4], [1, 2, 3, 4]],
-                    [[0, 2, 1, 5], [2, 2, 1, 4], [0, 1, 2, 4], [1, 2, 3, 4]]])
-measure_matrix = torch.tensor([[3, 0, 0, 0], [0, 2, 0, 0], [0, 0, 1, 0], [0, 0, 0, 4]])
-model = NodeAdjacencyMatrixAgregator(6, 1, 4)
-print(model(mat, measure_matrix))
 

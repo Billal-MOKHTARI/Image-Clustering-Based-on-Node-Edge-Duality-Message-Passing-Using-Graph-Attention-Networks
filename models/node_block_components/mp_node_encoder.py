@@ -1,9 +1,9 @@
 from torch import nn
 from torchsummary import summary
 import torch
-class IntermediateEncoder(nn.Module):
+class MPNodeEncoder(nn.Module):
     def __init__(self, in_features, out_features, layer_index, **kwargs):
-        super(IntermediateEncoder, self).__init__()
+        super(MPNodeEncoder, self).__init__()
         linear_layer_args_name = "linear_layer"
         batch_norm_args_name = "batch_norm_layer"
         activation_args_name = "activation_layer"
@@ -38,6 +38,6 @@ class IntermediateEncoder(nn.Module):
             x = self.activation(x)
         return x
 
-# mat = torch.tensor([[0, 1, 2, 3]], dtype=torch.float32)   
-# model = IntermediateEncoder(4, 10, linear_layer={"bias": True}, batch_norm_layer={"momentum": 0.1}, activation_layer={"activation": nn.ReLU, "activation_args": {}})
-# model(mat)
+mat = torch.tensor([[0, 1, 2, 3]], dtype=torch.float32)   
+model = MPNodeEncoder(4, 10, linear_layer={"bias": True}, batch_norm_layer={"momentum": 0.1}, activation_layer={"activation": nn.ReLU, "activation_args": {}}, layer_index=1)
+print(model(mat))
