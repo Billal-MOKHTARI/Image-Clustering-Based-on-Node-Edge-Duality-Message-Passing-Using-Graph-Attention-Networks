@@ -1,0 +1,34 @@
+2024-04-09 12:28:44,332 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-04-09 12:28:44,332 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Configure stats pid to 3091
+2024-04-09 12:28:44,332 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Loading settings from /home/bimokhtari1/.config/wandb/settings
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Loading settings from /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/notebooks/wandb/settings
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Applying login settings: {'anonymous': '50ec2df756bf2e8a273dc36f5a363b8e445c743f'}
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Applying login settings: {'api_key': '***REDACTED***'}
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Applying login settings: {'api_key': '***REDACTED***'}
+2024-04-09 12:28:44,333 INFO    MainThread:3091 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-04-09 12:28:44,334 INFO    MainThread:3091 [wandb_init.py:_log_setup():521] Logging user logs to /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/notebooks/wandb/run-20240409_122844-nmr39907/logs/debug.log
+2024-04-09 12:28:44,334 INFO    MainThread:3091 [wandb_init.py:_log_setup():522] Logging internal logs to /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/notebooks/wandb/run-20240409_122844-nmr39907/logs/debug-internal.log
+2024-04-09 12:28:44,334 INFO    MainThread:3091 [wandb_init.py:_jupyter_setup():467] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x7f8a0dd4dc10>
+2024-04-09 12:28:44,335 INFO    MainThread:3091 [wandb_init.py:init():561] calling init triggers
+2024-04-09 12:28:44,335 INFO    MainThread:3091 [wandb_init.py:init():568] wandb.init called with sweep_config: {}
+config: {}
+2024-04-09 12:28:44,336 INFO    MainThread:3091 [wandb_init.py:init():611] starting backend
+2024-04-09 12:28:44,336 INFO    MainThread:3091 [wandb_init.py:init():615] setting up manager
+2024-04-09 12:28:44,339 INFO    MainThread:3091 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-04-09 12:28:44,341 INFO    MainThread:3091 [wandb_init.py:init():623] backend started and connected
+2024-04-09 12:28:44,347 INFO    MainThread:3091 [wandb_run.py:_label_probe_notebook():1299] probe notebook
+2024-04-09 12:28:44,348 INFO    MainThread:3091 [wandb_run.py:_label_probe_notebook():1309] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2024-04-09 12:28:44,348 INFO    MainThread:3091 [wandb_init.py:init():715] updated telemetry
+2024-04-09 12:28:44,387 INFO    MainThread:3091 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-04-09 12:28:44,805 INFO    MainThread:3091 [wandb_run.py:_on_init():2357] communicating current version
+2024-04-09 12:28:44,972 INFO    MainThread:3091 [wandb_run.py:_on_init():2366] got version response 
+2024-04-09 12:28:44,973 INFO    MainThread:3091 [wandb_init.py:init():799] starting run threads in backend
+2024-04-09 12:28:45,355 INFO    MainThread:3091 [wandb_run.py:_console_start():2335] atexit reg
+2024-04-09 12:28:45,356 INFO    MainThread:3091 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-04-09 12:28:45,356 INFO    MainThread:3091 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-04-09 12:28:45,356 INFO    MainThread:3091 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-04-09 12:28:45,356 INFO    MainThread:3091 [wandb_init.py:init():842] run started, returning control to user process
+2024-04-09 12:28:45,359 INFO    MainThread:3091 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2024-04-09 12:28:45,359 INFO    MainThread:3091 [wandb_init.py:_pause_backend():432] pausing backend

@@ -1,0 +1,59 @@
+{
+    "os": "Linux-5.4.0-174-generic-x86_64-with-glibc2.29",
+    "python": "3.8.10",
+    "heartbeatAt": "2024-04-09T10:28:45.009804",
+    "startedAt": "2024-04-09T10:28:44.328351",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/Billal-MOKHTARI/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks.git",
+        "commit": "1c98728431060919a506cea97f018466f9878c15"
+    },
+    "email": "billal.mokhtari@etu.uca.fr",
+    "root": "/home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks",
+    "host": "f205pc13",
+    "username": "bimokhtari1",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 4,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 1994.85375,
+        "min": 800.0,
+        "max": 3600.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1997.348,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 1998.237,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 1987.906,
+            "min": 800.0,
+            "max": 3600.0
+        },
+        {
+            "current": 1995.924,
+            "min": 800.0,
+            "max": 3600.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 109.88578796386719,
+            "used": 7.893608093261719
+        }
+    },
+    "memory": {
+        "total": 15.489360809326172
+    }
+}
