@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from typing import List
+import utils
 
 def load_data(path):
     data = pd.read_csv(path)
@@ -29,12 +30,19 @@ def create_index(matrix, delimiter):
 
     return new_index
 
-def is_intersect_list(list1, list2):
+def intersect_list(list1, list2):
+    intersection = []
+
     for i in list1:
         if i in list2:
-            return True
+            intersection.append(i)
+    
+    return intersection
+            
 
-def create_dual(matrix, delimiter):
+
+def create_dual(matrix, delimiter, mapper):
+    # assert all(isinstance(i, (float, int)) for i in mapper.values()), "All elements must be floats"
     dual_index = create_index(matrix, delimiter)
     size = len(dual_index)
 
@@ -45,28 +53,24 @@ def create_dual(matrix, delimiter):
         for ind2 in dual_index:
             ind1_split = ind1.split(delimiter)
             ind2_split = ind2.split(delimiter)
-            if is_intersect_list(ind1_split, ind2_split):
-                dual_matrix.loc[ind1, ind2] = 1
 
+            intersection = intersect_list(ind1_split, ind2_split)
+
+            if len(intersection) == 2:
+                dual_matrix.loc[ind1, ind2] = 1
+            
+            elif intersection != []:
+                dual_matrix.loc[ind1, ind2] = mapper.loc[intersection[0]]
+                
     return dual_matrix
 
-def extract_channels(tensor, index, columns) -> List[pd.DataFrame]:
-    channels = []
-    shape = tensor.shape
-    assert len(shape) == 3, "The matrix should be a 3D tensor"
 
-    for i in range(shape[0]):
-        channel = tensor[i, :, :]
-        channel = pd.DataFrame(channel, index=index, columns=columns)
-        channels.append(channel)
-
-    return channels
 
 def construct_dual_index(tensor, index, delimiter):
-    assert len(tensor) == 3, "The tensor should be a 3D tensor"
+    assert len(tensor.shape) == 3, "The tensor should be a 3D tensor"
     assert tensor.shape[1] == tensor.shape[2], "The tensor should be square"
 
-    channels = extract_channels(tensor, index, index)
+    channels = utils.extract_channels(tensor, index, index)
 
     new_index = list()
     for channel in channels:
@@ -97,25 +101,32 @@ def sort_and_fill_matrix(matrix, large_index):
     
     return matrix
 
-
- 
-def create_dual_tensor(tensor, index, delimiter):
+def create_dual_tensor(tensor, index, delimiter, mapper):
+    assert mapper.shape[0] == len(index), "The number of rows in the mapper should be equal to the number of indexes"
+    
     dual_index = construct_dual_index(tensor, index, delimiter)
 
-    channels = extract_channels(tensor, index, index)
+    channels = utils.extract_channels(tensor, index, index)
+    assert mapper.shape[1] == len(channels), "The number of columns in the mapper should be equal to the number of channels"
     dual_channels = []
 
+    ind = 0
     for channel in channels:
-        dual_channel = create_dual(channel, delimiter)
+        channel_mapper = mapper.iloc[:, ind]
+        dual_channel = create_dual(channel, delimiter, channel_mapper)
         dual_channel = sort_and_fill_matrix(dual_channel, dual_index)
 
         dual_channels.append(dual_channel)
+        ind += 1
     
     return dual_index, np.array(dual_channels)
         
     
 
 index = ["1", "2", "3", "4", "5"]
+vals = np.array([[8, 1, 5], [2, 22, 5], [0.2, 5, 7], [1, 4, 0], [1, 6, 0.9]])
+
+mapper = pd.DataFrame(vals, index=index)
 
 mat1 = np.array([[1, 1, 0, 1, 1], 
                 [1, 1, 1, 0, 0], 
@@ -137,6 +148,6 @@ mat3 = np.array([[1, 1, 0, 0, 1],
 
 mat = np.array([mat1, mat2, mat3])
 
-dual_matrix = create_dual_tensor(mat, index, "_")
+dual_matrix = create_dual_tensor(mat, index, "_", mapper)
 print(dual_matrix[0])
 print(dual_matrix[1])
