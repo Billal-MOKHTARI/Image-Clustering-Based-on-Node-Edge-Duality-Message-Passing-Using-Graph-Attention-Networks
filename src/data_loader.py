@@ -3,6 +3,8 @@ import numpy as np
 from typing import List
 import utils
 
+import torch
+
 def load_data(path):
     data = pd.read_csv(path)
     return data
@@ -119,35 +121,35 @@ def create_dual_tensor(tensor, index, delimiter, mapper):
         dual_channels.append(dual_channel)
         ind += 1
     
-    return dual_index, np.array(dual_channels)
+    return dual_index, torch.tensor(np.array(dual_channels))
         
     
 
-index = ["1", "2", "3", "4", "5"]
-vals = np.array([[8, 1, 5], [2, 22, 5], [0.2, 5, 7], [1, 4, 0], [1, 6, 0.9]])
+# index = ["1", "2", "3", "4", "5"]
+# vals = np.array([[8, 1, 5], [2, 22, 5], [0.2, 5, 7], [1, 4, 0], [1, 6, 0.9]])
 
-mapper = pd.DataFrame(vals, index=index)
+# mapper = pd.DataFrame(vals, index=index)
 
-mat1 = np.array([[1, 1, 0, 1, 1], 
-                [1, 1, 1, 0, 0], 
-                [0, 1, 1, 0, 1], 
-                [1, 0, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
+# mat1 = np.array([[1, 1, 0, 1, 1], 
+#                 [1, 1, 1, 0, 0], 
+#                 [0, 1, 1, 0, 1], 
+#                 [1, 0, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
 
-mat2 = np.array([[1, 0, 1, 1, 1], 
-                [0, 1, 1, 0, 1], 
-                [1, 1, 1, 1, 1], 
-                [1, 0, 1, 1, 0],
-                [1, 1, 1, 0, 1]])
+# mat2 = np.array([[1, 0, 1, 1, 1], 
+#                 [0, 1, 1, 0, 1], 
+#                 [1, 1, 1, 1, 1], 
+#                 [1, 0, 1, 1, 0],
+#                 [1, 1, 1, 0, 1]])
 
-mat3 = np.array([[1, 1, 0, 0, 1], 
-                [1, 1, 0, 1, 0], 
-                [0, 0, 1, 0, 1], 
-                [0, 1, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
+# mat3 = np.array([[1, 1, 0, 0, 1], 
+#                 [1, 1, 0, 1, 0], 
+#                 [0, 0, 1, 0, 1], 
+#                 [0, 1, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
 
-mat = np.array([mat1, mat2, mat3])
+# mat = np.array([mat1, mat2, mat3])
 
-dual_matrix = create_dual_tensor(mat, index, "_", mapper)
-print(dual_matrix[0])
-print(dual_matrix[1])
+# dual_matrix = create_dual_tensor(mat, index, "_", mapper)
+# print(dual_matrix[0])
+# print(dual_matrix[1])
