@@ -3,7 +3,7 @@ import sys
 import os
 # Add the parent directory of the current file to the system path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
-from models.node_block_components import image_encoder
+from models import image_encoder
 import models.constants
 
 

@@ -1,3 +1,5 @@
+import torch
+
 MODELS = {'vgg11',
         'vgg11_bn',
         'vgg13',
@@ -34,3 +36,6 @@ MODELS = {'vgg11',
         'mnasnet1_0',
         'mnasnet1_3',
     }
+
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+FLOATING_POINT = torch.float32
