@@ -54,7 +54,7 @@ class DualMessagePassing(nn.Module):
                                                    **self.edge_message_passing_args)
 
     def create_dual_adjacency_tensor(self, delimiter, mapper):
-        tensor = torch.zeros(self.primal_out_features, len(self.dual_index), len(self.dual_index))
+        tensor = torch.zeros(mapper.shape[1], len(self.dual_index), len(self.dual_index))
 
         for ind1 in self.dual_index:
             for ind2 in self.dual_index:
@@ -63,13 +63,12 @@ class DualMessagePassing(nn.Module):
 
                 intersection = data_loader.intersect_list(ind1_split, ind2_split)
                 if len(intersection) == 1:
-                    index_row, index_col, value = self.dual_index.index(ind1), self.dual_index.index(ind2), mapper[intersection[0]]
-                    tensor[:, index_row, index_col] = value    
+                    index_row, index_col, value = self.dual_index.index(ind1), self.dual_index.index(ind2), mapper.loc[intersection[0]]
+                    tensor[:, index_row, index_col] = torch.tensor(value)
+                elif len(intersection) == 2:
+                    tensor[:, self.dual_index.index(ind1), self.dual_index.index(ind2)] = torch.tensor(np.ones(mapper.shape[1]))
 
-        return tensor 
-
-
-        
+        return tensor
 
     def create_primal_adjacency_tensor(self, primal_index, delimiter, mapper):
 
@@ -81,3 +80,21 @@ class DualMessagePassing(nn.Module):
 
 
         pass
+
+def create_dual_adjacency_tensor(dual_index, delimiter, mapper):
+    tensor = torch.zeros(mapper.shape[1], len(dual_index), len(dual_index))
+
+    for ind1 in dual_index:
+        for ind2 in dual_index:
+            ind1_split = ind1.split(delimiter)
+            ind2_split = ind2.split(delimiter)
+
+            intersection = data_loader.intersect_list(ind1_split, ind2_split)
+            if len(intersection) == 1:
+                index_row, index_col, value = dual_index.index(ind1), dual_index.index(ind2), mapper.loc[intersection[0]]
+                tensor[:, index_row, index_col] = torch.tensor(value)    
+            elif len(intersection) == 2:
+                tensor[:, dual_index.index(ind1), dual_index.index(ind2)] = torch.tensor(np.ones(mapper.shape[1]))
+    return tensor 
+dual_index = ["a_b", "b_c", "c_a"]
+print(create_dual_adjacency_tensor(dual_index, "_", pd.DataFrame(np.array([[1, 2, 3, 7], [4, 5, 6, 2], [7, 8, 9, 10]]), index=['a', 'b', 'c'])))
