@@ -6,14 +6,13 @@ from torchsummary import summary   # Used for model summary
 
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-from src import utils  # Import custom utility functions module
+
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import constants  # Import custom constants module
 
 from torch_model_manager import TorchModelManager
- 
+from src import utils
 class ImageEncoder(nn.Module):
     """
     A custom neural network module for transforming node data using extended convolutional layers 
