@@ -10,28 +10,6 @@ from src import data_loader
 
 class DualMessagePassing(nn.Module):
     """
-    >>> DualMessagePassing module performs message passing on both primal and dual graphs.
-
-    >>> Args:
-    >>>     primal_in_features (int): Number of input features for the primal graph.
-    >>>     primal_out_features (int): Number of output features for the primal graph.
-    >>>     primal_index (list): List of indices for the primal graph.
-    >>>     depth (int): Depth of the message passing.
-    >>>     dual_in_features (int): Number of input features for the dual graph.
-    >>>     dual_out_features (int): Number of output features for the dual graph.
-    >>>     dual_index (list): List of indices for the dual graph.
-    >>>     layer_index (int): Index of the layer.
-    >>>     delimiter (str, optional): Delimiter used to split indices. Defaults to "_".
-    >>>     **kwargs: Additional keyword arguments for message passing.
-
-    >>> Attributes:
-    >>>     node_message_passing_args (dict): Additional arguments for node message passing.
-    >>>     edge_message_passing_args (dict): Additional arguments for edge message passing.
-    >>>     node_graph_order (int): Order of the primal graph.
-    >>>     primal_in_features (int): Number of input features for the primal graph.
-    >>>     primal_out_features (int): Number of output features for the primal graph.
-    >>>     primal_index (list): List of indices for the primal graph.
-    >>>
         dual_graph_order (int): Order of the dual graph.
         dual_in_features (int): Number of input features for the dual graph.
         dual_out_features (int): Number of output features for the dual graph.
@@ -49,7 +27,7 @@ class DualMessagePassing(nn.Module):
     Returns:
         dict: Dictionary containing the primal and dual outputs and adjacency tensors. primal and dual outputs and adjacency tensors.
     
-    >>> Example :
+    Example :
     >>>     model = DualMessagePassing(
     >>>                             primal_in_features=3, 
     >>>                             primal_out_features=7, 
@@ -220,43 +198,43 @@ class DualMessagePassing(nn.Module):
 
         return result
     
-model = DualMessagePassing(
-                            primal_in_features=3, 
-                            primal_out_features=7, 
-                            depth=3,
-                            primal_index=["n1", "n2", "n3", "n4"],
-                            dual_in_features=5,
-                            dual_out_features=3,
+# model = DualMessagePassing(
+#                             primal_in_features=3, 
+#                             primal_out_features=7, 
+#                             depth=3,
+#                             primal_index=["n1", "n2", "n3", "n4"],
+#                             dual_in_features=5,
+#                             dual_out_features=3,
     
-                            dual_index=["n1_n2", "n1_n3", "n2_n4"], 
-                            layer_index=1,
-                            delimiter="_",
-                            node_message_passing_args={"batch_norm": {"momentum": 0.1}, "activation": {"layer": nn.ReLU, "args": {}}},
-                            edge_message_passing_args={"batch_norm": {"momentum": 0.1}, "activation": {"layer": nn.ReLU, "args": {}}}
-                            )
+#                             dual_index=["n1_n2", "n1_n3", "n2_n4"], 
+#                             layer_index=1,
+#                             delimiter="_",
+#                             node_message_passing_args={"batch_norm": {"momentum": 0.1}, "activation": {"layer": nn.ReLU, "args": {}}},
+#                             edge_message_passing_args={"batch_norm": {"momentum": 0.1}, "activation": {"layer": nn.ReLU, "args": {}}}
+#                             )
 
-node_x = torch.tensor(np.array([[1, 2, 3], [4, 6, 5], [7, 8, 9], [10, 11, 12]]), dtype=torch.float32)
-edge_x = torch.tensor(np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]]), dtype=torch.float32)
-primal_adjacency_tensor = torch.tensor(np.array([[[1, 1, 1, 0], 
-                                                  [1, 1, 0, 0], 
-                                                  [1, 0, 1, 0], 
-                                                  [0, 0, 0, 1]], 
-                                                 [[1, 1, 1, 0], 
-                                                  [1, 1, 0, 1], 
-                                                  [1, 0, 1, 0], 
-                                                  [0, 1, 0, 1]], 
-                                                 [[1, 1, 0, 0], 
-                                                  [1, 1, 0, 1], 
-                                                  [0, 0, 1, 0], 
-                                                  [0, 1, 0, 1]]]), dtype=torch.float32)
-dual_adjacency_tensor = torch.tensor(np.array([[[1, 2, 3], 
-                                                [2, 1, 1], 
-                                                [3, 1, 0]], 
-                                               [[1, 0, 1], 
-                                                [0, 1, 0], 
-                                                [1, 0, 1]], 
-                                               [[1, 0, 1], 
-                                                [0, 1, 1], 
-                                                [1, 1, 1]]]), dtype=torch.float32)
-result = model(node_x, edge_x, primal_adjacency_tensor, dual_adjacency_tensor)
-print(result)
+# node_x = torch.tensor(np.array([[1, 2, 3], [4, 6, 5], [7, 8, 9], [10, 11, 12]]), dtype=torch.float32)
+# edge_x = torch.tensor(np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]]), dtype=torch.float32)
+# primal_adjacency_tensor = torch.tensor(np.array([[[1, 1, 1, 0], 
+#                                                   [1, 1, 0, 0], 
+#                                                   [1, 0, 1, 0], 
+#                                                   [0, 0, 0, 1]], 
+#                                                  [[1, 1, 1, 0], 
+#                                                   [1, 1, 0, 1], 
+#                                                   [1, 0, 1, 0], 
+#                                                   [0, 1, 0, 1]], 
+#                                                  [[1, 1, 0, 0], 
+#                                                   [1, 1, 0, 1], 
+#                                                   [0, 0, 1, 0], 
+#                                                   [0, 1, 0, 1]]]), dtype=torch.float32)
+# dual_adjacency_tensor = torch.tensor(np.array([[[1, 2, 3], 
+#                                                 [2, 1, 1], 
+#                                                 [3, 1, 0]], 
+#                                                [[1, 0, 1], 
+#                                                 [0, 1, 0], 
+#                                                 [1, 0, 1]], 
+#                                                [[1, 0, 1], 
+#                                                 [0, 1, 1], 
+#                                                 [1, 1, 1]]]), dtype=torch.float32)
+# result = model(node_x, edge_x, primal_adjacency_tensor, dual_adjacency_tensor)
+# print(result)
