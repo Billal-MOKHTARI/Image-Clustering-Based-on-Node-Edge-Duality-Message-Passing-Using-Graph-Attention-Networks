@@ -12,24 +12,69 @@ from src import utils
 
 class DualGATImageClustering(nn.Module):
     def __init__(self, 
-                image_size, 
+                in_image_size, 
                 backbone, 
-                index,
+                primal_index,
+                dual_index,
                 margin_expansion_factor=6,
-                mp_layer_inputs=[728, 600, 512, 400, 256],  
-                delimiters="_",
+                primal_mp_layer_inputs=[728, 600, 512, 400, 256],  
+                dual_mp_layer_inputs=[1000, 728, 600, 512, 400, 256],
+                delimiter="_",
                 **kwargs):
         super(DualGATImageClustering, self).__init__()
-        image_encoder_args = kwargs.get("image_encoder_args", {})
         
-        self.image_size = image_size
-        self.image_encoder = ImageEncoder(input_shape=image_size, 
+        # Extract additional keyword arguments
+        image_encoder_args = kwargs.get("image_encoder_args", {})
+        dual_message_passing_args = kwargs.get("dual_message_passing_args", {})
+        
+        # Store input size and primal index
+        self.image_size = in_image_size
+        self.primal_index = primal_index 
+        self.delimiter = delimiter
+        self.dual_index = dual_index   
+        
+        self.image_encoder = ImageEncoder(input_shape=in_image_size, 
                                           model=backbone, 
                                           margin_expansion_factor=margin_expansion_factor, 
                                           **image_encoder_args)
-        self.index = index
+        self.out_img_size = utils.get_output_model(self.image_encoder, in_image_size)
         
-    def create_dual_adjacency_tensor(self, primal_adjacency_tensor, primal_index, mapper):
+        # Create primal layer inputs
+        self.primal_mp_layer_inputs = []
+        self.primal_mp_layer_inputs.append(self.out_img_size)
+        self.primal_mp_layer_inputs.extend(primal_mp_layer_inputs)
+
+        # Create dual layer inputs
+        self.dual_mp_layer_inputs = dual_mp_layer_inputs      
+  
+        # Create dual message passing layers
+        self.dmp_layers = []
+        for i in range(len(self.mp_layer_inputs)-1):
+            self.dmp_layers.append(DualMessagePassing(primal_in_features=self.primal_mp_layer_inputs[i], 
+                                                      primal_out_features=self.primal_mp_layer_inputs[i+1], 
+                                                      primal_index=self.primal_index,
+                                                      depth=self.dual_mp_layer_inputs[i],
+                                                      dual_in_features=self.dual_mp_layer_inputs[i],
+                                                      dual_out_features=self.dual_mp_layer_inputs[i+1],
+                                                      dual_index=primal_index,
+                                                      layer_index=i,
+                                                      delimiter=self.delimiter,
+                                                      **dual_message_passing_args))
+            
+        
+
+    def forward(self, imgs, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor):
+        # Encode images to embeddings
+        primal_nodes = self.image_encoder(imgs)
+      
+        for layer in self.dmp_layers:
+            result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
+            primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
+            dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
+            
+        
+# model = DualGATImageClustering(in_image_size=(3, 224, 224), backbone="vgg16", primal_index=["1", "2", "3", "4", "5"])
+def create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, mapper, delimiter):
         
         def sort_and_fill_matrix(matrix, large_index):
             # Sort the index of the matrix according to the large index
@@ -112,7 +157,7 @@ class DualGATImageClustering(nn.Module):
 
         assert mapper.shape[0] == len(primal_index), "The number of rows in the mapper should be equal to the number of indexes"
         
-        dual_index = create_dual_index(primal_adjacency_tensor, primal_index, self.delimiter)
+        dual_index = create_dual_index(primal_adjacency_tensor, primal_index, delimiter)
 
         channels = utils.extract_channels(primal_adjacency_tensor, primal_index, primal_index)
         assert mapper.shape[1] == len(channels), "The number of columns in the mapper should be equal to the number of channels"
@@ -121,14 +166,39 @@ class DualGATImageClustering(nn.Module):
         ind = 0
         for channel in channels:
             channel_mapper = mapper.iloc[:, ind]
-            dual_channel = create_dual(channel, self.delimiter, channel_mapper)
+            dual_channel = create_dual(channel, delimiter, channel_mapper)
             dual_channel = sort_and_fill_matrix(dual_channel, dual_index)
 
             dual_channels.append(dual_channel)
             ind += 1
         
         return dual_index, torch.tensor(np.array(dual_channels))
+    
+primal_index = ["1", "2", "3", "4", "5"]
+vals = np.array([[8, 1, 5], [2, 22, 5], [0.2, 5, 7], [1, 4, 0], [1, 6, 0.9]])
 
-    def forward(self, imgs):
-        imgs = self.image_encoder(imgs)
-        
+mapper = pd.DataFrame(vals, index=primal_index)
+
+mat1 = np.array([[1, 1, 0, 1, 1], 
+                [1, 1, 1, 0, 0], 
+                [0, 1, 1, 0, 1], 
+                [1, 0, 0, 1, 0],
+                [1, 0, 1, 0, 1]])
+
+mat2 = np.array([[1, 0, 1, 1, 1], 
+                [0, 1, 1, 0, 1], 
+                [1, 1, 1, 1, 1], 
+                [1, 0, 1, 1, 0],
+                [1, 1, 1, 0, 1]])
+
+mat3 = np.array([[1, 1, 0, 0, 1], 
+                [1, 1, 0, 1, 0], 
+                [0, 0, 1, 0, 1], 
+                [0, 1, 0, 1, 0],
+                [1, 0, 1, 0, 1]])
+
+primal_adjacency_tensor = torch.tensor(np.array([mat1, mat2, mat3]))
+
+dual_matrix = create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, mapper, "_")
+print(dual_matrix[0])
+print(dual_matrix[1])

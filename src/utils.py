@@ -33,3 +33,12 @@ def get_output_model(model, input_shape):
         output_size = output_size[1]
     
     return output_size
+
+def intersect_list(list1, list2):
+    intersection = []
+
+    for i in list1:
+        if i in list2:
+            intersection.append(i)
+    
+    return intersection
