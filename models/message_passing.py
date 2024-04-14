@@ -6,7 +6,6 @@ import numpy as np
 import os
 import sys
 import constants
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 class MessagePassing(nn.Module):
     """
