@@ -1,27 +1,44 @@
 import torch
 from torch import nn
-import constants
-from dual_message_passing import DualMessagePassing
-from image_encoder import ImageEncoder
+from . import constants
+
+from .dual_message_passing import DualMessagePassing
+from .image_encoder import ImageEncoder
 import numpy as np
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from src import utils
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+
 
 class DualGATImageClustering(nn.Module):
     def __init__(self, 
                 primal_index,
                 dual_index,
                 n_objects,
-                backbone = 'vgg16', 
-                in_image_size = (3, 224, 224), 
+                backbone='vgg16', 
+                in_image_size=(4, 224, 224), 
                 margin_expansion_factor=6,
                 primal_mp_layer_inputs=[728, 600, 512, 400, 256],  
                 dual_mp_layer_inputs=[1000, 728, 600, 512, 400],
                 delimiter="_",
                 **kwargs):
+        """
+        DualGATImageClustering model for image clustering based on node-edge duality message passing using Graph Attention Networks.
         
+        Args:
+            primal_index (list): List of primal node indices.
+            dual_index (list): List of dual node indices.
+            n_objects (int): Number of objects in the graph.
+            backbone (str): Backbone model architecture for image encoding. Default is 'vgg16'.
+            in_image_size (tuple): Input image size. Default is (3, 224, 224).
+            margin_expansion_factor (int): Margin expansion factor for image encoding. Default is 6.
+            primal_mp_layer_inputs (list): List of input sizes for primal message passing layers. Default is [728, 600, 512, 400, 256].
+            dual_mp_layer_inputs (list): List of input sizes for dual message passing layers. Default is [1000, 728, 600, 512, 400].
+            delimiter (str): Delimiter used for creating dual node indices. Default is "_".
+            **kwargs: Additional keyword arguments for image encoder and dual message passing layers.
+        """
         super(DualGATImageClustering, self).__init__()
         
         # Extract additional keyword arguments
@@ -42,19 +59,13 @@ class DualGATImageClustering(nn.Module):
         self.out_img_size = utils.get_output_model(self.image_encoder, in_image_size)
         
         # Create primal layer inputs
-        self.primal_mp_layer_inputs = []
-        self.primal_mp_layer_inputs.append(self.out_img_size)
-        self.primal_mp_layer_inputs.extend(primal_mp_layer_inputs)
+        self.primal_mp_layer_inputs = [self.out_img_size] + primal_mp_layer_inputs
 
         # Create dual layer inputs
-        self.dual_mp_layer_inputs = []
-        self.dual_mp_layer_inputs.append(n_objects)
-        self.dual_mp_layer_inputs.extend(dual_mp_layer_inputs)
+        self.dual_mp_layer_inputs = [n_objects] + dual_mp_layer_inputs
               
         # Create dual message passing depths
-        self.dual_depths = []
-        self.dual_depths.append(n_objects)
-        self.dual_depths.extend(primal_mp_layer_inputs)
+        self.dual_depths = [n_objects] + primal_mp_layer_inputs
         
         # Create dual message passing layers
         self.dmp_layers = []
@@ -73,23 +84,31 @@ class DualGATImageClustering(nn.Module):
                                                       **dual_message_passing_args))
 
     def forward(self, imgs, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
+        """
+        Forward pass of the DualGATImageClustering model.
+        
+        Args:
+            imgs (torch.Tensor): Input images.
+            primal_adjacency_tensor (torch.Tensor): Primal adjacency tensor.
+            dual_adjacency_tensor (torch.Tensor): Dual adjacency tensor.
+            dual_nodes (torch.Tensor): Dual nodes.
+        
+        Returns:
+            tuple: Tuple containing primal nodes, primal adjacency tensor, dual nodes, and dual adjacency tensor.
+        """
         # Encode images to embeddings
         primal_nodes = self.image_encoder(imgs)
-
 
         for layer in self.dmp_layers:
             result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
             
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
             dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
-            
+        
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
             
-num_imgs = 5
-n_objects = 4
-img = torch.randn(num_imgs, 3, 224, 224)
-primal_index = ["1", "2", "3", "4", "5"]
 
+# Create adjacency tensors and other variables
 mat1 = np.array([[1, 1, 0, 1, 1], 
                 [1, 1, 1, 0, 0], 
                 [0, 1, 1, 0, 1], 
@@ -115,7 +134,14 @@ mat4 = np.array([[1, 1, 0, 0, 1],
                 [1, 0, 1, 0, 1]])
 
 primal_adjacency_tensor = torch.tensor(np.array([mat1, mat2, mat3, mat4]), dtype=constants.FLOATING_POINT)
+n_objects = primal_adjacency_tensor.shape[0]
+num_images = primal_adjacency_tensor.shape[1]
+
+img = torch.randn(num_images, 4, 224, 224)
+primal_index = ["1", "2", "3", "4", "5"]
+
 dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, "_")
 
+# Create and run the DualGATImageClustering model
 model = DualGATImageClustering(primal_index=primal_index, dual_index=dual_index, n_objects=n_objects)
 model(img, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)

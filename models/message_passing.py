@@ -1,11 +1,12 @@
 from torch import nn
 from torchsummary import summary
 import torch
-from custom_layers import Linear2D
+
+from .custom_layers import Linear2D
 import numpy as np
 import os
 import sys
-import constants
+from . import constants
 
 class MessagePassing(nn.Module):
     """
