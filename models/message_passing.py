@@ -82,8 +82,8 @@ class MessagePassing(nn.Module):
         self.graph_order = graph_order
         self.depth = depth
 
-        if batch_norm_args_name in kwargs.keys():
-            batch_norm_args = kwargs[batch_norm_args_name]
+
+        batch_norm_args = kwargs.get(batch_norm_args_name, {})
         if activation_args_name in kwargs.keys():
             activation_args = kwargs[activation_args_name]
             layer = activation_args["layer"]

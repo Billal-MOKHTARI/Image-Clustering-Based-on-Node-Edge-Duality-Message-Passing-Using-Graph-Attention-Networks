@@ -76,7 +76,8 @@ class DualMessagePassing(nn.Module):
                 primal_in_features, 
                 primal_out_features, 
                 primal_index,
-                depth,
+                primal_depth,
+                dual_depth,
                 dual_in_features,
                 dual_out_features,
                 dual_index, 
@@ -91,11 +92,13 @@ class DualMessagePassing(nn.Module):
         self.primal_in_features = primal_in_features
         self.primal_out_features = primal_out_features
         self.primal_index = primal_index
-        self.depth = depth
+        self.primal_depth = primal_depth
+
         self.dual_graph_order = len(dual_index)
         self.dual_in_features = dual_in_features
         self.dual_out_features = dual_out_features
         self.dual_index = dual_index
+        self.dual_depth = dual_depth
  
         self.layer_index = layer_index
         self.delimiter = delimiter
@@ -103,14 +106,14 @@ class DualMessagePassing(nn.Module):
         self.node_message_passing_block = MessagePassing(graph_order=self.node_graph_order, 
                                                    in_features=self.primal_in_features, 
                                                    out_features=self.primal_out_features, 
-                                                   depth=self.depth, 
+                                                   depth=self.primal_depth, 
                                                    layer_index=self.layer_index, 
                                                    **self.node_message_passing_args)
-        
+
         self.edge_message_passing_block = MessagePassing(graph_order=self.dual_graph_order, 
                                                    in_features=self.dual_in_features, 
                                                    out_features=self.dual_out_features, 
-                                                   depth=self.primal_in_features, 
+                                                   depth=self.dual_depth, 
                                                    layer_index=self.layer_index, 
                                                    **self.edge_message_passing_args)
 
