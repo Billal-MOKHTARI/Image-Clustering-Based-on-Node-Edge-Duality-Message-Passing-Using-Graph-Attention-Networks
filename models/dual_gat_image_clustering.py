@@ -106,27 +106,28 @@ class DualGATImageClustering(nn.Module):
                                                       **dual_message_passing_args))
 
     def encoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
-        encoder_history = {}
+        encoder_history = []
         for layer in self.enc_dmp_layers:
             result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
             
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
             dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
 
-            encoder_history.extend(result)
+            tmp = {"primal_nodes": primal_nodes, "dual_nodes": dual_nodes}
+            encoder_history.append(tmp)
         
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, encoder_history
 
     def decoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
-        decoder_history = {}
+        decoder_history = []
         for layer in self.dec_dmp_layers:
             result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
             
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
             dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
         
-            decoder_history.extend(result)
-            
+            decoder_history.append(result)
+
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history
         
 
@@ -149,43 +150,60 @@ class DualGATImageClustering(nn.Module):
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, encoder_history = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history = self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         
-        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
+        encoder_history.pop()
+        decoder_history = decoder_history[::-1]
+
+        # Compute primal reconstruction loss
+        primal_losses = 0
+        dual_losses = 0
+
+        num_layers = len(encoder_history)
+        for i in range(num_layers):
+            enc_primal_node = encoder_history[i]["primal_nodes"]
+            dec_primal_node = decoder_history[i]["primal_nodes"]
+            primal_losses += self.primal_criterion_weights[i] * self.criterion(enc_primal_node, dec_primal_node)
+
+            enc_dual_node = encoder_history[i]["dual_nodes"]
+            dec_dual_node = decoder_history[i]["dual_nodes"]
+            dual_losses += self.dual_criterion_weights[i] * self.criterion(enc_dual_node, dec_dual_node)
+
+        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, primal_losses, dual_losses
     
-# # Create adjacency tensors and other variables
-# mat1 = np.array([[1, 1, 0, 1, 1], 
-#                 [1, 1, 1, 0, 0], 
-#                 [0, 1, 1, 0, 1], 
-#                 [1, 0, 0, 1, 0],
-#                 [1, 0, 1, 0, 1]])
+# Create adjacency tensors and other variables
+mat1 = np.array([[1, 1, 0, 1, 1], 
+                [1, 1, 1, 0, 0], 
+                [0, 1, 1, 0, 1], 
+                [1, 0, 0, 1, 0],
+                [1, 0, 1, 0, 1]])
 
-# mat2 = np.array([[1, 0, 1, 1, 1], 
-#                 [0, 1, 1, 0, 1], 
-#                 [1, 1, 1, 1, 1], 
-#                 [1, 0, 1, 1, 0],
-#                 [1, 1, 1, 0, 1]])
+mat2 = np.array([[1, 0, 1, 1, 1], 
+                [0, 1, 1, 0, 1], 
+                [1, 1, 1, 1, 1], 
+                [1, 0, 1, 1, 0],
+                [1, 1, 1, 0, 1]])
 
-# mat3 = np.array([[1, 1, 0, 0, 1], 
-#                 [1, 1, 0, 1, 0], 
-#                 [0, 0, 1, 0, 1], 
-#                 [0, 1, 0, 1, 0],
-#                 [1, 0, 1, 0, 1]])
+mat3 = np.array([[1, 1, 0, 0, 1], 
+                [1, 1, 0, 1, 0], 
+                [0, 0, 1, 0, 1], 
+                [0, 1, 0, 1, 0],
+                [1, 0, 1, 0, 1]])
 
-# mat4 = np.array([[1, 1, 0, 0, 1], 
-#                 [1, 1, 0, 1, 0], 
-#                 [0, 0, 1, 0, 1], 
-#                 [0, 1, 0, 1, 0],
-#                 [1, 0, 1, 0, 1]])
+mat4 = np.array([[1, 1, 0, 0, 1], 
+                [1, 1, 0, 1, 0], 
+                [0, 0, 1, 0, 1], 
+                [0, 1, 0, 1, 0],
+                [1, 0, 1, 0, 1]])
 
-# primal_adjacency_tensor = torch.tensor(np.array([mat1, mat2, mat3, mat4]), dtype=constants.FLOATING_POINT)
-# n_objects = primal_adjacency_tensor.shape[0]
-# num_images = primal_adjacency_tensor.shape[1]
+primal_adjacency_tensor = torch.tensor(np.array([mat1, mat2, mat3, mat4]), dtype=constants.FLOATING_POINT)
+n_objects = primal_adjacency_tensor.shape[0]
+num_images = primal_adjacency_tensor.shape[1]
 
-# img = torch.randn(num_images, 4, 224, 224)
-# primal_index = ["1", "2", "3", "4", "5"]
+img = torch.randn(num_images, 4, 224, 224)
+primal_index = ["1", "2", "3", "4", "5"]
 
-# dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, "_")
+dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, "_")
 
-# # Create and run the DualGATImageClustering model
-# model = DualGATImageClustering(primal_index=primal_index, dual_index=dual_index, n_objects=n_objects)
-# result = model(img, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-# # print(result[3].shape)
+# Create and run the DualGATImageClustering model
+model = DualGATImageClustering(primal_index=primal_index, dual_index=dual_index, n_objects=n_objects)
+result = model(img, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+# print(result[3].shape)
