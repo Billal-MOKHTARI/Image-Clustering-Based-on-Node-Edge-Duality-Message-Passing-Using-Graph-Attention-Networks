@@ -1,16 +1,17 @@
 import torch
 from torch import nn
-from . import constants
 
-from .dual_message_passing import DualMessagePassing
-from .image_encoder import ImageEncoder
-import numpy as np
+from dual_message_passing import DualMessagePassing
+from image_encoder import ImageEncoder
 import os
 import sys
 from src import utils
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
+from torch import nn
+import constants
+import numpy as np
 
 class DualGATImageClustering(nn.Module):
     def __init__(self, 
@@ -50,7 +51,9 @@ class DualGATImageClustering(nn.Module):
         self.primal_index = primal_index 
         self.dual_index = dual_index
         self.delimiter = delimiter 
-        
+        self.dec_primal_mp_layer_inputs = primal_mp_layer_inputs[::-1]
+        self.dec_dual_mp_layer_inputs = dual_mp_layer_inputs[::-1]
+
         self.image_encoder = ImageEncoder(input_shape=in_image_size, 
                                           model=backbone, 
                                           margin_expansion_factor=margin_expansion_factor, 
@@ -58,34 +61,46 @@ class DualGATImageClustering(nn.Module):
         
         self.out_img_size = utils.get_output_model(self.image_encoder, in_image_size)
         
-        # Create primal layer inputs
-        self.primal_mp_layer_inputs = [self.out_img_size] + primal_mp_layer_inputs
 
-        # Create dual layer inputs
-        self.dual_mp_layer_inputs = [n_objects] + dual_mp_layer_inputs
-              
-        # Create dual message passing depths
+        self.enc_primal_mp_layer_inputs = [self.out_img_size] + primal_mp_layer_inputs
+        self.enc_dual_mp_layer_inputs = [n_objects] + dual_mp_layer_inputs
         self.dual_depths = [n_objects] + primal_mp_layer_inputs
-        
-        # Create dual message passing layers
-        self.dmp_layers = []
-        for i in range(len(self.primal_mp_layer_inputs)-1):
-            self.dmp_layers.append(DualMessagePassing(primal_in_features=self.primal_mp_layer_inputs[i], 
-                                                      primal_out_features=self.primal_mp_layer_inputs[i+1], 
+
+        # Create encoder and decoder message passing layers
+        self.enc_dmp_layers = []
+        self.dec_dmp_layers = []
+
+        for i in range(len(self.enc_primal_mp_layer_inputs)-1):
+            self.enc_dmp_layers.append(DualMessagePassing(primal_in_features=self.enc_primal_mp_layer_inputs[i], 
+                                                      primal_out_features=self.enc_primal_mp_layer_inputs[i+1], 
                                                       primal_index=self.primal_index,
-                                                      primal_depth=self.dual_mp_layer_inputs[i],
+                                                      primal_depth=self.enc_dual_mp_layer_inputs[i],
                                                     
-                                                      dual_in_features=self.dual_mp_layer_inputs[i],
-                                                      dual_out_features=self.dual_mp_layer_inputs[i+1],
+                                                      dual_in_features=self.enc_dual_mp_layer_inputs[i],
+                                                      dual_out_features=self.enc_dual_mp_layer_inputs[i+1],
                                                       dual_index=self.dual_index,
                                                       dual_depth=self.dual_depths[i],
-                                                      layer_index=i,
+                                                      layer_index=f"encoder_{i}",
+                                                      delimiter=self.delimiter,
+                                                      **dual_message_passing_args))
+            
+        for i in range(len(self.dec_primal_mp_layer_inputs)-1):
+            self.dec_dmp_layers.append(DualMessagePassing(primal_in_features=self.dec_primal_mp_layer_inputs[i], 
+                                                      primal_out_features=self.dec_primal_mp_layer_inputs[i+1], 
+                                                      primal_index=self.primal_index,
+                                                      primal_depth=self.dec_dual_mp_layer_inputs[i],
+                                                    
+                                                      dual_in_features=self.dec_dual_mp_layer_inputs[i],
+                                                      dual_out_features=self.dec_dual_mp_layer_inputs[i+1],
+                                                      dual_index=self.dual_index,
+                                                      dual_depth=self.dec_primal_mp_layer_inputs[i],
+                                                      layer_index=f"decoder_{i}",
                                                       delimiter=self.delimiter,
                                                       **dual_message_passing_args))
 
     def encoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
 
-        for layer in self.dmp_layers:
+        for layer in self.enc_dmp_layers:
             result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
             
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
@@ -94,9 +109,14 @@ class DualGATImageClustering(nn.Module):
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
 
     def decoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
+        for layer in self.dec_dmp_layers:
+            result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
+            
+            primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
+            dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
         
+        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
         
-        pass
 
     def forward(self, imgs, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
         """
@@ -115,6 +135,45 @@ class DualGATImageClustering(nn.Module):
         primal_nodes = self.image_encoder(imgs)
 
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-        self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+        primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor = self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
+    
+# # Create adjacency tensors and other variables
+# mat1 = np.array([[1, 1, 0, 1, 1], 
+#                 [1, 1, 1, 0, 0], 
+#                 [0, 1, 1, 0, 1], 
+#                 [1, 0, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
+
+# mat2 = np.array([[1, 0, 1, 1, 1], 
+#                 [0, 1, 1, 0, 1], 
+#                 [1, 1, 1, 1, 1], 
+#                 [1, 0, 1, 1, 0],
+#                 [1, 1, 1, 0, 1]])
+
+# mat3 = np.array([[1, 1, 0, 0, 1], 
+#                 [1, 1, 0, 1, 0], 
+#                 [0, 0, 1, 0, 1], 
+#                 [0, 1, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
+
+# mat4 = np.array([[1, 1, 0, 0, 1], 
+#                 [1, 1, 0, 1, 0], 
+#                 [0, 0, 1, 0, 1], 
+#                 [0, 1, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
+
+# primal_adjacency_tensor = torch.tensor(np.array([mat1, mat2, mat3, mat4]), dtype=constants.FLOATING_POINT)
+# n_objects = primal_adjacency_tensor.shape[0]
+# num_images = primal_adjacency_tensor.shape[1]
+
+# img = torch.randn(num_images, 4, 224, 224)
+# primal_index = ["1", "2", "3", "4", "5"]
+
+# dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, "_")
+
+# # Create and run the DualGATImageClustering model
+# model = DualGATImageClustering(primal_index=primal_index, dual_index=dual_index, n_objects=n_objects)
+# result = model(img, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+# # print(result[3].shape)

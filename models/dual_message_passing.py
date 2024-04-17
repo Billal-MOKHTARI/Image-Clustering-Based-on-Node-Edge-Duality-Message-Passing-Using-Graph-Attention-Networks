@@ -1,9 +1,9 @@
 import torch.nn as nn
 import torch
-from .message_passing import MessagePassing
+from message_passing import MessagePassing
 import pandas as pd
 import numpy as np
-from . import constants
+import constants
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
