@@ -18,6 +18,9 @@ class DualGATImageClustering(nn.Module):
                 primal_index,
                 dual_index,
                 n_objects,
+                criterion = nn.MSELoss(),
+                primal_criterion_weights = [1, 1, 1, 1, 1],
+                dual_criterion_weights = [1, 1, 1, 1, 1],
                 backbone='vgg16', 
                 in_image_size=(4, 224, 224), 
                 margin_expansion_factor=6,
@@ -45,7 +48,8 @@ class DualGATImageClustering(nn.Module):
         # Extract additional keyword arguments
         image_encoder_args = kwargs.get("image_encoder_args", {})
         dual_message_passing_args = kwargs.get("dual_message_passing_args", {})
-        
+        criterion_args = kwargs.get("criterion_args", {})
+
         # Store input size and primal index
         self.image_size = in_image_size
         self.primal_index = primal_index 
@@ -53,6 +57,9 @@ class DualGATImageClustering(nn.Module):
         self.delimiter = delimiter 
         self.dec_primal_mp_layer_inputs = primal_mp_layer_inputs[::-1]
         self.dec_dual_mp_layer_inputs = dual_mp_layer_inputs[::-1]
+        self.criterion = criterion
+        self.primal_criterion_weights = primal_criterion_weights
+        self.dual_criterion_weights = dual_criterion_weights
 
         self.image_encoder = ImageEncoder(input_shape=in_image_size, 
                                           model=backbone, 
@@ -99,23 +106,28 @@ class DualGATImageClustering(nn.Module):
                                                       **dual_message_passing_args))
 
     def encoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
-
+        encoder_history = {}
         for layer in self.enc_dmp_layers:
             result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
             
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
             dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
+
+            encoder_history.extend(result)
         
-        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
+        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, encoder_history
 
     def decoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
+        decoder_history = {}
         for layer in self.dec_dmp_layers:
             result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
             
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
             dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
         
-        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
+            decoder_history.extend(result)
+            
+        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history
         
 
     def forward(self, imgs, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
@@ -134,8 +146,8 @@ class DualGATImageClustering(nn.Module):
         # Encode images to embeddings
         primal_nodes = self.image_encoder(imgs)
 
-        primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-        primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor = self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+        primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, encoder_history = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+        primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history = self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
     
