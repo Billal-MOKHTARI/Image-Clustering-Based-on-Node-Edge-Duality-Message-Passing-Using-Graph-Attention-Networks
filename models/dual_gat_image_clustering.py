@@ -127,7 +127,8 @@ class DualGATImageClustering(nn.Module):
             primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
             dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
         
-            decoder_history.append(result)
+            tmp = {"primal_nodes": primal_nodes, "dual_nodes": dual_nodes}
+            decoder_history.append(tmp)
 
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history
         
@@ -154,8 +155,8 @@ class DualGATImageClustering(nn.Module):
         decoder_history = decoder_history[::-1]
 
         # Compute primal reconstruction loss
-        primal_losses = 0
-        dual_losses = 0
+        primal_losses = []
+        dual_losses = []
 
         num_layers = len(encoder_history)
         for i in range(num_layers):
@@ -213,17 +214,31 @@ num_images = primal_adjacency_tensor.shape[1]
 img = torch.randn(num_images, 4, 224, 224)
 primal_index = ["1", "2", "3", "4", "5"]
 
-dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, "_")
+dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, 
+                                                                                   primal_index, 
+                                                                                   "_")
 
 # Create and run the DualGATImageClustering model
-model = DualGATImageClustering(primal_index=primal_index, dual_index=dual_index, n_objects=n_objects)
-result = model(img, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-# print(result[3].shape)
+model = DualGATImageClustering(primal_index=primal_index, 
+                               dual_index=dual_index, 
+                               n_objects=n_objects, 
+                               primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1], 
+                               dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1])
 
 def train(model, images, epochs, optimizer = optim.Adam, **kwargs):
-    optimizer = optimizer(**kwargs)
+    optimizer = optimizer(model.parameters(), **kwargs)
     for epoch in range(epochs):
         # Forward pass
         optimizer.zero_grad()
         result = model(images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-        loss = result["primal"]["losses"] + result["dual"]["losses"]
+        primal_loss = utils.list_sum(result["primal"]["losses"])
+        dual_loss = utils.list_sum(result["dual"]["losses"])
+        loss = primal_loss + dual_loss
+
+        loss.backward()
+        optimizer.step()
+        print(f"Epoch: {epoch}, Loss: {loss.item()}")
+
+
+epochs = 100
+train(model, img, epochs, optimizer=optim.Adam, lr=0.01)

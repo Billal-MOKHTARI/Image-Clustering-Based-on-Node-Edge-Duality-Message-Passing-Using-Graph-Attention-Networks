@@ -154,3 +154,7 @@ def create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, delimite
         dual_nodes.to(dtype=constants.FLOATING_POINT)
         
         return dual_index, dual_adjacency_tensor, dual_nodes
+
+def list_sum(l):
+
+    return sum(list(filter(lambda x: (x),l)))
