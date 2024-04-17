@@ -83,6 +83,21 @@ class DualGATImageClustering(nn.Module):
                                                       delimiter=self.delimiter,
                                                       **dual_message_passing_args))
 
+    def encoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
+
+        for layer in self.dmp_layers:
+            result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
+            
+            primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
+            dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
+        
+        return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
+
+    def decoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
+        
+        
+        pass
+
     def forward(self, imgs, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
         """
         Forward pass of the DualGATImageClustering model.
@@ -99,10 +114,7 @@ class DualGATImageClustering(nn.Module):
         # Encode images to embeddings
         primal_nodes = self.image_encoder(imgs)
 
-        for layer in self.dmp_layers:
-            result = layer(primal_nodes, dual_nodes, primal_adjacency_tensor, dual_adjacency_tensor)
-            
-            primal_nodes, primal_adjacency_tensor = result["primal"]["nodes"], result["primal"]["adjacency_tensor"]
-            dual_nodes, dual_adjacency_tensor = result["dual"]["nodes"], result["dual"]["adjacency_tensor"]
+        primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+        self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         
         return primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor
