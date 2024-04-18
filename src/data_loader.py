@@ -1,6 +1,8 @@
 import os
 import random
 from PIL import Image
+
+
 def combine_images(images):
     widths, heights = zip(*(i.size for i in images))
     max_width = max(widths)
@@ -27,42 +29,42 @@ def combine_horizontally(image1, image2):
 
     return new_img
 
-# Path to the folder containing the shape images
-dataset_path = "../benchmark/datasets/geometric shapes dataset"
-output_path = "../benchmark/datasets/shapes"
+# Function to create combined images
+def create_combined_images(dataset_path, output_path, rows = 2, cols = 2, num_images=1000):  
+    # Create output directory if it doesn't exist
+    if not os.path.exists(output_path):
+        os.makedirs(output_path) 
+    # Number of combined images to generate
+    categories = []
+    contents = os.listdir(dataset_path)
+    subfolders = [f for f in contents if os.path.isdir(os.path.join(dataset_path, f))]
 
-# Create output directory if it doesn't exist
-if not os.path.exists(output_path):
-    os.makedirs(output_path)
+    # Print the basenames of the subfolders
+    for subfolder in subfolders:
+        categories.append(os.path.basename(subfolder))
 
-# List of shape categories
-shape_categories = ["Circle", "Square", "Triangle"]
+    # Loop to generate combined images
+    for i in range(num_images):
+        combined_image = []
+        for j in range(rows):  # Two images per row
+            row_images = []
+            for _ in range(cols):  # Two images per row
+                # Randomly select a shape category
+                category = random.choice(categories)
+                # List images in the selected category
+                images = os.listdir(os.path.join(dataset_path, category))
+                # Randomly select an image from the category
+                image_file = random.choice(images)
+                # Open and append the selected image
+                img = Image.open(os.path.join(dataset_path, category, image_file))
+                row_images.append(img)
+            
+            # Combine the two images horizontally
+            combined_image.append(combine_horizontally(row_images[0], row_images[1]))
 
-# Number of combined images to generate
-num_images = 1000
+        # Combine the row images vertically
+        new_image = combine_images(combined_image)
+        # Save the combined image
+        new_image.save(os.path.join(output_path, f"combined_{i}.png"))
 
-# Loop to generate combined images
-for i in range(num_images):
-    combined_image = []
-    for j in range(2):  # Two images per row
-        row_images = []
-        for _ in range(2):  # Two images per row
-            # Randomly select a shape category
-            category = random.choice(shape_categories)
-            # List images in the selected category
-            shape_images = os.listdir(os.path.join(dataset_path, category))
-            # Randomly select an image from the category
-            image_file = random.choice(shape_images)
-            # Open and append the selected image
-            img = Image.open(os.path.join(dataset_path, category, image_file))
-            row_images.append(img)
-        
-        # Combine the two images horizontally
-        combined_image.append(combine_horizontally(row_images[0], row_images[1]))
-
-    # Combine the row images vertically
-    new_image = combine_images(combined_image)
-    # Save the combined image
-    new_image.save(os.path.join(output_path, f"combined_{i}.png"))
-
-print("Combined images generated successfully!")
+    print("Combined images generated successfully!")
