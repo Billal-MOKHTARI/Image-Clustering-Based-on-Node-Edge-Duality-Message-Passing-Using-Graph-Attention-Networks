@@ -7,7 +7,7 @@ import constants
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
-from src import data_loader
+from src import utils
 
 class DualMessagePassing(nn.Module):
     """
@@ -136,7 +136,7 @@ class DualMessagePassing(nn.Module):
                 ind1_split = ind1.split(self.delimiter)
                 ind2_split = ind2.split(self.delimiter)
 
-                intersection = data_loader.intersect_list(ind1_split, ind2_split)
+                intersection = utils.intersect_list(ind1_split, ind2_split)
                 if len(intersection) == 1:
                     index_row, index_col, value = self.dual_index.index(ind1), self.dual_index.index(ind2), mapper.loc[intersection[0]]
                     tensor[:, index_row, index_col] = torch.tensor(value)
