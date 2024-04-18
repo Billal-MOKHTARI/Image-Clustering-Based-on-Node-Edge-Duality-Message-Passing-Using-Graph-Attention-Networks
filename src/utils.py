@@ -260,6 +260,21 @@ def sort_and_fill_matrix(matrix, large_index):
     
     return matrix
 
+def convert_list(list_of_objects, source_type, destination_type):
+    """
+    Convert a list of objects from source_type to destination_type.
+
+    Args:
+        list_of_objects (list): List of objects to be converted.
+        source_type (type): Source type of the objects.
+        destination_type (type): Destination type to which objects will be converted.
+
+    Returns:
+        list: List of objects converted to the destination_type.
+    """
+    # Convert objects using list comprehension
+    return [destination_type(obj) for obj in list_of_objects]
+
 def create_dual_tensor(tensor, index, delimiter, mapper):
     assert mapper.shape[0] == len(index), "The number of rows in the mapper should be equal to the number of indexes"
     

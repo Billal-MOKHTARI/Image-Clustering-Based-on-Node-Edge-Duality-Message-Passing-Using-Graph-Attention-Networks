@@ -5,13 +5,43 @@ from dual_message_passing import DualMessagePassing
 from image_encoder import ImageEncoder
 import os
 import sys
-from src import utils
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
+from src import utils
+
+import pandas as pd
 from torch import nn
 import constants
 import numpy as np
+import torchvision.transforms as transforms
+from PIL import Image
+
+def read_images(folder_path, n):
+    """
+    Read the first n images from a folder, resize them to (3, 224, 224), and stack them into a single tensor.
+
+    Args:
+        folder_path (str): Path to the folder containing images.
+        n (int): Number of images to read.
+
+    Returns:
+        torch.Tensor: Stacked tensor of shape (N, 3, 224, 224).
+    """
+    images = []
+    transform = transforms.Compose([
+        transforms.Resize((64, 64)),
+        transforms.ToTensor()
+    ])
+    for filename in sorted(os.listdir(folder_path)):
+        if len(images) == n:
+            break
+        if filename.endswith(('.png', '.jpg', '.jpeg', '.bmp')):
+            image_path = os.path.join(folder_path, filename)
+            with Image.open(image_path) as img:
+                img_tensor = transform(img)
+                images.append(img_tensor)
+    stacked_tensor = torch.stack(images, dim=0)
+    return stacked_tensor
 
 class DualGATImageClustering(nn.Module):
     def __init__(self, 
@@ -22,7 +52,7 @@ class DualGATImageClustering(nn.Module):
                 primal_criterion_weights = [1, 1, 1, 1, 1],
                 dual_criterion_weights = [1, 1, 1, 1, 1],
                 backbone='vgg16', 
-                in_image_size=(4, 224, 224), 
+                in_image_size=(3, 224, 224), 
                 margin_expansion_factor=6,
                 primal_mp_layer_inputs=[728, 600, 512, 400, 256],  
                 dual_mp_layer_inputs=[1000, 728, 600, 512, 400],
@@ -181,49 +211,7 @@ class DualGATImageClustering(nn.Module):
         }
 
         return result
-    
-# Create adjacency tensors and other variables
-mat1 = np.array([[1, 1, 0, 1, 1], 
-                [1, 1, 1, 0, 0], 
-                [0, 1, 1, 0, 1], 
-                [1, 0, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
 
-mat2 = np.array([[1, 0, 1, 1, 1], 
-                [0, 1, 1, 0, 1], 
-                [1, 1, 1, 1, 1], 
-                [1, 0, 1, 1, 0],
-                [1, 1, 1, 0, 1]])
-
-mat3 = np.array([[1, 1, 0, 0, 1], 
-                [1, 1, 0, 1, 0], 
-                [0, 0, 1, 0, 1], 
-                [0, 1, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
-
-mat4 = np.array([[1, 1, 0, 0, 1], 
-                [1, 1, 0, 1, 0], 
-                [0, 0, 1, 0, 1], 
-                [0, 1, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
-
-primal_adjacency_tensor = torch.tensor(np.array([mat1, mat2, mat3, mat4]), dtype=constants.FLOATING_POINT)
-n_objects = primal_adjacency_tensor.shape[0]
-num_images = primal_adjacency_tensor.shape[1]
-
-img = torch.randn(num_images, 4, 224, 224)
-primal_index = ["1", "2", "3", "4", "5"]
-
-dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, 
-                                                                                   primal_index, 
-                                                                                   "_")
-
-# Create and run the DualGATImageClustering model
-model = DualGATImageClustering(primal_index=primal_index, 
-                               dual_index=dual_index, 
-                               n_objects=n_objects, 
-                               primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1], 
-                               dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1])
 
 def train(model, images, epochs, optimizer = optim.Adam, **kwargs):
     optimizer = optimizer(model.parameters(), **kwargs)
@@ -239,6 +227,37 @@ def train(model, images, epochs, optimizer = optim.Adam, **kwargs):
         optimizer.step()
         print(f"Epoch: {epoch}, Loss: {loss.item()}")
 
+
+# Test the model
+# Define the adjacency matrix
+n = 20  # Number of images to read and convert
+
+mat_square = pd.read_csv("../benchmark/datasets/test/adjacency_matrix_square.csv", index_col=0, header=0, dtype=np.float32)
+mat_circle = pd.read_csv("../benchmark/datasets/test/adjacency_matrix_circle.csv", index_col=0, header=0, dtype=np.float32)
+mat_triangle = pd.read_csv("../benchmark/datasets/test/adjacency_matrix_triangle.csv", index_col=0, header=0, dtype=np.float32)
+
+primal_adjacency_tensor = torch.tensor(np.array([mat_square, mat_circle, mat_triangle]), dtype=constants.FLOATING_POINT)[:,:n,:n]
+n_objects = primal_adjacency_tensor.shape[0]
+num_images = primal_adjacency_tensor.shape[1]
+
+primal_index = utils.convert_list(mat_square.index.tolist(), np.float32, str)[:n]
+dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, 
+                                                                                   primal_index, 
+                                                                                   "_")
+
+
+# Example usage:
+folder_path = "/home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/benchmark/datasets/test/shapes"
+img = read_images(folder_path, n)
+print(img.shape)
+
+# Create and run the DualGATImageClustering model
+model = DualGATImageClustering(primal_index=primal_index, 
+                               dual_index=dual_index, 
+                               n_objects=n_objects, 
+                               primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1], 
+                               dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1],
+                               in_image_size=(3, 64, 64))
 
 epochs = 100
 train(model, img, epochs, optimizer=optim.Adam, lr=0.01)
