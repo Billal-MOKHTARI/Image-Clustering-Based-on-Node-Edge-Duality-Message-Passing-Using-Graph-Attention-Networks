@@ -90,9 +90,7 @@ class Encoder_2D(nn.Module):
             len_signal_conv_X * len_signal_conv_Y * hidden_layers_list[-1],
             latent_space_dimn,
         )
-        print(len_signal_conv_X)
-        print(len_signal_conv_Y)
-        print(hidden_layers_list[-1])
+
 
         nn.init.xavier_uniform_(self.f_linear_out.weight)
 
@@ -105,12 +103,12 @@ class Encoder_2D(nn.Module):
         # Perform convolution and ReLU
         for i, conv_i in enumerate(self.f_conv):
             x = conv_i(x)
-            print(x.shape)
+
             x = F.relu(x)
         
         # Linear transformation to the low-dimensional latent space
         batchsize, features, nX, nY = x.size()
-        print(features, nX, nY)
+
         x = self.f_linear_out(x.view(batchsize, features * nX * nY))
 
         return x
@@ -179,7 +177,7 @@ class Decoder_2D(nn.Module):
         for i, conv_i in enumerate(self.f_conv[:-1]):
             x = conv_i(x)
             x = F.relu(x)
-
+    
         x = self.f_conv[-1](x)
 
         return x
