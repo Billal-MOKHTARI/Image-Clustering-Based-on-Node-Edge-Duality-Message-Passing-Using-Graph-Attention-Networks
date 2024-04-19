@@ -5,7 +5,6 @@ import numpy as np
 import sys
 import os
 
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from models import constants
 
@@ -21,15 +20,6 @@ def extract_channels(tensor, index=None, columns=None) -> List[pd.DataFrame]:
 
     return channels
 
-
-def required_kernel(in_size: int, out_size:int, stride=1, padding=1):
-    assert in_size > 0, "Input size must be greater than 0"
-    assert out_size > 0, "Output size must be greater than 0"
-    assert in_size >= out_size, "Input size must be greater than or equal to output size"
-    assert stride > 0, "Stride must be greater than 0"
-    assert padding >= 0, "Padding must be greater than or equal to 0"
-    
-    return (1-out_size)*stride+in_size+2*padding
 
 def get_output_model(model, input_shape):
     # Assuming 'model' is your model and 'input_shape' is the shape of your input
@@ -160,8 +150,6 @@ def create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, delimite
 def list_sum(l):
     return sum(list(filter(lambda x: (x),l)))
 
-
-
 def load_data(path):
     data = pd.read_csv(path)
     return data
@@ -197,8 +185,6 @@ def intersect_list(list1, list2):
             intersection.append(i)
     
     return intersection
-            
-
 
 def create_dual(matrix, delimiter, mapper):
     # assert all(isinstance(i, (float, int)) for i in mapper.values()), "All elements must be floats"
@@ -222,8 +208,6 @@ def create_dual(matrix, delimiter, mapper):
                 dual_matrix.loc[ind1, ind2] = mapper.loc[intersection[0]]
                 
     return dual_matrix
-
-
 
 def construct_dual_index(tensor, index, delimiter):
     assert len(tensor.shape) == 3, "The tensor should be a 3D tensor"
@@ -294,4 +278,3 @@ def create_dual_tensor(tensor, index, delimiter, mapper):
         ind += 1
     
     return dual_index, torch.tensor(np.array(dual_channels))
-        

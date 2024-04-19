@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import constants  # Import custom constants module
 
 from torch_model_manager import TorchModelManager
-from src import utils
+from src import utils, maths
 class ImageEncoder(nn.Module):
     """
     A custom neural network module for transforming node data using extended convolutional layers 
@@ -54,8 +54,8 @@ class ImageEncoder(nn.Module):
         self.extended_conv_layers = list()  # List to store extended convolutional layers
 
         # Calculate kernel sizes for convolutional layers
-        w_kernel = utils.required_kernel(self.input_shape[1], self.input_shape[1], stride[0], padding[0])
-        h_kernel = utils.required_kernel(self.input_shape[2], self.input_shape[2], stride[1], padding[1])
+        w_kernel = maths.required_kernel(self.input_shape[1], self.input_shape[1], stride[0], padding[0])
+        h_kernel = maths.required_kernel(self.input_shape[2], self.input_shape[2], stride[1], padding[1])
 
         out_channels = self.input_shape[0] // 2  # Initialize output channels for extended convolutional layers
         tmp = self.input_shape[0]  # Initialize temporary variable for output channels
@@ -92,3 +92,4 @@ class ImageEncoder(nn.Module):
         x = self.extended_conv_layers(x)  # Pass input through extended convolutional layers
         x = self.model(x)  # Pass input through pre-trained model
         return x
+    
