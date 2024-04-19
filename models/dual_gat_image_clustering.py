@@ -49,10 +49,12 @@ class DualGATImageClustering(nn.Module):
                 primal_index,
                 dual_index,
                 n_objects,
+                image_encoder_hidden_layers = [64, 128, 256, 512],
+                image_encoder_ksize = [3, 3, 3, 3],
                 criterion = nn.MSELoss,
                 primal_criterion_weights = [1, 1, 1, 1, 1],
                 dual_criterion_weights = [1, 1, 1, 1, 1],
-                in_image_size=(3, 224, 224), 
+                image_size=(3, 224, 224), 
                 primal_mp_layer_inputs=[64, 32, 16, 8, 4],  
                 dual_mp_layer_inputs=[64, 32, 16, 8],
                 delimiter="_",
@@ -75,19 +77,20 @@ class DualGATImageClustering(nn.Module):
         super(DualGATImageClustering, self).__init__()
         
         # Extract additional keyword arguments
-        image_encoder_args = kwargs.get("image_encoder_args", {})
         dual_message_passing_args = kwargs.get("dual_message_passing_args", {})
         criterion_args = kwargs.get("criterion_args", {})
 
         # Store input size and primal index
-        self.image_size = in_image_size
+        self.image_size = image_size
         self.primal_index = primal_index 
         self.dual_index = dual_index
         self.delimiter = delimiter 
         self.criterion = criterion(**criterion_args)
         self.primal_criterion_weights = primal_criterion_weights
         self.dual_criterion_weights = dual_criterion_weights
-        
+        self.image_encoder_hidden_layers = image_encoder_hidden_layers
+        self.image_encoder_ksize = image_encoder_ksize
+
         self.enc_primal_mp_layer_inputs = primal_mp_layer_inputs
         self.enc_dual_mp_layer_inputs = [n_objects] + dual_mp_layer_inputs
         self.dec_primal_mp_layer_inputs = self.enc_primal_mp_layer_inputs[::-1]
@@ -101,7 +104,7 @@ class DualGATImageClustering(nn.Module):
         self.enc_dmp_layers = []
         self.dec_dmp_layers = []
 
-        self.image_encoder = Encoder_2D(dimn_tensor=(-1,)+in_image_size, latent_space_dimn=self.enc_primal_mp_layer_inputs[0], hidden_layers_list=[in_image_size[0], 64, 128, 256, 512], ksize=[3, 3, 3, 3])
+        self.image_encoder = Encoder_2D(dimn_tensor=(-1,)+self.image_size, latent_space_dimn=self.enc_primal_mp_layer_inputs[0], hidden_layers_list=[in_image_size[0], 64, 128, 256, 512], ksize=[3, 3, 3, 3])
         
 
         for i in range(len(self.enc_primal_mp_layer_inputs)-1):
@@ -131,6 +134,15 @@ class DualGATImageClustering(nn.Module):
                                                       layer_index=f"decoder_{i}",
                                                       delimiter=self.delimiter,
                                                       **dual_message_passing_args))
+
+    def image_encoder(self):
+        return Encoder_2D(dimn_tensor=(-1,)+self.image_size, 
+                                        latent_space_dimn=self.enc_primal_mp_layer_inputs[0], 
+                                        hidden_layers_list=[self.image_size[0], 64, 128, 256, 512], 
+                                        ksize=[3, 3, 3, 3])
+
+    def image_decoder(self):
+        pass
 
     def encoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
         encoder_history = []
