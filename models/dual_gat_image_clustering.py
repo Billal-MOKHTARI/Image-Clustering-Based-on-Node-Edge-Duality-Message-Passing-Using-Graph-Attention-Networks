@@ -2,7 +2,6 @@ import torch
 from torch import nn
 from torch import optim
 from dual_message_passing import DualMessagePassing
-from image_encoder import ImageEncoder
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
@@ -88,7 +87,9 @@ class DualGATImageClustering(nn.Module):
         self.criterion = criterion(**criterion_args)
         self.primal_criterion_weights = primal_criterion_weights
         self.dual_criterion_weights = dual_criterion_weights
-        self.image_encoder_hidden_layers = image_encoder_hidden_layers
+
+        # Image encoder parameters
+        self.image_encoder_hidden_layers = [self.image_size[0]] + image_encoder_hidden_layers
         self.image_encoder_ksize = image_encoder_ksize
 
         self.enc_primal_mp_layer_inputs = primal_mp_layer_inputs
@@ -104,8 +105,7 @@ class DualGATImageClustering(nn.Module):
         self.enc_dmp_layers = []
         self.dec_dmp_layers = []
 
-        self.image_encoder = Encoder_2D(dimn_tensor=(-1,)+self.image_size, latent_space_dimn=self.enc_primal_mp_layer_inputs[0], hidden_layers_list=[in_image_size[0], 64, 128, 256, 512], ksize=[3, 3, 3, 3])
-        
+        self.image_encoder = self.get_image_encoder()
 
         for i in range(len(self.enc_primal_mp_layer_inputs)-1):
             self.enc_dmp_layers.append(DualMessagePassing(primal_in_features=self.enc_primal_mp_layer_inputs[i], 
@@ -135,11 +135,11 @@ class DualGATImageClustering(nn.Module):
                                                       delimiter=self.delimiter,
                                                       **dual_message_passing_args))
 
-    def image_encoder(self):
+    def get_image_encoder(self):
         return Encoder_2D(dimn_tensor=(-1,)+self.image_size, 
                                         latent_space_dimn=self.enc_primal_mp_layer_inputs[0], 
-                                        hidden_layers_list=[self.image_size[0], 64, 128, 256, 512], 
-                                        ksize=[3, 3, 3, 3])
+                                        hidden_layers_list=self.image_encoder_hidden_layers, 
+                                        ksize=self.image_encoder_ksize)
 
     def image_decoder(self):
         pass
@@ -197,7 +197,6 @@ class DualGATImageClustering(nn.Module):
         """
         # Encode images to embeddings
         primal_nodes = self.image_encoder(imgs).squeeze()
-
         encoder_history = []
  
 

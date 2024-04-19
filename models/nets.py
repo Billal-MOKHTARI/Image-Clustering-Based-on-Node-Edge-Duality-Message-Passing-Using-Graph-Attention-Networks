@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
-
+import torch
 
 class Conv2D_params:
     """Initialize the parameters of the model.
@@ -45,8 +45,8 @@ class Encoder_2D(nn.Module):
         size of the input data used for the model training.
         [batch size, number of channels, N_frames, N_frames]
     hidden_layers_list : list
-        list of channels in all comvolutional layers
-    ksize : int
+        list of channels in all convolutional layers
+    ksize : int or list
         size of the convolutional kernel
     latent_space_dimn : int
         number of latent variables
@@ -54,7 +54,7 @@ class Encoder_2D(nn.Module):
     
     def __init__(self, dimn_tensor, hidden_layers_list, ksize, latent_space_dimn):
 
-        # Input tensors are ( batchsize , channels , nX , nY )
+        # Input tensors are (batchsize, channels, nX, nY)
 
         super(Encoder_2D, self).__init__()
 
@@ -64,6 +64,10 @@ class Encoder_2D(nn.Module):
 
         len_signal_conv_X = nX
         len_signal_conv_Y = nY
+
+        # Convert ksize to list if it's an integer
+        if isinstance(ksize, int):
+            ksize = [ksize] * n_layers
 
         # set up convolutional layers
         self.f_conv = nn.ModuleList(
@@ -81,11 +85,13 @@ class Encoder_2D(nn.Module):
         for conv_i in self.f_conv:
             nn.init.xavier_uniform_(conv_i.weight)
 
-        # set up linear outout layer
-        self.f_linear_out = nn.Linear(
-            len_signal_conv_X * len_signal_conv_Y * hidden_layers_list[-1],
-            latent_space_dimn,
+        self.flatten = nn.Flatten()
+        # set up linear output layer
+
+        self.f_linear_out = nn.LazyLinear(
+            latent_space_dimn
         )
+ 
 
         nn.init.xavier_uniform_(self.f_linear_out.weight)
 
@@ -95,17 +101,19 @@ class Encoder_2D(nn.Module):
         )
 
     def forward(self, x):
-        
-        #perform convolution and ReLU
+        # Perform convolution and ReLU
         for i, conv_i in enumerate(self.f_conv):
             x = conv_i(x)
             x = F.relu(x)
-            
-        #linear transformation ot the low diminsional latent space
+        
+        # Linear transformation to the low-dimensional latent space
         batchsize, features, nX, nY = x.size()
-        x = self.f_linear_out(x.reshape(batchsize, 1, features * nX * nY))
+        x = self.flatten(x)
+        print("shape real", x.shape)
+        x = self.f_linear_out(x)
 
         return x
+
 
 
 class Decoder_2D(nn.Module):

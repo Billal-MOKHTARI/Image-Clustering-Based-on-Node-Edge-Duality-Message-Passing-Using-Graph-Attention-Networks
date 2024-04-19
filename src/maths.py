@@ -14,5 +14,3 @@ def get_output(in_size: int, kernel_size: int, stride=1, padding=1):
     assert padding >= 0, "Padding must be greater than or equal to 0"
     
     return (in_size-kernel_size+2*padding)//stride+1
-
-print(get_output(224, 3, 1, 1))
