@@ -167,13 +167,13 @@ class Decoder_2D(nn.Module):
         self.nY = nY
         self.nx_conv = nX
         self.ny_conv = nY
-
+    
     def forward(self, x):
+        print(x.shape)
 
         x = self.f_linear_in(x).reshape(
-            x.size()[0], self.channels_list[0], self.nx_conv, self.ny_conv
+            x.shape[0], self.channels_list[0], self.nx_conv, self.ny_conv
         )
-
         for i, conv_i in enumerate(self.f_conv[:-1]):
             x = conv_i(x)
             x = F.relu(x)

@@ -234,6 +234,7 @@ class DualGATImageClustering(nn.Module):
 
             print(f"Primal Loss {i}: {primal_losses[i].item()}")
 
+        print(self.image_decoder(primal_nodes))
         result = {
             "primal": {
                 "nodes": primal_nodes,
