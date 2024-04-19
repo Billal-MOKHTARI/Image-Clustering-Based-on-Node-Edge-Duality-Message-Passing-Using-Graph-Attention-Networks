@@ -136,10 +136,14 @@ class DualGATImageClustering(nn.Module):
                                                       **dual_message_passing_args))
 
     def get_image_encoder(self):
+
         return Encoder_2D(dimn_tensor=(-1,)+self.image_size, 
                                         latent_space_dimn=self.enc_primal_mp_layer_inputs[0], 
                                         hidden_layers_list=self.image_encoder_hidden_layers, 
                                         ksize=self.image_encoder_ksize)
+
+    def get_image_decoder(self):
+        return Decoder_2D()
 
     def image_decoder(self):
         pass
@@ -283,7 +287,7 @@ model = DualGATImageClustering(primal_index=primal_index,
                                n_objects=n_objects, 
                                primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1], 
                                dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1],
-                               in_image_size=(3, 64, 64))
+                               image_size=(3, 64, 64))
 
 epochs = 100
 train(model, img, epochs, optimizer=optim.Adam, lr=0.01)

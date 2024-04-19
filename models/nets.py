@@ -85,13 +85,14 @@ class Encoder_2D(nn.Module):
         for conv_i in self.f_conv:
             nn.init.xavier_uniform_(conv_i.weight)
 
-        self.flatten = nn.Flatten()
         # set up linear output layer
-
-        self.f_linear_out = nn.LazyLinear(
-            latent_space_dimn
+        self.f_linear_out = nn.Linear(
+            len_signal_conv_X * len_signal_conv_Y * hidden_layers_list[-1],
+            latent_space_dimn,
         )
- 
+        print(len_signal_conv_X)
+        print(len_signal_conv_Y)
+        print(hidden_layers_list[-1])
 
         nn.init.xavier_uniform_(self.f_linear_out.weight)
 
@@ -104,17 +105,15 @@ class Encoder_2D(nn.Module):
         # Perform convolution and ReLU
         for i, conv_i in enumerate(self.f_conv):
             x = conv_i(x)
+            print(x.shape)
             x = F.relu(x)
         
         # Linear transformation to the low-dimensional latent space
         batchsize, features, nX, nY = x.size()
-        x = self.flatten(x)
-        print("shape real", x.shape)
-        x = self.f_linear_out(x)
+        print(features, nX, nY)
+        x = self.f_linear_out(x.view(batchsize, features * nX * nY))
 
         return x
-
-
 
 class Decoder_2D(nn.Module):
     """
@@ -255,3 +254,4 @@ class AutoEncoder_2D(nn.Module):
 # model = Encoder_2D((-1, 1, 28, 28), [1, 16, 32], [3, 3], 2)
 
 # print(model)
+
