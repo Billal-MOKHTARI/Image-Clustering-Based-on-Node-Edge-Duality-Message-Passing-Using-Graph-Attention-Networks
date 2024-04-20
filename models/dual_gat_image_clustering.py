@@ -14,7 +14,7 @@ import constants
 import numpy as np
 import torchvision.transforms as transforms
 from PIL import Image
-from nets import Encoder_2D, Decoder_2D
+from custom_layers import Encoder2D
 
 def read_images(folder_path, n):
     """
@@ -138,20 +138,20 @@ class DualGATImageClustering(nn.Module):
 
     def get_image_encoder(self):
 
-        return Encoder_2D(dimn_tensor=(-1,)+self.image_size, 
+        return Encoder2D(dimn_tensor=(-1,)+self.image_size, 
                                         latent_space_dimn=self.enc_primal_mp_layer_inputs[0], 
                                         hidden_layers_list=self.image_encoder_hidden_layers, 
                                         ksize=self.image_encoder_ksize)
 
     def get_image_decoder(self):
-
-        return Decoder_2D(self.enc_primal_mp_layer_inputs[0], 
-                          1000, 
-                          self.image_size[1], 
-                          self.image_size[2], 
-                          self.image_encoder_hidden_layers[::-1]+[self.image_size[0]],
-                          ksize=self.image_encoder_ksize+[3],
-                        )
+        pass
+        # return Decoder_2D(self.enc_primal_mp_layer_inputs[0], 
+        #                   1000, 
+        #                   self.image_size[1], 
+        #                   self.image_size[2], 
+        #                   self.image_encoder_hidden_layers[::-1]+[self.image_size[0]],
+        #                   ksize=self.image_encoder_ksize+[3],
+        #                 )
 
 
     def encoder(self, primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes):
@@ -234,7 +234,7 @@ class DualGATImageClustering(nn.Module):
 
             print(f"Primal Loss {i}: {primal_losses[i].item()}")
 
-        print(self.image_decoder(primal_nodes))
+        # print(self.image_decoder(primal_nodes))
         result = {
             "primal": {
                 "nodes": primal_nodes,
