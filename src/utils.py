@@ -243,6 +243,7 @@ def sort_and_fill_matrix(matrix, large_index):
     matrix = matrix.reindex(index=large_index, columns=large_index)
     
     return matrix
+f
 
 def convert_list(list_of_objects, source_type, destination_type):
     """
