@@ -231,7 +231,7 @@ class Decoder2D(nn.Module):
                  activation, 
                  deconv_layers_per_block, 
                  deconv_strides, 
-                 deconv_padding,
+                 deconv_paddings,
                  unpool_strides,
                  unpool_paddings,
                  dropout_prob=0.5,
@@ -277,7 +277,7 @@ class Decoder2D(nn.Module):
                                                            layers[i+1], 
                                                            deconv_layers_per_block[i] if type(deconv_layers_per_block) == list else deconv_layers_per_block, 
                                                            deconv_stride = deconv_strides[i] if type(deconv_strides) == list else deconv_strides, 
-                                                           deconv_padding = deconv_padding[i] if type(deconv_padding) == list else deconv_padding,
+                                                           deconv_padding = deconv_paddings[i] if type(deconv_paddings) == list else deconv_paddings,
                                                            in_size=sizes[i],
                                                            out_size=sizes[i+1],
                                                            unpool_stride = unpool_strides[i] if type(unpool_strides) == list else unpool_strides,
@@ -338,7 +338,7 @@ class Decoder2D(nn.Module):
                             maths.required_kernel_transpose(in_size[1], out_size[1], stride=unpool_stride[1], padding=unpool_padding[1]))
         unpool2d = nn.MaxUnpool2d(pool_kernel_size, unpool_stride, unpool_padding)
         deconv2d_layers.append(unpool2d)
-        
+
         # We should keep the input size as it is
         deconv_kernel_size = (maths.required_kernel_transpose(in_size[0], in_size[0], stride=deconv_stride[0], padding=deconv_padding[0]),
                        maths.required_kernel_transpose(in_size[1], in_size[1], stride=deconv_stride[1], padding=deconv_padding[1]))
@@ -417,7 +417,9 @@ class Decoder2D(nn.Module):
 
 
 # Specify the path to your JSON file
-json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/encoder.json"
+encoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/encoder.json"
+decoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/decoder.json"
+
 
 
 def parse_encoder(json_file_path, network_type):
@@ -470,14 +472,29 @@ def parse_encoder(json_file_path, network_type):
             data[attr][i] = tuple(pool_padding)
     except:
         data[attr] = tuple(data[attr])
+        
+    if network_type == "decoder":
+        try:
+            attr = "deconv_paddings"
+            data[attr][0][0]
+            for i, deconv_padding in enumerate(data[attr]):
+                data[attr][i] = tuple(deconv_padding)
+        except:
+            data[attr] = tuple(data[attr])
     
     
     return data
-data = parse_encoder(json_file_path, network_type="encoder")
 
-
-
-encoder = Encoder2D(**data)
+encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
+decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
+print(decoder_args)
+encoder = Encoder2D(**encoder_args)
 x_enc = torch.randn(2, 3, 224, 224)
 x_dec = torch.randn(2, 512)
 y_enc, indices = encoder(x_enc)
+
+decoder = Decoder2D(**decoder_args)
+y_dec = decoder(y_enc, indices[::-1])
+print(y_dec.shape)
+
+
