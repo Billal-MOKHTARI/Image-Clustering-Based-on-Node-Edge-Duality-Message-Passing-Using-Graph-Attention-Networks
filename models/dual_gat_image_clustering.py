@@ -143,7 +143,7 @@ class DualGATImageClustering(nn.Module):
                                         hidden_layers_list=self.image_encoder_hidden_layers, 
                                         ksize=self.image_encoder_ksize)
 
-g
+
     def get_image_decoder(self):
         pass
         # return Decoder_2D(self.enc_primal_mp_layer_inputs[0], 
