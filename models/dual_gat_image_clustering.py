@@ -196,12 +196,12 @@ class DualGATImageClustering(nn.Module):
         
         encoder_history = []
         
-        primal_nodes, indices = self.image_encoder(imgs)
+        primal_nodes, indices, conv_encoder_history = self.image_encoder(imgs)
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, encoder_history = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history = self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         
         print(primal_nodes.shape)
-        primal_nodes = self.image_decoder(primal_nodes, indices[::-1])
+        primal_nodes, deconv_decoder_history = self.image_decoder(primal_nodes, indices[::-1])
         
         decoder_history = decoder_history[::-1]
 
@@ -222,8 +222,6 @@ class DualGATImageClustering(nn.Module):
             dec_dual_node = decoder_history[i]["dual_nodes"]
             dual_losses.append(self.dual_criterion_weights[i] * self.criterion(enc_dual_node, dec_dual_node))
 
-            print(f"Primal Loss {i}: {primal_losses[i].item()}")
-
         # print(self.image_decoder(primal_nodes))
         result = {
             "primal": {
@@ -234,12 +232,24 @@ class DualGATImageClustering(nn.Module):
                 "nodes": dual_nodes,
                 "adjacency_tensor": dual_adjacency_tensor,
                 "losses": dual_losses
-            }
+            },
+            "conv_encoder_history": conv_encoder_history,
+            "deconv_decoder_history": deconv_decoder_history[::-1]
         }
 
         return result
 
-def train(model, images, epochs, optimizer = optim.Adam, **kwargs):
+def train(model, 
+          images, 
+          epochs, 
+          optimizer = optim.Adam, 
+          primal_weight = 1, 
+          dual_weight = 1, 
+          **kwargs):
+    
+    assert primal_weight >= 0 and primal_weight <= 1, "Primal weight must be between 0 and 1"
+    assert dual_weight >= 0 and dual_weight <= 1, "Dual weight must be between 0 and 1"
+    
     optimizer = optimizer(model.parameters(), **kwargs)
     for epoch in range(epochs):
         # Forward pass
@@ -247,7 +257,17 @@ def train(model, images, epochs, optimizer = optim.Adam, **kwargs):
         result = model(images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         primal_loss = utils.list_sum(result["primal"]["losses"])
         dual_loss = utils.list_sum(result["dual"]["losses"])
-        loss = primal_loss + dual_loss
+        conv_encoder_history = result["conv_encoder_history"]
+        deconv_decoder_history = result["deconv_decoder_history"]
+        
+        print("encoder")
+        for enc in conv_encoder_history:
+            print(enc.shape)
+        
+        print("decoder")
+        for dec in deconv_decoder_history:
+            print(dec.shape)
+        loss = (primal_weight*primal_loss + dual_weight*dual_loss)/(primal_weight+dual_weight)
 
         loss.backward()
         optimizer.step()

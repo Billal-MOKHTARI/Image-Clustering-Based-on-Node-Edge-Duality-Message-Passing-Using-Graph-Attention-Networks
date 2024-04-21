@@ -209,16 +209,22 @@ class Encoder2D(nn.Module):
             list: List of pooling indices for each pooling layer.
         """
         pool_indices = []
+        conv_encoder_history = []
+        conv_encoder_history.append(x)
+        
         for i in range(len(self.encoder_layers)):
+            
             if isinstance(self.encoder_layers[i], nn.MaxPool2d):
                 x, indices = self.encoder_layers[i](x)
                 pool_indices.append(indices)
+                conv_encoder_history.append(x)
             else:
                 x = self.encoder_layers[i](x)
+
         x = self.flatten(x)
         x = self.linear(x)
         
-        return x, pool_indices
+        return x, pool_indices, conv_encoder_history
     
 class Decoder2D(nn.Module):
     """
@@ -367,16 +373,20 @@ class Decoder2D(nn.Module):
         """
         x = self.mlp_layers(x)
         x = x.view(x.size(0), -1, 1, 1)  # Reshape to (batch_size, channels, height, width)
-        
+        deconv_decoder_history = []
         k = 0 
         for i in range(len(self.decoder_layers)):
             if isinstance(self.decoder_layers[i], nn.MaxUnpool2d):
+                deconv_decoder_history.append(x)
+                
                 x = self.decoder_layers[i](x, pool_indices[k])
                 k += 1
             else:
                 x = self.decoder_layers[i](x)
-            
-        return x
+                
+        deconv_decoder_history.append(x)
+        
+        return x, deconv_decoder_history
 
 # latent_dims = [4096, 1000, 512]
 
@@ -487,14 +497,17 @@ def parse_encoder(json_file_path, network_type):
 
 # encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
 # decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
-# print(decoder_args)
+
 # encoder = Encoder2D(**encoder_args)
 # x_enc = torch.randn(2, 3, 224, 224)
 # x_dec = torch.randn(2, 512)
-# y_enc, indices = encoder(x_enc)
+# y_enc, indices, conv_encoder_history = encoder(x_enc)
+
+# # for enc in conv_encoder_history:
+# #     print(enc.shape)
 
 # decoder = Decoder2D(**decoder_args)
-# y_dec = decoder(y_enc, indices[::-1])
-# print(y_dec.shape)
+# y_dec, deconv_decoder_history = decoder(y_enc, indices[::-1])
 
-
+# for dec in deconv_decoder_history:
+#     print(dec.shape)
