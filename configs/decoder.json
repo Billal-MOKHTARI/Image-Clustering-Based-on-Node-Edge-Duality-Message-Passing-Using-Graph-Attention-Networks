@@ -1,6 +1,6 @@
 {
     "shapes": [[512, 14, 14], [256, 28, 28], [128, 56, 56], [64, 112, 112], [3, 224, 224]],
-    "latent_dims": [512, 1000, 4096],
+    "latent_dims": [64, 128, 256],
     "activation": "ReLU",
     "deconv_layers_per_block": 2,
     "deconv_kernels": [3, 3],

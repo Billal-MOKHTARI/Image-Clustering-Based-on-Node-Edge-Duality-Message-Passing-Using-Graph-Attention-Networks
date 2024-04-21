@@ -485,16 +485,16 @@ def parse_encoder(json_file_path, network_type):
     
     return data
 
-encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
-decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
-print(decoder_args)
-encoder = Encoder2D(**encoder_args)
-x_enc = torch.randn(2, 3, 224, 224)
-x_dec = torch.randn(2, 512)
-y_enc, indices = encoder(x_enc)
+# encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
+# decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
+# print(decoder_args)
+# encoder = Encoder2D(**encoder_args)
+# x_enc = torch.randn(2, 3, 224, 224)
+# x_dec = torch.randn(2, 512)
+# y_enc, indices = encoder(x_enc)
 
-decoder = Decoder2D(**decoder_args)
-y_dec = decoder(y_enc, indices[::-1])
-print(y_dec.shape)
+# decoder = Decoder2D(**decoder_args)
+# y_dec = decoder(y_enc, indices[::-1])
+# print(y_dec.shape)
 
 

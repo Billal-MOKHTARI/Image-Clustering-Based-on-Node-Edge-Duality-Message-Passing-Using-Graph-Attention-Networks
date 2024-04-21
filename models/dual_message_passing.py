@@ -84,6 +84,7 @@ class DualMessagePassing(nn.Module):
                 layer_index,
                 delimiter="_",
                 **kwargs):
+        
         super(DualMessagePassing, self).__init__()
         self.node_message_passing_args = kwargs.get("node_message_passing_args", {})
         self.edge_message_passing_args = kwargs.get("edge_message_passing_args", {})
