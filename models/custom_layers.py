@@ -63,46 +63,65 @@ class Linear2D(nn.Module):
             list_product.append(layer(channel))
             
         return torch.stack(list_product)
-    
+
 class Encoder2D(nn.Module):
+    """
+    2D Encoder module for convolutional autoencoder.
+    """
+
     def __init__(self, 
-                 layers, 
+                 shapes, 
                  latent_dims, 
                  activation, 
                  num_conv_layers, 
                  k_sizes, 
                  strides, 
-                 # Instead of manually defining the kernel size, stride, and padding for each pooling layer,
-                 # we can define the input and out sizes, then the kernel sizes will be calculated automatically.
-                 # The padding and stride will be fixed
-                 sizes,
                  stride_pool,
                  padding_pool,
                  pool_type,
                  dropout_p=0.5,
                  **kwargs):
+        """
+        Initialize the Encoder2D.
+
+        Args:
+            shapes (list): List of tuples specifying the shapes of input and output layers.
+            latent_dims (list): List of dimensions of latent space.
+            activation (torch.nn.Module): Activation function.
+            num_conv_layers (list or int): Number of convolutional layers.
+            k_sizes (list or int): Kernel size for convolutional layers.
+            strides (list or int): Stride for convolutional layers.
+            stride_pool (list or int): Stride for pooling layers.
+            padding_pool (list or int): Padding for pooling layers.
+            pool_type (str or list): Pooling type, either 'max' or 'avg'.
+            dropout_p (float): Dropout probability.
+            **kwargs: Additional keyword arguments.
+        """
         super(Encoder2D, self).__init__()
         self.activation_args = kwargs.get("activation_args", {})
         self.activation = activation(**self.activation_args)
         self.encoder_layers = []
-        self.pool_indices = None
+        layers = [layer[0] for layer in shapes]
+        sizes = [(layer[1], layer[2]) for layer in shapes]
         
+        # Create convolutional layers
         for i in range(len(layers)-1):
             self.encoder_layers.extend(self.conv2d_block(layers[i], 
-                                                  layers[i+1], 
-                                                  num_conv_layers[i] if type(num_conv_layers) == list else num_conv_layers, 
-                                                  k_sizes[i] if type(k_sizes) == list else k_sizes, 
-                                                  strides[i] if type(strides) == list else strides, 
-                                                  (maths.required_kernel(sizes[i][0], sizes[i+1][0], stride_pool[i] if type(stride_pool) == list else stride_pool, padding_pool[i] if type(padding_pool) == list else padding_pool),
-                                                   maths.required_kernel(sizes[i][1], sizes[i+1][1], stride_pool[i] if type(stride_pool) == list else stride_pool, padding_pool[i] if type(padding_pool) == list else padding_pool)), 
-                                                  stride_pool[i] if type(stride_pool) == list else stride_pool,
-                                                  padding_pool[i] if type(padding_pool) == list else padding_pool,
-                                                  pool_type=pool_type[i] if type(pool_type) == list else pool_type
-                                                  ))
+                                                         layers[i+1], 
+                                                         num_conv_layers[i] if type(num_conv_layers) == list else num_conv_layers, 
+                                                         k_sizes[i] if type(k_sizes) == list else k_sizes, 
+                                                         strides[i] if type(strides) == list else strides, 
+                                                         (maths.required_kernel(sizes[i][0], sizes[i+1][0], stride_pool[i] if type(stride_pool) == list else stride_pool, padding_pool[i] if type(padding_pool) == list else padding_pool),
+                                                          maths.required_kernel(sizes[i][1], sizes[i+1][1], stride_pool[i] if type(stride_pool) == list else stride_pool, padding_pool[i] if type(padding_pool) == list else padding_pool)), 
+                                                         stride_pool[i] if type(stride_pool) == list else stride_pool,
+                                                         padding_pool[i] if type(padding_pool) == list else padding_pool,
+                                                         pool_type=pool_type[i] if type(pool_type) == list else pool_type
+                                                         ))
+        
         self.flatten = nn.Flatten()
         self.linear = nn.Sequential(nn.LazyLinear(latent_dims[0]))
         
-        
+        # Create linear layers
         length = len(latent_dims)
         for i in range(1, length-1):
             self.linear.append(self.mlp_block(latent_dims[i-1], latent_dims[i], dropout_p))
@@ -110,7 +129,19 @@ class Encoder2D(nn.Module):
         if length > 1:
             self.linear.append(nn.Linear(latent_dims[-2], latent_dims[-1]))
             
+
     def mlp_block(self, in_features, out_features, dropout_p):
+        """
+        Create a block of fully connected layers.
+
+        Args:
+            in_features (int): Number of input features.
+            out_features (int): Number of output features.
+            dropout_p (float): Dropout probability.
+
+        Returns:
+            torch.nn.Sequential: Sequential container for the fully connected layers.
+        """
         mlp_layers = nn.Sequential()
         mlp_layers.append(nn.Linear(in_features, out_features))
         mlp_layers.append(nn.BatchNorm1d(out_features))
@@ -120,24 +151,40 @@ class Encoder2D(nn.Module):
         return mlp_layers
     
     def conv2d_block(self, 
-              in_channels, 
-              out_channels, 
-              num_conv_layers, 
-              kernel_size, 
-              stride, 
-              pool_kernel, 
-              pool_stride=(2, 2), 
-              pool_padding=(0, 0),
-              pool_type='max'):
-        
+                     in_channels, 
+                     out_channels, 
+                     num_conv_layers, 
+                     kernel_size, 
+                     stride, 
+                     pool_kernel, 
+                     pool_stride=(2, 2), 
+                     pool_padding=(0, 0),
+                     pool_type='max'):
+        """
+        Create a block of convolutional layers followed by pooling.
+
+        Args:
+            in_channels (int): Number of input channels.
+            out_channels (int): Number of output channels.
+            num_conv_layers (int): Number of convolutional layers.
+            kernel_size (int or tuple): Size of the convolutional kernel.
+            stride (int or tuple): Stride of the convolutional operation.
+            pool_kernel (int or tuple): Size of the pooling kernel.
+            pool_stride (int or tuple): Stride of the pooling operation.
+            pool_padding (int or tuple): Padding of the pooling operation.
+            pool_type (str): Type of pooling operation, either 'max' or 'avg'.
+
+        Returns:
+            torch.nn.Sequential: Sequential container for the convolutional and pooling layers.
+        """
         conv2d_layers = []
         conv2d_layers.append(nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding='same'))
-        conv2d_layers.append(nn.BatchNorm2d(out_channels)),
+        conv2d_layers.append(nn.BatchNorm2d(out_channels))
         conv2d_layers.append(self.activation)
         
         for _ in range(num_conv_layers-1):
             conv2d_layers.append(nn.Conv2d(out_channels, out_channels, kernel_size, stride, padding='same'))
-            conv2d_layers.append(nn.BatchNorm2d(out_channels)),
+            conv2d_layers.append(nn.BatchNorm2d(out_channels))
             conv2d_layers.append(self.activation)
         
         if pool_type == 'max':
@@ -150,6 +197,16 @@ class Encoder2D(nn.Module):
         return conv2d_layers
     
     def forward(self, x):
+        """
+        Forward pass through the encoder.
+
+        Args:
+            x (torch.Tensor): Input tensor.
+
+        Returns:
+            torch.Tensor: Output tensor after encoding.
+            list: List of pooling indices for each pooling layer.
+        """
         pool_indices = []
         for i in range(len(self.encoder_layers)):
             if isinstance(self.encoder_layers[i], nn.MaxPool2d):
@@ -163,24 +220,45 @@ class Encoder2D(nn.Module):
         return x, pool_indices
     
 class Decoder2D(nn.Module):
+    """
+    2D Decoder module for convolutional autoencoder.
+    """
+
     def __init__(self, 
                  latent_dims, 
-                 layers, 
+                 shapes, 
                  activation, 
                  num_conv_layers, 
                  strides, 
                  padding,
-                 sizes,
                  stride_pool,
                  padding_pool,
                  dropout_p=0.5,
                  **kwargs):
+        """
+        Initialize the Decoder2D.
+
+        Args:
+            latent_dims (list): List of dimensions of latent space.
+            shapes (list): List of tuples specifying the shapes of input and output layers.
+            activation (torch.nn.Module): Activation function.
+            num_conv_layers (list or int): Number of convolutional layers.
+            strides (list or int): Stride for convolutional layers.
+            padding (list or int): Padding for convolutional layers.
+            stride_pool (list or int): Stride for unpooling layers.
+            padding_pool (list or int): Padding for unpooling layers.
+            dropout_p (float): Dropout probability.
+            **kwargs: Additional keyword arguments.
+        """
         super(Decoder2D, self).__init__()
         self.activation_args = kwargs.get("activation_args", {})
         self.activation = activation(**self.activation_args)
         self.mlp_layers = nn.Sequential()
         self.decoder_layers = []
+        layers = [layer[0] for layer in shapes]
+        sizes = [(layer[1], layer[2]) for layer in shapes]
         
+        # Create linear layers
         length = len(latent_dims)
         for i in range(length-2):
             self.mlp_layers.append(self.mlp_block(latent_dims[i], latent_dims[i+1], dropout_p))
@@ -188,6 +266,7 @@ class Decoder2D(nn.Module):
         if length > 1:
             self.mlp_layers.append(nn.Linear(latent_dims[-2], latent_dims[-1]))
         
+        # Create convolutional layers
         kernel_size = (maths.required_kernel_transpose(1, sizes[0][0], stride=1, padding=0),
                           maths.required_kernel_transpose(1, sizes[0][1], stride=1, padding=0))
         self.decoder_layers.append(nn.ConvTranspose2d(latent_dims[-1], layers[0], kernel_size, 1, padding=0))
@@ -196,18 +275,28 @@ class Decoder2D(nn.Module):
             self.decoder_layers.extend(self.deconv2d_block(layers[i], 
                                                            layers[i+1], 
                                                            num_conv_layers[i] if type(num_conv_layers) == list else num_conv_layers, 
-                                                           
                                                            stride = strides[i] if type(strides) == list else strides, 
                                                            padding = padding[i] if type(padding) == list else padding,
                                                            in_size=sizes[i],
                                                            out_size=sizes[i+1],
                                                            pool_stride = stride_pool[i] if type(stride_pool) == list else stride_pool,
-                                                            pool_padding = padding_pool[i] if type(padding_pool) == list else padding_pool   
+                                                           pool_padding = padding_pool[i] if type(padding_pool) == list else padding_pool   
                                                            ))
         
 
         
     def mlp_block(self, in_features, out_features, dropout_p):
+        """
+        Create a block of fully connected layers.
+
+        Args:
+            in_features (int): Number of input features.
+            out_features (int): Number of output features.
+            dropout_p (float): Dropout probability.
+
+        Returns:
+            torch.nn.Sequential: Sequential container for the fully connected layers.
+        """
         mlp_layers = nn.Sequential()
         mlp_layers.append(nn.Linear(in_features, out_features))
         mlp_layers.append(nn.BatchNorm1d(out_features))
@@ -224,13 +313,28 @@ class Decoder2D(nn.Module):
                        padding,
                        in_size,
                        out_size,
-
                        pool_stride=(2, 2),
                        pool_padding=(0, 0)):
-        
+        """
+        Create a block of transposed convolutional layers followed by unpooling.
+
+        Args:
+            in_channels (int): Number of input channels.
+            out_channels (int): Number of output channels.
+            num_conv_layers (int): Number of convolutional layers.
+            stride (int or tuple): Stride for convolutional layers.
+            padding (int or tuple): Padding for convolutional layers.
+            in_size (tuple): Size of the input feature map.
+            out_size (tuple): Size of the output feature map.
+            pool_stride (int or tuple): Stride for unpooling layers.
+            pool_padding (int or tuple): Padding for unpooling layers.
+
+        Returns:
+            torch.nn.Sequential: Sequential container for the transposed convolutional and unpooling layers.
+        """
         deconv2d_layers = []
         pool_kernel_size = (maths.required_kernel_transpose(in_size[0], out_size[0], stride=pool_stride[0], padding=pool_padding[0]),
-        maths.required_kernel_transpose(in_size[1], out_size[1], stride=pool_stride[1], padding=pool_padding[1]))
+                            maths.required_kernel_transpose(in_size[1], out_size[1], stride=pool_stride[1], padding=pool_padding[1]))
         unpool2d = nn.MaxUnpool2d(pool_kernel_size, pool_stride, pool_padding)
         deconv2d_layers.append(unpool2d)
         
@@ -243,26 +347,29 @@ class Decoder2D(nn.Module):
         deconv2d_layers.append(self.activation)
         
         for _ in range(num_conv_layers-1):
-
             deconv2d_layers.append(nn.ConvTranspose2d(out_channels, out_channels, kernel_size, stride, padding))
             deconv2d_layers.append(nn.BatchNorm2d(out_channels))
             deconv2d_layers.append(self.activation)
-            
-
-
         
         return deconv2d_layers
     
     def forward(self, x, pool_indices):
-        x = self.mlp_layers(x)
+        """
+        Forward pass through the decoder.
 
+        Args:
+            x (torch.Tensor): Input tensor.
+            pool_indices (list): List of pooling indices for each pooling layer.
+
+        Returns:
+            torch.Tensor: Output tensor after decoding.
+        """
+        x = self.mlp_layers(x)
         x = x.view(x.size(0), -1, 1, 1)  # Reshape to (batch_size, channels, height, width)
         
-        k = 0
-        
+        k = 0 
         for i in range(len(self.decoder_layers)):
             if isinstance(self.decoder_layers[i], nn.MaxUnpool2d):
-                print("ok:", pool_indices[k].shape)
                 x = self.decoder_layers[i](x, pool_indices[k])
                 k += 1
             else:
@@ -270,20 +377,19 @@ class Decoder2D(nn.Module):
             
         return x
 
-layers = [3, 64, 128, 256, 512]
 latent_dims = [4096, 1000, 512]
 
-sizes = [(224, 224), (112, 112), (56, 56), (28, 28), (14, 14)]
+shapes = [(3, 224, 224), (64, 112, 112), (128, 56, 56), (256, 28, 28), (512, 14, 14)]
 padding = 0
 stride = 2
 
-encoder = Encoder2D(layers=layers, 
+encoder = Encoder2D(shapes=shapes, 
                   latent_dims=latent_dims, 
                   activation=nn.ReLU, 
                   num_conv_layers=2, 
                   k_sizes=3, 
                   strides=1, 
-                  sizes=sizes,
+
                   stride_pool=stride,
                   padding_pool=padding,
                   pool_type='max')
@@ -291,14 +397,13 @@ encoder = Encoder2D(layers=layers,
 
 
 
-decoder = Decoder2D(layers=layers[::-1], 
+decoder = Decoder2D(shapes=shapes[::-1], 
                   latent_dims=latent_dims[::-1], 
                   activation=nn.ReLU, 
                   num_conv_layers=2, 
                   
                   strides=(1, 1),
                   padding=(0, 0), 
-                  sizes=sizes[::-1],
                   stride_pool=(1, 1),
                   padding_pool = (0, 0)
                 )
@@ -307,11 +412,10 @@ decoder = Decoder2D(layers=layers[::-1],
 x_enc = torch.randn(2, 3, 224, 224)
 x_dec = torch.randn(2, 512)
 y_enc, indices = encoder(x_enc)
-for ind in indices[::-1]:
-    print("index shape : ", ind.shape)
+
 
 y_dec = decoder(y_enc, indices[::-1])
-print(y_dec)
+print(y_dec.shape)
 # x = torch.randn(2, 4096, 1, 1)
 # layer = nn.ConvTranspose2d(4096, 512, 3, 1) 
 # out = layer(x)
