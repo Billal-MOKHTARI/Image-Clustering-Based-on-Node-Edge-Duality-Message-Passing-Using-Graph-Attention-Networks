@@ -117,7 +117,7 @@ class Encoder2D(nn.Module):
                                                          padding_pool[i] if type(padding_pool) == list else padding_pool,
                                                          pool_type=pool_type[i] if type(pool_type) == list else pool_type
                                                          ))
-   h     
+        
         self.flatten = nn.Flatten()
         self.linear = nn.Sequential(nn.LazyLinear(latent_dims[0]))
         
