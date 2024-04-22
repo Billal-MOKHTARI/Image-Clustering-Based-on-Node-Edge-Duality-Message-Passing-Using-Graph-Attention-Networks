@@ -26,6 +26,19 @@ def train(model,
 
         primal_loss = utils.list_sum(result["primal"]["losses"])
         dual_loss = utils.list_sum(result["dual"]["losses"])
+
+
+        loss_log = {}
+        for i, res in enumerate(result["primal"]["losses"]):
+            loss_log[f"primal loss (layer {i})"] = res
+
+        for i, res in enumerate(result["dual"]["losses"]):
+            loss_log[f"dual loss (layer {i})"] = res
+
+        loss_log = {"primal loss": primal_loss, "dual loss": dual_loss}
+
+
+
         conv_encoder_history = result["conv_encoder_history"]
         deconv_decoder_history = result["deconv_decoder_history"]
         
@@ -34,3 +47,9 @@ def train(model,
         loss.backward()
         optimizer.step()
         print(f"Epoch: {epoch}, Loss: {loss.item()}")
+
+        loss_log["loss"] = loss.item()
+        print(loss_log)
+
+        # Log the loss
+        # wandb.log(loss_log, step = epoch, commit = True)

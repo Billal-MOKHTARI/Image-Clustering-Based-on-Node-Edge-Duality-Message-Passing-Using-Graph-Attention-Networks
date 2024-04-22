@@ -17,7 +17,9 @@ if __name__ == "__main__":
     dual_weight = 0.5
 
     # wandb arguments
-    project = "Dual-Gat-image-clustering"
+    project = "Image Clustering Based on Node-Edge Duality Message Passing Using Graph Attention Networks"
+    run_id_path = "configs/run_ids.bin"
+    run_name = "DualGATImageClustering"
 
 
     # model arguments
@@ -70,7 +72,9 @@ if __name__ == "__main__":
                                 criterion_args=criterion_args)
 
     # Connect to wandb
-    visualize.connect_to_wandb()
+    visualize.connect_to_wandb(project=project,
+                               run_id_path=run_id_path,
+                               run_name=run_name)
 
     # Train the model
     trainer.train(model=model, 
