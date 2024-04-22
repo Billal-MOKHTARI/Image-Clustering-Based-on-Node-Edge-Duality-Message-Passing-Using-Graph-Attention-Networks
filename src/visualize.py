@@ -1,9 +1,8 @@
 import wandb
 import os
 
-from maths import *
 from typing import Union
-import files_manager as fm
+from . import files_manager as fm
 
 def create_directory_tree(directory_structure: str, parent_path: str):
     """
@@ -27,8 +26,8 @@ def connect_to_wandb(project: str,
     
     # Additional runtime checks if needed
     assert isinstance(project, str), "project_name should be a string"
-    assert isinstance(run_id_path, str), "run_id_path should be a string"
-    assert isinstance(run_name, str), "run_name should be a string"
+    assert isinstance(run_id_path, Union[str, None]), "run_id_path should be a string"
+    assert isinstance(run_name, Union[str, None]), "run_name should be a string"
 
     run_id = None
     resume = None 

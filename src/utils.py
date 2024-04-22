@@ -7,34 +7,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from models.networks import constants
-import torchvision.transforms as transforms
 
-def read_images(folder_path, n):
-    """
-    Read the first n images from a folder, resize them to (3, 224, 224), and stack them into a single tensor.
-
-    Args:
-        folder_path (str): Path to the folder containing images.
-        n (int): Number of images to read.
-
-    Returns:
-        torch.Tensor: Stacked tensor of shape (N, 3, 224, 224).
-    """
-    images = []
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor()
-    ])
-    for filename in sorted(os.listdir(folder_path)):
-        if len(images) == n:
-            break
-        if filename.endswith(('.png', '.jpg', '.jpeg', '.bmp')):
-            image_path = os.path.join(folder_path, filename)
-            with Image.open(image_path) as img:
-                img_tensor = transform(img)
-                images.append(img_tensor)
-    stacked_tensor = torch.stack(images, dim=0)
-    return stacked_tensor
 
 def extract_channels(tensor, index=None, columns=None) -> List[pd.DataFrame]:
     channels = []

@@ -2,15 +2,11 @@ from torch import nn
 import torch
 import os
 import sys
-import numpy as np
 
-import numpy as np
 import torch
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src import maths
-from torchvision import models
-from torchsummary import summary
-import json
+
 
 class Linear2D(nn.Module):
 
@@ -230,7 +226,7 @@ class Decoder2D(nn.Module):
     """
     2D Decoder module for convolutional autoencoder.
     """
-
+    
     def __init__(self, 
                  latent_dims, 
                  shapes, 
@@ -429,71 +425,6 @@ class Decoder2D(nn.Module):
 # Specify the path to your JSON file
 encoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/encoder.json"
 decoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/decoder.json"
-
-
-
-def parse_encoder(json_file_path, network_type):
-    if network_type == "encoder":
-        conv_prefix = ""
-        pool_prefix = ""
-    elif network_type == "decoder":
-        conv_prefix = "de"
-        pool_prefix = "un"
-    
-    # Open the JSON file
-    with open(json_file_path, "r") as json_file:
-        # Load the JSON data
-        data = json.load(json_file)
-        
-    data["activation"] = getattr(nn, data["activation"])
-    for i in range(len(data["shapes"])):
-        data["shapes"][i] = tuple(data["shapes"][i])
-    
-    try:
-        attr = conv_prefix+"conv_kernels"
-        data[attr][0][0]
-        for i, conv_kernel in enumerate(data[attr]):
-            data[attr][i] = tuple(conv_kernel)
-    except:
-        data[attr] = tuple(data[attr])
-    
-    try:
-        attr = conv_prefix+"conv_strides"
-        data[attr][0][0]
-        for i, conv_stride in enumerate(data[attr]):
-            data[attr][i] = tuple(conv_stride)
-    except:
-        data[attr] = tuple(data[attr])
-        
-    
-    try:
-        attr = pool_prefix+"pool_strides"
-        data[attr][0][0]
-        for i, pool_stride in enumerate(data[attr]):
-            data[attr][i] = tuple(pool_stride)
-    except:
-        data[attr] = tuple(data[attr])
-        
-    
-    try:
-        attr = pool_prefix+"pool_paddings"
-        data[attr][0][0]
-        for i, pool_padding in enumerate(data[attr]):
-            data[attr][i] = tuple(pool_padding)
-    except:
-        data[attr] = tuple(data[attr])
-        
-    if network_type == "decoder":
-        try:
-            attr = "deconv_paddings"
-            data[attr][0][0]
-            for i, deconv_padding in enumerate(data[attr]):
-                data[attr][i] = tuple(deconv_padding)
-        except:
-            data[attr] = tuple(data[attr])
-    
-    
-    return data
 
 # encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
 # decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")

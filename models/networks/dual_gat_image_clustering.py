@@ -1,21 +1,6 @@
-import torch
 from torch import nn
-from torch import optim
-from dual_message_passing import DualMessagePassing
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-
-from src import utils
-
-import pandas as pd
-from torch import nn
-import constants
-import numpy as np
-import torchvision.transforms as transforms
-from PIL import Image
-from custom_layers import Encoder2D, Decoder2D, parse_encoder
-import metrics
+from .dual_message_passing import DualMessagePassing
+from .custom_layers import Encoder2D, Decoder2D
 
 
 class DualGATImageClustering(nn.Module):
