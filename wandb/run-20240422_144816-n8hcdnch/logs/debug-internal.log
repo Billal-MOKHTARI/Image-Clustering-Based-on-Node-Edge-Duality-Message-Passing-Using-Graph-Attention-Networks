@@ -42,3 +42,177 @@
 2024-04-22 14:48:23,257 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_created():271] file/dir created: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/requirements.txt
 2024-04-22 14:48:23,257 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_created():271] file/dir created: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/wandb-metadata.json
 2024-04-22 14:48:23,386 INFO    wandb-upload_0:48966 [upload_job.py:push():131] Uploaded file /tmp/tmpd0q5d1iwwandb/avn8jsuo-wandb-metadata.json
+2024-04-22 14:48:28,245 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:48:33,245 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:48:37,979 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 14:48:37,979 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 14:48:37,980 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 14:48:39,234 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:48:44,234 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:48:49,262 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_created():271] file/dir created: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/output.log
+2024-04-22 14:48:49,444 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:48:50,262 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/config.yaml
+2024-04-22 14:48:51,262 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/output.log
+2024-04-22 14:48:52,979 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 14:48:52,979 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 14:48:52,980 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 14:48:55,185 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:00,186 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:05,186 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:07,983 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 14:49:07,984 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 14:49:08,024 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 14:49:10,200 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:13,267 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/output.log
+2024-04-22 14:49:15,229 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:17,475 DEBUG   SystemMonitor:48966 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-04-22 14:49:17,476 DEBUG   SenderThread:48966 [sender.py:send():379] send: stats
+2024-04-22 14:49:20,476 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:22,983 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 14:49:22,983 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 14:49:22,985 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 14:49:26,211 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:27,867 DEBUG   SenderThread:48966 [sender.py:send():379] send: exit
+2024-04-22 14:49:27,868 INFO    SenderThread:48966 [sender.py:send_exit():586] handling exit code: 255
+2024-04-22 14:49:27,868 INFO    SenderThread:48966 [sender.py:send_exit():588] handling runtime: 70
+2024-04-22 14:49:27,868 INFO    SenderThread:48966 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-22 14:49:27,868 INFO    SenderThread:48966 [sender.py:send_exit():594] send defer
+2024-04-22 14:49:27,868 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,868 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 0
+2024-04-22 14:49:27,869 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,869 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-04-22 14:49:27,869 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 1
+2024-04-22 14:49:27,869 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,869 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 1
+2024-04-22 14:49:27,869 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,869 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-04-22 14:49:27,869 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 2
+2024-04-22 14:49:27,869 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,869 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 2
+2024-04-22 14:49:27,869 INFO    HandlerThread:48966 [system_monitor.py:finish():203] Stopping system monitor
+2024-04-22 14:49:27,869 DEBUG   SystemMonitor:48966 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-04-22 14:49:27,869 DEBUG   SystemMonitor:48966 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-04-22 14:49:27,870 INFO    HandlerThread:48966 [interfaces.py:finish():202] Joined cpu monitor
+2024-04-22 14:49:27,870 INFO    HandlerThread:48966 [interfaces.py:finish():202] Joined disk monitor
+2024-04-22 14:49:27,870 INFO    HandlerThread:48966 [interfaces.py:finish():202] Joined memory monitor
+2024-04-22 14:49:27,870 INFO    HandlerThread:48966 [interfaces.py:finish():202] Joined network monitor
+2024-04-22 14:49:27,871 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,871 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-04-22 14:49:27,871 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 3
+2024-04-22 14:49:27,871 DEBUG   SenderThread:48966 [sender.py:send():379] send: stats
+2024-04-22 14:49:27,871 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,871 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 3
+2024-04-22 14:49:27,871 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,871 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-04-22 14:49:27,871 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 4
+2024-04-22 14:49:27,872 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,872 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 4
+2024-04-22 14:49:27,872 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,872 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-04-22 14:49:27,872 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 5
+2024-04-22 14:49:27,872 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,872 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 5
+2024-04-22 14:49:27,872 DEBUG   SenderThread:48966 [sender.py:send():379] send: summary
+2024-04-22 14:49:27,873 INFO    SenderThread:48966 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-22 14:49:27,873 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,873 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-04-22 14:49:27,873 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 6
+2024-04-22 14:49:27,873 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,873 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 6
+2024-04-22 14:49:27,873 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,873 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-04-22 14:49:27,873 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 7
+2024-04-22 14:49:27,873 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 14:49:27,874 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:27,874 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 7
+2024-04-22 14:49:27,874 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:27,874 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-04-22 14:49:28,272 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_created():271] file/dir created: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/wandb-summary.json
+2024-04-22 14:49:28,866 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-22 14:49:29,833 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 8
+2024-04-22 14:49:29,834 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: poll_exit
+2024-04-22 14:49:29,834 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:29,834 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 8
+2024-04-22 14:49:29,835 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:29,835 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-04-22 14:49:29,835 INFO    SenderThread:48966 [job_builder.py:build():318] Attempting to build job artifact
+2024-04-22 14:49:29,835 INFO    SenderThread:48966 [job_builder.py:_get_source_type():455] is repo sourced job
+2024-04-22 14:49:29,867 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-22 14:49:29,870 INFO    SenderThread:48966 [job_builder.py:build():431] adding wandb-job metadata file
+2024-04-22 14:49:29,874 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 9
+2024-04-22 14:49:29,874 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: poll_exit
+2024-04-22 14:49:29,874 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:29,874 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 9
+2024-04-22 14:49:29,874 DEBUG   SenderThread:48966 [sender.py:send():379] send: artifact
+2024-04-22 14:49:30,273 INFO    Thread-12 :48966 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/output.log
+2024-04-22 14:49:30,869 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-22 14:49:31,031 INFO    wandb-upload_0:48966 [upload_job.py:push():86] Skipped uploading /home/bimokhtari1/.local/share/wandb/artifacts/staging/tmpgyqd5xj0
+2024-04-22 14:49:31,290 INFO    wandb-upload_1:48966 [upload_job.py:push():89] Uploaded file /tmp/tmp53ayf02g/wandb-job.json
+2024-04-22 14:49:32,362 INFO    SenderThread:48966 [sender.py:send_artifact():1468] sent artifact job-https___github.com_Billal-MOKHTARI_Image-Clustering-Based-o..lity-Message-Passing-Using-Graph-Attention-Networks.git_main.py - {'id': 'QXJ0aWZhY3Q6ODA1NjE5ODM0', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjE2NTM1NzI2Ng==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6ODA1NjE4MDQ4', 'versionIndex': 0}}}
+2024-04-22 14:49:32,363 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:32,363 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-04-22 14:49:32,363 INFO    SenderThread:48966 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-04-22 14:49:33,275 INFO    SenderThread:48966 [dir_watcher.py:finish():388] scan: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files
+2024-04-22 14:49:33,275 INFO    SenderThread:48966 [dir_watcher.py:finish():402] scan save: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/output.log output.log
+2024-04-22 14:49:33,276 INFO    SenderThread:48966 [dir_watcher.py:finish():402] scan save: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/conda-environment.yaml conda-environment.yaml
+2024-04-22 14:49:33,276 INFO    SenderThread:48966 [dir_watcher.py:finish():402] scan save: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/config.yaml config.yaml
+2024-04-22 14:49:33,287 INFO    SenderThread:48966 [dir_watcher.py:finish():402] scan save: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/requirements.txt requirements.txt
+2024-04-22 14:49:33,293 INFO    SenderThread:48966 [dir_watcher.py:finish():402] scan save: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/wandb-summary.json wandb-summary.json
+2024-04-22 14:49:33,299 INFO    SenderThread:48966 [dir_watcher.py:finish():402] scan save: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/wandb-metadata.json wandb-metadata.json
+2024-04-22 14:49:33,299 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 10
+2024-04-22 14:49:33,299 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: poll_exit
+2024-04-22 14:49:33,300 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:33,302 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 10
+2024-04-22 14:49:33,302 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:33,302 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-04-22 14:49:33,302 INFO    SenderThread:48966 [file_pusher.py:finish():172] shutting down file pusher
+2024-04-22 14:49:33,715 INFO    wandb-upload_1:48966 [upload_job.py:push():131] Uploaded file /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/conda-environment.yaml
+2024-04-22 14:49:33,815 INFO    wandb-upload_0:48966 [upload_job.py:push():131] Uploaded file /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/output.log
+2024-04-22 14:49:33,872 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-22 14:49:33,873 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: poll_exit
+2024-04-22 14:49:33,878 INFO    wandb-upload_2:48966 [upload_job.py:push():131] Uploaded file /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/config.yaml
+2024-04-22 14:49:33,879 INFO    wandb-upload_4:48966 [upload_job.py:push():131] Uploaded file /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/wandb-summary.json
+2024-04-22 14:49:33,895 INFO    wandb-upload_3:48966 [upload_job.py:push():131] Uploaded file /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/files/requirements.txt
+2024-04-22 14:49:34,096 INFO    Thread-11 (_thread_body):48966 [sender.py:transition_state():614] send defer: 11
+2024-04-22 14:49:34,097 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:34,097 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 11
+2024-04-22 14:49:34,098 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:34,098 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-04-22 14:49:34,098 INFO    SenderThread:48966 [file_pusher.py:join():178] waiting for file pusher
+2024-04-22 14:49:34,099 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 12
+2024-04-22 14:49:34,100 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:34,100 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 12
+2024-04-22 14:49:34,101 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:34,101 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-04-22 14:49:34,101 INFO    SenderThread:48966 [file_stream.py:finish():614] file stream finish called
+2024-04-22 14:49:34,570 INFO    SenderThread:48966 [file_stream.py:finish():618] file stream finish is done
+2024-04-22 14:49:34,571 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 13
+2024-04-22 14:49:34,571 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:34,571 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 13
+2024-04-22 14:49:34,572 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:34,572 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-04-22 14:49:34,572 INFO    SenderThread:48966 [sender.py:transition_state():614] send defer: 14
+2024-04-22 14:49:34,573 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: defer
+2024-04-22 14:49:34,573 INFO    HandlerThread:48966 [handler.py:handle_request_defer():172] handle defer: 14
+2024-04-22 14:49:34,574 DEBUG   SenderThread:48966 [sender.py:send():379] send: final
+2024-04-22 14:49:34,574 DEBUG   SenderThread:48966 [sender.py:send():379] send: footer
+2024-04-22 14:49:34,574 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: defer
+2024-04-22 14:49:34,574 INFO    SenderThread:48966 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-04-22 14:49:34,576 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-22 14:49:34,577 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: poll_exit
+2024-04-22 14:49:34,578 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: poll_exit
+2024-04-22 14:49:34,579 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: poll_exit
+2024-04-22 14:49:34,580 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: server_info
+2024-04-22 14:49:34,580 DEBUG   SenderThread:48966 [sender.py:send_request():406] send_request: server_info
+2024-04-22 14:49:34,586 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: get_summary
+2024-04-22 14:49:34,587 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: sampled_history
+2024-04-22 14:49:34,587 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 14:49:34,745 INFO    MainThread:48966 [wandb_run.py:_footer_history_summary_info():3936] rendering history
+2024-04-22 14:49:34,745 INFO    MainThread:48966 [wandb_run.py:_footer_history_summary_info():3968] rendering summary
+2024-04-22 14:49:34,745 INFO    MainThread:48966 [wandb_run.py:_footer_sync_info():3895] logging synced files
+2024-04-22 14:49:34,746 DEBUG   HandlerThread:48966 [handler.py:handle_request():146] handle_request: shutdown
+2024-04-22 14:49:34,746 INFO    HandlerThread:48966 [handler.py:finish():866] shutting down handler
+2024-04-22 14:49:35,581 INFO    WriterThread:48966 [datastore.py:close():296] close: /home/bimokhtari1/Documents/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_144816-n8hcdnch/run-n8hcdnch.wandb
+2024-04-22 14:49:35,746 INFO    SenderThread:48966 [sender.py:finish():1546] shutting down sender
+2024-04-22 14:49:35,746 INFO    SenderThread:48966 [file_pusher.py:finish():172] shutting down file pusher
+2024-04-22 14:49:35,746 INFO    SenderThread:48966 [file_pusher.py:join():178] waiting for file pusher

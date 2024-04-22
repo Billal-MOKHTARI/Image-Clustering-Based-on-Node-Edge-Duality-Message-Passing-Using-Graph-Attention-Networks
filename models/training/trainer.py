@@ -35,7 +35,7 @@ def train(model,
         for i, res in enumerate(result["dual"]["losses"]):
             loss_log[f"dual loss (layer {i})"] = res
 
-        loss_log = {"primal loss": primal_loss, "dual loss": dual_loss}
+        loss_log.update({"primal loss": primal_loss, "dual loss": dual_loss})
 
 
 
@@ -49,7 +49,6 @@ def train(model,
         print(f"Epoch: {epoch}, Loss: {loss.item()}")
 
         loss_log["loss"] = loss.item()
-        print(loss_log)
 
         # Log the loss
-        # wandb.log(loss_log, step = epoch, commit = True)
+        wandb.log(loss_log, step = epoch, commit = True)
