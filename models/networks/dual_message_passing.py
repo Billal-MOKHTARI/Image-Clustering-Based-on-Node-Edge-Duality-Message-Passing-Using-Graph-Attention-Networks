@@ -6,7 +6,7 @@ import numpy as np
 import constants
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src import utils
 
 class DualMessagePassing(nn.Module):

@@ -6,7 +6,7 @@ import numpy as np
 
 import numpy as np
 import torch
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src import maths
 from torchvision import models
 from torchsummary import summary

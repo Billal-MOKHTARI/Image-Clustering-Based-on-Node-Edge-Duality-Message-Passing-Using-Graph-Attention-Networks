@@ -8,7 +8,7 @@ import os
 import sys
 
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 import constants  # Import custom constants module
 
 from torch_model_manager import TorchModelManager

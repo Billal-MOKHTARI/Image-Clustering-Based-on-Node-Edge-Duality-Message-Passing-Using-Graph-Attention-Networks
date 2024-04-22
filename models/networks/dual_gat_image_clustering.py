@@ -4,7 +4,7 @@ from torch import optim
 from dual_message_passing import DualMessagePassing
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from src import utils
 
@@ -15,33 +15,8 @@ import numpy as np
 import torchvision.transforms as transforms
 from PIL import Image
 from custom_layers import Encoder2D, Decoder2D, parse_encoder
+import metrics
 
-def read_images(folder_path, n):
-    """
-    Read the first n images from a folder, resize them to (3, 224, 224), and stack them into a single tensor.
-
-    Args:
-        folder_path (str): Path to the folder containing images.
-        n (int): Number of images to read.
-
-    Returns:
-        torch.Tensor: Stacked tensor of shape (N, 3, 224, 224).
-    """
-    images = []
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor()
-    ])
-    for filename in sorted(os.listdir(folder_path)):
-        if len(images) == n:
-            break
-        if filename.endswith(('.png', '.jpg', '.jpeg', '.bmp')):
-            image_path = os.path.join(folder_path, filename)
-            with Image.open(image_path) as img:
-                img_tensor = transform(img)
-                images.append(img_tensor)
-    stacked_tensor = torch.stack(images, dim=0)
-    return stacked_tensor
 
 class DualGATImageClustering(nn.Module):
     def __init__(self, 
@@ -199,8 +174,7 @@ class DualGATImageClustering(nn.Module):
         primal_nodes, indices, conv_encoder_history = self.image_encoder(imgs)
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, encoder_history = self.encoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
         primal_nodes, primal_adjacency_tensor, dual_nodes, dual_adjacency_tensor, decoder_history = self.decoder(primal_nodes, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-        
-        print(primal_nodes.shape)
+ 
         primal_nodes, deconv_decoder_history = self.image_decoder(primal_nodes, indices[::-1])
         
         decoder_history = decoder_history[::-1]
@@ -222,7 +196,6 @@ class DualGATImageClustering(nn.Module):
             dec_dual_node = decoder_history[i]["dual_nodes"]
             dual_losses.append(self.dual_criterion_weights[i] * self.criterion(enc_dual_node, dec_dual_node))
 
-        # print(self.image_decoder(primal_nodes))
         result = {
             "primal": {
                 "nodes": primal_nodes,
@@ -239,77 +212,45 @@ class DualGATImageClustering(nn.Module):
 
         return result
 
-def train(model, 
-          images, 
-          epochs, 
-          optimizer = optim.Adam, 
-          primal_weight = 1, 
-          dual_weight = 1, 
-          **kwargs):
-    
-    assert primal_weight >= 0 and primal_weight <= 1, "Primal weight must be between 0 and 1"
-    assert dual_weight >= 0 and dual_weight <= 1, "Dual weight must be between 0 and 1"
-    
-    optimizer = optimizer(model.parameters(), **kwargs)
-    for epoch in range(epochs):
-        # Forward pass
-        optimizer.zero_grad()
-        result = model(images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
-        primal_loss = utils.list_sum(result["primal"]["losses"])
-        dual_loss = utils.list_sum(result["dual"]["losses"])
-        conv_encoder_history = result["conv_encoder_history"]
-        deconv_decoder_history = result["deconv_decoder_history"]
-        
-        print("encoder")
-        for enc in conv_encoder_history:
-            print(enc.shape)
-        
-        print("decoder")
-        for dec in deconv_decoder_history:
-            print(dec.shape)
-        loss = (primal_weight*primal_loss + dual_weight*dual_loss)/(primal_weight+dual_weight)
-
-        loss.backward()
-        optimizer.step()
-        print(f"Epoch: {epoch}, Loss: {loss.item()}")
-
-
 # Test the model
 # Define the adjacency matrix
-n = 3  # Number of images to read and convert
+# n = 3  # Number of images to read and convert
 
-mat_square = pd.read_csv("../benchmark/datasets/test/adjacency_matrix_square.csv", index_col=0, header=0, dtype=np.float32)
-mat_circle = pd.read_csv("../benchmark/datasets/test/adjacency_matrix_circle.csv", index_col=0, header=0, dtype=np.float32)
-mat_triangle = pd.read_csv("../benchmark/datasets/test/adjacency_matrix_triangle.csv", index_col=0, header=0, dtype=np.float32)
+# mat_square = pd.read_csv("../../benchmark/datasets/test/adjacency_matrix_square.csv", index_col=0, header=0, dtype=np.float32)
+# mat_circle = pd.read_csv("../../benchmark/datasets/test/adjacency_matrix_circle.csv", index_col=0, header=0, dtype=np.float32)
+# mat_triangle = pd.read_csv("../../benchmark/datasets/test/adjacency_matrix_triangle.csv", index_col=0, header=0, dtype=np.float32)
 
-primal_adjacency_tensor = torch.tensor(np.array([mat_square, mat_circle, mat_triangle]), dtype=constants.FLOATING_POINT)[:,:n,:n]
-n_objects = primal_adjacency_tensor.shape[0]
-num_images = primal_adjacency_tensor.shape[1]
+# primal_adjacency_tensor = torch.tensor(np.array([mat_square, mat_circle, mat_triangle]), dtype=constants.FLOATING_POINT)[:,:n,:n]
+# n_objects = primal_adjacency_tensor.shape[0]
+# num_images = primal_adjacency_tensor.shape[1]
 
-primal_index = utils.convert_list(mat_square.index.tolist(), np.float32, str)[:n]
-dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, 
-                                                                                   primal_index, 
-                                                                                   "_")
-
-
-# Example usage:
-folder_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/benchmark/datasets/test/shapes"
-img = read_images(folder_path, n)
+# primal_index = utils.convert_list(mat_square.index.tolist(), np.float32, str)[:n]
+# dual_index, dual_adjacency_tensor, dual_nodes = utils.create_dual_adjacency_tensor(primal_adjacency_tensor, 
+#                                                                                    primal_index, 
+#                                                                                    "_")
 
 
-encoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/encoder.json"
-decoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/decoder.json"
-encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
-decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
+# # Example usage:
+# folder_path = "../../benchmark/datasets/test/shapes"
+# img = read_images(folder_path, n)
 
-# Create and run the DualGATImageClustering model
-model = DualGATImageClustering(primal_index=primal_index, 
-                               dual_index=dual_index, 
-                               n_objects=n_objects, 
-                               primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1], 
-                               dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1],
-                               image_size=(3, 64, 64),
-                               encoder_args=encoder_args, decoder_args=decoder_args)
 
-epochs = 100
-train(model, img, epochs, optimizer=optim.Adam, lr=0.01)
+# encoder_json_file_path = "../../configs/encoder.json"
+# decoder_json_file_path = "../../configs/decoder.json"
+# encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
+# decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
+
+# # Create and run the DualGATImageClustering model
+# model = DualGATImageClustering(primal_index=primal_index, 
+#                                dual_index=dual_index, 
+#                                n_objects=n_objects, 
+#                                primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1], 
+#                                dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1],
+#                                image_size=(3, 64, 64),
+#                                encoder_args=encoder_args, 
+#                                decoder_args=decoder_args, 
+#                                criterion=metrics.MeanCosineDistance,
+#                                criterion_args={"dim":1})
+
+# epochs = 100
+# train(model, img, epochs, optimizer=optim.Adam, lr=0.01)
