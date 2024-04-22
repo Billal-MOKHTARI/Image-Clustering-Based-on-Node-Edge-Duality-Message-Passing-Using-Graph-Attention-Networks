@@ -13,6 +13,7 @@ def train(model,
           dual_nodes,
           primal_weight = 1, 
           dual_weight = 1, 
+          use_wandb = True,
           **kwargs):
     
     assert primal_weight >= 0 and primal_weight <= 1, "Primal weight must be between 0 and 1"
@@ -51,4 +52,5 @@ def train(model,
         loss_log["loss"] = loss.item()
 
         # Log the loss
-        wandb.log(loss_log, step = epoch, commit = True)
+        if use_wandb:
+            wandb.log(loss_log, step = epoch, commit = True)

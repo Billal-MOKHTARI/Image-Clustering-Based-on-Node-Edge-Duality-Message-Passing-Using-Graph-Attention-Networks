@@ -7,6 +7,7 @@ from src import files_manager as fm
 import pandas as pd
 import torch
 import numpy as np
+import torch.onnx
 
 if __name__ == "__main__":
     # training arguments
@@ -15,6 +16,7 @@ if __name__ == "__main__":
     image_dataset_path = "benchmark/datasets/test/shapes"
     primal_weight = 0.5
     dual_weight = 0.5
+    use_wandb = False
 
     # wandb arguments
     project = "Image Clustering Based on Node-Edge Duality Message Passing Using Graph Attention Networks"
@@ -85,4 +87,11 @@ if __name__ == "__main__":
                   dual_adjacency_tensor=dual_adjacency_tensor, 
                   dual_nodes=dual_nodes, 
                   primal_weight=primal_weight, 
-                  dual_weight=dual_weight)
+                  dual_weight=dual_weight,
+                  use_wandb=use_wandb)
+
+    # Export the model to onnx
+    torch.onnx.export(model, 
+                      (images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes), 
+                      "model.onnx", 
+                      verbose=True)
