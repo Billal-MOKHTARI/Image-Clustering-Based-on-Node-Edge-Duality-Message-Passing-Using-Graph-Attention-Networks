@@ -79,8 +79,6 @@ if __name__ == "__main__":
     # make_dot(output, 
     #          params=dict(model.named_parameters()), show_attrs=True, show_saved=True).render("model", format="png")
 
-
-
     # Train the model
     trainer.train(model=model, 
                   images=images, 
