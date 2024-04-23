@@ -8,6 +8,8 @@ import pandas as pd
 import torch
 import numpy as np
 import torch.onnx
+from torchviz import make_dot, make_dot_from_trace
+from torch import nn
 
 if __name__ == "__main__":
     # training arguments
@@ -16,12 +18,12 @@ if __name__ == "__main__":
     image_dataset_path = "benchmark/datasets/test/shapes"
     primal_weight = 0.5
     dual_weight = 0.5
-    use_wandb = False
+    use_wandb = True
 
     # wandb arguments
     project = "Image Clustering Based on Node-Edge Duality Message Passing Using Graph Attention Networks"
     run_id_path = "configs/run_ids.bin"
-    run_name = "DualGATImageClustering"
+    run_name = "DualGATImageClustering_no_replacement_Cos_Sim"
 
 
     # model arguments
@@ -30,12 +32,13 @@ if __name__ == "__main__":
     delimiter = "_"
     primal_criterion_weights=[1, 0.2, 0.3, 0.2, 1]
     dual_criterion_weights=[1, 0.2, 0.3, 0.2, 1]
-    criterion_args = {"dim":1}
+    criterion_args = {}
+    with_replacement = False
 
     # Load the images
     images = fm.read_images(image_dataset_path, num_images)
     image_size = images[0].shape
-
+    
     # Load the adjacency tensor
     mat_square = pd.read_csv("benchmark/datasets/test/adjacency_matrix_square.csv", index_col=0, header=0, dtype=np.float32)
     mat_circle = pd.read_csv("benchmark/datasets/test/adjacency_matrix_circle.csv", index_col=0, header=0, dtype=np.float32)
@@ -61,7 +64,6 @@ if __name__ == "__main__":
 
 
 
-
     model = DualGATImageClustering(primal_index=primal_index, 
                                 dual_index=dual_index, 
                                 n_objects=n_objects, 
@@ -71,7 +73,12 @@ if __name__ == "__main__":
                                 encoder_args=encoder_args, 
                                 decoder_args=decoder_args, 
                                 criterion=metrics.MeanCosineDistance,
-                                criterion_args=criterion_args)
+                                criterion_args=criterion_args,
+                                with_replacement = with_replacement)
+    
+    # output = model(images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)["primal"]["nodes"]
+    # make_dot(output, 
+    #          params=dict(model.named_parameters()), show_attrs=True, show_saved=True).render("model", format="png")
 
     # Connect to wandb
     visualize.connect_to_wandb(project=project,
@@ -90,8 +97,10 @@ if __name__ == "__main__":
                   dual_weight=dual_weight,
                   use_wandb=use_wandb)
 
+
+        
     # Export the model to onnx
-    torch.onnx.export(model, 
-                      (images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes), 
-                      "model.onnx", 
-                      verbose=True)
+    # torch.onnx.export(model, 
+    #                 (images.detach(), primal_adjacency_tensor.detach(), dual_adjacency_tensor, dual_nodes), 
+    #                 "model.onnx", 
+    #                 verbose=True)

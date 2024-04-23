@@ -83,6 +83,7 @@ class DualMessagePassing(nn.Module):
                 dual_index, 
                 layer_index,
                 delimiter="_",
+                with_replacement = True,
                 **kwargs):
         
         super(DualMessagePassing, self).__init__()
@@ -103,6 +104,7 @@ class DualMessagePassing(nn.Module):
  
         self.layer_index = layer_index
         self.delimiter = delimiter
+        self.with_replacement = with_replacement
 
         self.node_message_passing_block = MessagePassing(graph_order=self.node_graph_order, 
                                                    in_features=self.primal_in_features, 
@@ -188,8 +190,9 @@ class DualMessagePassing(nn.Module):
         primal_output = self.node_message_passing_block(node_x, primal_adjacency_tensor)
         dual_output = self.edge_message_passing_block(edge_x, dual_adjacency_tensor)
         
-        primal_adjacency_tensor = self.create_primal_adjacency_tensor(pd.DataFrame(dual_output.detach().numpy(), index=self.dual_index))
-        dual_adjacency_tensor = self.create_dual_adjacency_tensor(pd.DataFrame(primal_output.detach().numpy(), index=self.primal_index))
+        if self.with_replacement:
+            primal_adjacency_tensor = self.create_primal_adjacency_tensor(pd.DataFrame(dual_output.detach().numpy(), index=self.dual_index))
+            dual_adjacency_tensor = self.create_dual_adjacency_tensor(pd.DataFrame(primal_output.detach().numpy(), index=self.primal_index))
 
 
         result = {

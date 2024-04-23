@@ -1,0 +1,49 @@
+dec_prim torch.Size([16, 3, 3])
+dec_dual torch.Size([8, 3, 3])
+dec_prim torch.Size([32, 3, 3])
+dec_dual torch.Size([16, 3, 3])
+dec_prim torch.Size([64, 3, 3])
+dec_dual torch.Size([32, 3, 3])
+dec_prim torch.Size([3, 3, 3])
+dec_dual torch.Size([64, 3, 3])
+Epoch: 0, Loss: 3.2225170135498047
+Traceback (most recent call last):
+  File "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/main.py", line 89, in <module>
+    trainer.train(model=model,
+  File "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/models/training/trainer.py", line 26, in train
+    result = model(images, primal_adjacency_tensor, dual_adjacency_tensor, dual_nodes)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/models/networks/dual_gat_image_clustering.py", line 168, in forward
+    primal_nodes, indices, conv_encoder_history = self.image_encoder(imgs)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/models/networks/custom_layers.py", line 214, in forward
+    x, indices = self.encoder_layers[i](x)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/modules/pooling.py", line 164, in forward
+    return F.max_pool2d(input, self.kernel_size, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/_jit_internal.py", line 497, in fn
+    return if_true(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/torch/nn/functional.py", line 771, in max_pool2d_with_indices
+    return torch._C._nn.max_pool2d_with_indices(input, kernel_size, stride, padding, dilation, ceil_mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

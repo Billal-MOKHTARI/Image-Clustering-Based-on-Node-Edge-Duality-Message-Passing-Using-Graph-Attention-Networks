@@ -1,0 +1,1404 @@
+2024-04-22 23:51:50,017 INFO    StreamThr :9290 [internal.py:wandb_internal():86] W&B internal server running at pid: 9290, started at: 2024-04-22 23:51:49.841522
+2024-04-22 23:51:50,021 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status
+2024-04-22 23:51:50,334 INFO    WriterThread:9290 [datastore.py:open_for_write():87] open: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/run-njxgg0v8.wandb
+2024-04-22 23:51:50,336 DEBUG   SenderThread:9290 [sender.py:send():379] send: header
+2024-04-22 23:51:50,971 DEBUG   SenderThread:9290 [sender.py:send():379] send: run
+2024-04-22 23:51:56,009 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-22 23:51:57,108 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: check_version
+2024-04-22 23:51:57,185 INFO    SenderThread:9290 [dir_watcher.py:__init__():211] watching files in: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files
+2024-04-22 23:51:57,186 INFO    SenderThread:9290 [sender.py:_start_run_threads():1124] run started: njxgg0v8 with start time 1713822710.308873
+2024-04-22 23:51:57,186 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: check_version
+2024-04-22 23:51:57,187 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:51:57,557 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: run_start
+2024-04-22 23:51:57,702 DEBUG   HandlerThread:9290 [system_info.py:__init__():26] System info init
+2024-04-22 23:51:57,702 DEBUG   HandlerThread:9290 [system_info.py:__init__():41] System info init done
+2024-04-22 23:51:57,707 INFO    HandlerThread:9290 [system_monitor.py:start():194] Starting system monitor
+2024-04-22 23:51:57,711 INFO    SystemMonitor:9290 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-04-22 23:51:57,711 INFO    HandlerThread:9290 [system_monitor.py:probe():214] Collecting system info
+2024-04-22 23:51:57,718 INFO    SystemMonitor:9290 [interfaces.py:start():190] Started cpu monitoring
+2024-04-22 23:51:57,719 INFO    SystemMonitor:9290 [interfaces.py:start():190] Started disk monitoring
+2024-04-22 23:51:57,721 INFO    SystemMonitor:9290 [interfaces.py:start():190] Started memory monitoring
+2024-04-22 23:51:57,722 INFO    SystemMonitor:9290 [interfaces.py:start():190] Started network monitoring
+2024-04-22 23:51:57,726 DEBUG   HandlerThread:9290 [system_info.py:probe():150] Probing system
+2024-04-22 23:51:57,936 DEBUG   HandlerThread:9290 [system_info.py:_probe_git():135] Probing git
+2024-04-22 23:51:58,156 DEBUG   HandlerThread:9290 [system_info.py:_probe_git():143] Probing git done
+2024-04-22 23:51:58,157 DEBUG   HandlerThread:9290 [system_info.py:probe():198] Probing system done
+2024-04-22 23:51:58,157 DEBUG   HandlerThread:9290 [system_monitor.py:probe():223] {'os': 'Linux-6.8.0-76060800daily20240311-generic-x86_64-with-glibc2.35', 'python': '3.11.7', 'heartbeatAt': '2024-04-22T21:51:57.726826', 'startedAt': '2024-04-22T21:51:48.989198', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/Billal-MOKHTARI/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks.git', 'commit': '298a99bf625943fb190f85f82baf80ab2ad83ce6'}, 'email': 'Billal.MOKHTARI@etu.uca.fr', 'root': '/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks', 'host': 'pop-os', 'username': 'billalmokhtari', 'executable': '/home/billalmokhtari/anaconda3/bin/python', 'cpu_count': 2, 'cpu_count_logical': 4, 'cpu_freq': {'current': 2.494, 'min': 500.0, 'max': 2700.0}, 'cpu_freq_per_core': [{'current': 2.495, 'min': 500.0, 'max': 2700.0}, {'current': 2.494, 'min': 500.0, 'max': 2700.0}, {'current': 2.494, 'min': 500.0, 'max': 2700.0}, {'current': 2.494, 'min': 500.0, 'max': 2700.0}], 'disk': {'/': {'total': 182.10748291015625, 'used': 88.4493408203125}}, 'memory': {'total': 7.664970397949219}}
+2024-04-22 23:51:58,157 INFO    HandlerThread:9290 [system_monitor.py:probe():224] Finished collecting system info
+2024-04-22 23:51:58,157 INFO    HandlerThread:9290 [system_monitor.py:probe():227] Publishing system info
+2024-04-22 23:51:58,171 DEBUG   HandlerThread:9290 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-04-22 23:51:58,187 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_created():271] file/dir created: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/conda-environment.yaml
+2024-04-22 23:52:13,199 ERROR   HandlerThread:9290 [system_info.py:_save_conda():221] Error saving conda packages: Command '['conda', 'env', 'export']' timed out after 15 seconds
+Traceback (most recent call last):
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/site-packages/wandb/sdk/internal/system/system_info.py", line 214, in _save_conda
+    subprocess.call(
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/subprocess.py", line 391, in call
+    return p.wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/billalmokhtari/anaconda3/lib/python3.11/subprocess.py", line 2038, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['conda', 'env', 'export']' timed out after 15 seconds
+2024-04-22 23:52:13,288 DEBUG   HandlerThread:9290 [system_info.py:_save_conda():222] Saving conda packages done
+2024-04-22 23:52:13,342 INFO    HandlerThread:9290 [system_monitor.py:probe():229] Finished publishing system info
+2024-04-22 23:52:13,466 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:13,467 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-22 23:52:13,468 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:13,468 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-22 23:52:13,468 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:13,468 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-22 23:52:13,470 DEBUG   SenderThread:9290 [sender.py:send():379] send: files
+2024-04-22 23:52:13,470 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-04-22 23:52:14,191 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_created():271] file/dir created: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-metadata.json
+2024-04-22 23:52:14,772 INFO    wandb-upload_0:9290 [upload_job.py:push():131] Uploaded file /tmp/tmpghzgvmbnwandb/67p1duls-wandb-metadata.json
+2024-04-22 23:52:18,471 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:23,472 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:28,473 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:32,096 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: python_packages
+2024-04-22 23:52:32,098 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: python_packages
+2024-04-22 23:52:32,099 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:52:32,099 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:52:32,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 23:52:32,210 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_created():271] file/dir created: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/requirements.txt
+2024-04-22 23:52:32,491 DEBUG   SenderThread:9290 [sender.py:send():379] send: telemetry
+2024-04-22 23:52:33,493 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:38,523 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:43,524 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:48,588 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:52:48,588 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: internal_messages
+2024-04-22 23:52:48,588 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:48,589 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:52:54,292 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:52:56,502 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/config.yaml
+2024-04-22 23:52:57,725 DEBUG   SystemMonitor:9290 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-04-22 23:52:57,940 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:53:01,943 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:02,091 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:53:02,091 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:53:07,358 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:12,358 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:17,091 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:53:17,091 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:53:18,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:23,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:27,814 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:53:28,817 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:32,091 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:53:32,092 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:53:34,285 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:39,289 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:44,290 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:47,091 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:53:47,091 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:53:49,335 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:54,336 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:53:57,816 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:53:59,817 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:02,091 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:54:02,092 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:54:05,501 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:10,503 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:14,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-22 23:54:14,158 DEBUG   SenderThread:9290 [sender.py:send():379] send: telemetry
+2024-04-22 23:54:14,158 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-22 23:54:14,158 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-22 23:54:14,204 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-22 23:54:14,690 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_created():271] file/dir created: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-22 23:54:14,690 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_created():271] file/dir created: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-22 23:54:17,515 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:54:17,516 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-22 23:54:17,516 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:54:17,777 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:22,779 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:27,781 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:27,816 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:54:32,093 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:54:32,093 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:54:33,304 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:34,522 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/config.yaml
+2024-04-22 23:54:38,534 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:43,537 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:47,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:54:47,115 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:54:48,969 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:53,971 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:54:57,816 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:54:59,821 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:02,095 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:55:02,095 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:55:05,032 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:10,033 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:15,034 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:17,139 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:55:17,139 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:55:20,160 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:25,161 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:27,904 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:55:30,908 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:32,095 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:55:32,095 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:55:36,411 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:41,421 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:46,422 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:47,101 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:55:47,300 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:55:51,976 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:56,977 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:55:57,818 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:56:02,097 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:56:02,219 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:56:02,674 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:07,675 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:12,676 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:17,574 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-22 23:56:17,596 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:56:17,597 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:56:18,390 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:23,392 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:27,918 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:56:28,919 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:32,100 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:56:32,101 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:56:34,303 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:39,304 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:44,306 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:47,102 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:56:47,109 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:56:49,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:54,372 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:56:58,922 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:56:59,924 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:02,799 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:57:02,799 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:57:05,066 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:10,067 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:15,068 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:17,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:57:17,236 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:57:20,413 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:25,414 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:27,994 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:57:30,995 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:32,102 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:57:32,104 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:57:36,326 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:41,327 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:46,327 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:47,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:57:47,174 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:57:51,429 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:56,430 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:57:57,921 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:58:01,923 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:02,105 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:58:02,212 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:58:07,432 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:12,433 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:17,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:58:17,103 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:58:17,485 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:22,485 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:27,486 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:27,921 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:58:32,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:58:32,103 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:58:33,333 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:38,333 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:43,335 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:47,103 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:58:47,104 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:58:49,265 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:54,268 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:58:57,923 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:58:59,597 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-22 23:58:59,750 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-22 23:58:59,751 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-22 23:58:59,752 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:00,520 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-22 23:59:04,928 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-22 23:59:05,355 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-22 23:59:05,542 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:59:05,542 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:05,543 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:59:10,846 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:15,826 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:17,105 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:59:17,106 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:59:21,301 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:26,302 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:27,922 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:59:31,923 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:32,105 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:59:32,106 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:59:37,341 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:42,342 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:47,105 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-22 23:59:47,106 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-22 23:59:48,254 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:53,255 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-22 23:59:57,925 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-22 23:59:58,926 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:02,105 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:00:02,106 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:00:04,344 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:09,345 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:14,346 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:17,151 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:00:17,198 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:00:19,604 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:24,605 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:25,627 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:00:25,628 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:00:25,628 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:00:25,629 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:00:25,691 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:00:27,783 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:00:27,925 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:00:29,928 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:32,105 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:00:32,105 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:00:35,261 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:40,262 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:45,262 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:47,109 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:00:47,110 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:00:50,359 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:55,359 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:00:57,926 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:01:00,929 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:02,109 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:01:02,110 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:01:06,304 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:11,305 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:16,306 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:17,110 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:01:17,110 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:01:21,407 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:26,408 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:27,926 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:01:31,929 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:32,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:01:32,111 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:01:35,171 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:01:35,203 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:01:35,203 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:01:35,203 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:01:35,827 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:01:35,827 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:01:37,204 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:42,205 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:47,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:01:47,111 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:01:47,410 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:52,411 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:57,413 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:01:57,928 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:02:02,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:02:02,111 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:02:03,362 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:08,363 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:13,363 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:17,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:02:17,111 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:02:19,252 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:24,252 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:27,928 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:02:29,930 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:32,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:02:32,111 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:02:35,336 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:40,337 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:42,246 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:02:42,247 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:02:42,672 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:02:42,673 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:02:42,851 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:02:43,851 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:02:45,674 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:47,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:02:47,112 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:02:51,371 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:56,265 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:02:57,929 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:03:01,933 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:02,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:03:02,112 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:03:07,457 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:12,458 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:17,111 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:03:17,112 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:03:18,423 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:23,424 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:27,929 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:03:28,930 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:32,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:03:32,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:03:34,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:39,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:44,326 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:47,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:03:49,192 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:03:49,389 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:53,166 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:03:53,167 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:03:53,202 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:03:53,202 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:03:53,295 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:03:54,295 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:03:55,203 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:03:58,383 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:04:01,080 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:02,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:04:02,112 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:04:06,348 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:11,349 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:16,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:17,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:04:17,112 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:04:21,433 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:26,433 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:27,931 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:04:31,931 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:32,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:04:32,112 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:04:37,337 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:42,338 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:47,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:04:47,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:04:48,334 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:53,334 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:04:54,497 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:04:54,498 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:04:54,498 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:04:54,500 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:04:55,314 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:04:56,315 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:04:58,013 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:04:59,013 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:02,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:05:02,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:05:04,323 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:09,323 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:14,324 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:17,112 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:05:17,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:05:20,271 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:25,272 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:28,084 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:05:31,087 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:32,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:05:32,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:05:36,261 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:41,263 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:46,263 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:47,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:05:47,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:05:51,441 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:52,378 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:05:52,380 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:05:52,380 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:05:52,380 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:05:53,334 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:05:54,334 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:05:57,381 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:05:58,084 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:06:02,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:06:02,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:06:02,412 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:07,434 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:12,413 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:17,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:06:17,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:06:18,381 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:23,349 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:28,148 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:06:29,149 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:32,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:06:32,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:06:34,397 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:39,398 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:44,398 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:47,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:06:47,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:06:49,404 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:54,405 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:06:56,944 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:06:56,945 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:06:56,946 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:06:56,946 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:06:57,460 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:06:58,085 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:06:58,460 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:07:00,086 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:02,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:07:02,113 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:07:05,403 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:10,404 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:15,405 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:17,113 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:07:17,114 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:07:21,256 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:26,256 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:28,087 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:07:32,088 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:32,117 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:07:32,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:07:37,292 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:42,293 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:47,117 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:07:47,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:07:47,295 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:52,296 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:57,297 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:07:58,087 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:08:02,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:08:02,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:08:02,343 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:07,344 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:08,677 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:08:08,678 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:08:08,691 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:08:08,691 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:08:09,487 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:08:10,487 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:08:12,693 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:17,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:08:17,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:08:18,491 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:23,491 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:31,341 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:31,342 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:08:32,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:08:32,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:08:36,416 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:41,417 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:46,417 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:47,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:08:47,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:08:52,417 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:08:57,356 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:01,468 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:09:02,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:09:02,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:09:03,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:08,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:11,257 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:09:11,273 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:09:11,274 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:09:11,275 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:09:11,355 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:09:13,356 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:09:14,276 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:17,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:09:17,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:09:19,541 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:24,473 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:29,474 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:31,342 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:09:32,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:09:32,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:09:35,330 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:40,331 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:45,332 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:47,118 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:09:47,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:09:51,277 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:09:56,278 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:01,281 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:01,344 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:10:02,119 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:10:02,119 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:10:06,327 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:11,328 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:11,820 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:10:11,821 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:10:11,821 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:10:11,821 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:10:12,638 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:10:13,639 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:10:16,822 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:17,119 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:10:17,191 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:10:22,365 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:27,366 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:31,343 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:10:32,119 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:10:32,119 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:10:33,282 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:38,283 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:43,284 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:47,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:10:47,132 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:10:48,799 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:53,800 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:10:58,801 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:01,356 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:11:02,119 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:11:02,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:11:04,348 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:07,794 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:11:07,795 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:11:07,841 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:11:07,842 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:11:08,662 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:11:08,662 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:11:09,842 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:14,843 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:17,119 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:11:17,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:11:20,609 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:25,610 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:30,610 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:31,345 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:11:32,119 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:11:32,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:11:36,311 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:41,312 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:46,312 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:47,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:11:47,152 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:11:51,494 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:11:56,495 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:00,952 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:12:00,953 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:12:00,953 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:12:00,955 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:12:01,346 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:12:01,678 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:12:02,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:12:02,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:12:02,355 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:02,678 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:12:07,356 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:12,356 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:17,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:12:17,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:12:18,349 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:23,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:28,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:31,346 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:12:32,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:12:32,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:12:33,357 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:38,358 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:43,358 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:47,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:12:47,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:12:48,400 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:53,401 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:12:54,876 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:12:54,877 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:12:54,877 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:12:54,878 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:12:55,694 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:12:56,694 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:12:58,879 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:01,356 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:13:02,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:13:02,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:13:04,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:09,355 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:14,356 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:17,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:13:17,120 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:13:19,367 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:24,367 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:29,368 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:31,347 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:13:32,133 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:13:32,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:13:34,459 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:39,460 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:44,460 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:47,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:13:47,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:13:48,248 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:13:48,249 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:13:48,250 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:13:48,251 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:13:48,712 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:13:50,252 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:13:50,712 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:13:55,253 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:00,253 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:01,348 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:14:02,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:14:02,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:14:05,378 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:10,379 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:15,380 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:17,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:14:17,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:14:20,413 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:25,414 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:30,415 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:31,350 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:14:32,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:14:32,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:14:36,344 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:41,345 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:41,772 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:14:42,029 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:14:42,029 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:14:42,030 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:14:42,727 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:14:42,728 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:14:47,046 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:47,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:14:47,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:14:52,418 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:14:57,418 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:01,349 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:15:02,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:15:02,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:15:02,470 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:07,471 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:12,472 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:17,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:15:17,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:15:18,422 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:23,422 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:28,423 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:31,350 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:15:32,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:15:32,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:15:34,356 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:36,244 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:15:36,246 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:15:36,246 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:15:36,246 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:15:36,744 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:15:38,745 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:15:40,247 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:45,247 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:47,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:15:47,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:15:50,274 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:15:55,275 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:00,275 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:01,350 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:16:02,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:16:02,121 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:16:05,352 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:10,353 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:15,353 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:17,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:16:17,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:16:21,326 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:26,327 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:30,116 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:16:30,117 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:16:30,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:16:30,120 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:16:30,760 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:16:31,351 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:16:31,351 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:32,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:16:32,133 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:16:32,761 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:16:36,382 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:41,382 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:46,383 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:47,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:16:47,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:16:52,318 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:16:57,319 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:01,403 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:17:02,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:17:02,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:17:03,272 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:08,273 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:13,273 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:17,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:17:17,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:17:18,387 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:23,388 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:23,945 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:17:23,946 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:17:23,959 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:17:23,960 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:17:24,778 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:17:24,778 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:17:28,961 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:31,352 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:17:32,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:17:32,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:17:34,341 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:39,342 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:44,342 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:47,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:17:47,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:17:49,442 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:54,443 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:17:59,443 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:01,353 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:18:02,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:18:02,122 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:18:05,330 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:10,333 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:15,334 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:17,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:18:17,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:18:20,449 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:25,448 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:30,514 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:32,312 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:18:32,378 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:18:32,520 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:18:32,680 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-23 00:18:36,035 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:41,036 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:42,183 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:18:42,289 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:18:42,410 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:18:42,745 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:18:42,939 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:18:43,965 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:18:46,372 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:47,205 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-23 00:18:47,205 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:18:47,205 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:18:51,554 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:18:56,555 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:01,926 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:02,063 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:19:02,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:19:02,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:19:07,403 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:12,403 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:17,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:19:17,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:19:17,455 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:22,456 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:27,456 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:32,123 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:19:32,162 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:19:32,162 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:19:32,513 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:37,513 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:42,514 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:47,123 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:19:47,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:19:48,356 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:53,357 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:19:58,358 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:02,064 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:20:02,236 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:20:02,236 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:20:03,411 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:07,375 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:20:07,377 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:20:07,378 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:20:07,382 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:20:07,485 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:20:09,383 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:09,486 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:20:14,384 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:17,123 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:20:17,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:20:19,467 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:24,468 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:29,468 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:32,065 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:20:32,123 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:20:32,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:20:35,383 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:40,384 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:45,385 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:47,123 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:20:47,123 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:20:51,324 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:20:56,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:01,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:02,067 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:21:02,125 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:21:02,454 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:21:02,916 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:21:02,997 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:21:03,015 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:21:03,016 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:21:03,513 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:21:04,514 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:21:07,267 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:12,268 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:17,125 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:21:17,125 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:21:17,369 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:22,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:27,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:32,066 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:21:32,124 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:21:32,124 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:21:33,337 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:38,338 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:43,339 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:47,124 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:21:47,124 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:21:49,292 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:54,293 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:21:59,293 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:02,067 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:22:02,124 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:22:02,125 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:22:04,340 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:08,011 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:22:08,012 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:22:08,013 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:22:08,013 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:22:08,534 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:22:08,534 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:22:10,014 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:15,017 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:17,178 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:22:17,178 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:22:20,379 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:25,379 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:30,380 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:32,068 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:22:32,124 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:22:32,124 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:22:36,326 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:41,327 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:46,328 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:47,124 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:22:47,124 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:22:51,349 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:22:56,349 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:01,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:02,228 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:23:02,229 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:23:02,231 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:23:06,437 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:11,438 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:16,438 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:16,791 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:23:16,849 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:23:16,850 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:23:16,851 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:23:17,124 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:23:17,125 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:23:17,558 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:23:19,559 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:23:22,280 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:27,280 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:32,069 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:23:32,137 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:23:32,137 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:23:32,440 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:37,440 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:42,441 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:47,125 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:23:47,126 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:23:51,234 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:23:56,186 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:01,187 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:02,072 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:24:02,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:24:02,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:24:06,368 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:11,369 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:16,369 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:17,125 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:24:17,126 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:24:22,272 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:23,138 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:24:23,156 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:24:23,156 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:24:23,209 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:24:23,976 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:24:24,976 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:24:28,210 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:32,071 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:24:32,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:24:32,126 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:24:33,291 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:38,291 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:43,292 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:47,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:24:47,263 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:24:48,501 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:53,502 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:24:58,503 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:10,313 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:25:10,313 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:10,314 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:10,314 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: keepalive
+2024-04-23 00:25:10,314 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:25:10,315 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:25:15,647 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:17,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:25:17,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:25:21,365 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:26,366 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:31,367 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:32,073 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:25:32,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:25:32,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:25:37,355 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:38,969 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:25:38,970 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:25:38,970 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:25:38,971 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:25:39,285 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:25:40,285 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:25:42,971 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:47,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:25:47,126 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:25:48,407 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:53,408 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:25:58,408 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:02,073 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:26:02,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:26:02,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:26:04,300 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:09,301 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:14,301 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:17,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:26:17,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:26:20,266 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:25,267 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:30,268 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:32,074 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:26:32,126 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:26:32,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:26:33,547 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:26:33,548 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:26:33,548 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:26:33,548 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:26:34,345 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:26:34,345 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:26:35,549 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:40,550 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:45,550 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:47,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:26:47,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:26:51,416 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:26:56,416 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:01,417 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:02,074 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:27:02,198 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:27:02,198 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:27:07,396 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:12,397 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:17,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:27:17,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:27:17,419 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:22,420 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:26,275 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:27:26,276 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:27:26,276 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:27:26,277 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:27:26,361 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:27:28,277 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:28,362 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:27:32,075 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:27:32,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:27:32,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:27:33,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:38,371 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:43,371 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:47,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:27:47,127 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:27:48,424 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:53,424 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:27:58,427 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:02,076 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:28:02,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:28:02,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:28:04,328 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:09,328 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:14,329 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:17,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:28:17,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:28:18,940 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:28:18,941 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:28:18,941 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:28:18,941 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:28:19,377 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:28:19,942 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:20,377 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:28:24,942 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:29,943 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:32,076 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:28:32,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:28:32,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:28:35,483 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:40,483 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:45,484 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:47,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:28:47,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:28:51,433 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:28:56,433 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:01,434 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:02,078 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:29:02,127 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:29:02,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:29:07,357 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:12,038 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:29:12,039 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:29:12,040 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:29:12,040 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:29:12,421 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:29:13,041 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:14,422 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:29:17,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:29:17,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:29:18,286 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:23,287 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:28,287 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:32,077 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:29:32,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:29:32,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:29:33,342 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:38,344 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:43,344 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:47,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:29:47,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:29:49,329 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:54,329 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:29:59,331 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:02,078 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:30:02,186 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:30:02,186 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:30:04,383 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:05,724 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:30:05,725 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:30:05,725 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:30:05,726 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:30:06,440 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:30:06,440 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:30:09,729 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:14,730 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:17,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:30:17,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:30:20,312 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:25,312 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:30,313 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:32,079 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:30:32,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:30:32,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:30:35,397 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:40,397 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:45,398 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:47,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:30:47,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:30:51,311 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:56,311 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:30:59,191 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:30:59,192 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:30:59,192 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:30:59,193 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:30:59,456 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:31:00,457 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:31:02,079 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:31:02,081 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:02,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:31:02,128 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:31:07,312 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:12,313 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:17,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:31:17,129 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:31:17,352 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:22,352 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:27,353 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:32,080 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:31:32,128 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:31:32,129 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:31:32,405 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:37,408 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:42,409 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:47,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:31:47,129 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:31:47,459 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:52,368 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:31:52,369 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:31:52,370 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:31:52,370 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:31:52,477 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:31:53,413 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:31:54,478 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:31:58,371 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:02,080 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:32:02,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:32:02,129 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:32:03,383 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:08,384 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:13,393 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:17,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:32:17,129 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:32:18,463 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:23,464 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:28,464 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:32,081 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:32:32,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:32:32,129 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:32:34,296 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:39,297 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:44,298 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:45,901 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:32:45,902 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:32:45,903 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:32:45,903 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:32:46,494 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:32:46,494 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:32:47,160 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:32:47,161 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:32:49,365 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:54,365 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:32:59,369 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:02,082 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:33:02,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:33:02,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:33:04,522 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:09,523 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:14,523 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:17,168 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:33:17,168 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:33:20,349 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:25,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:30,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:32,083 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:33:32,163 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:33:32,163 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:33:35,424 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:40,197 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:33:40,198 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:33:40,198 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:33:40,199 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:33:40,512 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:33:41,201 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:42,512 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:33:46,201 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:47,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:33:47,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:33:51,373 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:33:56,373 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:01,374 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:02,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:34:02,187 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:34:02,188 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:34:06,437 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:11,437 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:16,438 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:17,129 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:34:17,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:34:22,378 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:27,378 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:32,084 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:34:32,130 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:34:32,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:34:33,328 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:35,190 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:34:35,191 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:34:35,191 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:34:35,193 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:34:35,529 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:34:36,529 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:34:39,194 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:44,195 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:47,130 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:34:47,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:34:49,363 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:54,364 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:34:59,365 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:02,084 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:35:02,130 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:35:02,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:35:05,341 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:10,342 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:15,343 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:17,130 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:35:17,130 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:35:21,302 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:26,303 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:31,304 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:31,736 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:35:31,737 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:35:31,738 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:35:31,740 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:35:32,085 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:35:32,130 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:35:32,144 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:35:32,574 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:35:32,575 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:35:36,440 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:41,441 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:46,442 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:47,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:35:47,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:35:52,288 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:35:57,291 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:02,086 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:36:02,130 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:36:02,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:36:02,444 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:07,445 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:12,449 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:17,133 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:36:17,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:36:17,480 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:22,481 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:27,482 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:32,088 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:36:32,133 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:36:32,133 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:36:33,397 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:38,401 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:41,032 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:36:41,033 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:36:41,033 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:36:41,034 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:36:41,618 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:36:42,618 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:36:44,034 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:47,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:36:47,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:36:49,367 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:54,368 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:36:59,369 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:02,087 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:37:02,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:37:02,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:37:05,350 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:10,351 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:15,355 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:17,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:37:17,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:37:21,305 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:26,305 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:31,306 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:32,088 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:37:32,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:37:32,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:37:36,325 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:41,327 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:45,674 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:37:45,675 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:37:45,675 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:37:45,675 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:37:46,670 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:37:46,670 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:37:46,676 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:47,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:37:47,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:37:52,407 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:37:57,408 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:02,088 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:38:02,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:38:02,131 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:38:03,366 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:08,367 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:13,371 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:17,132 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:38:17,133 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:38:19,344 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:24,345 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:29,346 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:32,094 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:38:32,131 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:38:32,132 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:38:34,351 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:39,353 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:44,355 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:47,132 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:38:47,132 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:38:49,416 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:50,822 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:38:50,823 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:38:50,824 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:38:50,824 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:38:51,706 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:38:52,706 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:38:54,825 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:38:59,826 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:02,095 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:39:02,133 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:39:02,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:39:05,366 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:10,374 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:15,374 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:17,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:39:17,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:39:20,421 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:25,422 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:30,422 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:32,095 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:39:32,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:39:32,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:39:35,474 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:40,477 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:45,478 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:47,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:39:47,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:39:50,116 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:39:50,117 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:39:50,118 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:39:50,119 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:39:50,735 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:39:50,735 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:39:51,120 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:39:56,121 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:01,122 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:02,095 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:40:02,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:40:02,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:40:06,366 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:11,367 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:16,368 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:17,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:40:17,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:40:21,430 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:26,431 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:31,434 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:32,096 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:40:32,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:40:32,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:40:37,380 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:42,381 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:47,134 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:40:47,134 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:40:48,322 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:53,323 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:57,754 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: partial_history
+2024-04-23 00:40:57,755 DEBUG   SenderThread:9290 [sender.py:send():379] send: history
+2024-04-23 00:40:57,756 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: summary_record
+2024-04-23 00:40:57,756 INFO    SenderThread:9290 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-04-23 00:40:57,773 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json
+2024-04-23 00:40:58,757 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:40:58,775 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:41:02,103 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:41:02,136 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: stop_status
+2024-04-23 00:41:02,136 DEBUG   SenderThread:9290 [sender.py:send_request():406] send_request: stop_status
+2024-04-23 00:41:04,366 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:41:09,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:41:14,370 DEBUG   HandlerThread:9290 [handler.py:handle_request():146] handle_request: status_report
+2024-04-23 00:41:14,648 WARNING StreamThr :9290 [internal.py:is_dead():414] Internal process exiting, parent pid 9216 disappeared
+2024-04-23 00:41:14,661 ERROR   StreamThr :9290 [internal.py:wandb_internal():152] Internal process shutdown.
+2024-04-23 00:41:14,769 INFO    cpu       :9290 [interfaces.py:monitor():140] Process cpu has exited.
+2024-04-23 00:41:14,829 INFO    memory    :9290 [interfaces.py:monitor():140] Process proc.memory.rssMB has exited.
+2024-04-23 00:41:14,927 DEBUG   SystemMonitor:9290 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-04-23 00:41:14,939 DEBUG   SystemMonitor:9290 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-04-23 00:41:14,968 INFO    HandlerThread:9290 [handler.py:finish():866] shutting down handler
+2024-04-23 00:41:14,968 INFO    HandlerThread:9290 [system_monitor.py:finish():203] Stopping system monitor
+2024-04-23 00:41:14,997 INFO    HandlerThread:9290 [interfaces.py:finish():202] Joined cpu monitor
+2024-04-23 00:41:14,968 INFO    WriterThread:9290 [datastore.py:close():296] close: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/run-njxgg0v8.wandb
+2024-04-23 00:41:15,159 DEBUG   SenderThread:9290 [sender.py:send():379] send: stats
+2024-04-23 00:41:15,523 INFO    SenderThread:9290 [sender.py:finish():1546] shutting down sender
+2024-04-23 00:41:15,523 INFO    HandlerThread:9290 [interfaces.py:finish():202] Joined disk monitor
+2024-04-23 00:41:15,524 INFO    HandlerThread:9290 [interfaces.py:finish():202] Joined memory monitor
+2024-04-23 00:41:15,628 INFO    HandlerThread:9290 [interfaces.py:finish():202] Joined network monitor
+2024-04-23 00:41:17,411 INFO    SenderThread:9290 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-04-23 00:41:17,499 INFO    Thread-12 :9290 [dir_watcher.py:_on_file_modified():288] file/dir modified: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log
+2024-04-23 00:41:17,629 INFO    MainThread:9290 [internal.py:handle_exit():76] Internal process exited
+2024-04-23 00:41:18,051 INFO    SenderThread:9290 [dir_watcher.py:finish():388] scan: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files
+2024-04-23 00:41:19,041 INFO    SenderThread:9290 [dir_watcher.py:finish():402] scan save: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/config.yaml config.yaml
+2024-04-23 00:41:19,367 INFO    SenderThread:9290 [dir_watcher.py:finish():402] scan save: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-summary.json wandb-summary.json
+2024-04-23 00:41:19,634 INFO    SenderThread:9290 [dir_watcher.py:finish():402] scan save: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/conda-environment.yaml conda-environment.yaml
+2024-04-23 00:41:19,709 INFO    SenderThread:9290 [dir_watcher.py:finish():402] scan save: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/output.log output.log
+2024-04-23 00:41:19,848 INFO    SenderThread:9290 [dir_watcher.py:finish():402] scan save: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/requirements.txt requirements.txt
+2024-04-23 00:41:20,046 INFO    SenderThread:9290 [dir_watcher.py:finish():402] scan save: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240422_235148-njxgg0v8/files/wandb-metadata.json wandb-metadata.json
+2024-04-23 00:41:20,067 INFO    SenderThread:9290 [file_pusher.py:finish():172] shutting down file pusher
+2024-04-23 00:41:20,098 INFO    SenderThread:9290 [file_pusher.py:join():178] waiting for file pusher
+2024-04-23 00:41:20,790 INFO    SenderThread:9290 [file_stream.py:finish():614] file stream finish called

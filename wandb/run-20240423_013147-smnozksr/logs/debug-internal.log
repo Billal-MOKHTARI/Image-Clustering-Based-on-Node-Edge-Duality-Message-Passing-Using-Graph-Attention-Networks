@@ -1,0 +1,10 @@
+2024-04-23 01:31:47,270 INFO    StreamThr :14879 [internal.py:wandb_internal():86] W&B internal server running at pid: 14879, started at: 2024-04-23 01:31:47.267898
+2024-04-23 01:31:47,279 DEBUG   HandlerThread:14879 [handler.py:handle_request():146] handle_request: status
+2024-04-23 01:31:47,291 INFO    WriterThread:14879 [datastore.py:open_for_write():87] open: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240423_013147-smnozksr/run-smnozksr.wandb
+2024-04-23 01:31:47,293 DEBUG   SenderThread:14879 [sender.py:send():379] send: header
+2024-04-23 01:31:47,294 DEBUG   SenderThread:14879 [sender.py:send():379] send: run
+2024-04-23 01:31:47,297 INFO    SenderThread:14879 [sender.py:_setup_resume():749] checking resume status for None/Image Clustering Based on Node-Edge Duality Message Passing Using Graph Attention Networks/smnozksr
+2024-04-23 01:31:47,876 DEBUG   HandlerThread:14879 [handler.py:handle_request():146] handle_request: shutdown
+2024-04-23 01:31:47,876 INFO    HandlerThread:14879 [handler.py:finish():866] shutting down handler
+2024-04-23 01:31:48,293 INFO    WriterThread:14879 [datastore.py:close():296] close: /home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/wandb/run-20240423_013147-smnozksr/run-smnozksr.wandb
+2024-04-23 01:31:48,713 INFO    SenderThread:14879 [sender.py:finish():1546] shutting down sender
