@@ -1,7 +1,6 @@
 from models.networks.dual_gat_image_clustering import DualGATImageClustering
 from models.networks import metrics, constants
 from models.training import trainer
-from src import visualize
 from src import utils
 from src import files_manager as fm
 import pandas as pd
@@ -80,10 +79,7 @@ if __name__ == "__main__":
     # make_dot(output, 
     #          params=dict(model.named_parameters()), show_attrs=True, show_saved=True).render("model", format="png")
 
-    # Connect to wandb
-    visualize.connect_to_wandb(project=project,
-                               run_id_path=run_id_path,
-                               run_name=run_name)
+
 
     # Train the model
     trainer.train(model=model, 
@@ -95,10 +91,10 @@ if __name__ == "__main__":
                   dual_nodes=dual_nodes, 
                   primal_weight=primal_weight, 
                   dual_weight=dual_weight,
-                  use_wandb=use_wandb)
+                  use_wandb=use_wandb,
+                  wandb_args={"project": project, "run_id_path": run_id_path, "run_name": run_name})
 
 
-        
     # Export the model to onnx
     # torch.onnx.export(model, 
     #                 (images.detach(), primal_adjacency_tensor.detach(), dual_adjacency_tensor, dual_nodes), 

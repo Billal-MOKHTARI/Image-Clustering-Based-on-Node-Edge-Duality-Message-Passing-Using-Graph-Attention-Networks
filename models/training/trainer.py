@@ -3,6 +3,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src import utils
 import wandb
+from src import visualize
 
 def train(model, 
           images, 
@@ -18,7 +19,8 @@ def train(model,
     
     assert primal_weight >= 0 and primal_weight <= 1, "Primal weight must be between 0 and 1"
     assert dual_weight >= 0 and dual_weight <= 1, "Dual weight must be between 0 and 1"
-    
+    wandb_args = kwargs.get("wandb_args", {})
+
     optimizer = optimizer(model.parameters(), **kwargs)
     for epoch in range(epochs):
         # Forward pass
@@ -53,4 +55,6 @@ def train(model,
 
         # Log the loss
         if use_wandb:
+                        # Connect to wandb
+            visualize.connect_to_wandb(**wandb_args)
             wandb.log(loss_log, step = epoch, commit = True)
