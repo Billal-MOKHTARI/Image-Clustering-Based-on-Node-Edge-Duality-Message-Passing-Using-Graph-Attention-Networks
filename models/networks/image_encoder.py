@@ -93,3 +93,6 @@ class ImageEncoder(nn.Module):
         x = self.model(x)  # Pass input through pre-trained model
         return x
     
+model = models.vgg16(pretrained=True)
+print(model)
+
