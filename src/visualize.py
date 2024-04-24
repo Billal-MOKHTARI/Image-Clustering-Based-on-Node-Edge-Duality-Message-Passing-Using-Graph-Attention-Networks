@@ -1,6 +1,6 @@
 import wandb
 import os
-
+import matplotlib.pyplot as plt
 from typing import Union
 from . import files_manager as fm
 
@@ -57,3 +57,21 @@ def connect_to_wandb(project: str,
         if not_exist_run_name:
             run_ids[run_name] = wandb.run.id
             fm.dump_data(run_ids, run_id_path)
+
+def show_images(images, num_rows, num_cols, titles=None, scale=1.5, grayscale=False):
+    """Plot a list of images."""
+    figsize = (num_cols * scale, num_rows * scale)
+    _, axes = plt.subplots(num_rows, num_cols, figsize=figsize)
+    axes = axes.flatten()
+    for i, (ax, img) in enumerate(zip(axes, images)):
+        if grayscale and img.size(0) == 1:
+            print(img.shape)
+            print(img.numpy().reshape(1, img.shape[0], img.shape[1]))
+            ax.imshow(img.numpy().reshape(1, img.shape[0], img.shape[1]), cmap='gray')
+        else:
+            ax.imshow(img.permute(1, 2, 0).numpy())
+        ax.axes.get_xaxis().set_visible(False)
+        ax.axes.get_yaxis().set_visible(False)
+        if titles:
+            ax.set_title(titles[i])
+    return axes
