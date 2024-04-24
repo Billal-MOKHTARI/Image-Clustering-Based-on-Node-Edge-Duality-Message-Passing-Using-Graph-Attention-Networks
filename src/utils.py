@@ -280,3 +280,9 @@ def create_dual_tensor(tensor, index, delimiter, mapper):
         ind += 1
     
     return dual_index, torch.tensor(np.array(dual_channels))
+
+def get_variable_name(variable):
+    for name, value in globals().items():
+        if value is variable:
+            return name
+    return None

@@ -1,0 +1,6 @@
+{"obj": {"type": "AssignString", "path": ["monitoring", "e2e0bb7a", "hostname"], "value": "f205pc13"}, "version": 1, "at": 1713955236.673769}
+{"obj": {"type": "AssignString", "path": ["monitoring", "e2e0bb7a", "pid"], "value": "22663"}, "version": 2, "at": 1713955236.6743379}
+{"obj": {"type": "AssignString", "path": ["monitoring", "e2e0bb7a", "tid"], "value": "139816474943872"}, "version": 3, "at": 1713955236.6748872}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "e2e0bb7a", "stdout"]}, "version": 4, "at": 1713955236.675362}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "e2e0bb7a", "stderr"]}, "version": 5, "at": 1713955236.6757216}
+{"obj": {"type": "UploadFile", "path": ["source_code", "diff"], "ext": "patch", "file_path": null, "tmp_file_name": "source_code_diff-1713955236.779731-2024-04-24_12.40.36.779731.patch", "clean_after_upload": false}, "version": 6, "at": 1713955236.779875}

@@ -1,14 +1,17 @@
 import torch
-from torch import nn
 from torchvision import models, transforms
 import os
-from PIL import Image
 import matplotlib.pyplot as plt
-from torchcam.methods import SmoothGradCAMpp, LayerCAM
+from torch_model_manager import TorchModelManager, NeptuneManager
+from PIL import Image
+from torch import nn
 
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from models.data_loaders import data_loader
+from src import utils
+
+
 
 def show_images(images, num_rows, num_cols, titles=None, scale=1.5, grayscale=False):
     """Plot a list of images."""
@@ -29,33 +32,55 @@ def show_images(images, num_rows, num_cols, titles=None, scale=1.5, grayscale=Fa
     return axes
 
 model = models.vgg16(pretrained=True).eval()
-print(model)
-# Define transformations to apply to the images
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),  # Resize images to 224x224
-    transforms.ToTensor(),           # Convert images to PyTorch tensors
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),            # Normalize images using mean and standard deviation
-])
 
-dataset = data_loader.ImageFolderNoLabel('../benchmark/datasets/agadez', transform=transform)
+# Load image
+image_path = "PHOTO-2023-10-24-16-06-49-1.jpg"
+image = Image.open(image_path)
+# Define transformations
+transform = transforms.Compose([transforms.ToTensor(), transforms.Resize((224, 224))])
+# Apply transformations
+image = transform(image)
 
-# Create a data loader to load images in batches
-data_loader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
+# Create a project
+nm = NeptuneManager(project = "Billal-MOKHTARI/Image-Clustering-based-on-Dual-Message-Passing",
+                    api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI0NGRlOTNiZC0zNGZlLTRjNWUtYWEyMC00NzEwOWJkOTRhODgifQ==",
+                    run_ids_path="../configs/run_ids.json")
+run = nm.create_run("data_visualization")
 
-# Iterate over the data loader to access the images
-for images in data_loader:
-    # Do something with the images (e.g., pass them through a neural network)
-    print(images.shape)
+# Visualize hidden layers of each backbone
+vgg16 = models.vgg16(pretrained=True)
+vgg19 = models.vgg19(pretrained=True)
+resnet18 = models.resnet18(pretrained=True)
+efficientnet_b7 = models.efficientnet_b7(pretrained=True)
+convnext_large = models.convnext_large(pretrained=True)
+mobile_net_v3_large = models.mobilenet_v3_large(pretrained=True)
+maxvit_t = models.maxvit_t(pretrained=True)
+vit_l_32 = models.vit_l_32(pretrained=True)
+mnasnet_1_3 = models.mnasnet1_3(pretrained=True)
+
+models = [efficientnet_b7]
+
+def visualize_models_hidden_layers(models, image, run, neptune_manager, names, path = 'images', 
+                             instance_indexes = [nn.Conv2d, nn.BatchNorm2d, nn.MaxPool2d, nn.AdaptiveAvgPool2d]):
+    
+
+    for model, name in zip(models, names):
+        
+        tmm = TorchModelManager(model)
+        indexes = tmm.get_layer_by_instance(instance_indexes).keys()
+        tmm.show_hidden_layers(torch.stack([image]), 
+                               indexes = indexes, 
+                               show_figure=False, 
+                               run=run, 
+                               neptune_manager=neptune_manager, 
+                               image_workspace=f'{path}/{name}')
 
 
-cam_extractor = SmoothGradCAMpp(model, 'features')
-layer_extractor = LayerCAM(model, [model.features[0], model.features[1]])
 
-out = model(images[0].unsqueeze(0))
+visualize_models_hidden_layers(models=models, 
+                               image=image, 
+                               run=run, 
+                               neptune_manager=nm, 
+                               path = 'images',
+                               names = ["efficientnet_b7"])
 
-
-
-cams = layer_extractor(out.squeeze(0).argmax().item(), out)
-print(cams[1])
-for name, cam in zip(layer_extractor.target_names, cams):
-    plt.imshow(cam.squeeze(0).numpy()); plt.axis('off'); plt.title(name); plt.show()
