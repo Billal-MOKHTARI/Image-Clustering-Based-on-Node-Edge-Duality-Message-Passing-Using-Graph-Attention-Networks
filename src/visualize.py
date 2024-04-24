@@ -75,3 +75,4 @@ def show_images(images, num_rows, num_cols, titles=None, scale=1.5, grayscale=Fa
         if titles:
             ax.set_title(titles[i])
     return axes
+

@@ -1,4 +1,5 @@
 from torch_model_manager import TorchModelManager, NeptuneManager
+
 import torch
 from torch import nn
 from typing import List
@@ -7,8 +8,9 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import os
 import tempfile
-import shutil
-from torchvision import models
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+from models.data_loaders import data_loader as dl
 
 def visualize_models_hidden_layers(models : List[nn.Module], 
                                    image_path : str, 
@@ -83,29 +85,50 @@ def visualize_models_hidden_layers(models : List[nn.Module],
                                image_workspace=f'{path}/{name}')
         
 
-def create_embeddings(model, data_path, run, neptune_workspace, embedding_file_name, **kwargs):
+def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path, embedding_file_name, **kwargs):
     """
     Applies the model on the data and uploads the embeddings to Neptune.
 
     Args:
         model (nn.Module): PyTorch model.
-        data_path (str): Path to the data.
+        neptune_manager (NeptuneManager): Neptune manager object.
         run: Neptune run object.
         neptune_workspace (str): Folder in Neptune where the embeddings should be uploaded.
+        data_path (str): Path to the data.
+        embedding_file_name (str): Name of the file to save the embeddings.
+        **kwargs: Additional keyword arguments.
+            torch_transforms (list, optional): List of Torch transformations to apply to the image before passing through the models. Defaults to None.
+            batch_size (int, optional): Batch size for data loader. Defaults to 64.
+            keep (bool, optional): Whether to keep the temporary file after tracking it in Neptune. Defaults to False.
+
+    Example:
+    >>> model = models.vgg19(pretrained=True)
+    >>> del model.classifier[-1]
+    >>> del model.classifier[-1]
+    >>> del model.classifier[-1]
+    >>>
+    >>> data_path = "../benchmark/datasets/agadez"
+    >>>
+    >>> nm = NeptuneManager(project="...",
+    ...                     api_token="e...",
+    ...                     run_ids_path="../configs/run_ids.json")
+    >>> run = nm.create_run("data_visualization")
+    >>> neptune_workspace = "embeddings"
+    >>> embedding_file_name = "./agadez_vgg19_embeddings.pth"
     """
     torch_transforms = kwargs.get('torch_transforms', None)
     batch_size = kwargs.get('batch_size', 64)
-
+    keep = kwargs.get('keep', False)
     # Define transformations
     transformations = [transforms.ToTensor()]
     if torch_transforms is not None:
         transformations.extend(torch_transforms)
 
     # Load the dataset
-    dataset = datasets.ImageFolder(data_path, transform=transformations)
 
     # Create a data loader
-    data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
+    data_loader = dl.ImageFolderNoLabel(data_path, transform=transforms.Compose(transformations))
+    data_loader = DataLoader(data_loader, batch_size=batch_size, shuffle=False)
 
     embeddings = []
 
@@ -114,32 +137,15 @@ def create_embeddings(model, data_path, run, neptune_workspace, embedding_file_n
 
     # Iterate over data
     with torch.no_grad():
-        for images, _ in data_loader:
+        for images in data_loader:
             # Forward pass
             outputs = model(images)
             embeddings.append(outputs)
+            print("Embeddings shape: ", outputs.shape)
+
 
     # Concatenate embeddings
     embeddings = torch.cat(embeddings)
     # Save embeddings to a temporary file
-    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-        torch.save(embeddings, embedding_file_name)
+    neptune_manager.log_artifacts(run=run, data=embeddings, path=embedding_file_name, workspace=neptune_workspace, keep=keep)
 
-
-    # Track embeddings file in Neptune
-    run[neptune_workspace].track_files(embedding_file_name)
-
-    # Delete the temporary file
-    os.remove(embedding_file_name)
-
-model = models.vgg16(pretrained=True)
-data_path = "../benchmark/agadez"
-
-nm = NeptuneManager(project = "Billal-MOKHTARI/Image-Clustering-based-on-Dual-Message-Passing",
-                    api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI0NGRlOTNiZC0zNGZlLTRjNWUtYWEyMC00NzEwOWJkOTRhODgifQ==",
-                    run_ids_path="../configs/run_ids.json")
-run = nm.create_run("data_visualization")
-
-neptune_workspace = "embeddings"
-
-create_embeddings(model, data_path, run, neptune_workspace, embedding_file_name, **kwargs)
