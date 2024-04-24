@@ -5,9 +5,8 @@ from torch import nn
 from typing import List
 from PIL import Image
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+from torchvision import transforms
 import os
-import tempfile
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from models.data_loaders import data_loader as dl
@@ -38,8 +37,8 @@ def visualize_models_hidden_layers(models : List[nn.Module],
     >>> image_path = "PHOTO-2023-10-24-16-06-49-1.jpg"
 
     >>> # Create a project
-    >>> nm = NeptuneManager(project = "Billal-MOKHTARI/Image-Clustering-based-on-Dual-Message-Passing",
-    ...                     api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI0NGRlOTNiZC0zNGZlLTRjNWUtYWEyMC00NzEwOWJkOTRhODgifQ==",
+    >>> nm = NeptuneManager(project = "...",
+    ...                     api_token="...",
     ...                     run_ids_path="../configs/run_ids.json")
     >>> run = nm.create_run("data_visualization")
 
