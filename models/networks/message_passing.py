@@ -1,8 +1,8 @@
 from torch import nn
 import torch
 
-from .custom_layers import Linear2D
-from . import constants
+from custom_layers import Linear2D
+import constants
 
 class MessagePassing(nn.Module):
     """

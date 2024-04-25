@@ -58,3 +58,14 @@ def train(model,
                         # Connect to wandb
             visualize.connect_to_wandb(**wandb_args)
             wandb.log(loss_log, step = epoch, commit = True)
+
+def image_gat_mp_trainer(model, 
+                         embedding_path, 
+                         epochs, 
+                         optimizer,
+                         adjacency_tensor,
+                         **kwargs):
+    
+    
+    
+

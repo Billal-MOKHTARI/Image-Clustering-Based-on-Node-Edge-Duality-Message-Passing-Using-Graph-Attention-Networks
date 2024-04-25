@@ -84,7 +84,7 @@ def visualize_models_hidden_layers(models : List[nn.Module],
                                image_workspace=f'{path}/{name}')
         
 
-def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path, embedding_file_name, **kwargs):
+def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path, **kwargs):
     """
     Applies the model on the data and uploads the embeddings to Neptune.
 
@@ -117,7 +117,6 @@ def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path,
     """
     torch_transforms = kwargs.get('torch_transforms', None)
     batch_size = kwargs.get('batch_size', 64)
-    keep = kwargs.get('keep', False)
     # Define transformations
     transformations = [transforms.ToTensor()]
     if torch_transforms is not None:
@@ -146,5 +145,5 @@ def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path,
     # Concatenate embeddings
     embeddings = torch.cat(embeddings)
     # Save embeddings to a temporary file
-    neptune_manager.log_artifacts(run=run, data=embeddings, path=embedding_file_name, workspace=neptune_workspace, keep=keep)
+    neptune_manager.log_files(run=run, data=embeddings, workspace=neptune_workspace)
 

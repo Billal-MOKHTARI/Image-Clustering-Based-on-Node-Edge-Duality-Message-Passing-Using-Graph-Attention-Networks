@@ -1,6 +1,6 @@
 from torch import nn
-from .dual_message_passing import DualMessagePassing
-from .custom_layers import Encoder2D, Decoder2D
+from dual_message_passing import DualMessagePassing
+from custom_layers import Encoder2D, Decoder2D
 
 
 class DualGATImageClustering(nn.Module):

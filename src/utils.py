@@ -149,8 +149,22 @@ def create_dual_adjacency_tensor(primal_adjacency_tensor, primal_index, delimite
         return dual_index, dual_adjacency_tensor, dual_nodes
 
 def list_sum(l):
-
     return sum(list(filter(lambda x: (x),l)))
+
+def mean(numbers):
+    """
+    Calculate the mean (average) of a list of numbers.
+
+    Parameters:
+    numbers (list): A list of numbers.
+
+    Returns:
+    float: The mean of the numbers.
+    """
+    if not numbers:
+        return None  # Return None if the list is empty
+    
+    return sum(numbers) / len(numbers)
 
 def load_data(path):
     data = pd.read_csv(path)
