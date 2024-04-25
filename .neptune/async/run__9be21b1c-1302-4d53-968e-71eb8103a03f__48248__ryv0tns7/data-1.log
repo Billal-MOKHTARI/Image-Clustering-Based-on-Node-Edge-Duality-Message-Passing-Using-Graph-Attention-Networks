@@ -1,0 +1,20 @@
+{"obj": {"type": "AssignString", "path": ["monitoring", "9efacb9f", "hostname"], "value": "f205pc13"}, "version": 1, "at": 1714051528.1267297}
+{"obj": {"type": "AssignString", "path": ["monitoring", "9efacb9f", "pid"], "value": "48248"}, "version": 2, "at": 1714051528.1270592}
+{"obj": {"type": "AssignString", "path": ["monitoring", "9efacb9f", "tid"], "value": "140122663498112"}, "version": 3, "at": 1714051528.1272194}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "9efacb9f", "stdout"]}, "version": 4, "at": 1714051528.1274862}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "9efacb9f", "stderr"]}, "version": 5, "at": 1714051528.1276217}
+{"obj": {"type": "UploadFile", "path": ["source_code", "diff"], "ext": "patch", "file_path": null, "tmp_file_name": "source_code_diff-1714051528.172478-2024-04-25_15.25.28.172478.patch", "clean_after_upload": false}, "version": 6, "at": 1714051528.172735}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "9efacb9f", "cpu"], "min": 0.0, "max": 100.0, "unit": "%"}, "version": 7, "at": 1714051528.200253}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "9efacb9f", "cpu"]}, "version": 8, "at": 1714051528.2005455}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "9efacb9f", "stdout"], "values": [{"value": "[neptune] [warning] Info (NVML): NVML Shared Library Not Found. GPU usage metrics may not be reported. For more information, see https://docs.neptune.ai/help/nvml_error/\n", "step": null, "ts": 1714051528.200802}]}, "version": 9, "at": 1714051528.2009568}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "9efacb9f", "memory"], "min": 0.0, "max": 15.489360809326172, "unit": "GB"}, "version": 10, "at": 1714051528.2012165}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "9efacb9f", "memory"]}, "version": 11, "at": 1714051528.2012997}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "cpu"], "values": [{"value": 29.9, "step": null, "ts": 1714051528.2126884}]}, "version": 12, "at": 1714051528.213638}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "memory"], "values": [{"value": 5.389793395996094, "step": null, "ts": 1714051528.2126884}]}, "version": 13, "at": 1714051528.2138884}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "9efacb9f", "stdout"], "values": [{"value": "Backend QtAgg is interactive backend. Turning interactive mode on.\n", "step": null, "ts": 1714051528.5527122}]}, "version": 14, "at": 1714051528.5527875}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "cpu"], "values": [{"value": 11.9, "step": null, "ts": 1714051538.2147818}]}, "version": 15, "at": 1714051538.216466}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "memory"], "values": [{"value": 5.377124786376953, "step": null, "ts": 1714051538.2147818}]}, "version": 16, "at": 1714051538.2174327}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "cpu"], "values": [{"value": 2.2, "step": null, "ts": 1714051548.218203}]}, "version": 17, "at": 1714051548.2198534}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "memory"], "values": [{"value": 5.379890441894531, "step": null, "ts": 1714051548.218203}]}, "version": 18, "at": 1714051548.2213871}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "cpu"], "values": [{"value": 12.8, "step": null, "ts": 1714051558.2219872}]}, "version": 19, "at": 1714051558.2241414}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "9efacb9f", "memory"], "values": [{"value": 5.4329833984375, "step": null, "ts": 1714051558.2219872}]}, "version": 20, "at": 1714051558.225174}

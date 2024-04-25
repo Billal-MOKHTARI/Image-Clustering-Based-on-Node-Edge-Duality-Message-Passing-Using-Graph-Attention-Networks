@@ -4,6 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from src import utils
 import wandb
 from src import visualize
+import pickle
+from tqdm import tqdm
 
 def train(model, 
           images, 
@@ -60,12 +62,23 @@ def train(model,
             wandb.log(loss_log, step = epoch, commit = True)
 
 def image_gat_mp_trainer(model, 
-                         embedding_path, 
+                         embeddings, 
                          epochs, 
                          optimizer,
                          adjacency_tensor,
                          **kwargs):
-    
+    optim_params = kwargs.get("optim_params", {})
+    optim = optimizer(model.parameters(), **optim_params)
+    # with open(embedding_path, "rb") as f:
+    #     embeddings = pickle.load(f)
+
+    for epoch in tqdm(range(epochs), desc="Training", unit="epoch"):
+        optim.zero_grad()
+        output, loss = model(embeddings, adjacency_tensor)
+
+        loss.backward()
+        optim.step()
+        tqdm.write(f"Epoch: {epoch}, Loss: {loss.item()}")
     
     
 
