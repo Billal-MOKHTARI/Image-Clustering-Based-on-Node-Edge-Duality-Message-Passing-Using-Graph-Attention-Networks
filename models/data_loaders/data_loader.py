@@ -72,7 +72,7 @@ def create_combined_images(dataset_path, output_path, rows = 2, cols = 2, num_im
 
     print("Combined images generated successfully!")
 
-def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame, from_csv = None, transpose = False):
+def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv = None, transpose = False):
     if from_csv is not None :
         matrix = pd.read_csv(from_csv, index_col=0, header=0)
 
@@ -94,14 +94,15 @@ def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame, from_csv = None,
                 channel[index_row, index_col] = 1
         channels.append(channel)
         
-    return torch.stack(channels)
+    return torch.stack(channels), index_row, index_col
 
 
 class ImageFolderNoLabel(torch.utils.data.Dataset):
     def __init__(self, root, transform=None):
         self.root = root
         self.transform = transform
-        self.images = os.listdir(root)
+        self.images = sorted(os.listdir(root))
+        
 
     def __len__(self):
         return len(self.images)

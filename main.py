@@ -98,3 +98,19 @@ if __name__ == "__main__":
     #                 (images.detach(), primal_adjacency_tensor.detach(), dual_adjacency_tensor, dual_nodes), 
     #                 "model.onnx", 
     #                 verbose=True)
+
+# from models.data_loaders import data_loader as dl
+# from torch.utils.data import DataLoader
+# import matplotlib.pyplot as plt
+# from torchvision import transforms
+
+# data_loader = dl.ImageFolderNoLabel("benchmark/datasets/agadez/images")
+# print(data_loader.images)
+# data_loader = DataLoader(data_loader, batch_size=64, shuffle=False)
+# data_loader = dl.ImageFolderNoLabel("benchmark/datasets/agadez/images", transform=transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()]))
+
+# for images in data_loader:
+#     for image in images:
+#         plt.imshow(transforms.ToPILImage()(image))
+#         plt.axis('off')  # Turn off axis labels
+#         plt.show()

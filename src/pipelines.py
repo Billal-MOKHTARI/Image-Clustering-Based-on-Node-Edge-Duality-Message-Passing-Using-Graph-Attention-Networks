@@ -5,11 +5,16 @@ from torch import nn
 from typing import List
 from PIL import Image
 from torch.utils.data import DataLoader
+
 from torchvision import transforms
 import os
 import sys
+import pandas as pd
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+import pickle
+
 from models.data_loaders import data_loader as dl
+from project_consts import NEPTUNE_MANAGER, DATA_VISUALIZATION_RUN
 
 def visualize_models_hidden_layers(models : List[nn.Module], 
                                    image_path : str, 
@@ -84,7 +89,7 @@ def visualize_models_hidden_layers(models : List[nn.Module],
                                image_workspace=f'{path}/{name}')
         
 
-def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path, **kwargs):
+def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path, output_path = None, **kwargs):
     """
     Applies the model on the data and uploads the embeddings to Neptune.
 
@@ -147,3 +152,42 @@ def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path,
     # Save embeddings to a temporary file
     neptune_manager.log_files(run=run, data=embeddings, workspace=neptune_workspace)
 
+    if output_path is not None:
+        with open(output_path, 'wb') as f:
+            pickle.dump(embeddings, f)
+
+    return embeddings
+
+def prepare_data(annotation_path, 
+                 image_path, 
+                 output_path, 
+                 model, 
+                 neptune_workspace, 
+                 neptune_manager = NEPTUNE_MANAGER, 
+                 run = DATA_VISUALIZATION_RUN, 
+                 transpose=True, 
+                 **kwargs):
+    
+    adjacency_tensor, index_row, index_col = dl.annotation_matrix_to_adjacency_tensor(from_csv=annotation_path, transpose=transpose)
+
+    try:
+        neptune_manager.delete_data(run, [neptune_workspace])
+    except:
+        pass
+
+    embeddings = create_embeddings(model=model, 
+                                   neptune_manager=neptune_manager, 
+                                   run=run, 
+                                   neptune_workspace=neptune_workspace, 
+                                   data_path=image_path,
+                                   output_path=output_path,
+                                   **kwargs)
+    
+    result = {
+        "adjacency_tensor": adjacency_tensor,
+        "index_row": index_row,
+        "index_col": index_col,
+        "embeddings": embeddings
+    }
+
+    return result
