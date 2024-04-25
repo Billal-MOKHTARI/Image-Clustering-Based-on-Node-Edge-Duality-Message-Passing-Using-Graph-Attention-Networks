@@ -1,7 +1,9 @@
 import os
 import random
 from PIL import Image
-
+import torch
+import pandas as pd
+import numpy as np
 
 def combine_images(images):
     widths, heights = zip(*(i.size for i in images))
@@ -68,3 +70,27 @@ def create_combined_images(dataset_path, output_path, rows = 2, cols = 2, num_im
         new_image.save(os.path.join(output_path, f"combined_{i}.png"))
 
     print("Combined images generated successfully!")
+
+def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame, from_csv = None, transpose = False):
+    if from_csv is not None :
+        matrix = pd.read_csv(from_csv, index_col=0, header=0)
+
+    if transpose:
+        matrix = matrix.T
+
+    index_row = matrix.index
+    index_col = matrix.columns
+    _, num_cols = matrix.shape
+    
+    torch_matrix = torch.Tensor(pd.DataFrame.to_numpy(matrix))
+
+    channels = []
+    for row in torch_matrix:
+        channel = torch.Tensor(num_cols, num_cols).fill_(0)
+        indexes = torch.argwhere(row == 1)
+        for index_row in indexes:
+            for index_col in indexes:
+                channel[index_row, index_col] = 1
+        channels.append(channel)
+        
+    return torch.stack(channels)
