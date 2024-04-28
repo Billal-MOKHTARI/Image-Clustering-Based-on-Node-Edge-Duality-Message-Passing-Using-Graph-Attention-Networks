@@ -1,12 +1,14 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
-from pipelines import viz_hidden_layers
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 import argparse
 import json
 from tqdm import tqdm
 from torchvision import models, transforms
+from pipelines import viz_hidden_layers
+from torch import nn
 
 parser = argparse.ArgumentParser(prog='viz_hidden_layers', description='Visualize hidden layers\' outputs')
 parser.add_argument('--config', type=str, help='Path to the configuration file', required=True)
@@ -32,7 +34,7 @@ image_path = config["image_path"]
 run = config["run"]
 model_weights = [model_weights_parser[model] for model in torch_models]
 method = config["method"]
-
+instance_indexes = config["instance_indexes"]
 
 # parse the parameters
 if not models_from_path:
@@ -40,6 +42,7 @@ if not models_from_path:
 
 torch_transforms = [eval(f"transforms.{transform}")(**torch_transforms[transform]) for transform in torch_transforms]
 
+instance_indexes = [eval(f"nn.{instance_index}") for instance_index in instance_indexes]
 
 viz_hidden_layers(models = torch_models, 
                   image_path=image_path, 
@@ -47,5 +50,6 @@ viz_hidden_layers(models = torch_models,
                   namespaces=namespaces, 
                   torch_transforms=torch_transforms,
                   method=method,
-                  models_from_path=models_from_path)
+                  models_from_path=models_from_path,
+                  instance_indexes=instance_indexes)
 

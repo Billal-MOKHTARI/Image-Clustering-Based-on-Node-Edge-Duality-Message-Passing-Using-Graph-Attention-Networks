@@ -17,5 +17,6 @@
       "std": [0.229, 0.224, 0.225]
     }
   },
-  "method": "layercam"
+  "method": "layercam",
+  "instance_indexes": ["Conv2d", "BatchNorm2d", "MaxPool2d", "AdaptiveAvgPool2d"]
 }
