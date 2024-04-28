@@ -3,28 +3,49 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from pipelines import viz_hidden_layers
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-from env import image_gat_mp_run
-from torchvision import models
-from torchvision import transforms
+import argparse
+import json
+from tqdm import tqdm
+from torchvision import models, transforms
 
-models = [models.vgg16(pretrained=True),
-          models.vgg19(pretrained=True),
-          models.resnet18(pretrained=True),
-          models.efficientnet_b7(pretrained=True),
-          models.convnext_large(pretrained=True),
-          models.mobilenet_v3_large(pretrained=True),
-          models.mnasnet1_3(pretrained=True)]
+parser = argparse.ArgumentParser(prog='viz_hidden_layers', description='Visualize hidden layers\' outputs')
+parser.add_argument('--config', type=str, help='Path to the configuration file', required=True)
 
-image_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/benchmark/datasets/agadez/images/G0041951.JPG"
-viz_hidden_layers(models = models, 
+args = parser.parse_args()
+path = args.config
+
+# read configuration file
+with open(path) as f:
+    config = json.load(f)
+
+pretrained_model_weights_parser_path = "../../configs/pretrained_model_weights_parser.json"
+
+with open(pretrained_model_weights_parser_path) as f:
+    model_weights_parser = json.load(f)
+
+
+torch_models = config["models"]
+namespaces = config["namespaces"]
+models_from_path = config["models_from_path"]
+torch_transforms = config["torch_transforms"]
+image_path = config["image_path"]
+run = config["run"]
+model_weights = [model_weights_parser[model] for model in torch_models]
+method = config["method"]
+
+
+# parse the parameters
+if not models_from_path:
+    torch_models = [eval(f"models.{model}(weights=models.{model_weight}_Weights.IMAGENET1K_V1)") for model, model_weight in tqdm(zip(torch_models, model_weights), total=len(torch_models), desc="Loading models", colour="green")]
+
+torch_transforms = [eval(f"transforms.{transform}")(**torch_transforms[transform]) for transform in torch_transforms]
+
+
+viz_hidden_layers(models = torch_models, 
                   image_path=image_path, 
-                  run=image_gat_mp_run, 
-                  namespaces=["images/vgg16", 
-                              "images/vgg19", 
-                              "images/resnet18", 
-                              "images/efficientnet_b7", 
-                              "images/convnext_large", 
-                              "images/mobilenet_v3_large", 
-                              "images/mnasnet1_3"], 
-                  
-                  torch_transforms=[transforms.Resize((512, 512)), transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+                  run=run, 
+                  namespaces=namespaces, 
+                  torch_transforms=torch_transforms,
+                  method=method,
+                  models_from_path=models_from_path)
+

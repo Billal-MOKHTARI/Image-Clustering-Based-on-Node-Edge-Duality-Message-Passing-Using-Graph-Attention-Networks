@@ -17,6 +17,3 @@ print(run_ids_path)
 neptune_manager = NeptuneManager(project_name=project,
                     api_token=api_token,
                     run_ids_path=run_ids_path)
-
-# List of runs
-image_gat_mp_run = neptune_manager.Run("Image GAT Message Passing")

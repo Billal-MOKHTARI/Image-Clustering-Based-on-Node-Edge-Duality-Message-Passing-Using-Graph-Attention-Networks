@@ -25,12 +25,15 @@ del vgg19.classifier[-1]
 
 models = [vgg16, vgg19]
 names = ["vgg16", "vgg19"]
+namespaces = ["embeddings/vgg16", "embeddings/vgg19"]
+batch_size = 16
 
 create_embeddings(models=models,
                   run=image_gat_mp_run,
-                  namespaces=["embeddings/vgg16", "embeddings/vgg19"],
+                  namespaces=namespaces,
                   data_path="../../benchmark/datasets/agadez/images",
                   row_index_namespace="embeddings/row_index",
                   torch_transforms=[transforms.Resize((512, 512)), 
                                     transforms.Normalize(mean=[0.485, 0.456, 0.406], 
-                                                         std=[0.229, 0.224, 0.225])])
+                                                         std=[0.229, 0.224, 0.225])],
+                  batch_size=batch_size)

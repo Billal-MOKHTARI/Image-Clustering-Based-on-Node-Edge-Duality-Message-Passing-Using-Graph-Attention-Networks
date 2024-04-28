@@ -12,14 +12,17 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import pickle
 from models.data_loaders import data_loader as dl
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from env import neptune_manager
 
 def viz_hidden_layers(models : List[nn.Module], 
                     image_path : str, 
-                    run, 
+                    run: str, 
                     namespaces: List[str], 
                     instance_indexes: List[nn.Module] = [nn.Conv2d, nn.BatchNorm2d, nn.MaxPool2d, nn.AdaptiveAvgPool2d],
                     torch_transforms = None,
-                    method = "layercam"):
+                    method = "layercam",
+                    models_from_path = False):
     
     """
     Visualizes the hidden layers of multiple PyTorch models.
@@ -62,6 +65,8 @@ def viz_hidden_layers(models : List[nn.Module],
     ...                                path='images',
     ...                                names=["efficientnet_b7"])
     """
+    run = neptune_manager.Run(run)
+    
     # Load the image from the path
     image = Image.open(image_path)
 
@@ -114,11 +119,11 @@ def create_embeddings(models, run, namespaces, data_path, row_index_namespace=No
     # Create a data loader
     data_loader = dl.ImageFolderNoLabel(data_path, transform=transforms.Compose(transformations))
     row_index = data_loader.get_paths
-    data_loader = DataLoader(data_loader, batch_size=batch_size, shuffle=False)
-
-    embeddings = []
 
     for model, namespace in tqdm(zip(models, namespaces), desc="Models"):
+        data_loader = DataLoader(data_loader, batch_size=batch_size, shuffle=False)
+        embeddings = []
+        
         # Switch model to evaluation mode
         model.eval()
 

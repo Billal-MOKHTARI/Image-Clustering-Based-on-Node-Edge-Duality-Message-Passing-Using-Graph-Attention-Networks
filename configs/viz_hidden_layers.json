@@ -1,0 +1,21 @@
+{
+  "models": [
+
+    "convnext_large"
+  ],
+  "namespaces": [
+
+    "images/convnext_large"
+  ],
+  "models_from_path": false,
+  "image_path": "../../benchmark/datasets/agadez/images/G0041951.JPG",
+  "run": "Image GAT Message Passing",
+  "torch_transforms": {
+    "Resize": { "size": [224, 224] },
+    "Normalize": {
+      "mean": [0.485, 0.456, 0.406],
+      "std": [0.229, 0.224, 0.225]
+    }
+  },
+  "method": "layercam"
+}
