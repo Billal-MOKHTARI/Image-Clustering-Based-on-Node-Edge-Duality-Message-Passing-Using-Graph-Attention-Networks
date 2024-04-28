@@ -1,0 +1,22 @@
+{"obj": {"type": "AssignString", "path": ["monitoring", "30aee46d", "hostname"], "value": "codespaces-520c13"}, "version": 1, "at": 1714317502.2125165}
+{"obj": {"type": "AssignString", "path": ["monitoring", "30aee46d", "pid"], "value": "39895"}, "version": 2, "at": 1714317502.2127557}
+{"obj": {"type": "AssignString", "path": ["monitoring", "30aee46d", "tid"], "value": "140130635563392"}, "version": 3, "at": 1714317502.2128937}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "30aee46d", "stdout"]}, "version": 4, "at": 1714317502.213035}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "30aee46d", "stderr"]}, "version": 5, "at": 1714317502.2131522}
+{"obj": {"type": "UploadFile", "path": ["source_code", "diff"], "ext": "patch", "file_path": null, "tmp_file_name": "source_code_diff-1714317502.324792-2024-04-28_15.18.22.324792.patch", "clean_after_upload": false}, "version": 6, "at": 1714317502.3250945}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "30aee46d", "cpu"], "min": 0.0, "max": 100.0, "unit": "%"}, "version": 7, "at": 1714317502.3325837}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "30aee46d", "cpu"]}, "version": 8, "at": 1714317502.3338344}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "30aee46d", "memory"], "min": 0.0, "max": 7.744113922119141, "unit": "GB"}, "version": 9, "at": 1714317502.3342047}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "30aee46d", "memory"]}, "version": 10, "at": 1714317502.3342917}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30aee46d", "stdout"], "values": [{"value": "[neptune] [warning] Info (NVML): NVML Shared Library Not Found. GPU usage metrics may not be reported. For more information, see https://docs.neptune.ai/help/nvml_error/\n", "step": null, "ts": 1714317502.335749}]}, "version": 11, "at": 1714317502.3357885}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "memory"], "values": [{"value": 3.7426681518554688, "step": null, "ts": 1714317502.3359692}]}, "version": 12, "at": 1714317502.3366811}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "cpu"], "values": [{"value": 56.8, "step": null, "ts": 1714317512.4272764}]}, "version": 13, "at": 1714317512.4276779}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "memory"], "values": [{"value": 5.21722412109375, "step": null, "ts": 1714317512.4272764}]}, "version": 14, "at": 1714317512.4278858}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "cpu"], "values": [{"value": 53.9, "step": null, "ts": 1714317524.892803}]}, "version": 15, "at": 1714317525.7192228}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "memory"], "values": [{"value": 6.295989990234375, "step": null, "ts": 1714317524.892803}]}, "version": 16, "at": 1714317525.7457914}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30aee46d", "stderr"], "values": [{"value": "\rModels: 0it [00:00, ?it/s]", "step": null, "ts": 1714317526.098367}]}, "version": 17, "at": 1714317526.098403}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30aee46d", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1714317526.1475031}]}, "version": 18, "at": 1714317526.147682}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30aee46d", "stderr"], "values": [{"value": "\rData:   0%|                                                                                                                               | 0/3 [00:00<?, ?it/s]", "step": null, "ts": 1714317526.1478453}]}, "version": 19, "at": 1714317526.147866}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30aee46d", "stderr"], "values": [{"value": "\u001b[A", "step": null, "ts": 1714317526.1479795}]}, "version": 20, "at": 1714317526.1479974}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "cpu"], "values": [{"value": 60.9, "step": null, "ts": 1714317535.751123}]}, "version": 21, "at": 1714317535.7514937}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30aee46d", "memory"], "values": [{"value": 6.019550323486328, "step": null, "ts": 1714317535.751123}]}, "version": 22, "at": 1714317535.7521567}

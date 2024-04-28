@@ -102,20 +102,6 @@ def create_embeddings(models, run, namespaces, data_path, row_index_namespace=No
             batch_size (int, optional): Batch size for data loader. Defaults to 64.
             keep (bool, optional): Whether to keep the temporary file after tracking it in Neptune. Defaults to False.
 
-    Example:
-    >>> model = models.vgg19(pretrained=True)
-    >>> del model.classifier[-1]
-    >>> del model.classifier[-1]
-    >>> del model.classifier[-1]
-    >>>
-    >>> data_path = "../benchmark/datasets/agadez"
-    >>>
-    >>> nm = NeptuneManager(project="...",
-    ...                     api_token="e...",
-    ...                     run_ids_path="../configs/run_ids.json")
-    >>> run = nm.create_run("data_visualization")
-    >>> namespace = "embeddings"
-    >>> embedding_file_name = "./agadez_vgg19_embeddings.pth"
     """
     torch_transforms = kwargs.get('torch_transforms', None)
     batch_size = kwargs.get('batch_size', 64)
