@@ -23,7 +23,7 @@ del vgg16.classifier[-1]
 del vgg19.classifier[-1]
 
 
-models = [models.vgg16(weights=models.VGG16_Weights.IMAGENET1K_V1), models.vgg19(weights=models.VGG19_Weights.IMAGENET1K_V1)]
+models = [vgg16, vgg19]
 names = ["vgg16", "vgg19"]
 
 create_embeddings(models=models,

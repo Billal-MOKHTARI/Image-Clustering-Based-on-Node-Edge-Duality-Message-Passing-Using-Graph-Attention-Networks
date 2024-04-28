@@ -1,0 +1,20 @@
+{"obj": {"type": "AssignString", "path": ["monitoring", "30244d20", "hostname"], "value": "codespaces-520c13"}, "version": 1, "at": 1714319051.2943988}
+{"obj": {"type": "AssignString", "path": ["monitoring", "30244d20", "pid"], "value": "51495"}, "version": 2, "at": 1714319051.2953835}
+{"obj": {"type": "AssignString", "path": ["monitoring", "30244d20", "tid"], "value": "140174807548288"}, "version": 3, "at": 1714319051.296228}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "30244d20", "stdout"]}, "version": 4, "at": 1714319051.2970552}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "30244d20", "stderr"]}, "version": 5, "at": 1714319051.2978976}
+{"obj": {"type": "UploadFile", "path": ["source_code", "diff"], "ext": "patch", "file_path": null, "tmp_file_name": "source_code_diff-1714319051.558686-2024-04-28_15.44.11.558686.patch", "clean_after_upload": false}, "version": 6, "at": 1714319051.5589}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "30244d20", "cpu"], "min": 0.0, "max": 100.0, "unit": "%"}, "version": 7, "at": 1714319051.5686932}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "30244d20", "cpu"]}, "version": 8, "at": 1714319051.5693386}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "30244d20", "memory"], "min": 0.0, "max": 7.744113922119141, "unit": "GB"}, "version": 9, "at": 1714319051.569863}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "30244d20", "memory"]}, "version": 10, "at": 1714319051.5704172}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30244d20", "stdout"], "values": [{"value": "[neptune] [warning] Info (NVML): NVML Shared Library Not Found. GPU usage metrics may not be reported. For more information, see https://docs.neptune.ai/help/nvml_error/\n", "step": null, "ts": 1714319051.5710242}]}, "version": 11, "at": 1714319051.5710628}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30244d20", "memory"], "values": [{"value": 5.021827697753906, "step": null, "ts": 1714319051.5716066}]}, "version": 12, "at": 1714319051.5720491}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30244d20", "cpu"], "values": [{"value": 58.4, "step": null, "ts": 1714319064.1285303}]}, "version": 13, "at": 1714319064.128907}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30244d20", "memory"], "values": [{"value": 6.361148834228516, "step": null, "ts": 1714319064.1285303}]}, "version": 14, "at": 1714319064.1290917}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30244d20", "stderr"], "values": [{"value": "\rModels: 0it [00:00, ?it/s]", "step": null, "ts": 1714319064.8844097}]}, "version": 15, "at": 1714319064.8844464}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30244d20", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1714319064.885222}]}, "version": 16, "at": 1714319064.8852477}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30244d20", "stderr"], "values": [{"value": "\rData:   0%|                                                                                                                               | 0/3 [00:00<?, ?it/s]", "step": null, "ts": 1714319064.885597}]}, "version": 17, "at": 1714319064.8856163}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "30244d20", "stderr"], "values": [{"value": "\u001b[A", "step": null, "ts": 1714319064.8857198}]}, "version": 18, "at": 1714319064.8857353}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30244d20", "cpu"], "values": [{"value": 68.1, "step": null, "ts": 1714319074.1292632}]}, "version": 19, "at": 1714319074.1298509}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "30244d20", "memory"], "values": [{"value": 6.166576385498047, "step": null, "ts": 1714319074.1292632}]}, "version": 20, "at": 1714319074.1301298}
