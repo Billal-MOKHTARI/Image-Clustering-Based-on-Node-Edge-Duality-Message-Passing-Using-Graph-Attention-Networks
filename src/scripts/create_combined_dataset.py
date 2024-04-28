@@ -1,9 +1,9 @@
 import argparse
 import os
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
-
-from data_loader import create_combined_images
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from models.data_loaders.data_loader import create_combined_images
+# from data_loader import create_combined_images
 
 parser = argparse.ArgumentParser(prog='create_combined_dataset', description='Create a combined dataset from multiple datasets')
 

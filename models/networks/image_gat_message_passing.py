@@ -14,7 +14,7 @@ import training.trainer
 
 from src import utils
 from training import trainer
-from project_consts import NEPTUNE_MANAGER, DATA_VISUALIZATION_RUN
+from env import NEPTUNE_MANAGER, DATA_VISUALIZATION_RUN
 class ImageGATMessagePassing(nn.Module):
     def __init__(self, graph_order, depth, layer_sizes, loss: nn.Module, loss_coeffs: List[float], **kwargs):
         super(ImageGATMessagePassing, self).__init__()

@@ -1,17 +1,19 @@
-import argparse
 import os
 import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+from models.data_loaders.data_loader import create_combined_images
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-from data_loader import create_combined_images
+from pipelines import create_embeddings
+from torchvision import models
+from env import image_gat_mp_run
 
-parser = argparse.ArgumentParser(prog='create_embeddings', description='Create imgae embeddings and save them in neptune.')
+models = [models.vgg16(pretrained=True), models.vgg19(pretrained=True)]
+names = ["vgg16", "vgg19"]
 
-# parser.add_argument('--model', type=str, help='Path to the dataset directory', required=True)
-# parser.add_argument('--destination', type=str, help='Path to the output directory', required=True)
-# parser.add_argument('--rows', type=int, help='Number of rows in the combined image', required=False, default=2)
-# parser.add_argument('--cols', type=int, help='Number of columns in the combined image', required=False, default=2)
-# parser.add_argument('--num_images', type=int, help='Number of combined images to generate', required=False, default=1000)
-
-# args = parser.parse_args()
-# create_combined_images(args.source, args.destination, int(args.rows), int(args.cols), int(args.num_images))
+create_embeddings(models=models,
+                  run=image_gat_mp_run,
+                  namespaces=["embeddings/vgg16", "embeddings/vgg19"],
+                  data_path="/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/benchmark/datasets/agadez/images",
+                  row_index_namespace="embeddings/row_index")

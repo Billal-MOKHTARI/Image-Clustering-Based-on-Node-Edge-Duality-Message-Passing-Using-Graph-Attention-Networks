@@ -103,6 +103,8 @@ class ImageFolderNoLabel(torch.utils.data.Dataset):
         self.transform = transform
         self.images = sorted(os.listdir(root))
         
+    def get_paths(self):
+        return self.images
 
     def __len__(self):
         return len(self.images)

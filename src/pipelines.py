@@ -1,29 +1,25 @@
-from torch_model_manager import TorchModelManager, NeptuneManager
+from torch_model_manager import TorchModelManager
 
 import torch
 from torch import nn
 from typing import List
 from PIL import Image
 from torch.utils.data import DataLoader
-
+from tqdm import tqdm
 from torchvision import transforms
 import os
 import sys
-import pandas as pd
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 import pickle
-
 from models.data_loaders import data_loader as dl
-from project_consts import NEPTUNE_MANAGER, DATA_VISUALIZATION_RUN
 
-def visualize_models_hidden_layers(models : List[nn.Module], 
-                                   image_path : str, 
-                                   run, 
-                                   neptune_manager : NeptuneManager, 
-                                   names: List[str], 
-                                   path : str = 'images', 
-                                   instance_indexes: List[nn.Module] = [nn.Conv2d, nn.BatchNorm2d, nn.MaxPool2d, nn.AdaptiveAvgPool2d],
-                                   torch_transforms = None):
+def viz_hidden_layers(models : List[nn.Module], 
+                    image_path : str, 
+                    run, 
+                    namespaces: List[str], 
+                    instance_indexes: List[nn.Module] = [nn.Conv2d, nn.BatchNorm2d, nn.MaxPool2d, nn.AdaptiveAvgPool2d],
+                    torch_transforms = None,
+                    method = "layercam"):
     
     """
     Visualizes the hidden layers of multiple PyTorch models.
@@ -66,30 +62,31 @@ def visualize_models_hidden_layers(models : List[nn.Module],
     ...                                path='images',
     ...                                names=["efficientnet_b7"])
     """
-
+    # Load the image from the path
     image = Image.open(image_path)
 
+    # Define transformations and apply them on the image
     transformations = [transforms.ToTensor()]
     if torch_transforms is not None:
         transformations.extend(torch_transforms)
 
     transform = transforms.Compose(transformations)
-    # Apply transformations
     image = transform(image)
 
-    for model, name in zip(models, names):
+    # Log the hidden layers and save the visualizations if save_paths is not None
+
+    for model, namespace in tqdm(zip(models, namespaces), total=len(models)):
         
         tmm = TorchModelManager(model)
         indexes = tmm.get_layer_by_instance(instance_indexes).keys()
-        tmm.show_hidden_layers(torch.stack([image]), 
-                               indexes = indexes, 
-                               show_figure=False, 
-                               run=run, 
-                               neptune_manager=neptune_manager, 
-                               image_workspace=f'{path}/{name}')
+        run.log_hidden_conv2d(model = model,
+                            input_data=torch.stack([image]), 
+                            indexes = indexes, 
+                            method=method,
+                            namespace=namespace)
         
 
-def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path, output_path = None, **kwargs):
+def create_embeddings(models, run, namespaces, data_path, row_index_namespace=None, **kwargs):
     """
     Applies the model on the data and uploads the embeddings to Neptune.
 
@@ -97,7 +94,7 @@ def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path,
         model (nn.Module): PyTorch model.
         neptune_manager (NeptuneManager): Neptune manager object.
         run: Neptune run object.
-        neptune_workspace (str): Folder in Neptune where the embeddings should be uploaded.
+        namespace (str): Folder in Neptune where the embeddings should be uploaded.
         data_path (str): Path to the data.
         embedding_file_name (str): Name of the file to save the embeddings.
         **kwargs: Additional keyword arguments.
@@ -117,77 +114,73 @@ def create_embeddings(model, neptune_manager, run, neptune_workspace, data_path,
     ...                     api_token="e...",
     ...                     run_ids_path="../configs/run_ids.json")
     >>> run = nm.create_run("data_visualization")
-    >>> neptune_workspace = "embeddings"
+    >>> namespace = "embeddings"
     >>> embedding_file_name = "./agadez_vgg19_embeddings.pth"
     """
     torch_transforms = kwargs.get('torch_transforms', None)
     batch_size = kwargs.get('batch_size', 64)
+    
     # Define transformations
     transformations = [transforms.ToTensor()]
     if torch_transforms is not None:
         transformations.extend(torch_transforms)
 
-    # Load the dataset
-
     # Create a data loader
     data_loader = dl.ImageFolderNoLabel(data_path, transform=transforms.Compose(transformations))
+    row_index = data_loader.get_paths
     data_loader = DataLoader(data_loader, batch_size=batch_size, shuffle=False)
 
     embeddings = []
 
-    # Switch model to evaluation mode
-    model.eval()
+    for model, namespace in tqdm(zip(models, namespaces), desc="Models"):
+        # Switch model to evaluation mode
+        model.eval()
 
-    # Iterate over data
-    with torch.no_grad():
-        for images in data_loader:
+        # Iterate over data
+        for images in tqdm(data_loader, desc="Data"):
             # Forward pass
-            outputs = model(images)
-            embeddings.append(outputs)
-            print("Embeddings shape: ", outputs.shape)
+            with torch.no_grad():
+                outputs = model(images)
+                embeddings.append(outputs)
+
+        # Concatenate embeddings
+        embeddings = torch.cat(embeddings)
+        # Save embeddings to a temporary file
+        run.log_files(data=embeddings, namespace=namespace)
+        if row_index_namespace is not None:
+            run.log_files(data=row_index, namespace=row_index_namespace)
 
 
-    # Concatenate embeddings
-    embeddings = torch.cat(embeddings)
-    # Save embeddings to a temporary file
-    neptune_manager.log_files(run=run, data=embeddings, workspace=neptune_workspace)
-
-    if output_path is not None:
-        with open(output_path, 'wb') as f:
-            pickle.dump(embeddings, f)
-
-    return embeddings
-
-def prepare_data(annotation_path, 
-                 image_path, 
-                 output_path, 
-                 model, 
-                 neptune_workspace, 
-                 neptune_manager = NEPTUNE_MANAGER, 
-                 run = DATA_VISUALIZATION_RUN, 
-                 transpose=True, 
-                 **kwargs):
+# def prepare_data(annotation_path, 
+#                  image_path, 
+#                  output_path, 
+#                  model, 
+#                  namespace, 
+#                  neptune_manager = NEPTUNE_MANAGER, 
+#                  run = DATA_VISUALIZATION_RUN, 
+#                  transpose=True, 
+#                  **kwargs):
     
-    adjacency_tensor, index_row, index_col = dl.annotation_matrix_to_adjacency_tensor(from_csv=annotation_path, transpose=transpose)
+#     adjacency_tensor, index_row, index_col = dl.annotation_matrix_to_adjacency_tensor(from_csv=annotation_path, transpose=transpose)
 
-    try:
-        neptune_manager.delete_data(run, [neptune_workspace])
-    except:
-        pass
+#     try:
+#         neptune_manager.delete_data(run, [namespace])
+#     except:
+#         pass
 
-    embeddings = create_embeddings(model=model, 
-                                   neptune_manager=neptune_manager, 
-                                   run=run, 
-                                   neptune_workspace=neptune_workspace, 
-                                   data_path=image_path,
-                                   output_path=output_path,
-                                   **kwargs)
+#     embeddings = create_embeddings(model=model, 
+#                                    neptune_manager=neptune_manager, 
+#                                    run=run, 
+#                                    namespace=namespace, 
+#                                    data_path=image_path,
+#                                    output_path=output_path,
+#                                    **kwargs)
     
-    result = {
-        "adjacency_tensor": adjacency_tensor,
-        "index_row": index_row,
-        "index_col": index_col,
-        "embeddings": embeddings
-    }
+#     result = {
+#         "adjacency_tensor": adjacency_tensor,
+#         "index_row": index_row,
+#         "index_col": index_col,
+#         "embeddings": embeddings
+#     }
 
-    return result
+#     return result
