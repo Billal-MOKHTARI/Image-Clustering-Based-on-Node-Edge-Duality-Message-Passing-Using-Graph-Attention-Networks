@@ -16,3 +16,4 @@ pip install scikit-learn
 pip install colorama
 pip install torchvision
 pip install tqdm
+pip install neptune_pytorch

@@ -1,8 +1,8 @@
 import torch
 from torch import nn
-from message_passing import MessagePassing
+from .message_passing import MessagePassing
 import numpy as np
-import constants
+from . import constants
 from typing import List
 import os
 import sys
@@ -10,11 +10,8 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
-import training.trainer
-
 from src import utils
-from training import trainer
-from env import NEPTUNE_MANAGER, DATA_VISUALIZATION_RUN
+
 class ImageGATMessagePassing(nn.Module):
     def __init__(self, graph_order, depth, layer_sizes, loss: nn.Module, loss_coeffs: List[float], **kwargs):
         super(ImageGATMessagePassing, self).__init__()
@@ -72,37 +69,37 @@ class ImageGATMessagePassing(nn.Module):
         loss = torch.mean(torch.stack([loss_coeff*self.loss(enc, dec) for enc, dec, loss_coeff in zip(enc_outputs, dec_outputs, self.loss_coeffs)]))
         return x, loss
 
-mat1 = np.array([[1, 1, 0, 1, 1], 
-                [1, 1, 1, 0, 0], 
-                [0, 1, 1, 0, 1], 
-                [1, 0, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
+# mat1 = np.array([[1, 1, 0, 1, 1], 
+#                 [1, 1, 1, 0, 0], 
+#                 [0, 1, 1, 0, 1], 
+#                 [1, 0, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
 
-mat2 = np.array([[1, 0, 1, 1, 1], 
-                [0, 1, 1, 0, 1], 
-                [1, 1, 1, 1, 1], 
-                [1, 0, 1, 1, 0],
-                [1, 1, 1, 0, 1]])
+# mat2 = np.array([[1, 0, 1, 1, 1], 
+#                 [0, 1, 1, 0, 1], 
+#                 [1, 1, 1, 1, 1], 
+#                 [1, 0, 1, 1, 0],
+#                 [1, 1, 1, 0, 1]])
 
-mat3 = np.array([[1, 1, 0, 0, 1], 
-                [1, 1, 0, 1, 0], 
-                [0, 0, 1, 0, 1], 
-                [0, 1, 0, 1, 0],
-                [1, 0, 1, 0, 1]])
+# mat3 = np.array([[1, 1, 0, 0, 1], 
+#                 [1, 1, 0, 1, 0], 
+#                 [0, 0, 1, 0, 1], 
+#                 [0, 1, 0, 1, 0],
+#                 [1, 0, 1, 0, 1]])
 
-mat = torch.tensor(np.array([mat1, mat2, mat3]), dtype=constants.FLOATING_POINT)
-x = torch.randn(5, 10, dtype=constants.FLOATING_POINT)
-
-
-model = ImageGATMessagePassing(graph_order=5, 
-                               depth=3, 
-                               layer_sizes=[10, 8, 6, 4], 
-                               loss=nn.MSELoss(), 
-                               loss_coeffs=[1, 1, 1])
+# mat = torch.tensor(np.array([mat1, mat2, mat3]), dtype=constants.FLOATING_POINT)
+# x = torch.randn(5, 10, dtype=constants.FLOATING_POINT)
 
 
-trainer.image_gat_mp_trainer(model, 
-                             x,
-                            1000, 
-                            torch.optim.Adam, 
-                            mat)
+# model = ImageGATMessagePassing(graph_order=5, 
+#                                depth=3, 
+#                                layer_sizes=[10, 8, 6, 4], 
+#                                loss=nn.MSELoss(), 
+#                                loss_coeffs=[1, 1, 1])
+
+
+# trainer.image_gat_mp_trainer(model, 
+#                              x,
+#                             1000, 
+#                             torch.optim.Adam, 
+#                             mat)

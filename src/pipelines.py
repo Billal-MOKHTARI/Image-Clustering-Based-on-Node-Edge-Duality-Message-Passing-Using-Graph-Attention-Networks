@@ -91,7 +91,7 @@ def viz_hidden_layers(models : List[nn.Module],
                             namespace=namespace)
         
 
-def create_embeddings(models, run, namespaces, data_path, row_index_namespace=None, **kwargs):
+def create_embeddings(models, run, namespaces, data_path, models_from_path = False, row_index_namespace=None, **kwargs):
     """
     Applies the model on the data and uploads the embeddings to Neptune.
 
@@ -117,11 +117,12 @@ def create_embeddings(models, run, namespaces, data_path, row_index_namespace=No
     if torch_transforms is not None:
         transformations.extend(torch_transforms)
 
-    # Create a data loader
-    data_loader = dl.ImageFolderNoLabel(data_path, transform=transforms.Compose(transformations))
-    row_index = data_loader.get_paths
+
 
     for model, namespace in tqdm(zip(models, namespaces), desc="Models"):
+        # Create a data loader
+        data_loader = dl.ImageFolderNoLabel(data_path, transform=transforms.Compose(transformations))
+        row_index = data_loader.get_paths()
         data_loader = DataLoader(data_loader, batch_size=batch_size, shuffle=False)
         embeddings = []
         

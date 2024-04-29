@@ -6,6 +6,13 @@ import wandb
 from src import visualize
 import pickle
 from tqdm import tqdm
+from env import neptune_manager
+from torch import nn
+import torch
+from typing import Union, List
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+from networks import image_gat_message_passing as igmp
+
 
 def train(model, 
           images, 
@@ -61,16 +68,42 @@ def train(model,
             visualize.connect_to_wandb(**wandb_args)
             wandb.log(loss_log, step = epoch, commit = True)
 
-def image_gat_mp_trainer(model, 
-                         embeddings, 
-                         epochs, 
-                         optimizer,
-                         adjacency_tensor,
+def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str], 
+                         row_index: Union[torch.List[str], str],
+                         epochs: int, 
+                         optimizer: torch.optim.Optimizer,
+                         adjacency_tensor: Union[torch.Tensor, str],
+                         run: str,
                          **kwargs):
+    # Connect to Neptune
+    run = neptune_manager.Run(run)
+
+    # Load the embeddings.
+    if isinstance(embeddings, str):
+        embeddings = run.fetch_pkl_data(embeddings)
+
+    # Load the row index
+    if isinstance(row_index, str):
+        row_index = run.fetch_pkl_data(row_index)
+
+    # Load the adjacency tensor
+    if isinstance(adjacency_tensor, str):
+        adjacency_tensor = run.fetch_pkl_data(adjacency_tensor)
+
+    graph_order = len(row_index)
+    depth = adjacency_tensor.shape[0]
+
+    # Get the model arguments
+    model_args = kwargs.get("model_args", {})
+
+    # Define the model
+    model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
+
+
+
+    # Initialize the optimizer
     optim_params = kwargs.get("optim_params", {})
     optim = optimizer(model.parameters(), **optim_params)
-    # with open(embedding_path, "rb") as f:
-    #     embeddings = pickle.load(f)
 
     for epoch in tqdm(range(epochs), desc="Training", unit="epoch"):
         optim.zero_grad()
@@ -82,3 +115,4 @@ def image_gat_mp_trainer(model,
     
     
 
+# image_gat_mp_trainer(model_args=, embeddings = "embeddings.pkl", row_index = "row_index.pkl", epochs = 10, optimizer = torch.optim.Adam, adjacency_tensor = None, run = "test")
