@@ -83,7 +83,7 @@ def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv 
         matrix = matrix.T
         
     if sort == "columns":
-        utils.sort_dataframe(matrix, mode=sort, index=index)
+        matrix = utils.sort_dataframe(matrix, mode=sort, index=index)
 
     index_row = matrix.index
     index_col = matrix.columns
