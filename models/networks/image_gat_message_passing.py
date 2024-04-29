@@ -23,7 +23,7 @@ class ImageGATMessagePassing(nn.Module):
         self.layer_sizes = layer_sizes
         self.encoder_layers = self.encoder()
         self.decoder_layers = self.decoder()
-        self.loss = loss
+        self.loss = loss()
         self.loss_coeffs = loss_coeffs
  
     def encoder(self):
@@ -62,44 +62,9 @@ class ImageGATMessagePassing(nn.Module):
         for name, layer in self.decoder_layers.items():
             x = layer(x, adjacency_tensor)
             dec_outputs.append(x)
- 
+
         # Inverse the decoder outputs to get the values in order with the encoder outputs
         dec_outputs = dec_outputs[::-1]
-
+        
         loss = torch.mean(torch.stack([loss_coeff*self.loss(enc, dec) for enc, dec, loss_coeff in zip(enc_outputs, dec_outputs, self.loss_coeffs)]))
         return x, loss
-
-# mat1 = np.array([[1, 1, 0, 1, 1], 
-#                 [1, 1, 1, 0, 0], 
-#                 [0, 1, 1, 0, 1], 
-#                 [1, 0, 0, 1, 0],
-#                 [1, 0, 1, 0, 1]])
-
-# mat2 = np.array([[1, 0, 1, 1, 1], 
-#                 [0, 1, 1, 0, 1], 
-#                 [1, 1, 1, 1, 1], 
-#                 [1, 0, 1, 1, 0],
-#                 [1, 1, 1, 0, 1]])
-
-# mat3 = np.array([[1, 1, 0, 0, 1], 
-#                 [1, 1, 0, 1, 0], 
-#                 [0, 0, 1, 0, 1], 
-#                 [0, 1, 0, 1, 0],
-#                 [1, 0, 1, 0, 1]])
-
-# mat = torch.tensor(np.array([mat1, mat2, mat3]), dtype=constants.FLOATING_POINT)
-# x = torch.randn(5, 10, dtype=constants.FLOATING_POINT)
-
-
-# model = ImageGATMessagePassing(graph_order=5, 
-#                                depth=3, 
-#                                layer_sizes=[10, 8, 6, 4], 
-#                                loss=nn.MSELoss(), 
-#                                loss_coeffs=[1, 1, 1])
-
-
-# trainer.image_gat_mp_trainer(model, 
-#                              x,
-#                             1000, 
-#                             torch.optim.Adam, 
-#                             mat)

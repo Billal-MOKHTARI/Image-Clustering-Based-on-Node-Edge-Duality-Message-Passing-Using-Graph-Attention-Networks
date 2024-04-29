@@ -3,13 +3,13 @@
     {
         "layer_sizes": [4096, 1024, 512, 256, 128],
         "loss": "MSELoss",
-        "layer_coeffs": [1, 1, 1, 1]
+        "loss_coeffs": [1, 1, 1, 1]
     },
     "embeddings": "data/embeddings/vgg19",
     "row_index": "data/embeddings/row_index",
     "epochs": 100,
     "optimizer": "Adam",
-    "adjacency_tensor": "data/adjacency_tensor",
-    "run": "Image GAT Message Passing"
+    "run": "Image GAT Message Passing",
+    "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv"
 
 }

@@ -12,7 +12,7 @@ import torch
 from typing import Union, List
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks import image_gat_message_passing as igmp
-
+from data_loaders import data_loader
 
 def train(model, 
           images, 
@@ -72,8 +72,9 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                          row_index: Union[torch.List[str], str],
                          epochs: int, 
                          optimizer: torch.optim.Optimizer,
-                         adjacency_tensor: Union[torch.Tensor, str],
                          run: str,
+                         adjacency_tensor: Union[torch.Tensor, str] = None,
+                         from_annotation_matrix: Union[None, str] = None,
                          **kwargs):
     # Connect to Neptune
     run = neptune_manager.Run(run)
@@ -89,7 +90,12 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     # Load the adjacency tensor
     if isinstance(adjacency_tensor, str):
         adjacency_tensor = run.fetch_pkl_data(adjacency_tensor)
-
+        
+    
+    if from_annotation_matrix is not None:
+        adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True)
+    
+  
     graph_order = len(row_index)
     depth = adjacency_tensor.shape[0]
 
@@ -98,8 +104,6 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
     # Define the model
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
-
-
 
     # Initialize the optimizer
     optim_params = kwargs.get("optim_params", {})

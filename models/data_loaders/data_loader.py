@@ -81,6 +81,7 @@ def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv 
 
     index_row = matrix.index
     index_col = matrix.columns
+   
     _, num_cols = matrix.shape
     
     torch_matrix = torch.Tensor(pd.DataFrame.to_numpy(matrix))
@@ -89,12 +90,12 @@ def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv 
     for row in torch_matrix:
         channel = torch.Tensor(num_cols, num_cols).fill_(0)
         indexes = torch.argwhere(row == 1)
-        for index_row in indexes:
-            for index_col in indexes:
-                channel[index_row, index_col] = 1
+        for ind_row in indexes:
+            for ind_col in indexes:
+                channel[ind_row, ind_col] = 1
         channels.append(channel)
-        
-    return torch.stack(channels), index_row, index_col
+
+    return torch.stack(channels), list(index_row), list(index_col)
 
 
 class ImageFolderNoLabel(torch.utils.data.Dataset):
