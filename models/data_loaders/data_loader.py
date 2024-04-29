@@ -1,10 +1,13 @@
-import os
 from torchvision import transforms # Custom dataset class to load images without labels
 from PIL import Image
 import torch
 import pandas as pd
 import numpy as np
 import random
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from src import utils
 
 def combine_images(images):
     widths, heights = zip(*(i.size for i in images))
@@ -72,12 +75,15 @@ def create_combined_images(dataset_path, output_path, rows = 2, cols = 2, num_im
 
     print("Combined images generated successfully!")
 
-def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv = None, transpose = False):
+def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv = None, transpose = False, sort = None, index=None):
     if from_csv is not None :
         matrix = pd.read_csv(from_csv, index_col=0, header=0)
 
     if transpose:
         matrix = matrix.T
+        
+    if sort == "columns":
+        utils.sort_dataframe(matrix, mode=sort, index=index)
 
     index_row = matrix.index
     index_col = matrix.columns

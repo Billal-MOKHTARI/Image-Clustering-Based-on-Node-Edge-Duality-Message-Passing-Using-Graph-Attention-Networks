@@ -18,14 +18,15 @@ class ImageGATMessagePassing(nn.Module):
         assert all(0 <= loss_coeff <= 1 for loss_coeff in loss_coeffs), "Loss coefficients must be between 0 and 1"
         self.encoder_args = kwargs.get("encoder_args", {})
         self.decoder_args = kwargs.get("decoder_args", {})
+        loss_args = kwargs.get("loss_args", {})
         self.graph_order = graph_order
         self.depth = depth
         self.layer_sizes = layer_sizes
         self.encoder_layers = self.encoder()
         self.decoder_layers = self.decoder()
-        self.loss = loss()
+        self.loss = loss(loss_args)
         self.loss_coeffs = loss_coeffs
- 
+        
     def encoder(self):
         encoder_layers = nn.ModuleDict()
         for i in range(len(self.layer_sizes)-1):

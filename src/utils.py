@@ -8,6 +8,15 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from models.networks import constants
 
+def sort_dataframe(dataframe, mode, index):
+    if mode == "columns":
+        sorted_df = dataframe[index]
+    elif mode == "rows":
+        sorted_df = dataframe.iloc[index]
+    else:
+        raise ValueError("Mode must be 'rows' or 'columns'")
+
+    return sorted_df
 
 def extract_channels(tensor, index=None, columns=None) -> List[pd.DataFrame]:
     channels = []

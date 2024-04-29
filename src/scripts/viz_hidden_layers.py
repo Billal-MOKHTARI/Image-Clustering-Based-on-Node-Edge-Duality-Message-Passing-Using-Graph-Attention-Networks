@@ -52,4 +52,3 @@ viz_hidden_layers(models = torch_models,
                   method=method,
                   models_from_path=models_from_path,
                   instance_indexes=instance_indexes)
-
