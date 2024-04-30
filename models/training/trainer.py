@@ -116,8 +116,5 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
         loss.backward()
         optim.step()
-        tqdm.write(f"Epoch: {epoch}, Loss: {loss.item()}")
-    
-    
 
-# image_gat_mp_trainer(model_args=, embeddings = "embeddings.pkl", row_index = "row_index.pkl", epochs = 10, optimizer = torch.optim.Adam, adjacency_tensor = None, run = "test")
+    
