@@ -102,6 +102,10 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
     # Get the model arguments
     model_args = kwargs.get("model_args", {})
+    npt_logger_args = kwargs.get("npt_logger_args", {})
+
+    # run.hyperparams_logger(model, )
+
 
     # Define the model
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
@@ -112,9 +116,21 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
     for epoch in tqdm(range(epochs), desc="Training", unit="epoch"):
         optim.zero_grad()
-        output, loss = model(embeddings, adjacency_tensor)
-
+        output, hidden_losses, loss = model(embeddings, adjacency_tensor)
         loss.backward()
         optim.step()
+
+        # Log the losses
+        for i, loss in enumerate(hidden_losses):
+            run.track_metric(model = model,
+                             namespace = f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})",
+                             metric = loss.item())
+            
+        run.track_metric(model = model, namespace = f"{model_args['loss']().__class__.__name__}", metric = loss.item(), **npt_logger_args)
+
+        log_freq = kwargs.get("log_freq", 10)
+        if epoch % log_freq == 0:
+            run.log_checkpoint(model, f"chkpt_epoch {epoch}", **npt_logger_args)
+
 
     
