@@ -94,8 +94,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     
     if from_annotation_matrix is not None:
         adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
-  
-    assert row_index == annot_row_index, "Row indexes do not match"
+
+    assert row_index == annot_col_index, "Row indexes do not match"
   
     graph_order = len(row_index)
     depth = adjacency_tensor.shape[0]
