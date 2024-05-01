@@ -13,6 +13,7 @@ from typing import Union, List
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks import image_gat_message_passing as igmp
 from data_loaders import data_loader
+from time import time
 
 def train(model, 
           images, 
@@ -102,9 +103,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
     # Get the model arguments
     model_args = kwargs.get("model_args", {})
-    npt_logger_args = kwargs.get("npt_logger_args", {})
-
-    # run.hyperparams_logger(model, )
+    namespace = kwargs.get("namespace", "training")
+    log_freq = kwargs.get("log_freq", 100)
 
 
     # Define the model
@@ -115,22 +115,27 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     optim = optimizer(model.parameters(), **optim_params)
 
     for epoch in tqdm(range(epochs), desc="Training", unit="epoch"):
-        optim.zero_grad()
-        output, hidden_losses, loss = model(embeddings, adjacency_tensor)
-        loss.backward()
-        optim.step()
 
+        optim.zero_grad()
+        output, hidden_losses, overall_loss = model(embeddings, adjacency_tensor)
+        
+        overall_loss.backward()
+        optim.step()
+        
         # Log the losses
         for i, loss in enumerate(hidden_losses):
             run.track_metric(model = model,
-                             namespace = f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})",
+                             namespace = os.path.join(namespace, "losses",f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"),
                              metric = loss.item())
             
-        run.track_metric(model = model, namespace = f"{model_args['loss']().__class__.__name__}", metric = loss.item(), **npt_logger_args)
-
-        log_freq = kwargs.get("log_freq", 10)
+        run.track_metric(model = model, 
+                         namespace = os.path.join(namespace, "losses", f"{model_args['loss']().__class__.__name__}"), 
+                         metric = overall_loss.item())
+        
         if epoch % log_freq == 0:
-            run.log_checkpoint(model, f"chkpt_epoch {epoch}", **npt_logger_args)
+            run.log_checkpoint(model = model, 
+                               optimizer=optim,
+                               loss = model_args["loss"],
+                               epoch = epoch,
+                               namespace = os.path.join(namespace, f"checkpoints",f"chkpt_epoch_{epoch}"))
 
-
-    

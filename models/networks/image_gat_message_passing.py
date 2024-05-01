@@ -55,10 +55,11 @@ class ImageGATMessagePassing(nn.Module):
     def forward(self, x, adjacency_tensor):
         enc_outputs = []
         dec_outputs = []
-
         for name, layer in self.encoder_layers.items():
             enc_outputs.append(x)
             x = layer(x, adjacency_tensor)
+        
+        
         
         for name, layer in self.decoder_layers.items():
             x = layer(x, adjacency_tensor)
@@ -67,8 +68,8 @@ class ImageGATMessagePassing(nn.Module):
         # Inverse the decoder outputs to get the values in order with the encoder outputs
         dec_outputs = dec_outputs[::-1]
         
-        hidden_losses_with_coeffs = [loss_coeff*self.loss(enc, dec) for enc, dec, loss_coeff in zip(enc_outputs, dec_outputs, self.loss_coeffs)]
-        hidden_losses = [self.loss(enc, dec) for enc, dec in zip(enc_outputs, dec_outputs)]
-        loss = torch.mean(torch.stack(hidden_losses_with_coeffs))
+        hidden_losses_with_coeffs = [loss_coeff*self.loss(enc, dec) for enc, dec, loss_coeff in zip(enc_outputs, dec_outputs, self.loss_coeffs)]    
+        hidden_losses = [self.loss(enc, dec) for enc, dec in zip(enc_outputs, dec_outputs)]        
+        overall_loss = torch.mean(torch.stack(hidden_losses_with_coeffs))
 
-        return x, hidden_losses, loss
+        return x, hidden_losses, overall_loss
