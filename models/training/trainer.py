@@ -14,7 +14,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks import image_gat_message_passing as igmp
 from data_loaders import data_loader
 from time import time
- 
+import numpy as np
+
 def train(model, 
           images, 
           epochs, 
@@ -134,6 +135,15 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     for i in range(len(model_args["layer_sizes"])):
         path_hidden_layers.append(os.path.join(namespace, loss_namespace, f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"))
 
+
+    # Get the minimal value of the loss
+    min_loss = np.inf
+    try :
+        min_loss = min(run.fetch_data(path_metric)["value"])
+
+    except:
+        pass
+
     for epoch in tqdm(range(current_epoch+1, current_epoch+epochs+1), desc="Training", unit="epoch"):
 
         optim.zero_grad()
@@ -162,4 +172,5 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                                loss = model_args["loss"],
                                epoch = epoch,
                                namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"))
+    run.stop_run()
 

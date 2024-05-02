@@ -28,5 +28,4 @@ if "model_args" in config.keys():
 
 optim = eval(f"torch.optim.{config['optimizer']}")
 config["optimizer"] = optim
-
 igmp_trainer(**config)
