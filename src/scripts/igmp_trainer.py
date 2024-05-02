@@ -4,7 +4,7 @@ import os
 import sys
 from torch import nn
 import torch
-
+import asyncio
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from models.training.trainer import image_gat_mp_trainer as igmp_trainer
@@ -28,4 +28,7 @@ if "model_args" in config.keys():
 
 optim = eval(f"torch.optim.{config['optimizer']}")
 config["optimizer"] = optim
+
 igmp_trainer(**config)
+
+

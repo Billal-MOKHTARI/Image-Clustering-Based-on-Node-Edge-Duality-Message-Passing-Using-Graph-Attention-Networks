@@ -15,6 +15,8 @@ from networks import image_gat_message_passing as igmp
 from data_loaders import data_loader
 from time import time
 import numpy as np
+import asyncio
+from models.networks.constants import DEVICE, FLOATING_POINT, ENCODING
 
 def train(model, 
           images, 
@@ -77,6 +79,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                          run: str,
                          adjacency_tensor: Union[torch.Tensor, str] = None,
                          from_annotation_matrix: Union[None, str] = None,
+                         weights_only: bool = False,
                          **kwargs):
     # Connect to Neptune
     run = neptune_manager.Run(run)
@@ -119,13 +122,25 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     optim = optimizer(model.parameters(), **optim_params)
 
     current_epoch = -1
+    min_loss = np.inf
     
     try:
         path = utils.get_max_element(run.fetch_files(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
-        state_dict = run.load_model_checkpoint(os.path.join(namespace, checkpoint_namespace, path))
+        full_path = os.path.join(namespace, checkpoint_namespace, path)
+
+        if path is None:
+            run.delete_data(full_path)
+
+            path = utils.get_max_element(run.fetch_files(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
+            full_path = os.path.join(namespace, checkpoint_namespace, path)
+
+        state_dict = run.load_model_checkpoint(full_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
         
         model.load_state_dict(state_dict["model_state_dict"])
+
         optim.load_state_dict(state_dict["optimizer_state_dict"])
+
+        # min_loss = state_dict["loss"]
         current_epoch = state_dict["epoch"]
     except:
         pass
@@ -135,14 +150,13 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     for i in range(len(model_args["layer_sizes"])):
         path_hidden_layers.append(os.path.join(namespace, loss_namespace, f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"))
 
-
     # Get the minimal value of the loss
-    min_loss = np.inf
     try :
         min_loss = min(run.fetch_data(path_metric)["value"])
 
     except:
         pass
+
 
     for epoch in tqdm(range(current_epoch+1, current_epoch+epochs+1), desc="Training", unit="epoch"):
 
@@ -156,21 +170,24 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
         for loss, path_hl in zip(hidden_losses, path_hidden_layers):
             run.track_metric(namespace = path_hl,
                              metric = loss.item(),
-                             step=epoch,
+                             step = None,
                              timestamp = time(),
                              wait=False)
         
         run.track_metric(namespace = path_metric, 
                          metric = overall_loss.item(),
-                         step=epoch,
+                         step=None,
                          timestamp = time(),
                          wait=False)
         
-        if epoch % log_freq == 0:
-            run.log_checkpoint(model = model, 
-                               optimizer=optim,
-                               loss = model_args["loss"],
-                               epoch = epoch,
-                               namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"))
+        if overall_loss.item() < min_loss:
+            min_loss = overall_loss.item()
+    
+            if epoch % log_freq == 0:
+                run.log_checkpoint(model = model, 
+                                optimizer=optim,
+                                loss = overall_loss.item(),
+                                epoch = epoch,
+                                namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"))
     run.stop_run()
 

@@ -39,3 +39,4 @@ MODELS = {'vgg11',
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 FLOATING_POINT = torch.float32
+ENCODING = 'ascii'

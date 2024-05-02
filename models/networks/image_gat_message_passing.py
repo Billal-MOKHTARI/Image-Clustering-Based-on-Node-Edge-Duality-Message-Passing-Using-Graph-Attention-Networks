@@ -24,7 +24,7 @@ class ImageGATMessagePassing(nn.Module):
         self.layer_sizes = layer_sizes
         self.encoder_layers = self.encoder()
         self.decoder_layers = self.decoder()
-        self.loss = loss(loss_args)
+        self.loss = loss(**loss_args)
         self.loss_coeffs = loss_coeffs
         
     def encoder(self):
