@@ -104,6 +104,9 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     # Get the model arguments
     model_args = kwargs.get("model_args", {})
     namespace = kwargs.get("namespace", "training")
+    checkpoint_namespace = kwargs.get("checkpoint_namespace", "checkpoints")
+    loss_namespace = kwargs.get("loss_namespace", "losses")
+    
     log_freq = kwargs.get("log_freq", 100)
 
 
@@ -114,7 +117,20 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     optim_params = kwargs.get("optim_params", {})
     optim = optimizer(model.parameters(), **optim_params)
 
-    for epoch in tqdm(range(epochs), desc="Training", unit="epoch"):
+    current_epoch = -1
+    
+    try:
+        path = utils.get_max_element(run.fetch_data(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
+        state_dict = run.load_model_checkpoint(os.path.join(namespace, checkpoint_namespace, path))
+        
+        model.load_state_dict(state_dict["model_state_dict"])
+        optim.load_state_dict(state_dict["optimizer_state_dict"])
+        current_epoch = state_dict["epoch"]
+    except:
+        pass
+    
+
+    for epoch in tqdm(range(current_epoch+1, current_epoch+epochs+1), desc="Training", unit="epoch"):
 
         optim.zero_grad()
         output, hidden_losses, overall_loss = model(embeddings, adjacency_tensor)
@@ -125,11 +141,11 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
         # Log the losses
         for i, loss in enumerate(hidden_losses):
             run.track_metric(model = model,
-                             namespace = os.path.join(namespace, "losses",f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"),
+                             namespace = os.path.join(namespace, loss_namespace,f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"),
                              metric = loss.item())
             
         run.track_metric(model = model, 
-                         namespace = os.path.join(namespace, "losses", f"{model_args['loss']().__class__.__name__}"), 
+                         namespace = os.path.join(namespace, loss_namespace, f"{model_args['loss']().__class__.__name__}"), 
                          metric = overall_loss.item())
         
         if epoch % log_freq == 0:
@@ -137,5 +153,5 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                                optimizer=optim,
                                loss = model_args["loss"],
                                epoch = epoch,
-                               namespace = os.path.join(namespace, f"checkpoints",f"chkpt_epoch_{epoch}"))
+                               namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"))
 

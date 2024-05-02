@@ -11,6 +11,8 @@
     "optimizer": "Adam",
     "run": "Image GAT Message Passing",
     "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
-    "log_freq": 100,
-    "namespace": "training"
+    "log_freq": 10,
+    "namespace": "training",
+    "checkpoint_namespace": "checkpoints",
+    "loss_namespace": "losses"
 }

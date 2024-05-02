@@ -309,3 +309,5 @@ def get_variable_name(variable):
             return name
     return None
 
+def get_max_element(lst, delimiter):
+    return max(lst, key=lambda x: int(x.split(delimiter)[-1]))
