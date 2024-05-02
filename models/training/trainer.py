@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks import image_gat_message_passing as igmp
 from data_loaders import data_loader
 from time import time
-
+ 
 def train(model, 
           images, 
           epochs, 
@@ -120,7 +120,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     current_epoch = -1
     
     try:
-        path = utils.get_max_element(run.fetch_data(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
+        path = utils.get_max_element(run.fetch_files(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
         state_dict = run.load_model_checkpoint(os.path.join(namespace, checkpoint_namespace, path))
         
         model.load_state_dict(state_dict["model_state_dict"])
@@ -129,6 +129,10 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     except:
         pass
     
+    path_metric = os.path.join(namespace, loss_namespace, f"{model_args['loss']().__class__.__name__}")
+    path_hidden_layers = []
+    for i in range(len(model_args["layer_sizes"])):
+        path_hidden_layers.append(os.path.join(namespace, loss_namespace, f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"))
 
     for epoch in tqdm(range(current_epoch+1, current_epoch+epochs+1), desc="Training", unit="epoch"):
 
@@ -139,14 +143,18 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
         optim.step()
         
         # Log the losses
-        for i, loss in enumerate(hidden_losses):
-            run.track_metric(model = model,
-                             namespace = os.path.join(namespace, loss_namespace,f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"),
-                             metric = loss.item())
-            
-        run.track_metric(model = model, 
-                         namespace = os.path.join(namespace, loss_namespace, f"{model_args['loss']().__class__.__name__}"), 
-                         metric = overall_loss.item())
+        for loss, path_hl in zip(hidden_losses, path_hidden_layers):
+            run.track_metric(namespace = path_hl,
+                             metric = loss.item(),
+                             step=epoch,
+                             timestamp = time(),
+                             wait=False)
+        
+        run.track_metric(namespace = path_metric, 
+                         metric = overall_loss.item(),
+                         step=epoch,
+                         timestamp = time(),
+                         wait=False)
         
         if epoch % log_freq == 0:
             run.log_checkpoint(model = model, 
