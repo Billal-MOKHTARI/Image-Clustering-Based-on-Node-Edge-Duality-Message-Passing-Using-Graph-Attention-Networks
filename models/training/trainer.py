@@ -17,6 +17,7 @@ from time import time
 import numpy as np
 import asyncio
 from models.networks.constants import DEVICE, FLOATING_POINT, ENCODING
+import json
 
 def train(model, 
           images, 
@@ -110,7 +111,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     namespace = kwargs.get("namespace", "training")
     checkpoint_namespace = kwargs.get("checkpoint_namespace", "checkpoints")
     loss_namespace = kwargs.get("loss_namespace", "losses")
-    
+
     log_freq = kwargs.get("log_freq", 100)
 
 
@@ -120,30 +121,47 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     # Initialize the optimizer
     optim_params = kwargs.get("optim_params", {})
     optim = optimizer(model.parameters(), **optim_params)
-
+    
+    # Define initial values
     current_epoch = -1
     min_loss = np.inf
-    
+    # Load the model checkpoint
     try:
         path = utils.get_max_element(run.fetch_files(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
         full_path = os.path.join(namespace, checkpoint_namespace, path)
+        state_dict = run.load_model_checkpoint(full_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
+        print("Loaded checkpoint : ", full_path)
 
-        if path is None:
-            run.delete_data(full_path)
-
+        if state_dict is None:
+            run.delete_data(full_path, wait=False)
             path = utils.get_max_element(run.fetch_files(os.path.join(namespace, checkpoint_namespace)), delimiter="_")
             full_path = os.path.join(namespace, checkpoint_namespace, path)
 
-        state_dict = run.load_model_checkpoint(full_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
+            state_dict = run.load_model_checkpoint(full_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
+            
+        current_epoch = state_dict["epoch"]
         
         model.load_state_dict(state_dict["model_state_dict"])
-
+        
+        optim = optimizer(model.parameters(), **optim_params)
         optim.load_state_dict(state_dict["optimizer_state_dict"])
 
-        # min_loss = state_dict["loss"]
-        current_epoch = state_dict["epoch"]
+        # with open('optimizer_state.txt', 'w') as file:
+        #     file.write(str(optim.state_dict()))
+            
+        # with open('model_state.txt', 'w') as file:
+        #     file.write(str(model.state_dict()))
+        # # min_loss = state_dict["loss"]
+        # return 
     except:
-        pass
+        print("Error loading model checkpoint")
+    
+
+    
+
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optim, 
+                                                  last_epoch=current_epoch, 
+                                                  lr_lambda=lambda epoch: optim_params['lr'])
     
     path_metric = os.path.join(namespace, loss_namespace, f"{model_args['loss']().__class__.__name__}")
     path_hidden_layers = []
@@ -165,6 +183,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
         
         overall_loss.backward()
         optim.step()
+        scheduler.step()
         
         # Log the losses
         for loss, path_hl in zip(hidden_losses, path_hidden_layers):

@@ -12,6 +12,9 @@
     "row_index": "data/embeddings/row_index",
     "epochs": 100,
     "optimizer": "Adam",
+    "optim_params": {
+        "lr": 0.001
+    },
     "run": "Image GAT Message Passing",
     "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
     "log_freq": 10,
