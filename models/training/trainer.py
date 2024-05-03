@@ -18,6 +18,7 @@ import numpy as np
 import asyncio
 from models.networks.constants import DEVICE, FLOATING_POINT, ENCODING
 import json
+from models.networks import metrics
 
 def train(model, 
           images, 
@@ -101,6 +102,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     if from_annotation_matrix is not None:
         adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
 
+
+
     assert row_index == annot_col_index, "Row indexes do not match"
   
     graph_order = len(row_index)
@@ -110,6 +113,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     model_args = kwargs.get("model_args", {})
     namespace = kwargs.get("namespace", "training")
     checkpoint_namespace = kwargs.get("checkpoint_namespace", "checkpoints")
+    hyperparam_namespace = kwargs.get("hyperparameter_namespace", "hyperparameters")
     loss_namespace = kwargs.get("loss_namespace", "losses")
 
     log_freq = kwargs.get("log_freq", 100)
@@ -140,21 +144,17 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
             state_dict = run.load_model_checkpoint(full_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
             
         current_epoch = state_dict["epoch"]
-        
+        min_loss = state_dict["loss"]
+
+        model.to(DEVICE)
         model.load_state_dict(state_dict["model_state_dict"])
         
         optim = optimizer(model.parameters(), **optim_params)
         optim.load_state_dict(state_dict["optimizer_state_dict"])
 
-        # with open('optimizer_state.txt', 'w') as file:
-        #     file.write(str(optim.state_dict()))
-            
-        # with open('model_state.txt', 'w') as file:
-        #     file.write(str(model.state_dict()))
-        # # min_loss = state_dict["loss"]
-        # return 
+
     except:
-        print("Error loading model checkpoint")
+        pass
     
 
     
@@ -168,13 +168,17 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
     for i in range(len(model_args["layer_sizes"])):
         path_hidden_layers.append(os.path.join(namespace, loss_namespace, f"Hidden Layer {model_args['loss']().__class__.__name__} (size = {model_args['layer_sizes'][i]})"))
 
-    # Get the minimal value of the loss
-    try :
-        min_loss = min(run.fetch_data(path_metric)["value"])
 
-    except:
-        pass
-
+    # Log hyperparameters
+    hyperparameters = {"model": model.__class__.__name__,
+                       "model_args": model_args,
+                       "optimizer": optim.__class__.__name__, 
+                       "optim_params": optim_params,
+                       "log_freq": log_freq,
+                       "graph": {"order": graph_order, "node_dimension": depth},
+                       }
+    run.log_hyperparameters(hyperparams = hyperparameters,
+                            namespace = os.path.join(namespace, hyperparam_namespace))
 
     for epoch in tqdm(range(current_epoch+1, current_epoch+epochs+1), desc="Training", unit="epoch"):
 
@@ -184,7 +188,9 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
         overall_loss.backward()
         optim.step()
         scheduler.step()
-        
+
+
+       
         # Log the losses
         for loss, path_hl in zip(hidden_losses, path_hidden_layers):
             run.track_metric(namespace = path_hl,
@@ -208,5 +214,6 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                                 loss = overall_loss.item(),
                                 epoch = epoch,
                                 namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"))
+
     run.stop_run()
 

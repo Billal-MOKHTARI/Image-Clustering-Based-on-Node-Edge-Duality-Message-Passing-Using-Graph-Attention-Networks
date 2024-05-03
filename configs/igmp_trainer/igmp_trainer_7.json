@@ -1,0 +1,23 @@
+{
+  "use_custom_loss": true,
+  "model_args": {
+    "layer_sizes": [4096, 1024, 512, 256, 128],
+    "loss": "MeanCosineDistance",
+    "loss_coeffs": [1, 0.8, 0.6, 0.4],
+    "loss_args": {}
+  },
+  "embeddings": "data/embeddings/vgg19",
+  "row_index": "data/embeddings/row_index",
+  "epochs": 1000,
+  "optimizer": "Adam",
+  "optim_params": {
+    "lr": 0.001
+  },
+  "run": "IGMP7",
+  "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
+  "log_freq": 10,
+  "namespace": "training",
+  "checkpoint_namespace": "checkpoints",
+  "loss_namespace": "losses",
+  "hyperpatameter_namespace": "hyperparameters"
+}
