@@ -53,12 +53,12 @@ class Linear2D(nn.Module):
         assert len(x.shape) == 3, "The input tensor should be a 3D tensor"
         assert len(x) == self.depth, "The depth of the tensor should be equal to the depth of the model"
 
-
-
         list_product = []
         for channel, layer in zip(x, self.list_linear):
-            list_product.append(layer(channel))
-            
+   
+            matrix = layer(channel)
+            list_product.append(matrix)
+
         return torch.stack(list_product)
 
 class Encoder2D(nn.Module):

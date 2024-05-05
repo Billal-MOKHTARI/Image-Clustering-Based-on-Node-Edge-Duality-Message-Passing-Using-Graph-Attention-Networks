@@ -129,7 +129,7 @@ class MessagePassing(nn.Module):
         """
         assert adjacency_tensor.shape[0] == self.depth, "The depth of the adjacency tensor should be equal to the depth of the LinearDot2D model"
         assert adjacency_tensor.shape[1] == adjacency_tensor.shape[2] == x.shape[0], "The adjacency tensor should be a 3D tensor with the same shape as the input tensor"
-        
+
         # Copy tensors to specified device
         x.to(constants.DEVICE)
         adjacency_tensor.to(constants.DEVICE)
@@ -140,6 +140,7 @@ class MessagePassing(nn.Module):
 
         # Perform linear transformation
         x = self.linear_layer(x)
+        print(self.linear_layer.weight)
         a = self.linear_dot_2d(adjacency_tensor)
 
         # Perform graph convolution

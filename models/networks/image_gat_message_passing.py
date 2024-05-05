@@ -68,6 +68,8 @@ class ImageGATMessagePassing(nn.Module):
         # Inverse the decoder outputs to get the values in order with the encoder outputs
         dec_outputs = dec_outputs[::-1]
         
+        # for i, x in enumerate(enc_outputs[1]):
+        #     np.savetxt(f".tmp/enc_2/enc_{i}.txt", x.detach().numpy())
         hidden_losses_with_coeffs = [loss_coeff*self.loss(enc, dec) for enc, dec, loss_coeff in zip(enc_outputs, dec_outputs, self.loss_coeffs)]    
         hidden_losses = [self.loss(enc, dec) for enc, dec in zip(enc_outputs, dec_outputs)]        
         overall_loss = torch.mean(torch.stack(hidden_losses_with_coeffs))
