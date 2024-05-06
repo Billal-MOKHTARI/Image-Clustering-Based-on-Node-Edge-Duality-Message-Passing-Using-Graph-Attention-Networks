@@ -1,2 +1,3 @@
 *.pyc
 */.neptune/*
+*__pycache__/*
