@@ -215,7 +215,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                                 optimizer=optim,
                                 loss = overall_loss.item(),
                                 epoch = epoch,
-                                namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"))
+                                namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"),
+                                wait = True)
 
     run.stop_run()
 
