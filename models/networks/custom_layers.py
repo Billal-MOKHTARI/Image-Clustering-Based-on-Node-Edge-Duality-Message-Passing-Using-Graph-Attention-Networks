@@ -8,6 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from src import maths
 
 
+
+
 class Linear2D(nn.Module):
 
     def __init__(self, depth, n_features):
@@ -42,24 +44,18 @@ class Linear2D(nn.Module):
             >>> mat = torch.tensor(np.array([mat1, mat2, mat3], dtype=np.float32))
         """
         super(Linear2D, self).__init__()
-        self.list_linear = []
-        self.depth = depth
-
-        for i in range(depth):
-            self.list_linear.append(nn.Linear(n_features, n_features))
-   
+        self.layers = nn.ModuleList([nn.Linear(n_features, n_features) for _ in range(depth)])
 
     def forward(self, x):
         assert len(x.shape) == 3, "The input tensor should be a 3D tensor"
-        assert len(x) == self.depth, "The depth of the tensor should be equal to the depth of the model"
+        assert len(x) == len(self.layers), "The depth of the tensor should be equal to the depth of the model"
 
-        list_product = []
-        for channel, layer in zip(x, self.list_linear):
-   
-            matrix = layer(channel)
-            list_product.append(matrix)
+        outputs = []
+        for layer, input_channel in zip(self.layers, x):
+            output_channel = layer(input_channel)
+            outputs.append(output_channel)
 
-        return torch.stack(list_product)
+        return torch.stack(outputs)
 
 class Encoder2D(nn.Module):
     """

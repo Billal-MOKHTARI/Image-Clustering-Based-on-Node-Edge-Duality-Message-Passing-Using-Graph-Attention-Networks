@@ -83,8 +83,11 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
                          from_annotation_matrix: Union[None, str] = None,
                          weights_only: bool = False,
                          **kwargs):
+    
+    run_args = kwargs.get("run_args", {})
+
     # Connect to Neptune
-    run = neptune_manager.Run(run)
+    run = neptune_manager.Run(run, **run_args)
 
     # Load the embeddings.
     if isinstance(embeddings, str):
@@ -121,7 +124,6 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
     # Define the model
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
-
     # Initialize the optimizer
     optim_params = kwargs.get("optim_params", {})
     optim = optimizer(model.parameters(), **optim_params)

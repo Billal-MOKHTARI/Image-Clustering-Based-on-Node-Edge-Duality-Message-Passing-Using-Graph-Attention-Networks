@@ -12,7 +12,6 @@ project = neptune_manager_configs["project_name"]
 api_token = neptune_manager_configs["api_token"]
 run_ids_path = neptune_manager_configs["run_ids_path"] 
 run_ids_path = os.path.join(os.path.dirname(__file__), run_ids_path)
-print(run_ids_path)
 
 neptune_manager = NeptuneManager(project_name=project,
                     api_token=api_token,

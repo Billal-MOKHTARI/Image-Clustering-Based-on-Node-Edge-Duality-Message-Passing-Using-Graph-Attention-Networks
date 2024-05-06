@@ -17,6 +17,13 @@
         "lr": 0.001
     },
     "run": "Image GAT Message Passing",
+    "run_args":
+    {
+        "capture_strerr": false,
+        "capture_stdout": false,
+        "capture_hardware_metrics": false,
+        "capture_traceback": true
+    },
     "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
     "log_freq": 10,
     "namespace": "training",

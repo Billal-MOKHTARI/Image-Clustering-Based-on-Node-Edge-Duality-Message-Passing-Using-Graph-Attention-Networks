@@ -140,7 +140,7 @@ class MessagePassing(nn.Module):
 
         # Perform linear transformation
         x = self.linear_layer(x)
-        print(self.linear_layer.weight)
+
         a = self.linear_dot_2d(adjacency_tensor)
 
         # Perform graph convolution
