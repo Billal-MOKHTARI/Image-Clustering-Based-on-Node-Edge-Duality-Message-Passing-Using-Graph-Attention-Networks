@@ -58,9 +58,7 @@ class ImageGATMessagePassing(nn.Module):
         for name, layer in self.encoder_layers.items():
             enc_outputs.append(x)
             x = layer(x, adjacency_tensor)
-        
-        
-        
+
         for name, layer in self.decoder_layers.items():
             x = layer(x, adjacency_tensor)
             dec_outputs.append(x)
