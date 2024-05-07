@@ -24,6 +24,7 @@
   "run_args": {
 
   },
+  "initial_parameter_namespace": "data/initial_parameters/weights",
   "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
   "log_freq": 10,
   "namespace": "training",

@@ -19,6 +19,7 @@ import asyncio
 from models.networks.constants import DEVICE, FLOATING_POINT, ENCODING
 import json
 from models.networks import metrics
+from torch_model_manager import TorchModelManager
 
 def train(model, 
           images, 
@@ -145,6 +146,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     checkpoint_namespace = kwargs.get("checkpoint_namespace", "checkpoints")
     hyperparam_namespace = kwargs.get("hyperparameter_namespace", "hyperparameters")
     loss_namespace = kwargs.get("loss_namespace", "losses")
+    initial_parameter_namespace = kwargs.get("initial_parameter_namespace")
     keep = kwargs.get("keep", 3)
 
     log_freq = kwargs.get("log_freq", 100)
@@ -152,6 +154,24 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
 
     # Define the model
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
+    tmm = TorchModelManager(model)
+
+    torch.use_deterministic_algorithms(True)
+    g_cpu = torch.Generator()
+    g_cpu.manual_seed(2147483647)
+    tmm.init_model_parameters(method_weight = "uniform", method_bias = "zeros", generator=g_cpu)
+    print(model.state_dict())
+    return 
+    
+    # try:
+    #     weights = run.fetch_pkl_data(initial_parameter_namespace)
+    #     model.load_state_dict(weights)
+    # except:
+    #     tmm = tmm.TorchModelManager(model)
+    #     tmm.init_model_parameters()
+    #     run.log_files(data=model.state_dict(), namespace=initial_parameter_namespace, extension=".pkl", wait=True)
+
+  
     # Initialize the optimizer
     optim_params = kwargs.get("optim_params", {})
     optim = optimizer(model.parameters(), **optim_params)

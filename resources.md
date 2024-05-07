@@ -2,3 +2,4 @@ https://rachitj.medium.com/troubleshooting-some-issues-while-resuming-model-trai
 https://github.com/ultralytics/yolov3/issues/902
 
 https://pytorch.org/docs/stable/deterministic.html
+https://pytorch.org/docs/stable/notes/randomness.html

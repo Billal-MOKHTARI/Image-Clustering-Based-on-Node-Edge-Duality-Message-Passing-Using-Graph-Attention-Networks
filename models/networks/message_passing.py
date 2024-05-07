@@ -94,6 +94,7 @@ class MessagePassing(nn.Module):
         self.batch_norm = nn.BatchNorm1d(out_features, **batch_norm_args)
         self.linear_dot_2d = Linear2D(self.depth, n_features=graph_order)
         self.conv_1x1 = nn.Conv2d(in_channels=self.depth, out_channels=1, kernel_size=1)
+        self.layer_norm = nn.LayerNorm(out_features)
 
         # Copy the model to specified device
         self.to(constants.DEVICE)
@@ -156,6 +157,9 @@ class MessagePassing(nn.Module):
         # Perform batch normalization
         if h.shape[0] > 1:
             h = self.batch_norm(h)
+        
+        # Perform layer normalization
+        h = self.layer_norm(h)
 
         # Perform activation
         if self.activation_exists:
