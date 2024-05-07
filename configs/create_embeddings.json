@@ -4,7 +4,7 @@
     { "vgg19": ["del vgg19.classifier[-1]", "del vgg19.classifier[-1]"] }
   ],
   "models_from_path": false,
-  "run": "IGMP8",
+  "run": null,
   "namespaces": ["data/embeddings/vgg16", "data/embeddings/vgg19"],
   "data_path": "../../benchmark/datasets/agadez/images",
   "row_index_namespace": "data/embeddings/row_index",

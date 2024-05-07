@@ -1,0 +1,14 @@
+diff --git a/models/training/evaluator.py b/models/training/evaluator.py
+index 5bf86dc1..aa4760df 100644
+--- a/models/training/evaluator.py
++++ b/models/training/evaluator.py
+@@ -79,6 +79,9 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
+     data = model(embeddings, adjacency_tensor).detach().numpy()
+     dataframe = pd.DataFrame(data, index=row_index)
+ 
++    for e in embeddings[0]:
++        print(e)
++    
+     print(dataframe)
+ 
+     # pca = PCA(n_components=3)

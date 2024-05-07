@@ -9,7 +9,7 @@ from tqdm import tqdm
 from env import neptune_manager
 from torch import nn
 import torch
-from typing import Union, List
+from typing import Union, List, Dict
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks import image_gat_message_passing as igmp
 from data_loaders import data_loader
@@ -74,7 +74,7 @@ def train(model,
             visualize.connect_to_wandb(**wandb_args)
             wandb.log(loss_log, step = epoch, commit = True)
 
-def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str], 
+def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict], 
                          row_index: Union[torch.List[str], str],
                          epochs: int, 
                          optimizer: torch.optim.Optimizer,
@@ -91,15 +91,42 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, str],
 
     # Load the embeddings.
     if isinstance(embeddings, str):
-        embeddings = run.fetch_pkl_data(embeddings)
+        with open(embeddings, "rb") as f:
+            embeddings = pickle.load(f)
+    elif isinstance(embeddings, dict):
+        embedding_path = embeddings["path"]
+        from_run_metadata = embeddings["from_run_metadata"]
+
+        if from_run_metadata :
+            embeddings = run.fetch_pkl_data(embedding_path)
+        else:
+            embeddings = neptune_manager.fetch_pkl_data(embedding_path)
 
     # Load the row index
     if isinstance(row_index, str):
-        row_index = run.fetch_pkl_data(row_index)
+        with open(row_index, "rb") as f:
+            row_index = pickle.load(f)
+    elif isinstance(row_index, dict):
+        row_index_path = row_index["path"]
+        from_run_metadata = row_index["from_run_metadata"]
+
+        if from_run_metadata:
+            row_index = run.fetch_pkl_data(row_index_path)
+        else:
+            row_index = neptune_manager.fetch_pkl_data(row_index_path)
 
     # Load the adjacency tensor
     if isinstance(adjacency_tensor, str):
-        adjacency_tensor = run.fetch_pkl_data(adjacency_tensor)
+        with open(adjacency_tensor, "rb") as f:
+            adjacency_tensor = pickle.load(f)
+    elif isinstance(adjacency_tensor, dict):
+        adjacency_tensor_path = adjacency_tensor["path"]
+        from_run_metadata = adjacency_tensor["from_run_metadata"]
+
+        if from_run_metadata:
+            adjacency_tensor = run.fetch_pkl_data(adjacency_tensor_path)
+        else:
+            adjacency_tensor = neptune_manager.fetch_pkl_data(adjacency_tensor_path)
         
     
     if from_annotation_matrix is not None:

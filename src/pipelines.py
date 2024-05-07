@@ -65,7 +65,10 @@ def viz_hidden_layers(models : List[nn.Module],
     ...                                path='images',
     ...                                names=["efficientnet_b7"])
     """
-    run = neptune_manager.Run(run)
+    if run is not None:
+        run = neptune_manager.Run(run)
+    else:
+        run = neptune_manager
     
     # Load the image from the path
     image = Image.open(image_path)
@@ -91,7 +94,7 @@ def viz_hidden_layers(models : List[nn.Module],
                             namespace=namespace)
         
 
-def create_embeddings(models, run, namespaces, data_path, models_from_path = False, row_index_namespace=None, **kwargs):
+def create_embeddings(models, namespaces, data_path, run = None, models_from_path = False, row_index_namespace=None, **kwargs):
     """
     Applies the model on the data and uploads the embeddings to Neptune.
 
@@ -108,7 +111,11 @@ def create_embeddings(models, run, namespaces, data_path, models_from_path = Fal
             keep (bool, optional): Whether to keep the temporary file after tracking it in Neptune. Defaults to False.
 
     """
-    run = neptune_manager.Run(run)
+    if run is not None:
+        run = neptune_manager.Run(run)
+    else:
+        run = neptune_manager  
+
     torch_transforms = kwargs.get('torch_transforms', None)
     batch_size = kwargs.get('batch_size', 64)
     

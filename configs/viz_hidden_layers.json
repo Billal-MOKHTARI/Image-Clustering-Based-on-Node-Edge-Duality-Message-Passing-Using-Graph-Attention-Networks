@@ -1,15 +1,23 @@
 {
   "models": [
-
-    "convnext_large"
+    "vgg16",
+    "vgg19",
+    "convnext_large",
+    "mnasnet1_3",
+    "resnet18",
+    "efficientnet_b7"
   ],
   "namespaces": [
-
-    "images/convnext_large"
+    "figures/hidden layers/vgg16",
+    "figures/hidden layers/vgg19",
+    "figures/hidden layers/convnext_large",
+    "figures/hidden layers/mnasnet1_3",
+    "figures/hidden layers/resnet18",
+    "figures/hidden layers/efficientnet_b7"
   ],
   "models_from_path": false,
   "image_path": "../../benchmark/datasets/agadez/images/G0041951.JPG",
-  "run": "Image GAT Message Passing",
+  "run": null,
   "torch_transforms": {
     "Resize": { "size": [224, 224] },
     "Normalize": {

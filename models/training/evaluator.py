@@ -79,7 +79,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
 
-    print(dataframe)
+
 
     # pca = PCA(n_components=3)
 
