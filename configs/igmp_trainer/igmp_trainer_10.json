@@ -18,7 +18,7 @@
     "capture_strerr": false,
     "capture_stdout": false,
     "capture_hardware_metrics": false,
-    "capture_traceback": true
+    "capture_traceback": false
   },
   "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
   "log_freq": 10,

@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from src import utils
 
 class ImageGATMessagePassing(nn.Module):
-    def __init__(self, graph_order, depth, layer_sizes, loss: nn.Module, loss_coeffs: List[float], **kwargs):
+    def __init__(self, graph_order, depth, layer_sizes, loss: nn.Module, loss_coeffs: List[float], evaluation = False, **kwargs):
         super(ImageGATMessagePassing, self).__init__()
         assert all(0 <= loss_coeff <= 1 for loss_coeff in loss_coeffs), "Loss coefficients must be between 0 and 1"
         self.encoder_args = kwargs.get("encoder_args", {})
@@ -26,7 +26,12 @@ class ImageGATMessagePassing(nn.Module):
         self.decoder_layers = self.decoder()
         self.loss = loss(**loss_args)
         self.loss_coeffs = loss_coeffs
+        self.evaluation = evaluation
         
+    def set_evaluation(self, evaluation):
+        assert evaluation == True or evaluation == False, "Evaluation must be a boolean"
+        self.evaluation = evaluation
+
     def encoder(self):
         encoder_layers = nn.ModuleDict()
         for i in range(len(self.layer_sizes)-1):
@@ -59,6 +64,9 @@ class ImageGATMessagePassing(nn.Module):
             enc_outputs.append(x)
             x = layer(x, adjacency_tensor)
 
+        if self.evaluation:
+            return x
+        
         for name, layer in self.decoder_layers.items():
             x = layer(x, adjacency_tensor)
             dec_outputs.append(x)

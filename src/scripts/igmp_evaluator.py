@@ -33,5 +33,3 @@ if "model_args" in config.keys():
 
 
 igmp_evaluator(**config)
-
-

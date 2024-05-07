@@ -10,6 +10,11 @@ import json
 from src import utils
 from models.networks.constants import DEVICE, FLOATING_POINT, ENCODING
 import pickle
+import torch
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
 def igmp_evaluator(embeddings: Union[torch.Tensor, str], 
                     row_index: Union[torch.List[str], str],
@@ -57,8 +62,48 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     model.to(DEVICE)
     
     # Set the model to the evaluation mode
-    model.eval()
-    print(model)
-    output, hidden_losses, overall_loss = model(embeddings, adjacency_tensor)
+
+    _, hidden_losses, overall_loss = model(embeddings, adjacency_tensor)
+
+    for i, hidden_loss in enumerate(hidden_losses):
+        print(f"Hidden loss {i}: {hidden_loss}")
+
+    print(f"Overall loss: {overall_loss}")
+    
+    # Remove the decoder and the loss from the model
+    del model.decoder_layers
+    del model.loss
+
+    model.set_evaluation(True)
+
+    data = model(embeddings, adjacency_tensor).detach().numpy()
+    dataframe = pd.DataFrame(data, index=row_index)
+
+    print(dataframe)
+
+    # pca = PCA(n_components=3)
+
+    # # Fit the PCA model to your data
+    # pca.fit(data)
+
+    # # Transform the data to 3 principal components
+    # data_pca = pca.transform(data)
+
+    # # Transform the data to spherical coordinates
+    # r = np.ones(data_pca.shape[0])  # Set radius to 1 for simplicity
+    # theta = np.arccos(data_pca[:, 2] / r)  # Inclination angle
+    # phi = np.arctan2(data_pca[:, 1], data_pca[:, 0])  # Azimuth angle
+
+    # # Convert spherical coordinates to Cartesian coordinates
+    # x = r * np.sin(theta) * np.cos(phi)
+    # y = r * np.sin(theta) * np.sin(phi)
+    # z = r * np.cos(theta)
+
+    # # Plot the transformed data
+    # fig = plt.figure(figsize=(8, 6))
+    # ax = fig.add_subplot(111, projection='3d')
+    # ax.scatter(x, y, z, c='r', marker='o')
+    # ax.set_title('Spherical Representation of PCA')
+    # plt.show()
 
     

@@ -12,4 +12,4 @@ parser.add_argument('--namespaces', nargs='+', type=str, help='Namespaces to del
 args = parser.parse_args()
 
 run = neptune_manager.Run(args.run)
-run.delete_data(args.namespaces)
+run.delete_data(args.namespaces, wait=True)
