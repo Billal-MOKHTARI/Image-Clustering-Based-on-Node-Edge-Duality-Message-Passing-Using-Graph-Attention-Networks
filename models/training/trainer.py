@@ -145,6 +145,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     checkpoint_namespace = kwargs.get("checkpoint_namespace", "checkpoints")
     hyperparam_namespace = kwargs.get("hyperparameter_namespace", "hyperparameters")
     loss_namespace = kwargs.get("loss_namespace", "losses")
+    keep = kwargs.get("keep", 3)
 
     log_freq = kwargs.get("log_freq", 100)
 
@@ -237,13 +238,16 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
         if overall_loss.item() < min_loss:
             min_loss = overall_loss.item()
     
-            if epoch % log_freq == 0:
+            if epoch % log_freq == 0 and epoch !=0 :
+                checkpoint_path = os.path.join(namespace, checkpoint_namespace)
+              
                 run.log_checkpoint(model = model, 
                                 optimizer=optim,
                                 loss = overall_loss.item(),
                                 epoch = epoch,
-                                namespace = os.path.join(namespace, checkpoint_namespace,f"chkpt_epoch_{epoch}"),
-                                wait = False)
+                                namespace = os.path.join(checkpoint_path, f"chkpt_epoch_{epoch}"),
+                                wait = True,
+                                keep = keep)
 
     run.stop_run()
 

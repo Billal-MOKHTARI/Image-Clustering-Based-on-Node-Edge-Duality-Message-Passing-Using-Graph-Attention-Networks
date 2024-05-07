@@ -3,6 +3,8 @@
 
 cd ../src/scripts
 
+
+
 # Find all JSON files inside the igmp_trainer directory
 json_files=$(find ../../configs/igmp_trainer -type f -name "*.json")
 # Iterate over each JSON file

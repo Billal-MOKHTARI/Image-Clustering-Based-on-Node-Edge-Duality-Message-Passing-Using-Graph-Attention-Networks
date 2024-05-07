@@ -8,6 +8,8 @@
       "reduction": "sum"
     }
   },
+  "keep": 3,
+
   "embeddings": { "path": "data/embeddings/vgg19", "from_run_metadata": false },
   "row_index": {
     "path": "data/embeddings/row_index",
