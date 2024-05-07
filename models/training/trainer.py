@@ -85,6 +85,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
                          weights_only: bool = False,
                          **kwargs):
     
+    torch.use_deterministic_algorithms(True)
+    
     run_args = kwargs.get("run_args", {})
 
     # Connect to Neptune
@@ -156,20 +158,11 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
     tmm = TorchModelManager(model)
 
-    torch.use_deterministic_algorithms(True)
-    g_cpu = torch.Generator()
-    g_cpu.manual_seed(2147483647)
-    tmm.init_model_parameters(method_weight = "uniform", method_bias = "zeros", generator=g_cpu)
-    print(model.state_dict())
-    return 
-    
-    # try:
-    #     weights = run.fetch_pkl_data(initial_parameter_namespace)
-    #     model.load_state_dict(weights)
-    # except:
-    #     tmm = tmm.TorchModelManager(model)
-    #     tmm.init_model_parameters()
-    #     run.log_files(data=model.state_dict(), namespace=initial_parameter_namespace, extension=".pkl", wait=True)
+    try:
+        weights = run.fetch_pkl_data(initial_parameter_namespace)
+        model.load_state_dict(weights)
+    except:
+        run.log_files(data=model.state_dict(), namespace=initial_parameter_namespace, extension=".pkl", wait=True)
 
   
     # Initialize the optimizer

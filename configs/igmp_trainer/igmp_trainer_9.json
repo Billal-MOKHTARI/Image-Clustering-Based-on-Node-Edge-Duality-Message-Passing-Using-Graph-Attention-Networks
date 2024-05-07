@@ -12,6 +12,7 @@
     "from_run_metadata": false
   },
   "keep": 3,
+  "initial_parameter_namespace": "data/initial_parameters/weights",
 
   "epochs": 1000,
   "optimizer": "Adam",

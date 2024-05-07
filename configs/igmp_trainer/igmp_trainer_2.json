@@ -9,6 +9,7 @@
     }
   },
   "keep": 3,
+  "initial_parameter_namespace": "data/initial_parameters/weights",
 
   "embeddings": { "path": "data/embeddings/vgg19", "from_run_metadata": false },
   "row_index": {

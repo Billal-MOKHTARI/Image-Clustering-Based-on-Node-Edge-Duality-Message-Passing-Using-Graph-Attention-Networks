@@ -17,4 +17,3 @@ neptune_manager = NeptuneManager(project_name=project,
                     api_token=api_token,
                     run_ids_path=run_ids_path)
 
-
