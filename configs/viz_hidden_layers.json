@@ -16,7 +16,7 @@
     "figures/hidden layers/efficientnet_b7"
   ],
   "models_from_path": false,
-  "image_path": "../../benchmark/datasets/agadez/images/G0041951.JPG",
+  "image_path": "benchmark/datasets/agadez/images/G0041951.JPG",
   "run": null,
   "torch_transforms": {
     "Resize": { "size": [224, 224] },

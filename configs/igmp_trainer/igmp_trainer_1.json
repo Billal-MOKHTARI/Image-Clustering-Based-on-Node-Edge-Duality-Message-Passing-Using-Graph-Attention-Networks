@@ -21,11 +21,12 @@
     "lr": 0.001
   },
   "run": "Image GAT Message Passing",
-  "run_args": {
-
-  },
+  "run_args": {},
   "initial_parameter_namespace": "data/initial_parameters/weights",
-  "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
+  "from_annotation_matrix": {
+    "path": "data/csv_files/annotations_cleaned",
+    "from_run_metadata": false
+  },
   "log_freq": 10,
   "namespace": "training",
   "checkpoint_namespace": "checkpoints",

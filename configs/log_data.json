@@ -1,0 +1,32 @@
+{
+  "benchmark/datasets/agadez/csv_files/annotations.csv": {
+    "read_csv_args": {
+      "header": 0,
+      "index_col": 0
+    },
+    "log_dataframe_args": {
+      "namespace": "data/csv_files/annotations",
+      "df_format": true,
+      "csv_format": true,
+      "profile_report_title": "Agadez Annotation Matrix Profile Report",
+      "profile_report_namespace": "data/reports/annotations"
+    }
+  },
+  "benchmark/datasets/agadez/csv_files/annotations_cleaned.csv": {
+    "read_csv_args": {
+      "header": 0,
+      "index_col": 0
+    },
+    "log_dataframe_args": {
+      "namespace": "data/csv_files/annotations_cleaned",
+      "df_format": true,
+      "csv_format": true,
+      "profile_report_title": "Agadez Cleaned Annotation Matrix Profile Report",
+      "profile_report_namespace": "data/reports/cleaned_annotations"
+    }
+  },
+  "benchmark/datasets/agadez/images": {
+    "namespace": "data/images",
+    "wait": true
+  }
+}

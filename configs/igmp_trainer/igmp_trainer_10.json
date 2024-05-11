@@ -26,7 +26,10 @@
     "capture_hardware_metrics": false,
     "capture_traceback": false
   },
-  "from_annotation_matrix": "../../benchmark/datasets/agadez/csv_files/annotations.csv",
+  "from_annotation_matrix": {
+    "path": "data/csv_files/annotations_cleaned",
+    "from_run_metadata": false
+  },
   "log_freq": 10,
   "namespace": "training",
   "checkpoint_namespace": "checkpoints",

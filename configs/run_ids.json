@@ -1,1 +1,12 @@
-{"IGMP6": "IM-58"}
+{
+  "Image GAT Message Passing": "IM-63",
+  "IGMP2": "IM-68",
+  "IGMP3": "IM-66",
+  "IGMP4": "IM-64",
+  "IGMP5": "IM-67",
+  "IGMP6": "IM-69",
+  "IGMP7": "IM-60",
+  "IGMP8": "IM-62",
+  "IGMP9": "IM-65",
+  "IGMP10": "IM-61"
+}

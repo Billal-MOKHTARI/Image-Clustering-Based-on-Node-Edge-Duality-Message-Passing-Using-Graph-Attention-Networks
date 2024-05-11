@@ -76,12 +76,12 @@ def train(model,
             wandb.log(loss_log, step = epoch, commit = True)
 
 def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict], 
-                         row_index: Union[torch.List[str], str],
+                         row_index: Union[torch.List[str], str, Dict],
                          epochs: int, 
                          optimizer: torch.optim.Optimizer,
                          run: str,
-                         adjacency_tensor: Union[torch.Tensor, str] = None,
-                         from_annotation_matrix: Union[None, str] = None,
+                         adjacency_tensor: Union[torch.Tensor, str, Dict] = None,
+                         from_annotation_matrix: Union[None, str, Dict] = None,
                          weights_only: bool = False,
                          **kwargs):
     
@@ -131,14 +131,31 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
         else:
             adjacency_tensor = neptune_manager.fetch_pkl_data(adjacency_tensor_path)
         
-    
+    # Load the annotation matrix if it is provided
     if from_annotation_matrix is not None:
-        adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
+        # Load the annotation matrix from Neptune
+        if isinstance(from_annotation_matrix, Dict):
+            from_annotation_matrix = from_annotation_matrix["path"]
+            from_run_metadata = from_annotation_matrix["from_run_metadata"]
+            
+            # The annotation matrix is stored in the run metadata
+            if from_run_metadata:
+                from_annotation_matrix = run.fetch_pkl_data(from_annotation_matrix)
+            
+            # The annotation matrix is stored in Neptune project metadata
+            else:
+                from_annotation_matrix = neptune_manager.fetch_pkl_data(from_annotation_matrix)
+                
+            adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(matrix = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
+        
+        # The annotation matrix is stored in a local file
+        if isinstance(from_annotation_matrix, str):
+            adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
 
-
-
+    # Check if the row indexes match
     assert row_index == annot_col_index, "Row indexes do not match"
   
+    # Get the graph order and depth
     graph_order = len(row_index)
     depth = adjacency_tensor.shape[0]
 

@@ -25,25 +25,48 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
                     weights_only: bool = False,
                     **kwargs):
     
-
-  
-
-    
     # Connect to Neptune
     run = neptune_manager.Run(run)
 
-    # Load the embeddings.
+  # Load the embeddings.
     if isinstance(embeddings, str):
-        embeddings = run.fetch_pkl_data(embeddings)
-        
+        with open(embeddings, "rb") as f:
+            embeddings = pickle.load(f)
+    elif isinstance(embeddings, dict):
+        embedding_path = embeddings["path"]
+        from_run_metadata = embeddings["from_run_metadata"]
+
+        if from_run_metadata :
+            embeddings = run.fetch_pkl_data(embedding_path)
+        else:
+            embeddings = neptune_manager.fetch_pkl_data(embedding_path)
+
     # Load the row index
     if isinstance(row_index, str):
-        row_index = run.fetch_pkl_data(row_index)
+        with open(row_index, "rb") as f:
+            row_index = pickle.load(f)
+    elif isinstance(row_index, dict):
+        row_index_path = row_index["path"]
+        from_run_metadata = row_index["from_run_metadata"]
+
+        if from_run_metadata:
+            row_index = run.fetch_pkl_data(row_index_path)
+        else:
+            row_index = neptune_manager.fetch_pkl_data(row_index_path)
 
     # Load the adjacency tensor
     if isinstance(adjacency_tensor, str):
-        adjacency_tensor = run.fetch_pkl_data(adjacency_tensor)
-        
+        with open(adjacency_tensor, "rb") as f:
+            adjacency_tensor = pickle.load(f)
+    elif isinstance(adjacency_tensor, dict):
+        adjacency_tensor_path = adjacency_tensor["path"]
+        from_run_metadata = adjacency_tensor["from_run_metadata"]
+
+        if from_run_metadata:
+            adjacency_tensor = run.fetch_pkl_data(adjacency_tensor_path)
+        else:
+            adjacency_tensor = neptune_manager.fetch_pkl_data(adjacency_tensor_path)
+
     if from_annotation_matrix is not None:
         adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
     assert row_index == annot_col_index, "Row indexes do not match"
@@ -75,9 +98,10 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     del model.loss
 
     model.set_evaluation(True)
-
-    data = model(embeddings, adjacency_tensor).detach().numpy()
+    with torch.no_grad():
+        data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
+    print(overall_loss)
 
 
 

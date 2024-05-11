@@ -78,6 +78,6 @@ class ImageGATMessagePassing(nn.Module):
         #     np.savetxt(f".tmp/enc_2/enc_{i}.txt", x.detach().numpy())
         hidden_losses_with_coeffs = [loss_coeff*self.loss(enc, dec) for enc, dec, loss_coeff in zip(enc_outputs, dec_outputs, self.loss_coeffs)]    
         hidden_losses = [self.loss(enc, dec) for enc, dec in zip(enc_outputs, dec_outputs)]        
-        overall_loss = torch.mean(torch.stack(hidden_losses_with_coeffs))
+        overall_loss = torch.sum(torch.stack(hidden_losses_with_coeffs))/torch.sum(torch.tensor(self.loss_coeffs))
 
         return x, hidden_losses, overall_loss

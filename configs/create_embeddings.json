@@ -6,7 +6,7 @@
   "models_from_path": false,
   "run": null,
   "namespaces": ["data/embeddings/vgg16", "data/embeddings/vgg19"],
-  "data_path": "../../benchmark/datasets/agadez/images",
+  "data_path": "benchmark/datasets/agadez/images",
   "row_index_namespace": "data/embeddings/row_index",
   "torch_transforms": {
     "Resize": { "size": [224, 224] },
