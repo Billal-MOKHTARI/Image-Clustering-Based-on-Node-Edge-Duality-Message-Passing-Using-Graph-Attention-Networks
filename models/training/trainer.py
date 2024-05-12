@@ -85,7 +85,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
                          weights_only: bool = False,
                          **kwargs):
     
-    torch.use_deterministic_algorithms(True)
+    if DEVICE == "cpu":
+        torch.use_deterministic_algorithms(True)
     
     run_args = kwargs.get("run_args", {})
 
@@ -173,7 +174,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
 
     # Define the model
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
-    tmm = TorchModelManager(model)
+    model.to(DEVICE)
 
     try:
         weights = run.fetch_pkl_data(initial_parameter_namespace)
@@ -216,9 +217,6 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     except:
         pass
     
-
-    
-
     scheduler = torch.optim.lr_scheduler.LambdaLR(optim, 
                                                   last_epoch=current_epoch, 
                                                   lr_lambda=lambda epoch: optim_params['lr'])
@@ -236,6 +234,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
                        "optim_params": optim_params,
                        "log_freq": log_freq,
                        "graph": {"order": graph_order, "node_dimension": depth},
+                       "device": DEVICE,
                        }
     run.log_hyperparameters(hyperparams = hyperparameters,
                             namespace = os.path.join(namespace, hyperparam_namespace))
@@ -280,4 +279,3 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
                                 keep = keep)
 
     run.stop_run()
-

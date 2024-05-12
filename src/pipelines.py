@@ -156,4 +156,3 @@ def create_embeddings(models, namespaces, data_path, run = None, models_from_pat
         run.log_files(data=embeddings, namespace=namespace)
         if row_index_namespace is not None:
             run.log_files(data=row_index, namespace=row_index_namespace)
-
