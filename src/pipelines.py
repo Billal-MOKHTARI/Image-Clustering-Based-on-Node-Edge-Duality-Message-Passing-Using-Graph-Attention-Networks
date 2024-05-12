@@ -118,6 +118,7 @@ def create_embeddings(models, namespaces, data_path, run = None, models_from_pat
 
     torch_transforms = kwargs.get('torch_transforms', None)
     batch_size = kwargs.get('batch_size', 64)
+    preprocess = kwargs.get('preprocess', [None for _ in models])
     
     # Define transformations
     transformations = [transforms.ToTensor()]
@@ -125,24 +126,30 @@ def create_embeddings(models, namespaces, data_path, run = None, models_from_pat
         transformations.extend(torch_transforms)
 
 
+    for model, namespace, prss in tqdm(zip(models, namespaces, preprocess), desc="Models"):
 
-    for model, namespace in tqdm(zip(models, namespaces), desc="Models"):
         # Create a data loader
-        data_loader = dl.ImageFolderNoLabel(data_path, transform=transforms.Compose(transformations))
+        data_loader = dl.ImageFolderNoLabel(data_path, 
+                                            transform=transforms.Compose(transformations) if prss== False else None,
+                                            preprocess=prss)
         row_index = data_loader.get_paths()
         data_loader = DataLoader(data_loader, batch_size=batch_size, shuffle=False)
         embeddings = []
         
         # Switch model to evaluation mode
-        model.eval()
-
+        if prss is None:
+            model.eval()
+ 
         # Iterate over data
         for images in tqdm(data_loader, desc="Data"):
             # Forward pass
-            with torch.no_grad():
+            
+            if prss is None:
                 outputs = model(images)
-                embeddings.append(outputs)
-
+            else:
+                outputs = model.encode_image(images)
+            
+            embeddings.append(outputs)
         # Concatenate embeddings
         embeddings = torch.cat(embeddings)
         # Save embeddings to a temporary file
@@ -150,37 +157,3 @@ def create_embeddings(models, namespaces, data_path, run = None, models_from_pat
         if row_index_namespace is not None:
             run.log_files(data=row_index, namespace=row_index_namespace)
 
-
-# def prepare_data(annotation_path, 
-#                  image_path, 
-#                  output_path, 
-#                  model, 
-#                  namespace, 
-#                  neptune_manager = NEPTUNE_MANAGER, 
-#                  run = DATA_VISUALIZATION_RUN, 
-#                  transpose=True, 
-#                  **kwargs):
-    
-#     adjacency_tensor, index_row, index_col = dl.annotation_matrix_to_adjacency_tensor(from_csv=annotation_path, transpose=transpose)
-
-#     try:
-#         neptune_manager.delete_data(run, [namespace])
-#     except:
-#         pass
-
-#     embeddings = create_embeddings(model=model, 
-#                                    neptune_manager=neptune_manager, 
-#                                    run=run, 
-#                                    namespace=namespace, 
-#                                    data_path=image_path,
-#                                    output_path=output_path,
-#                                    **kwargs)
-    
-#     result = {
-#         "adjacency_tensor": adjacency_tensor,
-#         "index_row": index_row,
-#         "index_col": index_col,
-#         "embeddings": embeddings
-#     }
-
-#     return result

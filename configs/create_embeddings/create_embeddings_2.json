@@ -1,11 +1,8 @@
 {
-  "models": [
-    { "vgg16": ["del vgg16.classifier[-1]", "del vgg16.classifier[-1]"] },
-    { "vgg19": ["del vgg19.classifier[-1]", "del vgg19.classifier[-1]"] }
-  ],
+  "models": [{ "ViT-B/32": { "module": "clip" } }],
   "models_from_path": false,
   "run": null,
-  "namespaces": ["data/embeddings/vgg16", "data/embeddings/vgg19"],
+  "namespaces": ["data/embeddings/ViT-B_32"],
   "data_path": "benchmark/datasets/agadez/images",
   "row_index_namespace": "data/embeddings/row_index",
   "torch_transforms": {
@@ -15,5 +12,5 @@
       "std": [0.229, 0.224, 0.225]
     }
   },
-  "batch_size": 32
+  "batch_size": 1
 }

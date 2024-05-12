@@ -4,7 +4,7 @@ from env import neptune_manager
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks.image_gat_message_passing import ImageGATMessagePassing
 from data_loaders import data_loader
-from typing import Union
+from typing import Union, Dict
 import torch
 import json
 from src import utils
@@ -76,7 +76,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     depth = adjacency_tensor.shape[0]
     model_args = kwargs.get("model_args", {})
     model = ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
-    
+    output_args = kwargs.get("output_args", {})
 
     
     # Load model checkpoint
@@ -85,13 +85,8 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     model.to(DEVICE)
     
     # Set the model to the evaluation mode
-
-    _, hidden_losses, overall_loss = model(embeddings, adjacency_tensor)
-
-    for i, hidden_loss in enumerate(hidden_losses):
-        print(f"Hidden loss {i}: {hidden_loss}")
-
-    print(f"Overall loss: {overall_loss}")
+    with torch.no_grad():
+        _, hidden_losses, overall_loss = model(embeddings, adjacency_tensor)
     
     # Remove the decoder and the loss from the model
     del model.decoder_layers
@@ -101,9 +96,18 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     with torch.no_grad():
         data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
-    print(overall_loss)
-
-
+    
+    # Save the outputs in neptune
+    if output_args is not None:
+        log_dataframe_args = output_args.get("log_dataframe", {})
+        
+        run.log_dataframe(dataframe = dataframe, 
+                          df_format = True,
+                          csv_format = True,
+                          **log_dataframe_args)
+        for hidden_loss, layer_size in zip(hidden_losses, model_args["layer_sizes"]):
+            run.log_args(namespace=os.path.join(output_args["metrics"], f"hidden_loss (layer_size = {layer_size})"), args=hidden_loss)
+            
 
     # pca = PCA(n_components=3)
 

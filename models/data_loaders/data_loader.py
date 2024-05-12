@@ -105,10 +105,11 @@ def annotation_matrix_to_adjacency_tensor(matrix: pd.DataFrame = None, from_csv 
 
 
 class ImageFolderNoLabel(torch.utils.data.Dataset):
-    def __init__(self, root, transform=None):
+    def __init__(self, root, transform=None, preprocess=False):
         self.root = root
         self.transform = transform
         self.images = sorted(os.listdir(root))
+        self.preprocess = preprocess
         
     def get_paths(self):
         return self.images
@@ -118,7 +119,12 @@ class ImageFolderNoLabel(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         img_name = os.path.join(self.root, self.images[idx])
-        image = Image.open(img_name).convert('RGB')
-        if self.transform:
-            image = self.transform(image)
+        if not self.preprocess:
+            image = Image.open(img_name).convert('RGB')
+            if self.transform:
+                image = self.transform(image)
+        
+        else:
+            image = self.preprocess(Image.open(img_name)) 
+        
         return image

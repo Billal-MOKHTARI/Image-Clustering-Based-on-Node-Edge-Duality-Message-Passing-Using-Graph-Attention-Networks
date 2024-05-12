@@ -17,3 +17,5 @@ pip install colorama
 pip install torchvision
 pip install tqdm
 pip install neptune_pytorch
+pip install ftfy regex tqdm
+pip install git+https://github.com/openai/CLIP.git
