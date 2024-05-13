@@ -1,12 +1,12 @@
 {
   "use_custom_loss": true,
   "model_args": {
-    "layer_sizes": [4096, 1024, 512, 256, 128],
+    "layer_sizes": [512, 384, 256, 128],
     "loss": "MeanCosineDistance",
-    "loss_coeffs": [1, 1, 1, 1],
+    "loss_coeffs": [1, 0.8, 0.6],
     "loss_args": {}
   },
-  "embeddings": { "path": "data/embeddings/vgg19", "from_run_metadata": false },
+  "embeddings": { "path": "data/embeddings/ViT-B_32", "from_run_metadata": false },
   "row_index": {
     "path": "data/embeddings/row_index",
     "from_run_metadata": false
@@ -14,7 +14,7 @@
   "keep": 3,
   "initial_parameter_namespace": "data/initial_parameters/weights",
 
-  "epochs": 1000,
+  "epochs": 3000,
   "optimizer": "Adam",
   "optim_params": {
     "lr": 0.001
@@ -24,7 +24,7 @@
     "capture_strerr": false,
     "capture_stdout": false,
     "capture_hardware_metrics": false,
-    "capture_traceback": true
+    "capture_traceback": false
   },
   "from_annotation_matrix": {
     "path": "data/csv_files/annotations_cleaned",

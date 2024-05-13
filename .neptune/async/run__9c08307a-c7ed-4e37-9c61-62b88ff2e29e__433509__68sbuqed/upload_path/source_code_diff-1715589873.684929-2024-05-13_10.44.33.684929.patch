@@ -1,0 +1,19 @@
+diff --git a/models/training/trainer.py b/models/training/trainer.py
+index ac67cd23..3619e457 100644
+--- a/models/training/trainer.py
++++ b/models/training/trainer.py
+@@ -235,6 +235,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
+                        "log_freq": log_freq,
+                        "graph": {"order": graph_order, "node_dimension": depth},
+                        "device": DEVICE,
++                       "precision": FLOATING_POINT,
++                        "encoding": ENCODING,
+                        }
+     run.log_hyperparameters(hyperparams = hyperparameters,
+                             namespace = os.path.join(namespace, hyperparam_namespace))
+diff --git a/src/__pycache__/__init__.cpython-311.pyc b/src/__pycache__/__init__.cpython-311.pyc
+index da2d628c..2ef80fcf 100644
+Binary files a/src/__pycache__/__init__.cpython-311.pyc and b/src/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/src/__pycache__/utils.cpython-311.pyc b/src/__pycache__/utils.cpython-311.pyc
+index 31e87bf8..06d47501 100644
+Binary files a/src/__pycache__/utils.cpython-311.pyc and b/src/__pycache__/utils.cpython-311.pyc differ

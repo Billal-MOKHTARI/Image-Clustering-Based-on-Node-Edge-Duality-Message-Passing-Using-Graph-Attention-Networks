@@ -136,19 +136,19 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     if from_annotation_matrix is not None:
         # Load the annotation matrix from Neptune
         if isinstance(from_annotation_matrix, Dict):
-            from_annotation_matrix = from_annotation_matrix["path"]
+            annotation_matrix_path = from_annotation_matrix["path"]
             from_run_metadata = from_annotation_matrix["from_run_metadata"]
             
             # The annotation matrix is stored in the run metadata
             if from_run_metadata:
-                from_annotation_matrix = run.fetch_pkl_data(from_annotation_matrix)
+                from_annotation_matrix = run.fetch_pkl_data(annotation_matrix_path)
             
             # The annotation matrix is stored in Neptune project metadata
             else:
-                from_annotation_matrix = neptune_manager.fetch_pkl_data(from_annotation_matrix)
+                from_annotation_matrix = neptune_manager.fetch_csv_data(annotation_matrix_path, header=0, index_col=0)
                 
             adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(matrix = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
-        
+
         # The annotation matrix is stored in a local file
         if isinstance(from_annotation_matrix, str):
             adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
@@ -159,7 +159,7 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     # Get the graph order and depth
     graph_order = len(row_index)
     depth = adjacency_tensor.shape[0]
-
+    
     # Get the model arguments
     model_args = kwargs.get("model_args", {})
     namespace = kwargs.get("namespace", "training")
@@ -168,9 +168,9 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     loss_namespace = kwargs.get("loss_namespace", "losses")
     initial_parameter_namespace = kwargs.get("initial_parameter_namespace")
     keep = kwargs.get("keep", 3)
-
     log_freq = kwargs.get("log_freq", 100)
 
+    assert len(model_args["layer_sizes"])-1 == len(model_args["loss_coeffs"])
 
     # Define the model
     model = igmp.ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
@@ -235,6 +235,8 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
                        "log_freq": log_freq,
                        "graph": {"order": graph_order, "node_dimension": depth},
                        "device": DEVICE,
+                       "precision": FLOATING_POINT,
+                        "encoding": ENCODING,
                        }
     run.log_hyperparameters(hyperparams = hyperparameters,
                             namespace = os.path.join(namespace, hyperparam_namespace))

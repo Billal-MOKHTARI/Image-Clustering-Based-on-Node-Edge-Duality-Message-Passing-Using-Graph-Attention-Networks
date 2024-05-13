@@ -109,29 +109,29 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
             run.log_args(namespace=os.path.join(output_args["metrics"], f"hidden_loss (layer_size = {layer_size})"), args=hidden_loss)
             
 
-    # pca = PCA(n_components=3)
+    pca = PCA(n_components=3)
 
-    # # Fit the PCA model to your data
-    # pca.fit(data)
+    # Fit the PCA model to your data
+    pca.fit(data)
 
-    # # Transform the data to 3 principal components
-    # data_pca = pca.transform(data)
+    # Transform the data to 3 principal components
+    data_pca = pca.transform(data)
 
-    # # Transform the data to spherical coordinates
-    # r = np.ones(data_pca.shape[0])  # Set radius to 1 for simplicity
-    # theta = np.arccos(data_pca[:, 2] / r)  # Inclination angle
-    # phi = np.arctan2(data_pca[:, 1], data_pca[:, 0])  # Azimuth angle
+    # Transform the data to spherical coordinates
+    r = np.ones(data_pca.shape[0])  # Set radius to 1 for simplicity
+    theta = np.arccos(data_pca[:, 2] / r)  # Inclination angle
+    phi = np.arctan2(data_pca[:, 1], data_pca[:, 0])  # Azimuth angle
 
-    # # Convert spherical coordinates to Cartesian coordinates
-    # x = r * np.sin(theta) * np.cos(phi)
-    # y = r * np.sin(theta) * np.sin(phi)
-    # z = r * np.cos(theta)
+    # Convert spherical coordinates to Cartesian coordinates
+    x = r * np.sin(theta) * np.cos(phi)
+    y = r * np.sin(theta) * np.sin(phi)
+    z = r * np.cos(theta)
 
-    # # Plot the transformed data
-    # fig = plt.figure(figsize=(8, 6))
-    # ax = fig.add_subplot(111, projection='3d')
-    # ax.scatter(x, y, z, c='r', marker='o')
-    # ax.set_title('Spherical Representation of PCA')
-    # plt.show()
+    # Plot the transformed data
+    fig = plt.figure(figsize=(8, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(x, y, z, c='r', marker='o')
+    ax.set_title('Spherical Representation of PCA')
+    plt.show()
 
     
