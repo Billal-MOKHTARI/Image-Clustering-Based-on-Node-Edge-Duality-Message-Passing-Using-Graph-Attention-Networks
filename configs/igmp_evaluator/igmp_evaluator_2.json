@@ -1,0 +1,28 @@
+{
+  "use_custom_loss": false,
+  "model_args": {
+    "layer_sizes": [512, 384, 256, 128],
+    "loss": "MSELoss",
+    "loss_coeffs": [1, 0.8, 0.6],
+    "loss_args": {}
+  },
+  "embeddings": { "path": "data/embeddings/ViT-B_32", "from_run_metadata": false },
+  "row_index": {
+    "path": "data/embeddings/row_index",
+    "from_run_metadata": false
+  },
+  "run": "IGMP2",
+  "from_annotation_matrix": "benchmark/datasets/agadez/csv_files/annotations_cleaned.csv",
+  "checkpoint_path": "training/checkpoints/chkpt_epoch_2980",
+  "output_args": {
+    "log_dataframe":
+    {
+      "namespace": "outputs/csv_files/evaluation",
+      "profile_report_title": "Output Profile Report",
+      "profile_report_namespace": "outputs/reports/report"
+    },
+
+    "figure": "outputs/figures/3d_plot",
+    "metrics": "outputs/metrics/MSELoss"
+  }
+}

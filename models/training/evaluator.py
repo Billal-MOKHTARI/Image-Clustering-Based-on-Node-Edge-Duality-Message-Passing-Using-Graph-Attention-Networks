@@ -96,17 +96,17 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     with torch.no_grad():
         data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
-    
+    print(dataframe)
     # Save the outputs in neptune
-    if output_args is not None:
-        log_dataframe_args = output_args.get("log_dataframe", {})
+    # if output_args is not None:
+    #     log_dataframe_args = output_args.get("log_dataframe", {})
         
-        run.log_dataframe(dataframe = dataframe, 
-                          df_format = True,
-                          csv_format = True,
-                          **log_dataframe_args)
-        for hidden_loss, layer_size in zip(hidden_losses, model_args["layer_sizes"]):
-            run.log_args(namespace=os.path.join(output_args["metrics"], f"hidden_loss (layer_size = {layer_size})"), args=hidden_loss)
+    #     run.log_dataframe(dataframe = dataframe, 
+    #                       df_format = True,
+    #                       csv_format = True,
+    #                       **log_dataframe_args)
+    #     for hidden_loss, layer_size in zip(hidden_losses, model_args["layer_sizes"]):
+    #         run.log_args(namespace=os.path.join(output_args["metrics"], f"hidden_loss (layer_size = {layer_size})"), args=hidden_loss)
             
 
     pca = PCA(n_components=3)
@@ -128,7 +128,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     z = r * np.cos(theta)
 
     # Plot the transformed data
-    fig = plt.figure(figsize=(8, 6))
+    fig = plt.figure(figsize=(20, 15))
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(x, y, z, c='r', marker='o')
     ax.set_title('Spherical Representation of PCA')
