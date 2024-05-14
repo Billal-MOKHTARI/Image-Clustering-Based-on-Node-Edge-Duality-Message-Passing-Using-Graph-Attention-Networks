@@ -112,4 +112,4 @@ def plot_clusters(data, cluster_column='cluster'):
         )
     )
 
-    fig.show()
+    return fig

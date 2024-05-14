@@ -104,7 +104,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     dataframe = clustering.clustering(method = clustering_method, data = dataframe, **clustering_args)
     clusters = dataframe["cluster"].values
     print(f"{len(clusters[clusters == -1])/len(clusters)*100:.4f} %")
-    
+
     # Save the outputs in neptune
     # if output_args is not None:
     #     log_dataframe_args = output_args.get("log_dataframe", {})
@@ -118,16 +118,9 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
             
 
     pca = PCA(n_components=3)
-
-    # Fit the PCA model to your data
     pca.fit(data)
-
-    # Transform the data to 3 principal components
     data_pca = pca.transform(data)
-
     data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': dataframe['cluster']})
-
-    visualize.plot_clusters(data_viz, cluster_column='cluster')
+    fig = visualize.plot_clusters(data_viz, cluster_column='cluster')
     
-
-    
+    return data_viz, fig

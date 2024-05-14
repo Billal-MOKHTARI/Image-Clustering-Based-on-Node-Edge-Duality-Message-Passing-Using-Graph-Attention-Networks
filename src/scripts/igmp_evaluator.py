@@ -32,4 +32,4 @@ if "model_args" in config.keys():
         config["model_args"]["loss"] = loss
 
 
-igmp_evaluator(**config)
+data, fig = igmp_evaluator(**config)
