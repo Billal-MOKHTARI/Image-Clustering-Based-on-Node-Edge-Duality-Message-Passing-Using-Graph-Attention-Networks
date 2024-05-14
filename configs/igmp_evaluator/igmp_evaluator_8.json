@@ -24,5 +24,11 @@
 
     "figure": "outputs/figures/3d_plot",
     "metrics": "outputs/metrics/MeanCosineDistance"
+  },
+  "clustering_method": "dbscan",
+  "clustering_args": 
+  {
+    "eps": 0.5,
+    "min_samples": 5
   }
 }

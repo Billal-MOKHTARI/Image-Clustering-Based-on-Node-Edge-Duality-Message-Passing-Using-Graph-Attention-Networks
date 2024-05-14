@@ -13,7 +13,7 @@
   },
   "run": "IGMP1",
   "from_annotation_matrix": "benchmark/datasets/agadez/csv_files/annotations_cleaned.csv",
-  "checkpoint_path": "training/checkpoints/chkpt_epoch_2960",
+  "checkpoint_path": "training/checkpoints/chkpt_epoch_2990",
   "output_args": {
     "log_dataframe":
     {
@@ -24,5 +24,11 @@
 
     "figure": "outputs/figures/3d_plot",
     "metrics": "outputs/metrics/MSELoss"
+  },
+  "clustering_method": "dbscan",
+  "clustering_args": 
+  {
+    "eps": 4,
+    "min_samples": 6
   }
 }

@@ -3,6 +3,7 @@ import os
 import matplotlib.pyplot as plt
 from typing import Union
 from . import files_manager as fm
+import plotly.graph_objs as go
 
 def create_directory_tree(directory_structure: str, parent_path: str):
     """
@@ -76,3 +77,39 @@ def show_images(images, num_rows, num_cols, titles=None, scale=1.5, grayscale=Fa
             ax.set_title(titles[i])
     return axes
 
+def plot_clusters(data, cluster_column='cluster'):
+    """
+    Plot clusters in 3D using Plotly.
+
+    Parameters:
+    - data (pd.DataFrame): Data with cluster labels.
+
+    Returns:
+    - None
+    """
+    fig = go.Figure()
+
+    for cluster_label in data[cluster_column].unique():
+        cluster_data = data[data[cluster_column] == cluster_label]
+        fig.add_trace(go.Scatter3d(
+            x=cluster_data['x'],
+            y=cluster_data['y'],
+            z=cluster_data['z'],
+            mode='markers',
+            marker=dict(
+                size=5,
+                opacity=0.8,
+            ),
+            name=f'Cluster {cluster_label}'
+        ))
+
+    fig.update_layout(
+        title='Spherical Representation of PCA with Clusters',
+        scene=dict(
+            xaxis=dict(title='X'),
+            yaxis=dict(title='Y'),
+            zaxis=dict(title='Z'),
+        )
+    )
+
+    fig.show()

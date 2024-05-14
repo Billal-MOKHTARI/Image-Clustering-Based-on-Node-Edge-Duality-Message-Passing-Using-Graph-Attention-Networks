@@ -1,7 +1,11 @@
 import sys
 import os
 from env import neptune_manager
+from . import clustering
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from src import visualize
 from networks.image_gat_message_passing import ImageGATMessagePassing
 from data_loaders import data_loader
 from typing import Union, Dict
@@ -23,6 +27,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
                     adjacency_tensor: Union[torch.Tensor, str] = None,
                     from_annotation_matrix: Union[None, str] = None,
                     weights_only: bool = False,
+                    clustering_method = None,
                     **kwargs):
     
     # Connect to Neptune
@@ -77,7 +82,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     model_args = kwargs.get("model_args", {})
     model = ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
     output_args = kwargs.get("output_args", {})
-
+    clustering_args = kwargs.get("clustering_args", {})
     
     # Load model checkpoint
     state_dict = run.load_model_checkpoint(checkpoint_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
@@ -96,7 +101,10 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     with torch.no_grad():
         data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
-    print(dataframe)
+    dataframe = clustering.clustering(method = clustering_method, data = dataframe, **clustering_args)
+    clusters = dataframe["cluster"].values
+    print(f"{len(clusters[clusters == -1])/len(clusters)*100:.4f} %")
+    
     # Save the outputs in neptune
     # if output_args is not None:
     #     log_dataframe_args = output_args.get("log_dataframe", {})
@@ -117,21 +125,9 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     # Transform the data to 3 principal components
     data_pca = pca.transform(data)
 
-    # Transform the data to spherical coordinates
-    r = np.ones(data_pca.shape[0])  # Set radius to 1 for simplicity
-    theta = np.arccos(data_pca[:, 2] / r)  # Inclination angle
-    phi = np.arctan2(data_pca[:, 1], data_pca[:, 0])  # Azimuth angle
+    data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': dataframe['cluster']})
 
-    # Convert spherical coordinates to Cartesian coordinates
-    x = r * np.sin(theta) * np.cos(phi)
-    y = r * np.sin(theta) * np.sin(phi)
-    z = r * np.cos(theta)
-
-    # Plot the transformed data
-    fig = plt.figure(figsize=(20, 15))
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(x, y, z, c='r', marker='o')
-    ax.set_title('Spherical Representation of PCA')
-    plt.show()
+    visualize.plot_clusters(data_viz, cluster_column='cluster')
+    
 
     
