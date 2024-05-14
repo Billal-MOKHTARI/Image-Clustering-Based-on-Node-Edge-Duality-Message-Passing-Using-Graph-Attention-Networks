@@ -134,7 +134,7 @@ def evaluation_form():
     if submitted:
         st.write("Form submitted successfully!")
 
-    return dataframe
+    return dataframe, submitted
 
 def main():
     st.title('Evaluation')
@@ -149,26 +149,21 @@ def main():
         st.write('Training')
     elif option == 'Evaluation':
         dataframe = None
+        submit = False
         with st.sidebar:
-            dataframe = evaluation_form()
+            dataframe, submit = evaluation_form()
 
         if dataframe is not None:
             clusters = dataframe["cluster"].values
 
-        if dataframe is not None:
+        if dataframe is not None and submit:
             pca = PCA(n_components=3)
             pca.fit(dataframe.drop(columns=['cluster']))
             data_pca = pca.transform(dataframe.drop(columns=['cluster']))
             data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': dataframe['cluster']})
             fig = visualize.plot_clusters(data_viz, cluster_column='cluster', width=1000, height=800)
             st.plotly_chart(fig, use_container_width=True)
-     # Check if the instructions have already been executed
-    if 'instructions_executed' not in st.session_state:
-        # Execute the instructions only once
-        st.write("These instructions will be executed only once!")
-        
-        # Set a flag to indicate that the instructions have been executed
-        st.session_state.instructions_executed = True
+
 
 
 if __name__ == "__main__":
