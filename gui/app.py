@@ -62,10 +62,64 @@ def evaluation_form(config=None):
     checkpoint_path = st.text_input('Path', value='training/checkpoints/chkpt_epoch_2990', key='checkpoint_path_text_input')
 
     st.subheader('Clustering method')
-    clustering_method = st.selectbox('Clustering method', ['DBSCAN'], index=0)
+    clustering_method = st.selectbox('Clustering method', ['DBSCAN', 'Spectral', 'Mean Shift', 'KDE', 'Gaussian Mixture'], index=0)
+    
     if clustering_method.lower() == 'dbscan':
-        epsilon = st.number_input('Epsilon', value=3.5, format="%.2f")
-        min_samples = st.number_input('Min Samples', value=8)
+        epsilon = st.number_input('Epsilon', value=0.5, format="%.2f")
+        min_samples = st.number_input('Min Samples', value=5)
+        metric = st.selectbox('Metric', ['euclidean', 'manhattan', 'cosine'], index=0)
+        algorithm = st.selectbox('Algorithm', ['auto', 'ball_tree', 'kd_tree', 'brute'], index=0)
+        leaf_size = st.number_input('Leaf Size', value=30)
+        p = st.number_input('P', value=None, format="%.2f")
+        n_jobs = st.number_input('N Jobs', value=None)
+        
+    elif clustering_method.lower() == 'spectral':
+        n_clusters = st.number_input('Number of Clusters', value=8)
+        eigen_solver = st.selectbox('Eigen Solver', ['arpack', 'lobpcg', 'amg', None], index=0)
+        n_components = st.number_input('Number of Components', value=None)
+        random_state = st.number_input('Random State', value=None)
+        n_init = st.number_input('Number of Initializations', value=10)
+        gamma = st.number_input('Gamma', value=1.0)
+        affinity = st.selectbox('Affinity', ['rbf', 'nearest_neighbors'], index=0)
+        n_neighbors = st.number_input('Number of Neighbors', value=10)
+        eigen_tol = st.number_input('Eigen Tolerance', value=None, format="%.2f")
+        assign_labels = st.selectbox('Assign Labels', ['kmeans', 'discretize', 'cluster_qr'], index=0)
+        degree = st.number_input('Degree', value=3)
+        coef0 = st.number_input('Coef0', value=1.0)
+        kernel_params = st.text_input('Kernel Parameters', value=None)
+        n_jobs = st.number_input('Number of Jobs', value=None)
+
+    elif clustering_method.lower().replace(" ", "_") == 'mean_shift':
+        bandwidth = st.number_input('Bandwidth', value=None)
+        seeds = st.text_area('Seeds', value=None)
+        bin_seeding = st.checkbox('Bin Seeding', value=False)
+        min_bin_freq = st.number_input('Minimum Bin Frequency', value=1)
+        cluster_all = st.checkbox('Cluster All', value=True)
+        n_jobs = st.number_input('Number of Jobs', value=None)
+        max_iter = st.number_input('Maximum Iterations', value=300)
+
+    elif clustering_method.lower() == 'kde':
+        bandwidth = st.number_input('Bandwidth', value=1.0)
+        algorithm = st.selectbox('Algorithm', ['kd_tree', 'ball_tree', 'auto'], index=2)
+        kernel = st.selectbox('Kernel', ['gaussian', 'tophat', 'epanechnikov', 'exponential', 'linear', 'cosine'], index=0)
+        metric = st.text_input('Metric', value='euclidean')
+        atol = st.number_input('Absolute Tolerance', value=0.0, format="%.4f")
+        rtol = st.number_input('Relative Tolerance', value=0.0, format="%.4f")
+        breadth_first = st.checkbox('Breadth First', value=True)
+        leaf_size = st.number_input('Leaf Size', value=40)
+        metric_params = st.text_input('Metric Parameters', value=None)
+
+    elif clustering_method.lower().replace(" ", "_") == 'gaussian_mixture':
+        n_components = st.number_input('Number of Components', value=1)
+        covariance_type = st.selectbox('Covariance Type', ['full', 'tied', 'diag', 'spherical'], index=0)
+        tol = st.number_input('Tolerance', value=0.001)
+        reg_covar = st.number_input('Regularization Covariance', value=0.000001)
+        max_iter = st.number_input('Maximum Iterations', value=100)
+        n_init = st.number_input('Number of Initializations', value=1)
+        init_params = st.selectbox('Initialization Parameters', ['kmeans', 'k-means++', 'random', 'random_from_data'], index=0)
+        random_state = st.number_input('Random State', value=None)
+        warm_start = st.checkbox('Warm Start', value=False)
+
 
     submit_button_clicked = st.button('Submit')
 
@@ -92,6 +146,72 @@ def evaluation_form(config=None):
                 config = json.load(f)
             os.remove(full_path)
         else:
+            if clustering_method == 'DBSCAN':
+                clustering_args = {
+                    "eps": epsilon,
+                    "min_samples": min_samples,
+                    "metric": metric,
+                    "algorithm": algorithm,
+                    "leaf_size": leaf_size,
+                    "p": p,
+                    "n_jobs": n_jobs
+                }
+            elif clustering_method == 'Spectral':
+                if eigen_tol == None:
+                    eigen_tol = 'auto'
+                clustering_args = {
+                    "n_clusters": n_clusters,
+                    "eigen_solver": eigen_solver,
+                    "n_components": n_components,
+                    "random_state": random_state,
+                    "n_init": n_init,
+                    "gamma": gamma,
+                    "affinity": affinity,
+                    "n_neighbors": n_neighbors,
+                    "eigen_tol": eigen_tol,
+                    "assign_labels": assign_labels,
+                    "degree": degree,
+                    "coef0": coef0,
+                    "kernel_params": kernel_params,
+                    "n_jobs": n_jobs
+                }
+                
+            elif clustering_method == 'Mean Shift':
+                clustering_args = {
+                    "bandwidth": bandwidth,
+                    "seeds": seeds,
+                    "bin_seeding": bin_seeding,
+                    "min_bin_freq": min_bin_freq,
+                    "cluster_all": cluster_all,
+                    "n_jobs": n_jobs,
+                    "max_iter": max_iter
+                }
+            elif clustering_method == 'KDE':
+                clustering_args = {
+                    "bandwidth": bandwidth,
+                    "algorithm": algorithm,
+                    "kernel": kernel,
+                    "metric": metric,
+                    "atol": atol,
+                    "rtol": rtol,
+                    "breadth_first": breadth_first,
+                    "leaf_size": leaf_size,
+                    "metric_params": metric_params
+                }
+            elif clustering_method == 'Gaussian Mixture':
+                clustering_method = 'gmm'
+                clustering_args = {
+                    "n_components": n_components,
+                    "covariance_type": covariance_type,
+                    "tol": tol,
+                    "reg_covar": reg_covar,
+                    "max_iter": max_iter,
+                    "n_init": n_init,
+                    "init_params": init_params,
+                    "random_state": random_state,
+                    "warm_start": warm_start
+                }
+                
             config = {
                 "model_args": {
                     "layer_sizes": layer_sizes,
@@ -116,11 +236,8 @@ def evaluation_form(config=None):
                 },
                 "from_annotation_matrix": annotation_matrix_path,
                 "checkpoint_path": checkpoint_path,
-                "clustering_method": clustering_method.lower(),
-                "clustering_args": {
-                    "eps": epsilon,
-                    "min_samples": min_samples
-                }
+                "clustering_method": clustering_method.lower().replace(" ", "_"),
+                "clustering_args": clustering_args
             }
         if not use_custom_loss:
             loss = eval(f"nn.{config['model_args']['loss']}")
@@ -152,8 +269,6 @@ def main():
         with st.sidebar:
             
             st.session_state.config, submitted = evaluation_form(st.session_state.config)
-            print("---------------------------------------------------------")
-            print(st.session_state.config)
         if st.session_state.dataframe is None and submitted and st.session_state.config is not None:
             st.session_state.dataframe = igmp_evaluator(**st.session_state.config)
         elif st.session_state.dataframe is not None and st.session_state.config is not None:
