@@ -3,6 +3,7 @@ from tempfile import NamedTemporaryFile
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from models.training import clustering
 from models.training.evaluator import igmp_evaluator
 from models.networks import metrics
 import json 
@@ -12,10 +13,9 @@ from sklearn.decomposition import PCA
 import pandas as pd
 st.set_page_config(layout="wide")
 
-def evaluation_form():
-    dataframe = None
+def evaluation_form(config=None):
+
     submitted = False
-    
     st.subheader('Use custom loss')
     use_custom_loss = st.checkbox('Use custom loss', key='use_custom_loss_checkbox')
 
@@ -69,7 +69,7 @@ def evaluation_form():
 
     submit_button_clicked = st.button('Submit')
 
-    if submit_button_clicked:
+    if submit_button_clicked or config is not None:
         # Validate the form
         submitted = True
 
@@ -128,13 +128,8 @@ def evaluation_form():
         else:
             loss = eval(f"metrics.{config['model_args']['loss']}")
             config["model_args"]["loss"] = loss
-        
-        dataframe = igmp_evaluator(**config)
 
-    if submitted:
-        st.write("Form submitted successfully!")
-
-    return dataframe, submitted
+    return config, submitted
 
 def main():
     st.title('Evaluation')
@@ -147,24 +142,30 @@ def main():
 
     if option == 'Training':
         st.write('Training')
+        st.session_state["dataframe"] = None
+        st.session_state["config"] = None
     elif option == 'Evaluation':
-        dataframe = None
-        submit = False
+        submitted = False
+        dataframe = st.session_state.get('dataframe', None)
+        config = st.session_state.get('config', None)
+
         with st.sidebar:
-            dataframe, submit = evaluation_form()
-
-        if dataframe is not None:
-            clusters = dataframe["cluster"].values
-
-        if dataframe is not None and submit:
+            
+            st.session_state.config, submitted = evaluation_form(st.session_state.config)
+            print("---------------------------------------------------------")
+            print(st.session_state.config)
+        if st.session_state.dataframe is None and submitted and st.session_state.config is not None:
+            st.session_state.dataframe = igmp_evaluator(**st.session_state.config)
+        elif st.session_state.dataframe is not None and st.session_state.config is not None:
+            data = clustering.clustering(method = st.session_state.config["clustering_method"], data = st.session_state.dataframe, **st.session_state.config["clustering_args"]).copy()
+            clusters = data["cluster"].values
+       
             pca = PCA(n_components=3)
-            pca.fit(dataframe.drop(columns=['cluster']))
-            data_pca = pca.transform(dataframe.drop(columns=['cluster']))
-            data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': dataframe['cluster']})
+            pca.fit(data.drop(columns=['cluster']))
+            data_pca = pca.transform(data.drop(columns=['cluster']))
+            data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': data['cluster']})
             fig = visualize.plot_clusters(data_viz, cluster_column='cluster', width=1000, height=800)
             st.plotly_chart(fig, use_container_width=True)
-
-
 
 if __name__ == "__main__":
     main()

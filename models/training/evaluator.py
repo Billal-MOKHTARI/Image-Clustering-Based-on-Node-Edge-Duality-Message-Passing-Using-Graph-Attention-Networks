@@ -1,7 +1,6 @@
 import sys
 import os
 from env import neptune_manager
-from . import clustering
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
@@ -82,7 +81,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     model_args = kwargs.get("model_args", {})
     model = ImageGATMessagePassing(graph_order = graph_order, depth = depth, **model_args)
     output_args = kwargs.get("output_args", {})
-    clustering_args = kwargs.get("clustering_args", {})
+
     
     # Load model checkpoint
     state_dict = run.load_model_checkpoint(checkpoint_path, map_location=DEVICE, encoding = ENCODING, weights_only = weights_only)
@@ -101,7 +100,6 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     with torch.no_grad():
         data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
-    dataframe = clustering.clustering(method = clustering_method, data = dataframe, **clustering_args)
     # clusters = dataframe["cluster"].values
     # print(f"{len(clusters[clusters == -1])/len(clusters)*100:.4f} %")
 

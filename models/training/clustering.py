@@ -34,8 +34,8 @@ def clustering(method, data, **kwargs):
         labels = gmm.fit_predict(data)
     else:
         raise ValueError("Invalid clustering method specified.")
-
+    data_cl = data.copy()
     # Add the cluster labels as a new column to the DataFrame
-    data['cluster'] = labels
+    data_cl['cluster'] = labels
 
-    return data
+    return data_cl
