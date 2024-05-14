@@ -29,9 +29,9 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
                     weights_only: bool = False,
                     clustering_method = None,
                     **kwargs):
-    
+    run_args = kwargs.get("run_args", {})
     # Connect to Neptune
-    run = neptune_manager.Run(run)
+    run = neptune_manager.Run(run, **run_args)
 
   # Load the embeddings.
     if isinstance(embeddings, str):
@@ -102,8 +102,8 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
         data = model(embeddings, adjacency_tensor).detach().numpy()
     dataframe = pd.DataFrame(data, index=row_index)
     dataframe = clustering.clustering(method = clustering_method, data = dataframe, **clustering_args)
-    clusters = dataframe["cluster"].values
-    print(f"{len(clusters[clusters == -1])/len(clusters)*100:.4f} %")
+    # clusters = dataframe["cluster"].values
+    # print(f"{len(clusters[clusters == -1])/len(clusters)*100:.4f} %")
 
     # Save the outputs in neptune
     # if output_args is not None:
@@ -117,10 +117,10 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
     #         run.log_args(namespace=os.path.join(output_args["metrics"], f"hidden_loss (layer_size = {layer_size})"), args=hidden_loss)
             
 
-    pca = PCA(n_components=3)
-    pca.fit(data)
-    data_pca = pca.transform(data)
-    data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': dataframe['cluster']})
-    fig = visualize.plot_clusters(data_viz, cluster_column='cluster')
+    # pca = PCA(n_components=3)
+    # pca.fit(data)
+    # data_pca = pca.transform(data)
+    # data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': dataframe['cluster']})
+    # fig = visualize.plot_clusters(data_viz, cluster_column='cluster')
     
-    return data_viz, fig
+    return dataframe

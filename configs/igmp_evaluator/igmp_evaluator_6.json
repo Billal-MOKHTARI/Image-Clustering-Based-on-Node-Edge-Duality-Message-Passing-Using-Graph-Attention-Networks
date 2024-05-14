@@ -12,6 +12,12 @@
     "from_run_metadata": false
   },
   "run": "IGMP6",
+  "run_args": {
+    "capture_strerr": false,
+    "capture_stdout": false,
+    "capture_hardware_metrics": false,
+    "capture_traceback": false
+  },
   "from_annotation_matrix": "benchmark/datasets/agadez/csv_files/annotations_cleaned.csv",
   "checkpoint_path": "training/checkpoints/chkpt_epoch_2980",
   "output_args": {

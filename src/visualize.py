@@ -77,15 +77,18 @@ def show_images(images, num_rows, num_cols, titles=None, scale=1.5, grayscale=Fa
             ax.set_title(titles[i])
     return axes
 
-def plot_clusters(data, cluster_column='cluster'):
+def plot_clusters(data, cluster_column='cluster', width=800, height=600):
     """
     Plot clusters in 3D using Plotly.
 
     Parameters:
     - data (pd.DataFrame): Data with cluster labels.
+    - cluster_column (str): Name of the column containing cluster labels.
+    - width (int): Width of the figure in pixels.
+    - height (int): Height of the figure in pixels.
 
     Returns:
-    - None
+    - fig (plotly.graph_objs.Figure): Plotly figure.
     """
     fig = go.Figure()
 
@@ -109,7 +112,9 @@ def plot_clusters(data, cluster_column='cluster'):
             xaxis=dict(title='X'),
             yaxis=dict(title='Y'),
             zaxis=dict(title='Z'),
-        )
+        ),
+        width=width,
+        height=height
     )
 
     return fig
