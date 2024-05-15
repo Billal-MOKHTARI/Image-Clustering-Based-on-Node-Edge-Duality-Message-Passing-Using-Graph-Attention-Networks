@@ -16,7 +16,7 @@ import pandas as pd
 
 st.set_page_config(layout="wide")
 
-def evaluation_form(config=None):
+def evaluation_tab(config=None):
 
     submitted = False
     st.subheader('Use custom loss')
@@ -157,14 +157,13 @@ def evaluation_form(config=None):
         random_state = st.number_input('Random State', value=None)
         warm_start = st.checkbox('Warm Start', value=False)
 
-
+    config_file = st.file_uploader("Upload JSON configuration file")
     submit_button_clicked = st.button('Submit')
 
     if submit_button_clicked or config is not None:
         # Validate the form
         submitted = True
 
-        config_file = st.file_uploader("Upload JSON configuration file")
         if config_file is not None:
             # Save the uploaded file to a temporary location
             temp_file = NamedTemporaryFile(delete=False, suffix='.'+config_file.name.split('.')[-1])
@@ -286,10 +285,13 @@ def evaluation_form(config=None):
 
     return config, submitted
 
+def training_tab():
+    pass
+
 def main():
     st.title('Evaluation')
 
-    # Call the evaluation_form function to display the form
+    # Call the evaluation_tab function to display the form
     option = st.sidebar.selectbox(
     'Select an option:',
     ('Training', 'Evaluation')
@@ -300,16 +302,17 @@ def main():
         st.session_state["dataframe"] = None
         st.session_state["config"] = None
     elif option == 'Evaluation':
+
         submitted = False
         dataframe = st.session_state.get('dataframe', None)
         config = st.session_state.get('config', None)
-
         with st.sidebar:
             
-            st.session_state.config, submitted = evaluation_form(st.session_state.config)
+            st.session_state.config, submitted = evaluation_tab(st.session_state.config)
         if st.session_state.dataframe is None and submitted and st.session_state.config is not None:
-            st.session_state.dataframe = igmp_evaluator(**st.session_state.config)
-        elif st.session_state.dataframe is not None and st.session_state.config is not None:
+            with st.spinner('Processing...'):
+                st.session_state.dataframe = igmp_evaluator(**st.session_state.config)
+        if st.session_state.dataframe is not None and st.session_state.config is not None:
             data = clustering.clustering(method = st.session_state.config["clustering_method"], data = st.session_state.dataframe, **st.session_state.config["clustering_args"]).copy()
             clusters = data["cluster"].values
        
