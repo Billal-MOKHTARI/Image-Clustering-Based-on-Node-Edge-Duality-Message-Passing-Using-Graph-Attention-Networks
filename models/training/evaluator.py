@@ -24,7 +24,7 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
                     run: str,
                     checkpoint_path: str,
                     adjacency_tensor: Union[torch.Tensor, str] = None,
-                    from_annotation_matrix: Union[None, str] = None,
+                    from_annotation_matrix: Union[None, str, Dict] = None,
                     weights_only: bool = False,
                     clustering_method = None,
                     **kwargs):
@@ -71,8 +71,28 @@ def igmp_evaluator(embeddings: Union[torch.Tensor, str],
         else:
             adjacency_tensor = neptune_manager.fetch_pkl_data(adjacency_tensor_path)
 
+    # Load the annotation matrix if it is provided
     if from_annotation_matrix is not None:
-        adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
+        # Load the annotation matrix from Neptune
+        if isinstance(from_annotation_matrix, Dict):
+            annotation_matrix_path = from_annotation_matrix["path"]
+            from_run_metadata = from_annotation_matrix["from_run_metadata"]
+            
+            # The annotation matrix is stored in the run metadata
+            if from_run_metadata:
+                from_annotation_matrix = run.fetch_pkl_data(annotation_matrix_path)
+            
+            # The annotation matrix is stored in Neptune project metadata
+            else:
+                from_annotation_matrix = neptune_manager.fetch_csv_data(annotation_matrix_path, header=0, index_col=0)
+                
+            adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(matrix = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
+
+        # The annotation matrix is stored in a local file
+        if isinstance(from_annotation_matrix, str):
+            adjacency_tensor, annot_row_index, annot_col_index = data_loader.annotation_matrix_to_adjacency_tensor(from_csv = from_annotation_matrix, transpose=True, sort="columns", index=row_index)
+        print(embeddings.shape)
+
     assert row_index == annot_col_index, "Row indexes do not match"
     
     # Initialize the model

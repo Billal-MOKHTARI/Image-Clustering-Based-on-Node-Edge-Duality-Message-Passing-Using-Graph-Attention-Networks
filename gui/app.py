@@ -1,3 +1,4 @@
+
 import streamlit as st
 from tempfile import NamedTemporaryFile
 import os
@@ -11,6 +12,8 @@ from torch import nn
 from src import visualize
 from sklearn.decomposition import PCA
 import pandas as pd
+
+
 st.set_page_config(layout="wide")
 
 def evaluation_form(config=None):
@@ -41,10 +44,32 @@ def evaluation_form(config=None):
     st.subheader('Embeddings')
     embeddings_path = st.text_input('Path', value='data/embeddings/ViT-B_32', key='embeddings_path_text_input')
     from_run_metadata_embeddings = st.checkbox('From run metadata', value=False, key='from_run_metadata_embeddings_checkbox')
+    embeddings_uploader = st.file_uploader('Upload embeddings', key='embeddings_file_uploader')
+    if embeddings_uploader is not None:
+        # Save the uploaded file to a temporary location
+        temp_file = NamedTemporaryFile(delete=False, suffix='.'+embeddings_uploader.name.split('.')[-1])
+        temp_file.write(embeddings_uploader.read())
+
+        # Get the full path of the saved file
+        embeddings_path = temp_file.name
+
+        # Close the temporary file
+        temp_file.close()
 
     st.subheader('Row index')
     row_index_path = st.text_input('Path', value='data/embeddings/row_index', key='row_index_path_text_input')
     from_run_metadata_row_index = st.checkbox('From run metadata', value=False, key='from_run_metadata_row_index_checkbox')
+    row_index_uploader = st.file_uploader('Upload row index', key='row_index_file_uploader')
+    if row_index_uploader is not None:
+        # Save the uploaded file to a temporary location
+        temp_file = NamedTemporaryFile(delete=False, suffix='.'+row_index_uploader.name.split('.')[-1])
+        temp_file.write(row_index_uploader.read())
+
+        # Get the full path of the saved file
+        row_index_path = temp_file.name
+
+        # Close the temporary file
+        temp_file.close()
 
     st.subheader('Run')
     run = st.text_input('Run', value='IGMP1')
@@ -56,7 +81,19 @@ def evaluation_form(config=None):
     capture_traceback = st.checkbox('Capture traceback', value=False, key='capture_traceback_checkbox')
 
     st.subheader('From Annotation Matrix')
-    annotation_matrix_path = st.text_input('Path', value='benchmark/datasets/agadez/csv_files/annotations_cleaned.csv', key='annotation_matrix_path_text_input')
+    annotation_matrix_path = st.text_input('Path', value='data/csv_files/annotations_cleaned', key='annotation_matrix_path_text_input')
+    from_run_metadata_annotation_matrix = st.checkbox('From run metadata', value=False, key='from_run_metadata_annotation_matrix_checkbox')
+    annotation_matrix_uploader = st.file_uploader('Upload annotation matrix', key='annotation_matrix_file_uploader')
+    if annotation_matrix_uploader is not None:
+        # Save the uploaded file to a temporary location
+        temp_file = NamedTemporaryFile(delete=False, suffix='.'+annotation_matrix_uploader.name.split('.')[-1])
+        temp_file.write(annotation_matrix_uploader.read())
+
+        # Get the full path of the saved file
+        annotation_matrix_path = temp_file.name
+
+        # Close the temporary file
+        temp_file.close()
 
     st.subheader('Checkpoint Path')
     checkpoint_path = st.text_input('Path', value='training/checkpoints/chkpt_epoch_2990', key='checkpoint_path_text_input')
@@ -211,7 +248,14 @@ def evaluation_form(config=None):
                     "random_state": random_state,
                     "warm_start": warm_start
                 }
-                
+
+            embeddings = {"path": embeddings_path,
+                        "from_run_metadata": from_run_metadata_embeddings} if embeddings_uploader is None else embeddings_path
+            
+            row_index = {"path": row_index_path, "from_run_metadata": from_run_metadata_row_index} if row_index_uploader is None else row_index_path
+
+            from_annotation_matrix = {"path": annotation_matrix_path, 
+                                      "from_run_metadata": from_run_metadata_annotation_matrix} if annotation_matrix_uploader is None else annotation_matrix_path
             config = {
                 "model_args": {
                     "layer_sizes": layer_sizes,
@@ -219,14 +263,8 @@ def evaluation_form(config=None):
                     "loss_coeffs": loss_coeffs,
                     "loss_args": {}
                 },
-                "embeddings": {
-                    "path": embeddings_path,
-                    "from_run_metadata": from_run_metadata_embeddings
-                },
-                "row_index": {
-                    "path": row_index_path,
-                    "from_run_metadata": from_run_metadata_row_index
-                },
+                "embeddings": embeddings,
+                "row_index": row_index,
                 "run": run,
                 "run_args": {
                     "capture_stderr": capture_stderr,
@@ -234,7 +272,7 @@ def evaluation_form(config=None):
                     "capture_hardware_metrics": capture_hardware_metrics,
                     "capture_traceback": capture_traceback
                 },
-                "from_annotation_matrix": annotation_matrix_path,
+                "from_annotation_matrix": from_annotation_matrix,
                 "checkpoint_path": checkpoint_path,
                 "clustering_method": clustering_method.lower().replace(" ", "_"),
                 "clustering_args": clustering_args
