@@ -14,6 +14,11 @@ import pickle
 from models.data_loaders import data_loader as dl
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from env import neptune_manager
+import pandas as pd
+from torch_model_manager import SegmentationManager
+from src import utils
+from scipy.stats import hmean
+
 
 def viz_hidden_layers(models : List[nn.Module], 
                     image_path : str, 
@@ -156,3 +161,45 @@ def create_embeddings(models, namespaces, data_path, run = None, models_from_pat
         run.log_files(data=embeddings, namespace=namespace)
         if row_index_namespace is not None:
             run.log_files(data=row_index, namespace=row_index_namespace)
+
+def create_adjacency_tensor(run, 
+                            row_index_path: str, 
+                            dataset_path, 
+                            classes, 
+                            box_threshold, 
+                            text_threshold, 
+                            nms_threshold, 
+                            output_namespace,
+                            agg=hmean, 
+                            annotation_matrix_processing=utils.sort_dataframe):
+    """
+    Creates an adjacency tensor from an annotation matrix.
+
+    Args:
+        annotation_matrix_path (str): Path to the annotation matrix.
+
+    Returns:
+        torch.Tensor: Adjacency tensor.
+    """
+    if run is not None:
+        run = neptune_manager.Run(run)
+    else:
+        run = neptune_manager 
+
+    row_index = run.fetch_pkl_data(row_index_path)
+
+    # annotation_matrix = utils.sort_dataframe(annotation_matrix, mode="rows", index=row_index)
+
+    seg_manager = SegmentationManager()
+    adjacency_tensor = seg_manager.occ_proba_disjoint_tensor(dataset_path=dataset_path, 
+                                                             classes=classes,
+                                                             box_threshold=box_threshold,
+                                                             text_threshold=text_threshold,
+                                                             nms_threshold=nms_threshold,
+                                                             agg=agg,
+                                                             annotation_matrix_processing=annotation_matrix_processing,
+                                                             annotation_matrix_processing_args={"mode": "rows", "index": row_index})
+    
+    run.log_files(data=adjacency_tensor, namespace=output_namespace, extension='pkl', wait=True)
+    return adjacency_tensor
+
