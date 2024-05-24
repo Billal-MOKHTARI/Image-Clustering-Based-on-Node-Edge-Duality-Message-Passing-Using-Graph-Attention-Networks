@@ -16,4 +16,5 @@ if args.run is not None:
 
 else:
     run = neptune_manager
+    
 run.delete_data(args.namespaces, wait=True)

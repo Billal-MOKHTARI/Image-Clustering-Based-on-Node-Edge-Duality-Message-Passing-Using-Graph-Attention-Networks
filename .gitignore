@@ -6,6 +6,8 @@
 data-1.log
 None-*
 metadata.json
-*Circle*
+benchmark/datasets/geometric shapes dataset/Circle
 *Square*
 *Triangle*
+weights/GroundingDINO/*
+weights/SAM/*

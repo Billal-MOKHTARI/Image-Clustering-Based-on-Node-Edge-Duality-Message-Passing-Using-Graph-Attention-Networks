@@ -1,0 +1,16 @@
+{
+    "run": null,
+    "row_index_path": "data/embeddings/row_index",
+    "dataset_path": "benchmark/datasets/agadez/images",
+    "classes_path": "benchmark/datasets/agadez/classes.txt",
+    "box_threshold": 0.3, 
+    "text_threshold": 0.25, 
+    "output_namespaces": {
+        "annotation_matrix": "data/csv_files/annotations_agadez",
+        "adjacency_tensor": "data/tensors/adjacency_tensor_agadez",
+        "detections": "data/detections/detections_agadez",
+        "annotated_images": "data/images/annotated_images_agadez"
+
+    },
+    "annotation_matrix_processing": true
+}

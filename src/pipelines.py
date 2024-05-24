@@ -165,13 +165,11 @@ def create_embeddings(models, namespaces, data_path, run = None, models_from_pat
 def create_adjacency_tensor(run, 
                             row_index_path: str, 
                             dataset_path, 
-                            classes, 
+                            classes_path, 
                             box_threshold, 
-                            text_threshold, 
-                            nms_threshold, 
-                            output_namespace,
-                            agg=hmean, 
-                            annotation_matrix_processing=utils.sort_dataframe):
+                            text_threshold,  
+                            output_namespaces,
+                            annotation_matrix_processing = True):
     """
     Creates an adjacency tensor from an annotation matrix.
 
@@ -189,17 +187,21 @@ def create_adjacency_tensor(run,
     row_index = run.fetch_pkl_data(row_index_path)
 
     # annotation_matrix = utils.sort_dataframe(annotation_matrix, mode="rows", index=row_index)
+    with open(classes_path, "r") as f:
+        classes = f.read().splitlines()
 
     seg_manager = SegmentationManager()
-    adjacency_tensor = seg_manager.occ_proba_disjoint_tensor(dataset_path=dataset_path, 
+    result = seg_manager.occ_proba_disjoint_tensor(dataset_path=dataset_path, 
                                                              classes=classes,
                                                              box_threshold=box_threshold,
                                                              text_threshold=text_threshold,
-                                                             nms_threshold=nms_threshold,
-                                                             agg=agg,
-                                                             annotation_matrix_processing=annotation_matrix_processing,
-                                                             annotation_matrix_processing_args={"mode": "rows", "index": row_index})
+                                                             agg=hmean,
+                                                             annotation_matrix_processing=utils.sort_dataframe if annotation_matrix_processing else None,
+                                                             annotation_matrix_processing_args={"mode": "rows", "index": row_index} if annotation_matrix_processing else {},
+                                                             run=run,
+                                                             output_namespaces=output_namespaces)
     
-    run.log_files(data=adjacency_tensor, namespace=output_namespace, extension='pkl', wait=True)
-    return adjacency_tensor
+
+
+    return result
 

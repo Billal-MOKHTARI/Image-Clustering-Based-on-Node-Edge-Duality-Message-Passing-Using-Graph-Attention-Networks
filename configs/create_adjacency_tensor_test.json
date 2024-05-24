@@ -1,0 +1,15 @@
+{
+    "run": null,
+    "row_index_path": "data/embeddings/row_index",
+    "dataset_path": "benchmark/datasets/geometric",
+    "classes_path": "benchmark/datasets/agadez/classes.txt",
+    "box_threshold": 0.3, 
+    "text_threshold": 0.25, 
+    "output_namespaces": {
+        "annotation_matrix": "data/csv_files/annotations_geometric",
+        "adjacency_tensor": "data/tensors/adjacency_tensor_geometric",
+        "detections": "data/detections/detections_geometric",
+        "annotated_images": "data/images/annotated_images_geometric"
+    },
+    "annotation_matrix_processing": false
+}
