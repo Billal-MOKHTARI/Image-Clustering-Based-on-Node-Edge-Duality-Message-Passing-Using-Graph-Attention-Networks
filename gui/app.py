@@ -315,10 +315,12 @@ def main():
         if st.session_state.dataframe is not None and st.session_state.config is not None:
             data = clustering.clustering(method = st.session_state.config["clustering_method"], data = st.session_state.dataframe, **st.session_state.config["clustering_args"]).copy()
             clusters = data["cluster"].values
-       
+
+            row_index = data.index
             pca = PCA(n_components=3)
             pca.fit(data.drop(columns=['cluster']))
             data_pca = pca.transform(data.drop(columns=['cluster']))
+            print(data)
             data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': data['cluster']})
             fig = visualize.plot_clusters(data_viz, cluster_column='cluster', width=1000, height=800)
             st.plotly_chart(fig, use_container_width=True)
