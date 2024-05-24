@@ -1,0 +1,1702 @@
+person
+bicycle
+car
+motorcycle
+airplane
+bus
+train
+truck
+boat
+traffic light
+fire hydrant
+street sign
+stop sign
+parking meter
+bench
+bird
+cat
+dog
+horse
+sheep
+cow
+elephant
+bear
+zebra
+giraffe
+hat
+backpack
+umbrella
+shoe
+eye glasses
+handbag
+tie
+suitcase
+frisbee
+skis
+snowboard
+sports ball
+kite
+baseball bat
+baseball glove
+skateboard
+surfboard
+tennis racket
+bottle
+plate
+wine glass
+cup
+fork
+knife
+spoon
+bowl
+banana
+apple
+sandwich
+orange
+broccoli
+carrot
+hot dog
+pizza
+donut
+cake
+chair
+couch
+potted plant
+bed
+mirror
+dining table
+window
+desk
+toilet
+door
+tv
+laptop
+mouse
+remote
+keyboard
+cell phone
+microwave
+oven
+toaster
+sink
+refrigerator
+blender
+book
+clock
+vase
+scissors
+teddy bear
+hair drier
+toothbrush
+hair brush
+banner
+blanket
+branch
+bridge
+building-other
+bush
+cabinet
+cage
+cardboard
+carpet
+ceiling-other
+ceiling-tile
+cloth
+clothes
+clouds
+counter
+cupboard
+curtain
+desk-stuff
+dirt
+door-stuff
+fence
+floor-marble
+floor-other
+floor-stone
+floor-tile
+floor-wood
+flower
+fog
+food-other
+fruit
+furniture-other
+grass
+gravel
+ground-other
+hill
+house
+leaves
+light
+mat
+metal
+mirror-stuff
+moss
+mountain
+mud
+napkin
+net
+paper
+pavement
+pillow
+plant-other
+plastic
+platform
+playingfield
+railing
+railroad
+river
+road
+rock
+roof
+rug
+salad
+sand
+sea
+shelf
+sky-other
+skyscraper
+snow
+solid-other
+stairs
+stone
+straw
+structural-other
+table
+tent
+textile-other
+towel
+tree
+vegetable
+wall-brick
+wall-concrete
+wall-other
+wall-panel
+wall-stone
+wall-tile
+wall-wood
+water-other
+waterdrops
+window-blind
+window-other
+wood
+subway
+statue
+fountain
+elevator
+escalator
+tree trunk
+toy
+tool
+drone
+fireplace
+hedge
+ivy
+landscape
+mailbox
+phone booth
+rubbish bin
+satellite dish
+sculpture
+swimming pool
+traffic cone
+trampoline
+trolley
+tunnel
+vent
+viaduct
+walkway
+waterfall
+windmill
+apron
+armchair
+awning
+balcony
+barrel
+beach
+beehive
+bell
+bookcase
+campsite
+candlestick
+canoe
+canyon
+chandelier
+chimney
+cliff
+clock tower
+closet
+coastline
+conveyor belt
+corkscrew
+crosswalk
+dam
+desert
+dome
+drain
+driveway
+dune
+electric pole
+exhibit
+fairy lights
+fire escape
+flagpole
+flamingo
+footpath
+footbridge
+frost
+furnace
+gazebo
+glacier
+glow
+grapevine
+greenhouse
+grotto
+harbor
+hedgerow
+iceberg
+igloo
+lantern
+laundry line
+lighthouse
+meadow
+monument
+mosque
+mountain range
+outhouse
+overpass
+palace
+parasol
+pasture
+pavilion
+pier
+quarry
+rainforest
+reef
+reservoir
+ridge
+rubble
+safari
+sailboat
+scaffold
+sewer
+shed
+shrub
+skyline
+sleigh
+snowdrift
+spring
+sprinkler
+square
+staircase
+steeple
+stream
+swamp
+swing
+telephone pole
+tower
+trellis
+valley
+veranda
+volcano
+water tower
+water wheel
+wind chime
+wind turbine
+woodland
+workbench
+workshop
+yacht
+yard
+zephyr
+lion
+tiger
+rabbit
+deer
+kangaroo
+panda
+penguin
+dolphin
+whale
+shark
+fish
+crocodile
+alligator
+frog
+turtle
+snake
+monkey
+chimpanzee
+gorilla
+leopard
+cheetah
+rhinoceros
+hippopotamus
+bat
+octopus
+squid
+crab
+lobster
+starfish
+seal
+otter
+mole
+hedgehog
+squirrel
+raccoon
+fox
+wolf
+buffalo
+bison
+antelope
+camel
+goat
+pig
+donkey
+mule
+rat
+hamster
+guinea pig
+parrot
+sparrow
+peacock
+eagle
+hawk
+owl
+falcon
+swan
+pelican
+stork
+pigeon
+dove
+seagull
+woodpecker
+ostrich
+emu
+koala
+platypus
+walrus
+manatee
+orca
+jellyfish
+coral
+anemone
+butterfly
+moth
+bee
+wasp
+ant
+beetle
+ladybug
+dragonfly
+grasshopper
+cricket
+locust
+termite
+mantis
+fly
+mosquito
+cockroach
+spider
+scorpion
+earthworm
+snail
+slug
+clam
+oyster
+mussel
+shrimp
+prawn
+barnacle
+sea urchin
+sea cucumber
+seahorse
+ambulance
+helicopter
+scooter
+trailer
+tractor
+taxi
+van
+limousine
+police car
+fire truck
+garbage truck
+cement mixer
+golf cart
+snowmobile
+jet ski
+kayak
+minibus
+hovercraft
+segway
+tank
+spaceship
+bulldozer
+forklift
+excavator
+crane
+road roller
+dump truck
+tow truck
+pickup truck
+motorhome
+RV (recreational vehicle)
+hot air balloon
+glider
+hang glider
+ultralight
+electric scooter
+hoverboard
+snowcat
+gondola
+ski lift
+rickshaw
+cart
+wheelchair
+rowing boat
+lifeboat
+tugboat
+ferry
+barge
+paddleboat
+submarine
+amphibious vehicle
+armored vehicle
+all-terrain vehicle (ATV)
+quad bike
+dirt bike
+tour bus
+double-decker bus
+coach
+monorail
+light rail
+tram
+funicular
+zeppelin
+blimp
+autonomous car
+cap
+beanie
+beret
+helmet
+headband
+visor
+scarf
+bandana
+t-shirt
+shirt
+blouse
+sweater
+hoodie
+jacket
+coat
+vest
+tank top
+polo shirt
+cardigan
+pants
+jeans
+shorts
+skirt
+leggings
+trousers
+sweatpants
+overalls
+sneakers
+boots
+glasses
+sandals
+slippers
+heels
+flats
+loafers
+sunglasses
+watch
+belt
+gloves
+briefcase
+wallet
+bow tie
+cufflinks
+jewelry (necklace, bracelet, ring, earrings)
+underwear
+bra
+panties
+boxers
+briefs
+swimsuit
+bikini
+trunks
+pajamas
+nightgown
+robe
+suit
+blazer
+dress
+gown
+tuxedo
+raincoat
+parka
+windbreaker
+poncho
+sports bra
+jersey
+tracksuit
+yoga pants
+gym shorts
+Canidae
+Felidae
+Cat
+Cattle
+Dog
+Donkey
+Goat
+Guinea pig
+Horse
+Pig
+Rabbit
+Fancy rat varieties
+laboratory rat strains
+Sheep breeds
+Water buffalo breeds
+Chicken breeds
+Duck breeds
+Goose breeds
+Pigeon breeds
+Turkey breeds
+Aardvark
+Aardwolf
+African buffalo
+African elephant
+African leopard
+Albatross
+Alligator
+Alpaca
+American buffalo (bison)
+American robin
+Amphibian
+list
+Anaconda
+Angelfish
+Anglerfish
+Ant
+Anteater
+Antelope
+Antlion
+Ape
+Aphid
+Arabian leopard
+Arctic Fox
+Arctic Wolf
+Armadillo
+Arrow crab
+Asp
+Ass (donkey)
+Baboon
+Badger
+Bald eagle
+Bandicoot
+Barnacle
+Barracuda
+Basilisk
+Bass
+Bat
+Beaked whale
+Bear
+Beaver
+Bedbug
+Bee
+Beetle
+Bird
+Bison
+Blackbird
+Black panther
+Black widow spider
+Blue bird
+Blue jay
+Blue whale
+Boa
+Boar
+Bobcat
+Bobolink
+Bonobo
+Booby
+Box jellyfish
+Bovid
+Buffalo, African
+Buffalo, American (bison)
+Bug
+Butterfly
+Buzzard
+Camel
+Canid
+Cape buffalo
+Capybara
+Cardinal
+Caribou
+Carp
+Catshark
+Caterpillar
+Catfish
+Centipede
+Cephalopod
+Chameleon
+Cheetah
+Chickadee
+Chicken
+Chimpanzee
+Chinchilla
+Chipmunk
+Clam
+Clownfish
+Cobra
+Cockroach
+Cod
+Condor
+Constrictor
+Coral
+Cougar
+Cow
+Coyote
+Crab
+Crane
+Crane fly
+Crawdad
+Crayfish
+Cricket
+Crocodile
+Crow
+Cuckoo
+Cicada
+Damselfly
+Deer
+Dingo
+Dinosaur
+Dolphin
+Dormouse
+Dove
+Dragonfly
+Dragon
+Duck
+Dung beetle
+Eagle
+Earthworm
+Earwig
+Echidna
+Eel
+Egret
+Elephant
+Elephant seal
+Elk
+Emu
+English pointer
+Ermine
+Falcon
+Ferret
+Finch
+Firefly
+Fish
+Flamingo
+Flea
+Fly
+Flyingfish
+Fowl
+Fox
+Frog
+Fruit bat
+Gamefowl
+Galliform
+Gazelle
+Gecko
+Gerbil
+Giant panda
+Giant squid
+Gibbon
+Gila monster
+Giraffe
+Goldfish
+Goose
+Gopher
+Gorilla
+Grasshopper
+Great blue heron
+Great white shark
+Grizzly bear
+Ground shark
+Ground sloth
+Grouse
+Guan
+Guanaco
+Guineafowl
+Gull
+Guppy
+Haddock
+Halibut
+Hammerhead shark
+Hamster
+Hare
+Harrier
+Hawk
+Hedgehog
+Hermit crab
+Heron
+Herring
+Hippopotamus
+Hookworm
+Hornet
+Hoverfly
+Hummingbird
+Humpback whale
+Hyena
+Iguana
+Impala
+Irukandji jellyfish
+Jackal
+Jaguar
+Jay
+Jellyfish
+Junglefowl
+Kangaroo
+Kangaroo mouse
+Kangaroo rat
+Kingfisher
+Kite
+Kiwi
+Koala
+Koi
+Komodo dragon
+Krill
+Ladybug
+Lamprey
+Landfowl
+Land snail
+Lark
+Leech
+Lemming
+Lemur
+Leopard
+Leopon
+Limpet
+Lion
+Lizard
+Llama
+Lobster
+Locust
+Loon
+Louse
+Lungfish
+Lynx
+Macaw
+Mackerel
+Magpie
+Mammal
+Manatee
+Mandrill
+Manta ray
+Marlin
+Marmoset
+Marmot
+Marsupial
+Marten
+Mastodon
+Meadowlark
+Meerkat
+Mink
+Minnow
+Mite
+Mockingbird
+Mole
+Mollusk
+Mongoose
+Monitor lizard
+Monkey
+Moose
+Mosquito
+Moth
+Mountain goat
+Mouse
+Mule
+Muskox
+Narwhal
+Newt
+New World quail
+Nightingale
+Ocelot
+Octopus
+Old World quail
+Opossum
+Orangutan
+Orca
+Ostrich
+Otter
+Owl
+Ox
+Panda
+Panther
+Panthera hybrid
+Parakeet
+Parrot
+Parrotfish
+Partridge
+Peacock
+Peafowl
+Pelican
+Penguin
+Perch
+Peregrine falcon
+Pheasant
+Pigeon
+Pike
+Pilot whale
+Pinniped
+Piranha
+Planarian
+Platypus
+Polar bear
+Pony
+Porcupine
+Porpoise
+Portuguese man o' war
+Possum
+Prairie dog
+Prawn
+Praying mantis
+Primate
+Ptarmigan
+Puffin
+Puma
+Python
+Quail
+Quelea
+Quokka
+Raccoon
+Rainbow trout
+Rat
+Rattlesnake
+Raven
+Ray (Batoidea)
+Ray (Rajiformes)
+Red panda
+Reindeer
+Reptile
+Rhinoceros
+Right whale
+Roadrunner
+Rodent
+Rook
+Rooster
+Roundworm
+Saber-toothed cat
+Sailfish
+Salamander
+Salmon
+Sawfish
+Scale insect
+Scallop
+Scorpion
+Seahorse
+Sea lion
+Sea slug
+Sea snail
+Shark
+Sheep
+Shrew
+Shrimp
+Silkworm
+Silverfish
+Skink
+Skunk
+Sloth
+Slug
+Smelt
+Snail
+Snake
+Snipe
+Snow leopard
+Sockeye salmon
+Sole
+Sparrow
+Sperm whale
+Spider
+Spider monkey
+Spoonbill
+Squid
+Squirrel
+Starfish
+Star-nosed mole
+Steelhead trout
+Stingray
+Stoat
+Stork
+Sturgeon
+Sugar glider
+Swallow
+Swan
+Swift
+Swordfish
+Swordtail
+Tahr
+Takin
+Tapir
+Tarantula
+Tarsier
+Tasmanian devil
+Termite
+Tern
+Thrush
+Tick
+Tiger
+Tiger shark
+Tiglon
+Toad
+Tortoise
+Toucan
+Trapdoor spider
+Tree frog
+Trout
+Tuna
+Turkey
+Turtle
+Tyrannosaurus
+Urial
+Vampire bat
+Vampire squid
+Vicuna
+Viper
+Vole
+Vulture
+Wallaby
+Walrus
+Wasp
+Warbler
+Water Boa
+Water buffalo
+Weasel
+Whale
+Whippet
+Whitefish
+Whooping crane
+Wildcat
+Wildebeest
+Wildfowl
+Wolf
+Wolverine
+Wombat
+Woodpecker
+Worm
+Wren
+Xerinae
+X-ray fish
+Yak
+Yellow perch
+Zebra
+Zebra finch
+Animals by number of neurons
+Animals by size
+Common household pests
+Common names of poisonous animals
+Bali cattle
+Domestic Bactrian camel
+Domestic canary
+Domestic dromedary camel
+Domestic duck
+Domestic goat
+Domestic goose
+Domestic guineafowl
+Domestic hedgehog
+Domestic pig
+Domestic pigeon
+Domestic rabbit
+Domestic silkmoth
+Domestic silver fox
+Domestic turkey
+Fancy mouse
+Fancy rat
+Lab rat
+Gayal
+Ringneck dove
+Siamese fighting fish
+Society finch
+savannah
+forest
+jungle
+grove
+cave
+creek
+lake
+pond
+ocean
+bay
+gulf
+marsh
+lagoon
+fjord
+rain
+dew
+hail
+thunderstorm
+lightning
+rainbow
+wind
+tornado
+hurricane
+tsunami
+drought
+blizzard
+leaf
+vine
+algae
+seaweed
+cactus
+fern
+lichen
+soil
+pebble
+boulder
+earth
+clay
+sunrise
+sunset
+star
+moon
+constellation
+aurora
+horizon
+island
+peninsula
+archipelago
+coral reef
+tundra
+taiga
+wetland
+mangrove
+prairie
+steppe
+chaparral
+bog
+fen
+notebook
+notes
+journal
+diary
+magazine
+newspaper
+brochure
+manual
+catalog
+pamphlet
+flyer
+calendar
+planner
+address book
+comic book
+pen
+pencil
+marker
+highlighter
+eraser
+sharpener
+ruler
+protractor
+compass
+notepad
+sticky notes
+envelope
+folder
+binder
+clip
+stapler
+staples
+tape
+glue
+paperclip
+thumbtack
+hole punch
+calculator
+paintbrush
+paint
+canvas
+palette
+easel
+sketchbook
+crayon
+colored pencil
+watercolors
+acrylic paint
+oil paint
+charcoal
+pastels
+sculpting tools
+glitter
+ribbon
+thread
+yarn
+needle
+fabric
+monitor
+printer
+scanner
+tablet
+smartphone
+charger
+USB drive
+hard drive
+memory card
+camera
+lens
+tripod
+microphone
+headphones
+speakers
+battery
+glass
+bed sheet
+lamp
+basket
+container
+broom
+mop
+vacuum
+dustpan
+brush
+sponge
+bucket
+cleaner
+detergent
+hammer
+screwdriver
+wrench
+pliers
+saw
+drill
+nail
+screw
+bolt
+nut
+tape measure
+level
+chisel
+sander
+toolbox
+apartment
+condominium
+townhouse
+duplex
+bungalow
+cottage
+villa
+mansion
+ranch
+mobile home
+tiny house
+row house
+loft
+penthouse
+studio apartment
+farmhouse
+beach house
+lake house
+treehouse
+log cabin
+chalet
+houseboat
+yurt
+tepee
+hut
+cabin
+apartment building
+condo building
+tenement
+housing complex
+high-rise
+low-rise
+mid-rise
+cooperative housing
+camper
+caravan
+office building
+shopping mall
+supermarket
+store
+warehouse
+factory
+restaurant
+hotel
+motel
+hostel
+hospital
+clinic
+school
+university
+library
+museum
+theater
+cinema
+stadium
+gym
+community center
+courthouse
+police station
+fire station
+post office
+church
+temple
+synagogue
+garage
+barn
+stable
+boathouse
+carport
+silo
+pool house
+tool shed
+playhouse
+doghouse
+pergola
+deck
+patio
+porch
+terrace
+wall
+city hall
+capitol building
+embassy
+consulate
+parliament building
+prison
+jail
+detention center
+army barracks
+navy base
+air force base
+government office
+customs office
+tax office
+art gallery
+concert hall
+amphitheater
+aquarium
+zoo
+botanical garden
+sports arena
+spa
+wellness center
+nightclub
+casino
+amusement park
+theme park
+observatory
+planetarium
+science center
+heritage center
+grape
+strawberry
+blueberry
+raspberry
+blackberry
+cherry
+watermelon
+cantaloupe
+honeydew
+pear
+peach
+plum
+nectarine
+mango
+pineapple
+kiwi
+papaya
+pomegranate
+apricot
+fig
+grapefruit
+lemon
+lime
+tangerine
+clementine
+date
+coconut
+cauliflower
+spinach
+kale
+lettuce
+cabbage
+brussels sprouts
+asparagus
+peas
+green beans
+bell pepper
+jalapeno
+cucumber
+zucchini
+squash
+pumpkin
+tomato
+potato
+sweet potato
+yam
+onion
+garlic
+shallot
+leek
+scallion
+radish
+beet
+turnip
+parsnip
+eggplant
+mushroom
+corn
+artichoke
+okra
+celery
+rhubarb
+rice
+wheat
+oats
+barley
+quinoa
+millet
+buckwheat
+cornmeal
+bulgur
+couscous
+farro
+spelt
+rye
+beans
+lentils
+chickpeas
+soybeans
+black beans
+kidney beans
+pinto beans
+navy beans
+edamame
+lima beans
+fava beans
+almonds
+walnuts
+pecans
+cashews
+pistachios
+hazelnuts
+macadamia nuts
+brazil nuts
+sunflower seeds
+pumpkin seeds
+flax seeds
+chia seeds
+hemp seeds
+sesame seeds
+pine nuts
+beef
+pork
+chicken
+turkey
+lamb
+veal
+duck
+goose
+venison
+ham
+bacon
+sausage
+prosciutto
+salami
+scallop
+tuna
+salmon
+trout
+sardines
+anchovies
+mackerel
+halibut
+cod
+milk
+cheese
+yogurt
+butter
+cream
+ice cream
+sour cream
+cream cheese
+cottage cheese
+whipped cream
+kefir
+buttermilk
+bread
+rolls
+bagels
+muffins
+croissants
+donuts
+pastries
+cakes
+cookies
+pies
+tarts
+brownies
+biscuits
+scones
+cupcakes
+water
+tea
+coffee
+juice
+smoothie
+salt
+pepper
+sugar
+honey
+vinegar
+olive oil
+vegetable oil
+soy sauce
+hot sauce
+ketchup
+mustard
+mayonnaise
+salsa
+chips
+pretzels
+popcorn
+crackers
+trail mix
+granola bars
+gelato
+sorbet
+pudding
+custard
+flan
+jelly
+jello
+mousse
+trifle
+guitar
+bass guitar
+ukulele
+violin
+viola
+cello
+double bass
+harp
+banjo
+mandolin
+sitar
+lute
+hurdy-gurdy
+zither
+flute
+clarinet
+saxophone
+oboe
+bassoon
+piccolo
+recorder
+fife
+bagpipes
+harmonica
+accordion
+concertina
+didgeridoo
+trumpet
+trombone
+French horn
+tuba
+euphonium
+cornet
+flugelhorn
+sousaphone
+bugle
+piano
+organ
+synthesizer
+harpsichord
+clavichord
+celesta
+drum kit
+snare drum
+bass drum
+tambourine
+cymbals
+gong
+xylophone
+marimba
+vibraphone
+timpani
+bongos
+conga drums
+djembe
+tabla
+drum machine
+sequencer
+digital piano
+electronic keyboard
+bodhran
+erhu
+dulcimer
+shakuhachi
+gamelan
+baglama
+oud
+saz
+taiko drum
+bouzouki
+balalaika
+guzheng
+koto
+mbira
+theremin
+overtone flute
+prepared piano
+tuning fork
+metronome
+computer
+desktop
+server
+router
+modem
+switch
+telephone
+landline
+satellite phone
+VOIP (Voice Over Internet Protocol)
+video conferencing
+email
+messaging apps
+social media
+internet
+broadband
+fiber optic
+wireless communication
+automobile
+electric car
+hybrid car
+self-driving car
+ship
+solar panels
+wind turbines
+biofuels
+MRI machine
+CT scanner
+X-ray machine
+ultrasound machine
+pacemaker
+defibrillator
+prosthetics
+artificial organs
+telemedicine
+healthcare apps
+recycling technology
+waste management
+water purification
+air purification
+renewable energy
+green building technology
+carbon capture
+tractors
+harvesters
+irrigation systems
+crop monitoring technology
+precision agriculture
+genetically modified organisms (GMOs)
+hydroponics
+vertical farming
+automation
+robotics
+3D printing
+CNC machines
+assembly line technology
+supply chain management systems
+television
+home theater system
+video game console
+gaming PC
+satellite
+space probe
+space telescope
+space station
+rocket
+space shuttle
+online banking
+mobile payment app
+cryptocurrency
+blockchain technology
+fintech startups
+smartwatche
+fitness tracker
+Head
+Brain
+Skull
+Face
+Eyes
+Nose
+Mouth
+Lips
+Teeth
+Tongue
+Ears
+Hair
+Scalp
+Torso
+Chest
+Heart
+Lungs
+Ribcage
+Breast
+Abdomen
+Stomach
+Liver
+Intestines
+Kidneys
+Pancreas
+Spleen
+Bladder
+Back
+Spine
+Vertebrae
+Shoulder
+Blades
+Arms
+Upper
+Arm
+Bicep
+Tricep
+Elbow
+Forearm
+Wrist
+Hand
+Palm
+Fingers
+Thumb
+Index
+Middle
+Ring
+Little
+Legs
+Hip
+Thigh
+Quadriceps
+Hamstrings
+Knee
+Lower
+Leg
+Shin
+Calf
+Ankle
+Foot
+Toes
+Big
+Toe
+Second
+Third
+Fourth
+Fifth
+Skin
+Bones
+Muscles
+Nerves
+Blood
+Vessels
