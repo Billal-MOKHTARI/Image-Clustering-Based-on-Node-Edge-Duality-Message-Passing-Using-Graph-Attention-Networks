@@ -1,0 +1,7 @@
+{
+    "method": "gaussian_mixture",
+    "number_components": 4,
+    "covariance_type": "spherical",
+    "number_initializations": 1000,
+    "initialization_parameters": "kmeans++"
+}

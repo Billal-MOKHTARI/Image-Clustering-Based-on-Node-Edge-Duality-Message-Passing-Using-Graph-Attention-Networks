@@ -4,6 +4,12 @@ import matplotlib.pyplot as plt
 from typing import Union
 from . import files_manager as fm
 import plotly.graph_objs as go
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import cv2
+import numpy as np
+from PIL import Image
 
 def create_directory_tree(directory_structure: str, parent_path: str):
     """
@@ -118,3 +124,40 @@ def plot_clusters(data, cluster_column='cluster', width=800, height=600):
     )
 
     return fig
+
+def show_clustering(dataframe, cluster_column_name, image_size=(100, 100), title_fontsize=12, columns_per_row=5):
+    # Get the unique clusters
+    clusters = dataframe[cluster_column_name].unique()
+    
+    subfigures = {}
+    
+    for i, cluster in enumerate(clusters):
+        # Get all image paths for the current cluster
+        cluster_images = dataframe[dataframe[cluster_column_name] == cluster].index
+        
+        num_images = len(cluster_images)
+        num_rows = (num_images - 1) // columns_per_row + 1
+        
+        fig, axs = plt.subplots(num_rows, columns_per_row, figsize=(5 * columns_per_row, 5 * num_rows))
+        axs = np.atleast_2d(axs)  # Ensure axs is always a 2D array
+        
+        for j, img_path in enumerate(cluster_images):
+            img = Image.open(img_path)
+            img = img.resize(image_size)  # Resize the image
+            ax = axs[j // columns_per_row, j % columns_per_row]
+            ax.imshow(img)
+            ax.axis('off')
+        
+        # Set the title of the figure to the cluster name
+        fig.suptitle(f'Cluster {cluster}', fontsize=title_fontsize)
+        
+        # Hide any remaining subplots that are not used
+        for j in range(num_images, num_rows * columns_per_row):
+            fig.delaxes(axs[j // columns_per_row, j % columns_per_row])
+        
+        plt.tight_layout()
+        
+        # Store the figure in the dictionary with the cluster title as key
+        subfigures[f'Cluster {cluster}'] = fig
+    
+    return subfigures

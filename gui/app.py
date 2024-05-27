@@ -307,7 +307,6 @@ def main():
         dataframe = st.session_state.get('dataframe', None)
         config = st.session_state.get('config', None)
         with st.sidebar:
-            
             st.session_state.config, submitted = evaluation_tab(st.session_state.config)
         if st.session_state.dataframe is None and submitted and st.session_state.config is not None:
             with st.spinner('Processing...'):
@@ -320,10 +319,20 @@ def main():
             pca = PCA(n_components=3)
             pca.fit(data.drop(columns=['cluster']))
             data_pca = pca.transform(data.drop(columns=['cluster']))
-            print(data)
             data_viz = pd.DataFrame({'x': data_pca[:, 0], 'y': data_pca[:, 1], 'z': data_pca[:, 2], 'cluster': data['cluster']})
             fig = visualize.plot_clusters(data_viz, cluster_column='cluster', width=1000, height=800)
             st.plotly_chart(fig, use_container_width=True)
+
+            # Show the clustering results
+            data_viz.index = "benchmark/datasets/agadez/images/"+row_index
+            with st.spinner('Showing clustering results...'):
+
+                fig_imgs = visualize.show_clustering(data_viz, cluster_column_name='cluster', image_size=(128, 128))
+
+                for k, v in fig_imgs.items():
+                    st.write(k)
+                    st.pyplot(v)
+                
 
 if __name__ == "__main__":
     main()

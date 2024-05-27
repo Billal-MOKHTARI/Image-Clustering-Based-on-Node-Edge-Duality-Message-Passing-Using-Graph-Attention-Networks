@@ -1,0 +1,12 @@
+{
+    "method": "spectral",
+    "number_clusters": 5,
+    "eigen_solver": "arpack",
+    "number_initializations": 100,
+    "gamma": 1.0,
+    "affinity": "nearest_neighbors",
+    "number_neighbors": 10,
+    "assign_labels": "kmeans",
+    "degree": 3,
+    "coeff0": 1
+}
