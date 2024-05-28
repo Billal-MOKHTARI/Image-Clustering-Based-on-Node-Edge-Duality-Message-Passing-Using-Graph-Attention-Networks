@@ -205,3 +205,5 @@ def create_adjacency_tensor(run,
 
     return result
 
+def generate_masks(image_folder_path, run, output_namespaces, **kwargs):
+    pass
