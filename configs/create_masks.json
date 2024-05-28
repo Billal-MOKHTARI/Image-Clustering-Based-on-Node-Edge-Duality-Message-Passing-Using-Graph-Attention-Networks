@@ -1,0 +1,24 @@
+{
+    "run": null,
+    "output_namespaces":
+    {
+        "detections": "data/detections/detections_agadez",
+        "annotated_images": "data/images/annotated_images_agadez"
+    },
+    "image_folder_path": "benchmark/datasets/agadez/images",
+    "image_size": [1024, 1024],
+    "points_per_side":  32,
+    "points_per_batch": 64,
+    "pred_iou_thresh":  0.88,
+    "stability_score_thresh": 0.95,
+    "stability_score_offset":  1,
+    "box_nms_thresh": 0.7,
+    "crop_n_layers": 0,
+    "crop_nms_thresh": 0.7,
+    "crop_overlap_ratio": 0.341333333333333333,
+    "crop_n_points_downscale_factor": 1,
+    "point_grids": null,
+    "min_mask_region_area": 0,
+    "output_mode": "binary_mask"
+
+}
