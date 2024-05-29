@@ -1,0 +1,23 @@
+{
+    "create_embeddings": {
+        "config": "configs/create_embeddings/create_embeddings_2.json",
+        "exec_order": 2,
+        "exec": true
+    },
+    "generate_masks":
+    {
+        "config": "configs/generate_masks.json",
+        "exec_order": 3,
+        "exec": false
+    },
+    "viz_hidden_layers":{
+        "config": "configs/viz_hidden_layers.json",
+        "exec_order": 1,
+        "exec": false
+    },
+    "log_data":{
+        "config": "configs/log_data.json",
+        "exec_order": 0,
+        "exec": false
+    }
+}
