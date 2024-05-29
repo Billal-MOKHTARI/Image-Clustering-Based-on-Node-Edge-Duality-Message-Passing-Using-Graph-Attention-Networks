@@ -10,3 +10,5 @@ https://github.com/gradient-ai/Grounded-Segment-Anything
 https://github.com/mhyeonsoo/SAM_gDINO_AutoLabeling
 https://github.com/IDEA-Research/Grounded-Segment-Anything
 https://github.com/IDEA-Research/GroundingDINO
+
+https://github.com/mlfoundations/open_clip
