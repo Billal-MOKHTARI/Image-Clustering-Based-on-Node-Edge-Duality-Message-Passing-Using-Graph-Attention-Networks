@@ -4,7 +4,7 @@ pip install graphviz
 pip install torchview
 pip install torchviz
 pip install -e git+https://github.com/frgfm/torch-cam.git#egg=torchcam
-pip install neptune
+pip install -U neptune
 pip install argparse
 pip install torch
 pip install ydata_profiling
