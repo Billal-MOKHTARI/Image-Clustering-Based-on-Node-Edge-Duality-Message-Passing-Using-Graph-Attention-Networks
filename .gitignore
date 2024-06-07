@@ -11,3 +11,4 @@ benchmark/datasets/geometric shapes dataset/Circle
 *Triangle*
 weights/GroundingDINO/*
 weights/SAM/*
+*.pkl
