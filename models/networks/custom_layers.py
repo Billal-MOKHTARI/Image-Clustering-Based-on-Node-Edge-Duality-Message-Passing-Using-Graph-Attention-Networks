@@ -2,6 +2,7 @@ from torch import nn
 import torch
 import os
 import sys
+import math
 
 import torch
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
@@ -380,61 +381,3 @@ class Decoder2D(nn.Module):
         
         return x, deconv_decoder_history
 
-# latent_dims = [4096, 1000, 512]
-
-# shapes = [(3, 224, 224), (64, 112, 112), (128, 56, 56), (256, 28, 28), (512, 14, 14)]
-# padding = 0
-# stride = 2
-
-# encoder = Encoder2D(shapes=shapes, 
-#                   latent_dims=latent_dims, 
-#                   activation=nn.ReLU, 
-#                   conv_layers_per_block=2, 
-#                   conv_kernels=3, 
-#                   conv_strides=1, 
-
-#                   pool_strides=stride,
-#                   pool_paddings=padding,
-#                   pool_types='max')
-
-
-# decoder = Decoder2D(shapes=shapes[::-1], 
-#                   latent_dims=latent_dims[::-1], 
-#                   activation=nn.ReLU, 
-#                   deconv_layers_per_block=2, 
-                  
-#                   deconv_strides=(1, 1),
-#                   deconv_padding=(0, 0), 
-#                   unpool_strides=(1, 1),
-#                   unpool_paddings = (0, 0)
-#                 )
-
-# x_enc = torch.randn(2, 3, 224, 224)
-# x_dec = torch.randn(2, 512)
-# y_enc, indices = encoder(x_enc)
-
-
-# y_dec = decoder(y_enc, indices[::-1])
-# print(y_dec.shape)
-
-
-# Specify the path to your JSON file
-encoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/encoder.json"
-decoder_json_file_path = "/home/billalmokhtari/Documents/projects/Image-Clustering-Based-on-Node-Edge-Duality-Message-Passing-Using-Graph-Attention-Networks/configs/decoder.json"
-
-# encoder_args = parse_encoder(encoder_json_file_path, network_type="encoder")
-# decoder_args = parse_encoder(decoder_json_file_path, network_type="decoder")
-
-# encoder = Encoder2D(**encoder_args)
-# x_enc = torch.randn(2, 3, 224, 224)
-# x_dec = torch.randn(2, 512)
-# y_enc, indices, conv_encoder_history = encoder(x_enc)
-
-# # for enc in conv_encoder_history:
-# #     print(enc.shape)
-
-# decoder = Decoder2D(**decoder_args)
-# y_dec, deconv_decoder_history = decoder(y_enc, indices[::-1])
-
-# for dec in deconv_decoder_history:
-#     print(dec.shape)

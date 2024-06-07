@@ -12,6 +12,7 @@ import torch
 from typing import Union, List, Dict
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 from networks import image_gat_message_passing as igmp
+from networks.custom_layers import Encoder2D, Decoder2D
 from data_loaders import data_loader
 from time import time
 import numpy as np
@@ -281,3 +282,13 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
                                 keep = keep)
 
     run.stop_run()
+    
+    
+def positional_encoding_trainer(encoder_args: Dict, decoder_args: Dict, **kwargs):
+    encoder = Encoder2D(**encoder_args)
+    decoder = Decoder2D(**decoder_args)
+    
+    # x, pool_indices, conv_encoder_history = encoder(images)
+      
+    
+    
