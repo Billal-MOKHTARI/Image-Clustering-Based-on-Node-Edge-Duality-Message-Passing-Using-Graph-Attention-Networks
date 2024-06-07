@@ -21,6 +21,8 @@ from models.networks.constants import DEVICE, FLOATING_POINT, ENCODING
 import json
 from models.networks import metrics
 from torch_model_manager import TorchModelManager
+from torch.optim import Adam
+
 
 def train(model, 
           images, 
@@ -284,11 +286,29 @@ def image_gat_mp_trainer(embeddings: Union[torch.Tensor, Dict],
     run.stop_run()
     
     
-def positional_encoding_trainer(encoder_args: Dict, decoder_args: Dict, **kwargs):
-    encoder = Encoder2D(**encoder_args)
-    decoder = Decoder2D(**decoder_args)
+def positional_encoding_trainer(detections_path: str, encoder_args: Dict, decoder_args: Dict, **kwargs):
+    # encoder = Encoder2D(**encoder_args)
+    # decoder = Decoder2D(**decoder_args)
+
+    # Define the optimizer
+    optimizer = Adam()
+
+    # Load detections
+    det_paths = os.listdir(detections_path)
+    det_paths = [os.path.join(detections_path, det_path) for det_path in det_paths]
     
+    for det in det_paths:
+        with open(det, "rb") as f:
+            detections = pickle.load(f)
+        masks = torch.stack([torch.Tensor(detection["segmentation"]) for detection in detections])
+        confidences = [detection["stability_score"] for detection in detections]
+
+    
+        
+        
     # x, pool_indices, conv_encoder_history = encoder(images)
       
     
-    
+positional_encoding_trainer(detections_path="benchmark/datasets/agadez/detections",
+                            encoder_args=None, 
+                            decoder_args=None)

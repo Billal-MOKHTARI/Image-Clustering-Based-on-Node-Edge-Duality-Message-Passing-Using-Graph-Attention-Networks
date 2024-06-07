@@ -7,6 +7,7 @@ import math
 import torch
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src import maths
+from src import files_manager
 
 
 
@@ -381,3 +382,41 @@ class Decoder2D(nn.Module):
         
         return x, deconv_decoder_history
 
+class AutoEncoder(nn.Module):
+    def __init__(self, encoder_args, decoder_args, loss, **kwargs):
+        super(AutoEncoder, self).__init__()
+        loss_args = kwargs.get("loss_args", {})
+        self.encoder = Encoder2D(**encoder_args)
+        self.decoder = Decoder2D(**decoder_args)
+        self.loss = loss(**loss_args)
+        
+    def forward(self, x):
+        x, pool_indices, conv_encoder_history = self.encoder(x)
+        print(conv_encoder_history)
+        x, deconv_decoder_history = self.decoder(x, pool_indices)
+        print(deconv_decoder_history)
+        
+        
+        return x, conv_encoder_history, deconv_decoder_history
+
+# Specify the path to your JSON file
+encoder_json_file_path = "configs/image_positional_encoder/encoder.json"
+decoder_json_file_path = "configs/image_positional_encoder/decoder.json"
+
+encoder_args = files_manager.parse_encoder(encoder_json_file_path, network_type="encoder")
+decoder_args = files_manager.parse_encoder(decoder_json_file_path, network_type="decoder")
+
+auto_encoder = AutoEncoder(encoder_args, decoder_args, nn.MSELoss)
+
+x_enc = torch.randn(2, 1, 1024, 1024)
+x_dec = torch.randn(2, 512)
+
+auto_encoder(x_enc)
+# # for enc in conv_encoder_history:
+# #     print(enc.shape)
+
+# decoder = Decoder2D(**decoder_args)
+# y_dec, deconv_decoder_history = decoder(y_enc, indices[::-1])
+
+# for dec in deconv_decoder_history:
+#     print(dec.shape)
