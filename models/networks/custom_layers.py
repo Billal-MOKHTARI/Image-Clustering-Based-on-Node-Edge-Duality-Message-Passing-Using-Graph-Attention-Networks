@@ -400,8 +400,8 @@ class AutoEncoder(nn.Module):
         return x, conv_encoder_history, deconv_decoder_history
 
 # Specify the path to your JSON file
-encoder_json_file_path = "configs/image_positional_encoder/encoder.json"
-decoder_json_file_path = "configs/image_positional_encoder/decoder.json"
+encoder_json_file_path = "configs/rough/encoder.json"
+decoder_json_file_path = "configs/rough/decoder.json"
 
 encoder_args = files_manager.parse_encoder(encoder_json_file_path, network_type="encoder")
 decoder_args = files_manager.parse_encoder(decoder_json_file_path, network_type="decoder")
