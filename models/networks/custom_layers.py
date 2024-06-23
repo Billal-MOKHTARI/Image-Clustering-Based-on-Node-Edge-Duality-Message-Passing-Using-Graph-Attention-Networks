@@ -9,9 +9,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from src import maths
 from src import files_manager
 
-
-
-
 class Linear2D(nn.Module):
 
     def __init__(self, depth, n_features):
@@ -183,9 +180,9 @@ class Encoder2D(nn.Module):
             conv2d_layers.append(self.activation)
         
         if pool_types == 'max':
-            pool2d = nn.MaxPool2d(pool_kernel, pool_stride, pool_padding, return_indices=True)
+            pool2d = nn.MaxPool2d(pool_kernel, pool_stride, pool_padding, return_indices=False)
         elif pool_types == 'avg':
-            pool2d = nn.AvgPool2d(pool_kernel, pool_stride, pool_padding, return_indices=True)
+            pool2d = nn.AvgPool2d(pool_kernel, pool_stride, pool_padding, return_indices=False)
         
         conv2d_layers.append(pool2d)
            
@@ -210,6 +207,7 @@ class Encoder2D(nn.Module):
             
             if isinstance(self.encoder_layers[i], nn.MaxPool2d):
                 x, indices = self.encoder_layers[i](x)
+                print(indices.shape)
                 pool_indices.append(indices)
                 conv_encoder_history.append(x)
             else:
@@ -400,18 +398,18 @@ class AutoEncoder(nn.Module):
         return x, conv_encoder_history, deconv_decoder_history
 
 # Specify the path to your JSON file
-encoder_json_file_path = "configs/rough/encoder.json"
-decoder_json_file_path = "configs/rough/decoder.json"
+# encoder_json_file_path = "configs/rough/encoder.json"
+# decoder_json_file_path = "configs/rough/decoder.json"
 
-encoder_args = files_manager.parse_encoder(encoder_json_file_path, network_type="encoder")
-decoder_args = files_manager.parse_encoder(decoder_json_file_path, network_type="decoder")
+# encoder_args = files_manager.parse_encoder(encoder_json_file_path, network_type="encoder")
+# decoder_args = files_manager.parse_encoder(decoder_json_file_path, network_type="decoder")
 
-auto_encoder = AutoEncoder(encoder_args, decoder_args, nn.MSELoss)
+# auto_encoder = AutoEncoder(encoder_args, decoder_args, nn.MSELoss)
 
-x_enc = torch.randn(2, 1, 1024, 1024)
-x_dec = torch.randn(2, 512)
+# x_enc = torch.randn(2, 1, 244, 224)
+# x_dec = torch.randn(2, 128)
 
-auto_encoder(x_enc)
+# auto_encoder(x_enc)
 # # for enc in conv_encoder_history:
 # #     print(enc.shape)
 
